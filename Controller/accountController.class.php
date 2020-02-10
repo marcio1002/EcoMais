@@ -92,11 +92,12 @@ class AccountController
 
     public function deleteRegistry($connection, $table, $where)
     {
-        if (!isset($connection) || !isset($table) || !isset($values)) throw new Exception("Error valores nulos", 1);
+        if (!isset($connection) || !isset($table) || !isset($where)) throw new Exception("Erro valores nulos", 1);
 
         $query = "DELETE FROM $table WHERE $where";
 
         $this->result = mysqli_query($connection, $query);
+
         if (!$this->result) throw new Exception("Erro: <strong>$query</strong> $query <br/>" . mysqli_error($connection));
     }
 }
