@@ -1,1 +1,5 @@
-src/
+./view/index.php
+./view/mostrar.php
+./controller/add.php
+./controller/delete.php
+./controller/update.php
