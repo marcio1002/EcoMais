@@ -1,5 +1,5 @@
-./index.php
-./mostrar.php
-./add.php
-./delete.php
-./update.php
+/view/index.php
+./view/mostrar.php
+./controller/add.php
+./controller/delete.php
+./controller/update.php
