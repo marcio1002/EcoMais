@@ -15,7 +15,7 @@ class AccountController implements Database
     private $password;
     private $database;
 
-    function __construct($host, $user, $password, $database)
+    function __construct(string $host,string $user,string $password,string $database)
     {
         $this->host = $host;
         $this->user = $user;
@@ -34,7 +34,7 @@ class AccountController implements Database
         mysqli_close($this->connection);
     }
 
-    public function addRegistry( $table, array $columns, array $values)
+    public function addRegistry(string $table, array $columns, array $values)
     {
         if (!isset($table) || !isset($columns) || !isset($values) ) throw new Exception("Error valores nulos", 1);
 
@@ -53,7 +53,7 @@ class AccountController implements Database
         4: Busca select com valores definidos,
         5: Busca select com valores definidos e where.
     */
-    public function showRegistry( $table, array $values, $where, $option = 1)
+    public function showRegistry(string $table, array $values,string $where,int $option = 1)
     {
         if ( !isset($table)) throw new Exception("Erro: valores nulos", 1);
         if (!$option) throw new Exception("Valor 0 (zero) não aceito");
@@ -89,7 +89,7 @@ class AccountController implements Database
     /* @Parâmetro $values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
             exem: nome_da_coluna = 'valor'
        */
-    public function updateRegistry($table, $where, array $values, $option = 1)
+    public function updateRegistry(string $table,string $where, array $values,int $option = 1)
     {
         if (!isset($table) || !isset($values)) throw new Exception("Error valores nulos", 1);
         if (!$option) throw new Exception("Valor 0 (zero) não aceito");
@@ -110,7 +110,7 @@ class AccountController implements Database
         if (!$this->result) throw  new Exception("Erro: <strong>$query</strong> <br/>" . mysqli_error($this->connection));
     }
 
-    public function deleteRegistry( $table, $where)
+    public function deleteRegistry(string $table,string $where)
     {
         if (!isset($table) || !isset($where)) throw new Exception("Erro valores nulos", 1);
 

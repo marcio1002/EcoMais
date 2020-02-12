@@ -2,21 +2,22 @@
     interface Register {
 
         public function getName();
-        public function setName($name);
+        public function setName(string $name);
         public function getPassword();
-        public function setPassword($password);
+        public function setPassword(string $password);
         public function getEmail();
-        public function setEmail($email);
+        public function setEmail(string $email);
         public function getCpf();
-        public function setCpf($cpf);
+        public function setCpf(string $cpf);
         public function getCnpj();
-        public function setCnpj($cnpj);
+        public function setCnpj(string $cnpj);
         public function getStati();
-        public function setStati($stati);
+        public function setStati(string $stati);
         public function getCity();
-        public function setCity($city);
+        public function setCity(string $city);
         public function getAddre();
-        public function setAddre($addre);
+        public function setAddre(string $addre);
         public function getNumber();
-        public function setNumber($number);
+        public function setNumber(int $number);
+        public function createAt();
     }

@@ -1,4 +1,5 @@
-<?php require_once "../controller/connection.php"; ?>
+<?php require_once "../controller/connection.php";
+require_once "../model/registerController.class.php" ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -15,7 +16,7 @@
 
     td,
     th {
-      border: 1px solid #dddddd;
+      border: 2px solid #dddddd;
       text-align: left;
       padding: 8px;
       width: 70%;
@@ -29,28 +30,31 @@
 
 <body>
   <?php
-  
+
 
   try {
-    $result = $account->showRegistry("usuarios", [], "id_usuarios = 2", 1);
+    $date = new RegisterController();
+    $result = $account->showRegistry("usuarios", array(), "id_usuarios = 2", 1);
 
-    echo "<table >
+    echo "<table>
             <tr>
                 <th>Nome<th>
                 <th>Email</th>
                 <th>Senha</th>
-            </tr>";
+                <th>Data e hora</th>
+           ";
     while ($array_result = mysqli_fetch_array($result)) {
+      $date = strstr($array_result['date'], "(", true);
       echo "
             <tr>
-                <td>$array_result[nome]</td>
-                <td>$array_result[email]</td>
-                <td>$array_result[password]</td>
+              <td>$array_result[nome]</td>
+              <td>$array_result[email]</td>
+              <td>$array_result[password]</td>
+              <td>$date</td>
             </tr>
-            ";
+          ";
     }
     echo "</table>";
-
     $account->connectionClose();
   } catch (Exception $error) {
 

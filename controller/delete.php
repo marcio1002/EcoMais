@@ -2,7 +2,7 @@
     require_once "./connection.php";
         
     try{
-        $result =  $account->deleteRegistry($connection,"usuarios","id_usuarios = 5");
+        $result =  $account->deleteRegistry("usuarios","id_usuario = id_usuario");
         echo "<script> alert('Ok') </script>";
         $account->connectionClose();
     }catch(Exception $erro){

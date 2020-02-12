@@ -9,12 +9,13 @@
         $register->setEmail($_POST['email']);
         $register->setPassword($_POST['password']);
 
-        $array_register = array($register->getName(),$register->getEmail(),$register->getPassword());
-        $array_columns = array("nome","email","password");
+        $array_register = array($register->getName(),$register->getEmail(),$register->getPassword(),$register->createAt());
+        $array_columns = array("nome","email","password","date");
 
         $account->addRegistry("usuarios",$array_columns,$array_register);
+        echo "<script>confir('Cadastrado com sucesso!'); </script>";
         header("location: ../view/index.php");
-        echo "<script>alert('Cadastrado com sucesso!'); </script>";
+
     }catch(Exception $erro) {
         echo $erro->getMessage();
     }
