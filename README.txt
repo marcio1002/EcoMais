@@ -1,3 +1,3 @@
-# Api EconomizaMais
+# api EconomizaMais
 
 Api para manipulação e criação de dados  do EconomizaMais
