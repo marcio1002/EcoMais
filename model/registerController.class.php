@@ -1,5 +1,5 @@
 <?php
-require_once "./interfaces/registerInterface.php";
+require_once "../interfaces/registerInterface.php";
 class RegisterController  implements Register
 {
     private $name;

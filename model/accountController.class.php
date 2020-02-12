@@ -1,10 +1,10 @@
 <?php
-    require_once "./interfaces/databaseInterface.php";
 /* @param patrão da api são: nome da tabela e valores que serão adicionado no banco.
-       @param de opções e manipulações de busca, atualização e deleção.
-        @Param $where  é  uma variavel String com valor de manilupação como comparação, ordenação e limitação.
-        @Param $option é definido como um número de opções. É usado nos metodos show e update.
+@param de opções e manipulações de busca, atualização e deleção.
+@Param $where  é  uma variavel String com valor de manilupação como comparação, ordenação e limitação.
+@Param $option é definido como um número de opções. É usado nos metodos show e update.
 */
+require_once "../interfaces/databaseInterface.php";
 
 class AccountController implements Database
 {
