@@ -9,6 +9,8 @@
         public function setEmail(string $email);
         public function getCpf();
         public function setCpf(string $cpf);
+        public function getCep();
+        public function setCep($cep);
         public function getCnpj();
         public function setCnpj(string $cnpj);
         public function getStati();

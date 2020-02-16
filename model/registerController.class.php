@@ -12,6 +12,7 @@ class RegisterController  implements Register
     private $addre;
     private $number;
     private $date;
+    private $cep;
 
     public function getName() {
         return $this->name;
@@ -45,11 +46,15 @@ class RegisterController  implements Register
     public function setCpf($cpf) {
         $this->cpf = $cpf;
     }
-
+    public function getCep() {
+        return $this->cep;
+    }
+    public function setCep($cep) {
+        $this->cep = $cep;
+    }
     public function getCnpj() {
         return $this->cnpj;
     }
-
     public function setCnpj(string $cnpj) {
         $this->cnpj = $cnpj;
     }

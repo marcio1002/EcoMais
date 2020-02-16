@@ -44,7 +44,7 @@ class AccountController implements Database
         $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
         $this->result =  mysqli_query($this->connection, $query);
 
-        if (!$this->result) throw new Exception("Erro: <strong> $query </strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception("Erro: <strong> $table </strong><strong> $columns</strong> <br/>" . mysqli_error($this->connection));
     }
     /* @param $option  São  5 opções para selecionar sua busca 
         1: Busca simpres com select,
@@ -83,7 +83,7 @@ class AccountController implements Database
                 $this->result = mysqli_query($this->connection, $query);
                 break;
         }
-        if (!$this->result) throw new Exception("Erro: <strong> $query </strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception("Erro: <strong>$table</strong> <strong> $values</strong> <strong> $where</strong> <br/>" . mysqli_error($this->connection));
         return $this->result;
     }
     /* @Parâmetro $values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
@@ -107,7 +107,7 @@ class AccountController implements Database
                 break;
         }
 
-        if (!$this->result) throw  new Exception("Erro: <strong>$query</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw  new Exception("Erro: <strong>$table</strong> <strong>$values</strong> <br/>" . mysqli_error($this->connection));
     }
 
     public function deleteRegistry(string $table,string $where)
@@ -118,7 +118,7 @@ class AccountController implements Database
 
         $this->result = mysqli_query($this->connection, $query);
 
-        if (!$this->result) throw new Exception("Erro: <strong>$query</strong> $query <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception("Erro: <strong>$table</strong> <strong>$query</strong> <br/>" . mysqli_error($this->connection));
     }
 }
 ?>
