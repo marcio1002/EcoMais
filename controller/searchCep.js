@@ -7,7 +7,7 @@ async function searchCep() {
         const info  = await axios.get(`https://viacep.com.br/ws/${cep}/json/`,{ responseType: 'json'});
         const {logradouro,localidade,bairro,uf} = info.data;
         inputCity.value = localidade;
-        inputAddre.value = logradouro+ ` ${bairro}`;
+        inputAddre.value = `${bairro} ${logradouro}`;
         stati.value = uf;
         
     } catch (erro) {
