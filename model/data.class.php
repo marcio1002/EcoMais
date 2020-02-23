@@ -10,8 +10,7 @@ class Data implements DatabaseInterface {
     private $result;
     private $connection;
 
-    function __construct(string $host,string $user,string $password,string $database)
-    {
+    function __construct(string $host,string $user,string $password,string $database) {
         $this->connection = mysqli_connect($host, $user, $password, $database) or die("<script>confirm('⛔ Erro ao conectar com o banco. <br/> Erro:" . mysqli_connect_errno() . "');</script>");
     }
 
@@ -37,8 +36,7 @@ class Data implements DatabaseInterface {
         4: Busca select com valores definidos,
         5: Busca select com valores definidos e where.
     */
-    public function show(string $table, array $values,string $where,int $option = 1)
-    {
+    public function show(string $table, array $values,string $where,int $option = 1) {
         if ( !isset($table)) throw new Exception("Erro: valores nulos", 1);
         if (!$option) throw new Exception("Valor 0 (zero) não aceito");
         if (!is_numeric($option)) throw new Exception("Valor não numérico");
@@ -73,8 +71,7 @@ class Data implements DatabaseInterface {
     /* @Parâmetro $values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
             exem: nome_da_coluna = 'valor'
        */
-    public function update(string $table,string $where, array $values)
-    {
+    public function update(string $table,string $where, array $values) {
         if (!isset($table) || !isset($values)) throw new Exception("Error valores nulos", 1);
 
         $valuesTable = implode(", ", $values);
@@ -85,8 +82,7 @@ class Data implements DatabaseInterface {
         if (!$this->result) throw  new Exception("Erro: <strong>$table</strong> <strong>$values</strong> <br/>" . mysqli_error($this->connection));
     }
 
-    public function delete(string $table,string $where)
-    {
+    public function delete(string $table,string $where) {
         if (!isset($table) || !isset($where)) throw new Exception("Erro valores nulos", 1);
 
         $query = "DELETE FROM $table WHERE $where";
