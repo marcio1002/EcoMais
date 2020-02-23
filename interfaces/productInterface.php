@@ -1,5 +1,5 @@
 <?php 
-    interface Product {
+    interface ProductInterface {
         public function getName();
         public function setName(string $name);
         public function getPrice();

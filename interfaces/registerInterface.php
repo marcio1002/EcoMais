@@ -1,5 +1,5 @@
 <?php 
-    interface Register {
+    interface RegisterInterface {
 
         public function getName();
         public function setName(string $name);

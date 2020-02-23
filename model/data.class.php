@@ -6,8 +6,7 @@
 */
 require_once "../interfaces/databaseInterface.php";
 
-class AccountController implements Database
-{
+class Data implements DatabaseInterface {
     private $result;
     private $connection;
 

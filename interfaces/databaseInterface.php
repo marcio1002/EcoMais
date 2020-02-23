@@ -1,5 +1,5 @@
 <?php
-interface Database
+interface DatabaseInterface
 {
     public function __construct(string $host,string $user,string $password,string $database);
     public function connectionClose();

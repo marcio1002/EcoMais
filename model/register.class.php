@@ -1,6 +1,6 @@
 <?php
 require_once "../interfaces/registerInterface.php";
-class RegisterController  implements Register {
+class Register implements RegisterInterface {
     private $name;
     private $password;
     private $email;

@@ -1,6 +1,6 @@
 <?php
     require_once "../interfaces/productInterface.php";
-    class ProductController implements Product {
+    class Product implements ProductInterface {
         private $name;
         private $price;
         private $brand;
@@ -90,8 +90,4 @@
             return $this->date;
         }
     }
-
-    $product = new ProductController();
-
-    $product->createAt();
 ?>
