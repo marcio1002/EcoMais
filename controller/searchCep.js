@@ -8,12 +8,12 @@ async function searchCep() {
         const {logradouro,localidade,bairro,uf} = info.data;
         inputCity.value = localidade;
         inputAddre.value = `${bairro} ${logradouro}`;
-        stati.value = uf;
-        
+        stati.value = uf;      
     } catch (erro) {
         alert('Não foi possível buscar o cep');
-        console.log(erro.request)
-        console.log(erro)
+        console.log(erro.request);
+        console.log(erro.response);
+        console.log(erro);
         clearInput();
     }
 }

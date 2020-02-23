@@ -9,6 +9,8 @@
         private $category;
         private $img;
         private $date;
+        private $desc;
+        private $pd;
 
         public function getName() {
             return $this->name;
@@ -64,6 +66,22 @@
 
         public function setImage(string $img) {
             $this->img = $img;
+        }
+
+        public function getDescription() {
+            return $this->desc;
+        }
+
+        public function setDescription(string $desc) {
+            $this->desc = $desc;
+        }
+
+        public function getPeriod() {
+            return $this->pd;
+        }
+
+        public function setPeriod(String $pd) {
+            $this->pd = $pd;
         }
 
         public function createAt() {

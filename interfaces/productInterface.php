@@ -14,6 +14,10 @@
         public function setCategory(string $category);
         public function getImage();
         public function setImage(string $img);
+        public function setDescription(String $desc);
+        public function getDescription();
+        public function getPeriod();
+        public function setPeriod(String $pd);
         public function createAt();
     }
 ?>

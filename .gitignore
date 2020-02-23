@@ -7,3 +7,5 @@
 /controller/delete.php
 
 /controller/update.php
+
+/controller/showRegistry.php

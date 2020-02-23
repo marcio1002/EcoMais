@@ -6,5 +6,4 @@
     $password = "";
     $database = "apiTest";
     $account = new AccountController($host,$user,$password,$database);
-    $account->connect();
 ?>

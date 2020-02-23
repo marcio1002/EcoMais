@@ -10,32 +10,17 @@ class AccountController implements Database
 {
     private $result;
     private $connection;
-    private $host;
-    private $user;
-    private $password;
-    private $database;
 
     function __construct(string $host,string $user,string $password,string $database)
     {
-        $this->host = $host;
-        $this->user = $user;
-        $this->password = $password;
-        $this->database = $database;
+        $this->connection = mysqli_connect($host, $user, $password, $database) or die("<script>confirm('⛔ Erro ao conectar com o banco. <br/> Erro:" . mysqli_connect_errno() . "');</script>");
     }
 
-    public function connect()
-    {
-        $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database) or die("<script>confirm('⛔ Erro ao conectar com o banco. <br/> Erro:" . mysqli_connect_errno() . "'); location.href = index.php </script>");
-    }
-
-    public function connectionClose()
-    {
-        
+    public function connectionClose() {
         mysqli_close($this->connection);
     }
 
-    public function addRegistry(string $table, array $columns, array $values)
-    {
+    public function add(string $table, array $columns, array $values) {
         if (!isset($table) || !isset($columns) || !isset($values) ) throw new Exception("Error valores nulos", 1);
 
         $columnsTable = implode(",", $columns);
@@ -44,7 +29,7 @@ class AccountController implements Database
         $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
         $this->result =  mysqli_query($this->connection, $query);
 
-        if (!$this->result) throw new Exception("Erro: <strong> $table </strong><strong> $columns</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception("Erro: <strong> $table </strong><strong> $columns </strong> <br/>" . mysqli_error($this->connection));
     }
     /* @param $option  São  5 opções para selecionar sua busca 
         1: Busca simpres com select,
@@ -53,7 +38,7 @@ class AccountController implements Database
         4: Busca select com valores definidos,
         5: Busca select com valores definidos e where.
     */
-    public function showRegistry(string $table, array $values,string $where,int $option = 1)
+    public function show(string $table, array $values,string $where,int $option = 1)
     {
         if ( !isset($table)) throw new Exception("Erro: valores nulos", 1);
         if (!$option) throw new Exception("Valor 0 (zero) não aceito");
@@ -89,28 +74,19 @@ class AccountController implements Database
     /* @Parâmetro $values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
             exem: nome_da_coluna = 'valor'
        */
-    public function updateRegistry(string $table,string $where, array $values,int $option = 1)
+    public function update(string $table,string $where, array $values)
     {
         if (!isset($table) || !isset($values)) throw new Exception("Error valores nulos", 1);
-        if (!$option) throw new Exception("Valor 0 (zero) não aceito");
-        if (!is_numeric($option)) throw new Exception("Valor não numérico");
 
         $valuesTable = implode(", ", $values);
-        switch ($option) {
-            case 1:
+
                 $query = "UPDATE $table SET $valuesTable WHERE $where;";
                 $this->result = mysqli_query($this->connection, $query);
-                break;
-            case 2:
-                $query = "UPDATE $table SET $valuesTable WHERE $where;";
-                $this->result = mysqli_query($this->connection, $query);
-                break;
-        }
 
         if (!$this->result) throw  new Exception("Erro: <strong>$table</strong> <strong>$values</strong> <br/>" . mysqli_error($this->connection));
     }
 
-    public function deleteRegistry(string $table,string $where)
+    public function delete(string $table,string $where)
     {
         if (!isset($table) || !isset($where)) throw new Exception("Erro valores nulos", 1);
 
@@ -118,7 +94,7 @@ class AccountController implements Database
 
         $this->result = mysqli_query($this->connection, $query);
 
-        if (!$this->result) throw new Exception("Erro: <strong>$table</strong> <strong>$query</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception("Erro: <strong>$table</strong> <strong>$where</strong> <br/>" . mysqli_error($this->connection));
     }
 }
 ?>
