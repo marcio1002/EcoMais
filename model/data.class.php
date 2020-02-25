@@ -36,10 +36,12 @@ class Data implements DatabaseInterface {
         4: Busca select com valores definidos,
         5: Busca select com valores definidos e where.
     */
-    public function show(string $table, array $values,string $where,int $option = 1) {
+    public function show(string $table, array $values = [],string $where = "",int $option = 1) {
         if ( !isset($table)) throw new Exception("Erro: valores nulos", 1);
         if (!$option) throw new Exception("Valor 0 (zero) não aceito");
         if (!is_numeric($option)) throw new Exception("Valor não numérico");
+
+        $valuesTable = implode(",", $values);
 
         switch ($option) {
             case 1:
@@ -55,17 +57,15 @@ class Data implements DatabaseInterface {
                 $this->result = mysqli_query($this->connection, $query);
                 break;
             case 4:
-                $valuesTable = implode(",", $values);
                 $query = "SELECT $valuesTable FROM $table;";
                 $this->result = mysqli_query($this->connection, $query);
                 break;
             case 5:
-                $valuesTable = implode(",", $values);
                 $query = "SELECT $valuesTable FROM $table WHERE $where;";
                 $this->result = mysqli_query($this->connection, $query);
                 break;
         }
-        if (!$this->result) throw new Exception("Erro: <strong>$table</strong> <strong> $values</strong> <strong> $where</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->result) throw new Exception(" <strong>$table</strong> <strong>$valuesTable</strong>  <strong> $where</strong> <br/>" . mysqli_error($this->connection));
         return $this->result;
     }
     /* @Parâmetro $values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
