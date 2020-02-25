@@ -26,7 +26,7 @@ class Register implements RegisterInterface {
     }
 
     public function setPassword(string $password) {
-        if (strlen($password) > 8) throw new Exception("Os números de caracteres foi ultrapassado, o máximo é de 8 caracteres");
+        if (strlen($password) > 10) throw new Exception("Os números de caracteres foi ultrapassado, o máximo é de 10 caracteres");
         $this->password = $password;
     }
 
