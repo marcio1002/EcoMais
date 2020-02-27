@@ -1,22 +1,25 @@
 <?php
 /** 
-* @param $table, $valores são parâmetros patrões para manipulações.
-* @param string $where  é  uma variavel String com valor de manilupação como comparação, ordenação e limitação.
-* @param int $option é definido como um número de opções. É usado nos metodo show.
+* @param $table, $value 
+* São parâmetros patrões para manipulações.
+* @param string $where  
+* É  uma variavel String com valor de manilupação como comparação, ordenação e limitação.
+* @param int $option 
+* É definido como um número de opções. É usado no metodo show.
 */
 
 require_once "../interfaces/databaseInterface.php";
 
 final class Data implements DatabaseInterface {
     private $res;
-    private $connection;
+    private $mysqli;
 
     function __construct(string $host,string $user,string $password,string $database) {
-        $this->connection = mysqli_connect($host, $user, $password, $database) or die("⛔ Error connecting to the bank. <br/> Erro:" . mysqli_connect_errno());
+        $this->mysqli = new mysqli($host, $user, $password, $database) or die("⛔ Error connecting to the bank. <br/> Erro:" . mysqli_connect_errno());
     }
 
     public function connectionClose() {
-        mysqli_close($this->connection);
+        $this->mysqli->close();
     }
 
     public function add(string $table, array $columns, array $values) {
@@ -26,7 +29,7 @@ final class Data implements DatabaseInterface {
         $valuesTable = implode("','", $values);
 
         $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
-        $this->res =  mysqli_query($this->connection, $query);
+        $this->res =  $this->mysqli->query($query);
 
         if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columns </strong> <br/>" . mysqli_error($this->connection));
         
@@ -51,23 +54,23 @@ final class Data implements DatabaseInterface {
         switch ($option) {
             case 1:
                 $query = "SELECT * FROM $table;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
                 break;
             case 2:
                 $query = "SELECT * FROM $table $where;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
                 break;
             case 3:
                 $query  = "SELECT * FROM $table WHERE $where;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
                 break;
             case 4:
                 $query = "SELECT $valuesTable FROM $table;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
                 break;
             case 5:
                 $query = "SELECT $valuesTable FROM $table WHERE $where;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
                 break;
         }
         if (!$this->res) throw new Exception(" <strong>$table</strong> <strong>$valuesTable</strong>  <strong> $where</strong> <br/>" . mysqli_error($this->connection));
@@ -75,9 +78,9 @@ final class Data implements DatabaseInterface {
         return $this->res;
     }
     /**  
-    * @param $
+    * @param array $values
     *
-    *values é definido como array e é passado dentro do array node da coluna e o valor em aspas simples
+    *Values é definido como array e é passado dentro do array nome da coluna e o valor em aspas simples
     * exem: nome_da_coluna = 'valor'
     */
     public function update(string $table,string $where, array $values) {
@@ -86,19 +89,23 @@ final class Data implements DatabaseInterface {
         $valuesTable = implode(", ", $values);
 
                 $query = "UPDATE $table SET $valuesTable WHERE $where;";
-                $this->res = mysqli_query($this->connection, $query);
+                $this->res = $this->mysqli->query($query);
 
         if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$values</strong> <br/>" . mysqli_error($this->connection));
     
         return $this->res;
     }
-
+    /**
+     * @param string $where
+     * Where é definido a opção de deleção e valor deve ser definido com aspas simples
+     * exem: id =  '$id'
+     */
     public function delete(string $table,string $where) {
         if (!isset($table) || !isset($where)) throw new Exception("Error null values", 1);
 
         $query = "DELETE FROM $table WHERE $where";
 
-        $this->res = mysqli_query($this->connection, $query);
+        $this->res = $this->mysqli->query($query);
 
         if (!$this->res) throw new Exception("Erro: <strong>$table</strong> <strong>$where</strong> <br/>" . mysqli_error($this->connection));
     
