@@ -1,7 +1,7 @@
 {
     "name": "apiecomais/apiecomais",
     "description": "Uma api para busca de dados do EcoMais",
-    "license": "proprietary",
+    "license": "Copyright",
     "version": "v1.1.0",
     "keywords": ["Query","dados","api","EcoMais"],
     "homepage": "https://github.com/marcio1002/ApiEcoMais",
