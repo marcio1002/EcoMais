@@ -1,0 +1,19 @@
+{
+    "name": "apiecomais/apiecomais",
+    "description": "Uma api para busca de dados do EcoMais",
+    "version": "v1.1.0",
+    "keywords": ["Query","dados","api","EcoMais"],
+    "homepage": "https://github.com/marcio1002/ApiEcoMais",
+    "authors": [
+        {
+            "name": "Marcio Alemão",
+            "email": "marcioalemao190@gmail.com",
+            "homepage": "https://github.com/marcio1002",
+            "role": "Developer PHP, JavaScript e Java"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    }
+
+}
