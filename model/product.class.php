@@ -1,22 +1,23 @@
 <?php
     require_once "../interfaces/productInterface.php";
     class Product implements ProductInterface {
-        private $name;
-        private $price;
-        private $brand;
-        private $manufacturer;
-        private $merchant;
-        private $category;
-        private $img;
-        private $date;
-        private $desc;
-        private $pd;
+        protected $name;
+        protected $price;
+        protected $brand;
+        protected $manufacturer;
+        protected $merchant;
+        protected $category;
+        protected $img;
+        protected $date;
+        protected $desc;
+        protected $pd;
 
         public function getName() {
             return $this->name;
         }
 
         public function setName(string $name) {
+            if(!isset($name)) throw new Exception('Undefined value');
             $this->name = $name;
         }
         
@@ -25,6 +26,7 @@
         }
 
         public function setPrice(string $price) {
+            if(!isset($price)) throw new Exception('Undefined value');
             $this->price = $price;
         }
         
@@ -33,6 +35,7 @@
         }
         
         public function setBrand(string $brand) {
+            if(!isset($brand)) throw new Exception('Undefined value');
             $this->brand = $brand;
         }
         
@@ -41,6 +44,7 @@
         }
         
         public function setManufacturer(string $mfr) {
+            if(!isset($manufacturer)) throw new Exception('Undefined value');
            return $this->manufacturer = $mfr;
         }
 
@@ -49,6 +53,7 @@
         }
 
         public function setMerchant(string $mrt) {
+            if(!isset($mrt)) throw new Exception('Undefined value');
             $this->merchant = $mrt;
         }
 
@@ -56,15 +61,26 @@
            return $this->category; 
         }
 
-        public function setCategory(string $category) {
-            $this->category = $category;
+        public function setCategory(string $ctr) {
+            if(!isset($ctr)) throw new Exception('Undefined value');
+            $this->category = $ctr;
         }
         
         public function getImage() {
             return $this->img;
         }
-
-        public function setImage(string $img) {
+        /**
+         * @param array $ext o tipo de formato para validação  
+         * 
+         * @param string  $Img o arquivo
+         * 
+         * separar por barra vertical
+         * exem: ext| ext| ext;
+        */
+        public function setImage( string $ext = "",array $img) {
+            if($img['error'] === 4) throw new Exception('file undefined');
+            if($img['error'] === 1) throw new Exception('File size not supported by the system');
+            if(!preg_match("/\.($ext$)/",$img['name'],$ex)) throw new Exception('Format not support!');
             $this->img = $img;
         }
 
@@ -73,6 +89,7 @@
         }
 
         public function setDescription(string $desc) {
+            if(!isset($desc)) throw new Exception('Undefined value');
             $this->desc = $desc;
         }
 
@@ -81,6 +98,7 @@
         }
 
         public function setPeriod(String $pd) {
+            if(!isset($pd)) throw new Exception('Undefined value');
             $this->pd = $pd;
         }
 

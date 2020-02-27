@@ -5,7 +5,11 @@ async function searchCep() {
         if (!validcep.test(cep)) return alert('Cep inválido');
 
         const info  = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-        const {logradouro,localidade,bairro,uf} = info.data;
+        console.log(info.data)
+        const {logradouro,localidade,bairro,uf,erro} = info.data;
+        
+        if(erro) throw new TypeError("Undefined value");
+        
         inputCity.value = localidade;
         inputAddre.value = `${bairro} ${logradouro}`;
         stati.value = uf;      

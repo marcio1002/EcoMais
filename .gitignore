@@ -1,6 +1,12 @@
+assets/
+
+src/
+
 /view/index.php
 
 /view/mostrar.php
+
+/view/image.php
 
 /controller/add.php
 
