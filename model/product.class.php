@@ -7,7 +7,7 @@
         protected $manufacturer;
         protected $merchant;
         protected $category;
-        protected $img;
+        protected $file;
         protected $date;
         protected $desc;
         protected $pd;
@@ -70,18 +70,16 @@
             return $this->img;
         }
         /**
-         * @param array $ext o tipo de formato para validação  
-         * 
-         * @param string  $Img o arquivo
-         * 
+         * @param string $ext -> o tipo de formato para validação  
+         * @param array $file -> o arquivo
          * separar por barra vertical
          * exem: ext| ext| ext;
         */
-        public function setImage( string $ext = "",array $img) {
-            if($img['error'] === 4) throw new Exception('file undefined');
-            if($img['error'] === 1) throw new Exception('File size not supported by the system');
-            if(!preg_match("/\.($ext$)/",$img['name'],$ex)) throw new Exception('Format not support!');
-            $this->img = $img;
+        public function setImage( string $ext = "",array $file) {
+            if($file['error'] === 4) throw new Exception('file undefined');
+            if($file['error'] === 1) throw new Exception('File size not supported by the system');
+            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!');
+            $this->file = $file;
         }
 
         public function getDescription() {
