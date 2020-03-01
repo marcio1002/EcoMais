@@ -5,5 +5,5 @@
     $user = "root";
     $password = "";
     $database = "apiTest";
-    $account = new Data($host,$user,$password,$database);
+    $data = new Data($host,$user,$password,$database);
 ?>

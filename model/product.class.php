@@ -71,14 +71,21 @@
         }
         /**
          * @param string $ext -> o tipo de formato para validação  
+
+         * @param array $file -> o arquivo
+
          * separar por barra vertical
          * exem: ext| ext| ext;
          * @param array $file -> o arquivo
         */
-        public function setImage( string $ext = "",array $file) {
+        public function setImage( string $ext,array $file) {
             if($file['error'] === 4) throw new Exception('file undefined');
             if($file['error'] === 1) throw new Exception('File size not supported by the system');
+
             if(!preg_match("/\.($ext)$/",$file['name'])) throw new Exception('Format not support!');
+
+            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!');
+
             $this->file = $file;
         }
 

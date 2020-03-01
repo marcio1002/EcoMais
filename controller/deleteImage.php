@@ -4,9 +4,9 @@
     $img = $_POST['image'];
 
     try{
-        if($account->delete("images","image = '$img'")){
+        if($data->delete("images","image = '$img'")){
             
-            $account->connectionClose();
+            $data->connectionClose();
             unlink("../src/images/$img");
             echo "<script>confirm('Deletado com sucesso'); location.href = '../view/mostrar.php';</script>";
         }
