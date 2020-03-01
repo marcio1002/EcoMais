@@ -15,7 +15,7 @@
 
             $ean = (($res % 10) === 0 ) ? $ean = $ean.'0' :  $ean = $ean.$res;
 
-            return $ean;
+            echo $ean;
         }catch(Exception $erro) {
             
             die($erro->getMessage());

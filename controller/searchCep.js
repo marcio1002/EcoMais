@@ -10,11 +10,10 @@ async function searchCep() {
         if(erro) throw new Error("Undefined value");
         
         iptCity.val(localidade);
-        iptAddre.val(`${bairro} ${logradouro}`);
+        iptAddre.val(`${bairro}, ${logradouro}`);
         statiElem.val(uf);      
     } catch (erro) {
         alert('Cep inválido');
-        console.log(erro);
         clearInput();
     }
 }
