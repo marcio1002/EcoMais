@@ -15,7 +15,7 @@ final class Data implements DatabaseInterface {
     private $mysqli;
 
     function __construct(string $host,string $user,string $password,string $database) {
-        $this->mysqli = new mysqli($host, $user, $password, $database) or die("⛔ Error connecting to the bank. <br/> Erro:" . mysqli_connect_errno());
+        $this->mysqli = new mysqli($host, $user, $password, $database) or die("⛔ Error connecting to the bank. <br/>" . mysqli_connect_errno());
     }
 
     public function connectionClose() {
@@ -23,7 +23,7 @@ final class Data implements DatabaseInterface {
     }
 
     public function add(string $table, array $columns, array $values) {
-        if (!isset($table) || !isset($columns) || !isset($values) ) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($columns) || empty($values) ) throw new Exception("Error null values", 1);
 
         $columnsTable = implode(",", $columns);
         $valuesTable = implode("','", $values);
@@ -31,7 +31,7 @@ final class Data implements DatabaseInterface {
         $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
         $this->res =  $this->mysqli->query($query);
 
-        if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columns </strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columnsTable </strong> <br/>" . mysqli_error($this->connection));
         
         return $this->res;
     }
@@ -45,7 +45,7 @@ final class Data implements DatabaseInterface {
     */
 
     public function show(string $table, array $values = [],string $where = "",int $option = 1) {
-        if ( !isset($table)) throw new Exception("Error null values", 1);
+        if (empty($table)) throw new Exception("Error null values", 1);
         if (!$option) throw new Exception("Value 0 (zero) is not accepted");
         if (!is_numeric($option)) throw new Exception("Non-numeric value");
 
@@ -84,14 +84,14 @@ final class Data implements DatabaseInterface {
     * exem: nome_da_coluna = 'valor'
     */
     public function update(string $table,string $where, array $values) {
-        if (!isset($table) || !isset($values)) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($values)) throw new Exception("Error null values", 1);
 
         $valuesTable = implode(", ", $values);
 
                 $query = "UPDATE $table SET $valuesTable WHERE $where;";
                 $this->res = $this->mysqli->query($query);
 
-        if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$values</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$valuesTable</strong> <br/>" . mysqli_error($this->connection));
     
         return $this->res;
     }
@@ -101,7 +101,7 @@ final class Data implements DatabaseInterface {
      * exem: id =  '$id'
      */
     public function delete(string $table,string $where) {
-        if (!isset($table) || !isset($where)) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($where)) throw new Exception("Error null values", 1);
 
         $query = "DELETE FROM $table WHERE $where";
 

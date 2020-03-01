@@ -26,6 +26,6 @@ try {
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }
 } catch (Exception $ex) {
-     echo $ex->getMessage();
+     die($ex->getMessage());
 }
 ?>
