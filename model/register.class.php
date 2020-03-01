@@ -18,7 +18,7 @@ class User implements UserInterface {
     }
 
     public function setName(string $name) {
-        if(!isset($name)) throw new Exception('Undefined value');
+        if(empty($name)) throw new Exception('Undefined value');
         $this->name = $name;
     }
 
@@ -27,7 +27,7 @@ class User implements UserInterface {
     }
 
     public function setPassword(string $password) {
-        if(!isset($password)) throw new Exception('Undefined value');
+        if(empty($password)) throw new Exception('Undefined value');
         if (strlen($password) > 10) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
         $this->password = $password;
     }
@@ -37,7 +37,7 @@ class User implements UserInterface {
     }
 
     public function setEmail(string $email) {
-        if(!isset($email)) throw new Exception('Undefined value');
+        if(empty($email)) throw new Exception('Undefined value');
         $this->email = $email;
     }
 
@@ -46,21 +46,23 @@ class User implements UserInterface {
     }
 
     public function setCpf($cpf) {
-        if(!isset($cpf)) throw new Exception('Undefined value');
+        if(empty($cpf)) throw new Exception('Undefined value');
+        if (!is_numeric($cpf)) throw new TypeError("Expected a number format", 1);
         $this->cpf = $cpf;
     }
     public function getCep() {
         return $this->cep;
     }
     public function setCep($cep) {
-        if(!isset($cep)) throw new Exception('Undefined value');
+        if(empty($cep)) throw new Exception('Undefined value');
         $this->cep = $cep;
     }
     public function getCnpj() {
         return $this->cnpj;
     }
     public function setCnpj(string $cnpj) {
-        if(!isset($cnpj)) throw new Exception('Undefined value');
+        if(empty($cnpj)) throw new Exception('Undefined value');
+        if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
         $this->cnpj = $cnpj;
     }
 
@@ -69,7 +71,7 @@ class User implements UserInterface {
     }
 
     public function setStati(string $stati) {
-        if(!isset($stati)) throw new Exception('Undefined value');
+        if(empty($stati)) throw new Exception('Undefined value');
         $this->stati = $stati;
     }
 
@@ -78,7 +80,7 @@ class User implements UserInterface {
     }
 
     public function setCity(string $city) {
-        if(!isset($city)) throw new Exception('Undefined value');
+        if(empty($city)) throw new Exception('Undefined value');
         $this->city = $city;
     }
 
@@ -87,7 +89,7 @@ class User implements UserInterface {
     }
 
     public function setAddre(string $addre) {
-        if(!isset($addre)) throw new Exception('Undefined value');
+        if(empty($addre)) throw new Exception('Undefined value');
         $this->addre = $addre;
     }
 
@@ -96,8 +98,8 @@ class User implements UserInterface {
     }
 
     public function setNumber(int $number) {
-        if(!isset($number)) throw new Exception('Undefined value');
-        if (!is_numeric($number)) throw new Exception("Non-numeric format", 1);
+        if(empty($number)) throw new Exception('Undefined value');
+        if (!is_numeric($number)) throw new TypeError("Expected a number format", 1);
         $this->number = $number;
     }
     public function createAt() {

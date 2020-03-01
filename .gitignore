@@ -15,3 +15,5 @@ src/
 /controller/update.php
 
 /controller/showRegistry.php
+
+/controller/qr_code.php
