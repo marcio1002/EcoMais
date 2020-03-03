@@ -3,7 +3,7 @@
     
     $host = "localhost:3306";
     $user = "root";
-    $password = "";
+    $password = "rootadmin";
     $database = "apiTest";
     $data = new Data($host,$user,$password,$database);
 ?>

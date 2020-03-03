@@ -21,8 +21,8 @@ try {
 
      if (move_uploaded_file($img['tmp_name'], "../src/images/$tokenName")) {
 
-          $account->add("images", ["image"], [$tokenName]);
-          $account->connectionClose();
+          $data->add("images", ["image"], [$tokenName]);
+          $data->connectionClose();
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }
 } catch (Exception $ex) {

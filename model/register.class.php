@@ -28,7 +28,7 @@ class User implements UserInterface {
 
     public function setPassword(string $password) {
         if(empty($password)) throw new Exception('Undefined value');
-        if (strlen($password) > 10) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
+        if (strlen($password) > 15) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
         $this->password = $password;
     }
 

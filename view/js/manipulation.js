@@ -25,6 +25,11 @@ $("#btnPwd").click(() => {
    }   
 });
 
+passwd.keypress((evt) =>{
+    const divElem = $('span#length').add('div');
+    divElem.html(evt.target.value.length);
+})
+
 iptCpf.focusout((evt) => {
     let cpf = evt.target.value;
     iptCpf.val(cpf.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4"));
@@ -56,7 +61,6 @@ iptEmail.focusout(() =>{
             ".online",
             ".site",
             ".top",
-            ".club",
             ".club",
             ".website",
             ".link",

@@ -3,17 +3,14 @@ assets/
 src/
 
 /view/index.php
-
 /view/mostrar.php
-
 /view/image.php
+/view/styles/
 
 /controller/add.php
-
 /controller/delete.php
-
 /controller/update.php
-
 /controller/showRegistry.php
+/controller/qrCode.php
 
-/controller/qr_code.php
+index.php
