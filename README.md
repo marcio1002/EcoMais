@@ -1,2 +1,2 @@
 # Api-EcoMais
-Api para manipulação e criação de dados  do EcoMais
+Um crud para manipulação de dados  do EcoMais

@@ -156,8 +156,6 @@ iptEmail.focusout(() =>{
 
     }catch(error) {
         alert("Formato inválido");
-        $('button').attr('type','hidden');
-        evt.preventDefault();
         console.log(error);
     }
 });

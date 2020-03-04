@@ -1,8 +1,8 @@
 {
     "name": "apiecomais/apiecomais",
-    "description": "Uma api para busca de dados do EcoMais",
+    "description": "Um crud para manipulação de dados do EcoMais",
     "license": "proprietary",
-    "version": "v1.1.1",
+    "version": "v1.1.3",
     "keywords": ["Query","dados","api","EcoMais"],
     "homepage": "https://github.com/marcio1002/ApiEcoMais",
     "authors": [

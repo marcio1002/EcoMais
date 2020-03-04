@@ -13,7 +13,7 @@
         
        
     }catch(Exception $ex){
-        echo "<script>confirm('Não foi possível deletar a imagem'); location.href = '../view/mostrar.php';</script>";
         die($ex->getMessage());
+        echo "<script>confirm('Não foi possível deletar a imagem'); location.href = '../view/mostrar.php';</script>";
     }
 ?>
