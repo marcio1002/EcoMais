@@ -31,7 +31,7 @@ final class Data implements DatabaseInterface {
         $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
         $this->res =  $this->mysqli->query($query);
 
-        if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columnsTable </strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columnsTable </strong> <br/>" . mysqli_error($this->connection),2);
         
         return $this->res;
     }
@@ -46,8 +46,8 @@ final class Data implements DatabaseInterface {
 
     public function show(string $table, array $values = [],string $where = "",int $option = 1) {
         if (empty($table)) throw new Exception("Error null values", 1);
-        if (!$option) throw new Exception("Value 0 (zero) is not accepted");
-        if (!is_numeric($option)) throw new Exception("Non-numeric value");
+        if (!$option) throw new Exception("Value 0 (zero) is not accepted",4);
+        if (!is_numeric($option)) throw new Exception("Non-numeric value",4);
 
         $valuesTable = implode(",", $values);
 
@@ -73,7 +73,7 @@ final class Data implements DatabaseInterface {
                 $this->res = $this->mysqli->query($query);
                 break;
         }
-        if (!$this->res) throw new Exception(" <strong>$table</strong> <strong>$valuesTable</strong>  <strong> $where</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw new Exception(" <strong>$table</strong> <strong>$valuesTable</strong>  <strong> $where</strong> <br/>" . mysqli_error($this->connection),2);
        
         return $this->res;
     }
@@ -91,7 +91,7 @@ final class Data implements DatabaseInterface {
                 $query = "UPDATE $table SET $valuesTable WHERE $where;";
                 $this->res = $this->mysqli->query($query);
 
-        if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$valuesTable</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$valuesTable</strong> <br/>" . mysqli_error($this->connection),2);
     
         return $this->res;
     }
@@ -107,7 +107,7 @@ final class Data implements DatabaseInterface {
 
         $this->res = $this->mysqli->query($query);
 
-        if (!$this->res) throw new Exception("Erro: <strong>$table</strong> <strong>$where</strong> <br/>" . mysqli_error($this->connection));
+        if (!$this->res) throw new Exception("Erro: <strong>$table</strong> <strong>$where</strong> <br/>" . mysqli_error($this->connection),2);
     
         return $this->res;
     }

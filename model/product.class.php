@@ -17,7 +17,7 @@
         }
 
         public function setName(string $name) {
-            if(empty($name)) throw new Exception('Undefined value');
+            if(empty($name)) throw new Exception('Error null values',1);
             $this->name = $name;
         }
         
@@ -26,7 +26,7 @@
         }
 
         public function setPrice(string $price) {
-            if(empty($price)) throw new Exception('Undefined value');
+            if(empty($price)) throw new Exception('Error null values',1);
             $this->price = $price;
         }
         
@@ -35,7 +35,7 @@
         }
         
         public function setBrand(string $brand) {
-            if(empty($brand)) throw new Exception('Undefined value');
+            if(empty($brand)) throw new Exception('Error null values',1);
             $this->brand = $brand;
         }
         
@@ -44,7 +44,7 @@
         }
         
         public function setManufacturer(string $mfr) {
-            if(empty($manufacturer)) throw new Exception('Undefined value');
+            if(empty($manufacturer)) throw new Exception('Error null values',1);
            return $this->manufacturer = $mfr;
         }
 
@@ -53,7 +53,7 @@
         }
 
         public function setMerchant(string $mrt) {
-            if(empty($mrt)) throw new Exception('Undefined value');
+            if(empty($mrt)) throw new Exception('Error null values',1);
             $this->merchant = $mrt;
         }
 
@@ -62,7 +62,7 @@
         }
 
         public function setCategory(string $ctr) {
-            if(empty($ctr)) throw new Exception('Undefined value');
+            if(empty($ctr)) throw new Exception('Error null values',1);
             $this->category = $ctr;
         }
         
@@ -77,9 +77,9 @@
         */
         
         public function setImage( string $ext,array $file) {
-            if($file['error'] === 4) throw new Exception('file undefined');
-            if($file['error'] === 1) throw new Exception('File size not supported by the system');
-            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!');
+            if($file['error'] === 4) throw new Exception('file undefined',1);
+            if($file['error'] === 1) throw new Exception('File size not supported by the system',4);
+            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!',4);
             $this->file = $file;
         }
 
@@ -88,7 +88,7 @@
         }
 
         public function setDescription(string $desc) {
-            if(empty($desc)) throw new Exception('Undefined value');
+            if(empty($desc)) throw new Exception('Error null values',1);
             $this->desc = $desc;
         }
 
@@ -97,7 +97,7 @@
         }
 
         public function setPeriod(String $pd) {
-            if(empty($pd)) throw new Exception('Undefined value');
+            if(empty($pd)) throw new Exception('Error null values',1);
             $this->pd = $pd;
         }
 

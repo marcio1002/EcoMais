@@ -1,9 +1,9 @@
-<?php
-    require_once "connection.php";
-    
-    $img = $_POST['image'];
-
+<?php    
+    require_once "../model/data.class.php";
     try{
+        $img = $_POST['image'];
+
+        $data = new Data('localhost','root','rootadmin','apiTest');
         if($data->delete("images","image = '$img'")){
             
             $data->connectionClose();
