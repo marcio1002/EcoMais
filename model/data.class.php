@@ -11,27 +11,38 @@
 require_once "../interfaces/databaseInterface.php";
 
 final class Data implements DatabaseInterface {
-    private $res;
-    private $mysqli;
+    private $res = null;
+    private $stmt = null;
+    private $host;
+    private $user;
+    private $passwd;
+    private $database;
 
-    function __construct(string $host,string $user,string $password,string $database) {
-        $this->mysqli = new mysqli($host, $user, $password, $database) or die("⛔ Error connecting to the bank. <br/>" . mysqli_connect_errno());
+    function __construct(string $host,string $user,string $passwd,string $database) {
+        $this->host = $host;
+        $this->user = $user;
+        $this->passwd = $passwd;
+        $this->database = $database;
+        $this->stmt = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd) or die("⛔ Error connecting to the bank. <br/>" . $this->stmt->errorInfo());
     }
 
     public function connectionClose() {
-        $this->mysqli->close();
+        unset($this->stmt);
     }
 
-    public function add(string $table, array $columns, array $values) {
-        if (empty($table) || empty($columns) || empty($values) ) throw new Exception("Error null values", 1);
+    public function add(string $table, array $columns, array $val) {
+        if (empty($table) || empty($columns) || empty($val) ) throw new Exception("Error null values", 1);
 
-        $columnsTable = implode(",", $columns);
-        $valuesTable = implode("','", $values);
+        $colTable = implode(",", $columns);
+        $preVal = implode(",",array_fill(0,count($val),'?'));
 
-        $query = "INSERT INTO $table ($columnsTable) VALUES('$valuesTable');";
-        $this->res =  $this->mysqli->query($query);
+        $query = $this->stmt->prepare("INSERT INTO $table ($colTable) VALUES($preVal)");
 
-        if (!$this->res) throw new Exception("Erro: <strong> $table </strong><strong> $columnsTable </strong> <br/>" . mysqli_error($this->connection),2);
+        for($c = 0; $c < count($val); $c++) {
+            $query->bindParam($c+1,$val[$c]);
+        }
+        $this->res = $query->execute();
+        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
         
         return $this->res;
     }
@@ -44,70 +55,87 @@ final class Data implements DatabaseInterface {
     * 5: Busca select com valores definidos e where.
     */
 
-    public function show(string $table, array $values = [],string $where = "",int $option = 1) {
+    public function show(string $table, array $val = [],string $where = "",int $option = 1) {
         if (empty($table)) throw new Exception("Error null values", 1);
         if (!$option) throw new Exception("Value 0 (zero) is not accepted",4);
         if (!is_numeric($option)) throw new Exception("Non-numeric value",4);
 
-        $valuesTable = implode(",", $values);
+        $valTable = implode(",", $val);
 
         switch ($option) {
             case 1:
-                $query = "SELECT * FROM $table;";
-                $this->res = $this->mysqli->query($query);
+                $query = $this->stmt->prepare("SELECT * FROM $table") ;
+                $this->res = $query->execute();
                 break;
             case 2:
-                $query = "SELECT * FROM $table $where;";
-                $this->res = $this->mysqli->query($query);
+                $query = $this->stmt->prepare("SELECT * FROM $table $where");
+                $this->res = $query->execute();
                 break;
             case 3:
-                $query  = "SELECT * FROM $table WHERE $where;";
-                $this->res = $this->mysqli->query($query);
+                $query = $this->stmt->prepare("SELECT * FROM $table WHERE $where");
+                $this->res = $query->execute();
                 break;
             case 4:
-                $query = "SELECT $valuesTable FROM $table;";
-                $this->res = $this->mysqli->query($query);
+                $query = $this->stmt->prepare("SELECT $valTable FROM $table");
+                $this->res = $query->execute();
                 break;
             case 5:
-                $query = "SELECT $valuesTable FROM $table WHERE $where;";
-                $this->res = $this->mysqli->query($query);
+                $query = $this->stmt->prepare("SELECT $valTable FROM $table WHERE $where");
+                $this->res = $query->execute();
                 break;
         }
-        if (!$this->res) throw new Exception(" <strong>$table</strong> <strong>$valuesTable</strong>  <strong> $where</strong> <br/>" . mysqli_error($this->connection),2);
-       
+        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
+
+        $this->res = $query->fetchAll();
         return $this->res;
     }
     /**  
-    * @param array $values
+    * @param array $val
+    * @param array $prval
     *
-    *Values é definido como array e é passado dentro do array nome da coluna e o valor em aspas simples
-    * exem: nome_da_coluna = 'valor'
+    * Variáveis de array $preval e $prewhe é definido como array e é passado dentro do array nome da coluna e o valor em aspas simples
+    * exem: nome_da_coluna = '?'
     */
-    public function update(string $table,string $where, array $values) {
-        if (empty($table) || empty($values)) throw new Exception("Error null values", 1);
+    public function update(string $table,string $prewher,array $where = null,array $preval,array $val = null) {
+        if (empty($table) || empty($prewher) || empty($preval) ) throw new Exception("Error null values", 1);
 
-        $valuesTable = implode(", ", $values);
+        $preVal = implode(", ", $preval);
+            $query = $this->stmt->prepare("UPDATE $table SET $preVal WHERE $prewher;");
 
-                $query = "UPDATE $table SET $valuesTable WHERE $where;";
-                $this->res = $this->mysqli->query($query);
+            $col = count($val) + count($where);
+            
+            for($c = 0; $c < $col; $c++) {
+                $query->bindParam($c+1, $val[$c]);
+                if($c >= count($val)) {
+                    $c2 = 1;
+                    $query->bindParam($c+1, $where[$c2]);
+                    $c2++;
+                }
 
-        if (!$this->res) throw  new Exception("Erro: <strong>$table</strong> <strong>$valuesTable</strong> <br/>" . mysqli_error($this->connection),2);
+            }
+            $this->res = $query->execute();
+
+        if (!$this->res) throw  new Exception(print_r($query->errorInfo()),2);
     
         return $this->res;
     }
     /**
      * @param string $where
-     * Where é definido a opção de deleção e valor deve ser definido com aspas simples
-     * exem: id =  '$id'
+     *  @param array $val
+     * Where é definido a opção de deleção e valor deve ser definido em array
+     * exem: id =  ?
      */
-    public function delete(string $table,string $where) {
-        if (empty($table) || empty($where)) throw new Exception("Error null values", 1);
+    public function delete(string $table,string $where,array $val) {
+        if (empty($table) || empty($where) || empty($vall)) throw new Exception("Error null values", 1);
 
-        $query = "DELETE FROM $table WHERE $where";
+        $query = $this->stmt->prepare("DELETE FROM $table WHERE $where");
 
-        $this->res = $this->mysqli->query($query);
+        for($c = 0; $c < count($val); $c++) {
+            $query->bindParam($c+1, $val[$c]);
+        }
+        $this->res = $query->execute();
 
-        if (!$this->res) throw new Exception("Erro: <strong>$table</strong> <strong>$where</strong> <br/>" . mysqli_error($this->connection),2);
+        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
     
         return $this->res;
     }

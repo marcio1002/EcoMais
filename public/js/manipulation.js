@@ -166,3 +166,15 @@ function clearInput() {
     iptAddre.val("");
     statiElem.val("");
 }
+
+$('.smoothScroll').click(function(elem)  {
+    elem.preventDefault();
+   
+    let id = $(this).attr('href'),
+    menuHeight = $('nav').innerHeight(),
+    target = $(id).offset().top - menuHeight;
+    $(doc).animate({
+        scrollTop: target ,
+        
+    },800);
+})

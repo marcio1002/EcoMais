@@ -12,5 +12,6 @@ src/
 /controller/update.php
 /controller/showRegistry.php
 /controller/qrCode.php
+/controller/deleteUser.php
 
 index.php

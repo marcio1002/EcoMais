@@ -1,6 +1,7 @@
 <?php
 require_once "../model/register.class.php";
 require_once "../model/product.class.php";
+require_once "../model/data.class.php";
 try {
      $data = new Data('localhost','root','rootadmin','apiTest');
      $prod = new Product();
@@ -13,7 +14,7 @@ try {
      $img = $prod->getImage();
      $imgInfoSize = getimagesize($img['tmp_name']);
 
-     if (($imgInfoSize[0] > $width)|| ($imgInfoSize[1] > $height) || ($img['size'] > $byte)) throw new Exception('maximum size exceeded');
+     if (($imgInfoSize[0] > $width)|| ($imgInfoSize[1] > $height) || ($img['size'] > $byte)) throw new Exception('maximum size exceeded',4);
 
      preg_match("/\.(jpg|png|jpeg|bmp)$/", $img['name'], $ext);
 

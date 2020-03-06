@@ -4,8 +4,7 @@
         $img = $_POST['image'];
 
         $data = new Data('localhost','root','rootadmin','apiTest');
-        if($data->delete("images","image = '$img'")){
-            
+        if($data->delete("images","image = ?",array($img))){
             $data->connectionClose();
             unlink("../src/images/$img");
             echo "<script>confirm('Deletado com sucesso'); location.href = '../view/mostrar.php';</script>";

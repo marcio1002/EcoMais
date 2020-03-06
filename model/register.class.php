@@ -2,7 +2,7 @@
 require_once "../interfaces/userInterface.php";
 class User implements UserInterface {
     protected $name;
-    protected $password;
+    protected $passwd;
     protected $email;
     protected $cpf;
     protected $cnpj;
@@ -23,13 +23,13 @@ class User implements UserInterface {
     }
 
     public function getPassword() {
-        return $this->password;
+        return $this->passwd;
     }
 
     public function setPassword(string $password) {
         if(empty($password)) throw new Exception('Undefined value');
         if (strlen($password) > 15) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
-        $this->password = $password;
+        $this->passwd = $password;
     }
 
     public function getEmail() {
