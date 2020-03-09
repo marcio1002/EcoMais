@@ -17,29 +17,29 @@ $('document').ready(function (){
 
     $('#btnDltImage').click(function (){
         if(!confirm("Deseja realmente deletar!")) return;
-        const data = { image: $('#image').val() };
+        const data = { image: $('input[name=image]').val() };
 
         $.post("../controller/deleteImage.php", data,)
         .done((data) =>{
             alert('Deletado com sucesso!');
-            const href = $(this ).attr('../view/mostrar.php','href');
-            $('#boxImg').load(href);
-            console.log(data);
+            location.href = "../view/mostrar.php";
+            console.log(data.toString());
         })
         .fail((xhr,desc,err)=> console.log(`ErrXHR: ${xhr} \n Description: ${desc} \n Error: ${err}`))
     })
     $("#btnUpdate").click(function (){
+        
         const data = {
-            name: $('name').val(),
-            email: $('email').val(),
-            passwd: $('pwd').val(),
+            name: $('input[name=name]').val(),
+            email: $('input[name=email]').val(),
+            passwd: $('input[name=passwd]').val(),
+            id: $('input[name=id]').val(),
         }
         $.post("../controller/update.php", data,)
         .done((data) =>{
             alert('Atualizado com sucesso!');
-            const href = $(this ).attr('href');
-            $('document').load(href);
-            console.log(data);
+            location.href = "../view/mostrar.php";
+            console.log(data.toString());
         })
         .fail((xhr,desc,err)=> console.log(`ErrXHR: ${xhr} \n Description: ${desc} \n Error: ${err}`))
     })
