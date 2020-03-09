@@ -1,9 +1,9 @@
 <?php
 /** 
-* @param $table, $value 
-* São parâmetros patrões para manipulações.
-* @param string $where  
-* É  uma variavel String com valor de manilupação como comparação, ordenação e limitação.
+* @param $table, $val
+* São parâmetros patrões.
+* @param array $where  
+* É  um array com valores de manilupação como comparação, ordenação e limitação.
 * @param int $option 
 * É definido como um número de opções. É usado no metodo show.
 */
@@ -11,8 +11,8 @@
 require_once "../interfaces/databaseInterface.php";
 
 final class Data implements DatabaseInterface {
-    private $res = null;
-    private $stmt = null;
+    private $res = 0;
+    private $pdo = null;
     private $host;
     private $user;
     private $passwd;
@@ -23,11 +23,11 @@ final class Data implements DatabaseInterface {
         $this->user = $user;
         $this->passwd = $passwd;
         $this->database = $database;
-        $this->stmt = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd) or die("⛔ Error connecting to the bank. <br/>" . $this->stmt->errorInfo());
+        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd) or die("⛔ Error connecting to the bank. <br/>" . $this->pdo->errorInfo());
     }
 
     public function connectionClose() {
-        unset($this->stmt);
+        unset($this->pdo);
     }
 
     public function add(string $table, array $columns, array $val) {
@@ -35,14 +35,16 @@ final class Data implements DatabaseInterface {
 
         $colTable = implode(",", $columns);
         $preVal = implode(",",array_fill(0,count($val),'?'));
-
-        $query = $this->stmt->prepare("INSERT INTO $table ($colTable) VALUES($preVal)");
+        $this->pdo->beginTransaction();
+        $query = $this->pdo->prepare("INSERT INTO $table ($colTable) VALUES($preVal)");
 
         for($c = 0; $c < count($val); $c++) {
             $query->bindParam($c+1,$val[$c]);
         }
-        $this->res = $query->execute();
-        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
+        $query->execute();
+
+        $this->res = $this->pdo->commit();
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
         
         return $this->res;
     }
@@ -55,69 +57,73 @@ final class Data implements DatabaseInterface {
     * 5: Busca select com valores definidos e where.
     */
 
-    public function show(string $table, array $val = [],string $where = "",int $option = 1) {
+    public function show(string $table, array $val = [],string $prewher = "", array $where = [],int $option = 1) {
         if (empty($table)) throw new Exception("Error null values", 1);
         if (!$option) throw new Exception("Value 0 (zero) is not accepted",4);
-        if (!is_numeric($option)) throw new Exception("Non-numeric value",4);
+        if (!is_numeric($option)) throw new Exception("Non-numeric value",3);
 
         $valTable = implode(",", $val);
 
+        $this->pdo->beginTransaction();
+
         switch ($option) {
             case 1:
-                $query = $this->stmt->prepare("SELECT * FROM $table") ;
-                $this->res = $query->execute();
+                $query = $this->pdo->prepare("SELECT * FROM $table") ;
                 break;
             case 2:
-                $query = $this->stmt->prepare("SELECT * FROM $table $where");
-                $this->res = $query->execute();
+                $query = $this->pdo->prepare("SELECT * FROM $table $prewher");
                 break;
             case 3:
-                $query = $this->stmt->prepare("SELECT * FROM $table WHERE $where");
-                $this->res = $query->execute();
+                $query = $this->pdo->prepare("SELECT * FROM $table WHERE $prewher");
                 break;
             case 4:
-                $query = $this->stmt->prepare("SELECT $valTable FROM $table");
-                $this->res = $query->execute();
+                $query = $this->pdo->prepare("SELECT $valTable FROM $table");
                 break;
             case 5:
-                $query = $this->stmt->prepare("SELECT $valTable FROM $table WHERE $where");
-                $this->res = $query->execute();
+                $query = $this->pdo->prepare("SELECT $valTable FROM $table WHERE $prewher");
                 break;
         }
-        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
+        for($c = 0; $c < count($where); $c++) {
+            $query->bindParam($c+1, $where[$c]);
+        }
+        
+        $query->execute();
+        $this->res = $this->pdo->commit();
 
-        $this->res = $query->fetchAll();
-        return $this->res;
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
+
+        return $query->fetchAll();
     }
     /**  
     * @param array $val
-    * @param array $prval
+    * @param array $preval
     *
     * Variáveis de array $preval e $prewhe é definido como array e é passado dentro do array nome da coluna e o valor em aspas simples
     * exem: nome_da_coluna = '?'
     */
-    public function update(string $table,string $prewher,array $where = null,array $preval,array $val = null) {
-        if (empty($table) || empty($prewher) || empty($preval) ) throw new Exception("Error null values", 1);
+    public function update(string $table,string $prewher,array $where ,array $preval,array $val) {
+        if (empty($table) || empty($prewher) || empty($preval) ||empty($where) || empty($val) ) throw new Exception("Error null values", 1);
 
-        $preVal = implode(", ", $preval);
-            $query = $this->stmt->prepare("UPDATE $table SET $preVal WHERE $prewher;");
+        $preVal = trim(implode(", ", $preval));
+            $this->pdo->beginTransaction();
+            $query = $this->pdo->prepare("UPDATE $table SET $preVal WHERE $prewher");
 
-            $col = count($val) + count($where);
-            
-            for($c = 0; $c < $col; $c++) {
-                $query->bindParam($c+1, $val[$c]);
-                if($c >= count($val)) {
-                    $c2 = 1;
+            $quant = count($val) + count($where);
+            $cont = count($val) - 1;
+            $c2 = 0;
+            for($c = 0; $c < $quant; $c++) {
+                if($c > $cont){
                     $query->bindParam($c+1, $where[$c2]);
                     $c2++;
+                } else {
+                    $query->bindParam($c+1, $val[$c]);   
                 }
-
             }
-            $this->res = $query->execute();
+            $query->execute();
+            $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw  new Exception(print_r($query->errorInfo()),2);
-    
-        return $this->res;
+            if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),2);
+            return $this->res;
     }
     /**
      * @param string $where
@@ -126,16 +132,17 @@ final class Data implements DatabaseInterface {
      * exem: id =  ?
      */
     public function delete(string $table,string $where,array $val) {
-        if (empty($table) || empty($where) || empty($vall)) throw new Exception("Error null values", 1);
-
-        $query = $this->stmt->prepare("DELETE FROM $table WHERE $where");
+        if (empty($table) || empty($where) || empty($val)) throw new Exception("Error null values", 1);
+        $this->pdo->beginTransaction();
+        $query = $this->pdo->prepare("DELETE FROM $table WHERE $where");
 
         for($c = 0; $c < count($val); $c++) {
             $query->bindParam($c+1, $val[$c]);
         }
-        $this->res = $query->execute();
+        $query->execute();
+        $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new Exception(print_r($query->errorInfo()),2);
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
     
         return $this->res;
     }

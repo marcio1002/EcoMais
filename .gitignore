@@ -7,11 +7,8 @@ src/
 /view/image.php
 /view/styles/
 
-/controller/add.php
-/controller/delete.php
-/controller/update.php
 /controller/showRegistry.php
-/controller/qrCode.php
 /controller/deleteUser.php
 
+/public/styles/style.css
 index.php

@@ -8,15 +8,17 @@
         $usr->setEmail($_GET['email']);
         $usr->setPassword($_GET['pwd']);
 
-        $res = $data->show('usuarios',[],"email = '{$usr->getEmail()}' AND password = '{$usr->getPassword()}'",3);
+        $res = $data->show('usuarios',[],"email = ? AND password = ?",[$usr->getEmail(),$usr->getPassword()],3);
 
-        if(!$res->num_rows) throw new Exception('No results found',3);
+        if(!$res) throw new Exception('No results found',3);
 
         $data->connectionClose();
 
         header('location: ../view/mostrar.php');
 
-    }catch(Exception $ex){
+    }catch(PDOException $ex){
+        die($ex->getMessage());
+    }catch(Exception $ex) {
         die($ex->getMessage());
     }
 ?>

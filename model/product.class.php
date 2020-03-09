@@ -79,7 +79,7 @@
         public function setImage( string $ext,array $file) {
             if($file['error'] === 4) throw new Exception('file undefined',1);
             if($file['error'] === 1) throw new Exception('File size not supported by the system',4);
-            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!',4);
+            if(!preg_match("/\.($ext$)/",$file['name'],$ex)) throw new Exception('Format not support!',5);
             $this->file = $file;
         }
 

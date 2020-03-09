@@ -20,13 +20,15 @@ try {
 
      $tokenName = md5(uniqid(time())) . "." . $ext[1];
 
-     if (move_uploaded_file($img['tmp_name'], "../src/images/$tokenName")) {
+     if (move_uploaded_file($img['tmp_name'], "../src/uploadImages/$tokenName")) {
 
           $data->add("images", ["image"], [$tokenName]);
           $data->connectionClose();
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }
-} catch (Exception $ex) {
+} catch (PDOException $ex) {
+     die($ex->getMessage());
+}catch(Exception $ex) {
      die($ex->getMessage());
 }
 ?>

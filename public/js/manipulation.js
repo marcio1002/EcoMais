@@ -1,10 +1,11 @@
 const iptEmail = $("#email");
 const iptCep = $("#cep");
-const passwd = $("#pwd"); 
-const statiElem = $("#stati");
 const iptCity = $("#city");
 const iptAddre = $("#addre");
 const iptCpf= $("#cpf");
+const iptName = $("#name");
+const passwd = $("#pwd"); 
+const statiElem = $("#stati");
 
 $('#search').click(() => searchCep());
 
@@ -169,12 +170,8 @@ function clearInput() {
 
 $('.smoothScroll').click(function(elem)  {
     elem.preventDefault();
-   
     let id = $(this).attr('href'),
     menuHeight = $('nav').innerHeight(),
     target = $(id).offset().top - menuHeight;
-    $(doc).animate({
-        scrollTop: target ,
-        
-    },800);
+    $(doc).animate({  scrollTop: target  },800);
 })

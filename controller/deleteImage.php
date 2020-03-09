@@ -6,13 +6,14 @@
         $data = new Data('localhost','root','rootadmin','apiTest');
         if($data->delete("images","image = ?",array($img))){
             $data->connectionClose();
-            unlink("../src/images/$img");
-            echo "<script>confirm('Deletado com sucesso'); location.href = '../view/mostrar.php';</script>";
+            unlink("../src/uploadImages/$img");
+            return "ok";
         }
         
        
-    }catch(Exception $ex){
-        die($ex->getMessage());
-        echo "<script>confirm('Não foi possível deletar a imagem'); location.href = '../view/mostrar.php';</script>";
+    }catch(PDOException $ex){
+        return die($ex->getMessage());
+    }catch(Exception $ex) {
+        return die($ex->getMessage());
     }
 ?>
