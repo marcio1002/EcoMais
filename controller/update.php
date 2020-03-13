@@ -13,13 +13,13 @@
         [$usr->getName(), $usr->getEmail(), $usr->getPassword()]
         )){
             $data->connectionClose();
-            return "ok";
+            echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
         }
         
        
     }catch(PDOException $ex){
-       return die($ex->getMessage());
+        echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()], );
     }catch(Exception $ex) {
-       return die($ex->getMessage());
+        echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()], );
     }
 ?>

@@ -23,7 +23,7 @@ final class Data implements DatabaseInterface {
         $this->user = $user;
         $this->passwd = $passwd;
         $this->database = $database;
-        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd) or die("⛔ Error connecting to the bank. <br/>" . $this->pdo->errorInfo());
+        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
     public function connectionClose() {
@@ -31,7 +31,7 @@ final class Data implements DatabaseInterface {
     }
 
     public function add(string $table, array $columns, array $val) {
-        if (empty($table) || empty($columns) || empty($val) ) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($columns) || empty($val) ) throw new Exception("Error null values", 411);
 
         $colTable = implode(",", $columns);
         $preVal = implode(",",array_fill(0,count($val),'?'));
@@ -44,7 +44,7 @@ final class Data implements DatabaseInterface {
         $query->execute();
 
         $this->res = $this->pdo->commit();
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
         
         return $this->res;
     }
@@ -58,8 +58,8 @@ final class Data implements DatabaseInterface {
     */
 
     public function show(string $table, array $val = [],string $prewher = "", array $where = [],int $option = 1) {
-        if (empty($table)) throw new Exception("Error null values", 1);
-        if (!$option) throw new Exception("Value 0 (zero) is not accepted",4);
+        if (empty($table)) throw new Exception("Error null values", 411);
+        if (!$option) throw new Exception("Value 0 (zero) is not accepted",411);
         if (!is_numeric($option)) throw new Exception("Non-numeric value",3);
 
         $valTable = implode(",", $val);
@@ -90,7 +90,7 @@ final class Data implements DatabaseInterface {
         $query->execute();
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
 
         return $query->fetchAll();
     }
@@ -102,7 +102,7 @@ final class Data implements DatabaseInterface {
     * exem: nome_da_coluna = '?'
     */
     public function update(string $table,string $prewher,array $where ,array $preval,array $val) {
-        if (empty($table) || empty($prewher) || empty($preval) ||empty($where) || empty($val) ) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($prewher) || empty($preval) ||empty($where) || empty($val) ) throw new Exception("Error null values",411);
 
         $preVal = trim(implode(", ", $preval));
             $this->pdo->beginTransaction();
@@ -122,7 +122,7 @@ final class Data implements DatabaseInterface {
             $query->execute();
             $this->res = $this->pdo->commit();
 
-            if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),2);
+            if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),400);
             return $this->res;
     }
     /**
@@ -132,7 +132,7 @@ final class Data implements DatabaseInterface {
      * exem: id =  ?
      */
     public function delete(string $table,string $where,array $val) {
-        if (empty($table) || empty($where) || empty($val)) throw new Exception("Error null values", 1);
+        if (empty($table) || empty($where) || empty($val)) throw new Exception("Error null values",411);
         $this->pdo->beginTransaction();
         $query = $this->pdo->prepare("DELETE FROM $table WHERE $where");
 
@@ -142,7 +142,7 @@ final class Data implements DatabaseInterface {
         $query->execute();
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),2);
+        if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
     
         return $this->res;
     }

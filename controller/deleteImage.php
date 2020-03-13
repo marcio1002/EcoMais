@@ -1,19 +1,23 @@
 <?php    
     require_once "../model/data.class.php";
     try{
-        $img = $_POST['image'];
+        $img = $_POST['img'];
+        if(empty($img)) throw new Exception("Value undefined") ;
 
         $data = new Data('localhost','root','rootadmin','apiTest');
-        if($data->delete("images","image = ?",array($img))){
-            $data->connectionClose();
+
+        if($res = $data->delete("images","image = ?",[$img])){
             unlink("../src/uploadImages/$img");
-            return "ok";
+            echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
+            $data->connectionClose();
         }
         
        
     }catch(PDOException $ex){
-        return die($ex->getMessage());
+       echo json_encode( ["error"=> true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
+        die($data->connectionClose());
     }catch(Exception $ex) {
-        return die($ex->getMessage());
+        echo json_encode( ["error" => true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
+        die($data->connectionClose());
     }
 ?>
