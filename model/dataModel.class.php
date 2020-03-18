@@ -26,9 +26,6 @@ final class Data implements DatabaseInterface {
         if(!$this->pdo) $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
-    public static function connectionClose() {
-        unset($this->pdo);
-    }
 
     public function add(string $table, array $columns, array $val) {
         if (empty($table) || empty($columns) || empty($val) ) throw new Exception("Error null values", 411);
@@ -48,7 +45,7 @@ final class Data implements DatabaseInterface {
         
         return $this->res;
 
-        self::connectionClose();
+        unset($this->pdo);
     }
     /**  
     * @param $option  São  5 opções para selecionar sua busca 
@@ -96,7 +93,7 @@ final class Data implements DatabaseInterface {
 
         return ($query->rowCount() == 1) ? $query->fetch() : $query->fetchAll();
 
-        self::connectionClose();
+        unset($this->pdo);
     }
     /**  
     * @param array $val
@@ -129,7 +126,7 @@ final class Data implements DatabaseInterface {
             if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),400);
             return $this->res;
 
-            self::connectionClose();
+            unset($this->pdo);
     }
     /**
      * @param string $where
@@ -152,7 +149,7 @@ final class Data implements DatabaseInterface {
     
         return $this->res;
 
-        self::connectionClose();
+        unset($this->pdo);
     }
 }
 ?>

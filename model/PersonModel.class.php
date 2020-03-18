@@ -1,6 +1,7 @@
 <?php
 require_once "../interfaces/personInterface.php";
 abstract class  Person  implements PersonInterface {
+    private $id;
     protected $name;
     protected $passwd;
     protected $email;
@@ -11,6 +12,14 @@ abstract class  Person  implements PersonInterface {
     protected $date;
     protected $cep;
     
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId(int $id) {
+        if(empty($id)) throw new Exception('Undefined value'); 
+        $this->id = trim($id);
+    }
 
     public function getName() {
         return $this->name;

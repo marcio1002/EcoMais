@@ -4,17 +4,7 @@
     
     class PersonPhysical extends Person implements PersonPhysicalInterface{
 
-        private $id;
         protected $cpf;
-
-        public function getId() {
-            return $this->id;
-        }
-    
-        public function setId(int $id) {
-            if(empty($id)) throw new Exception('Undefined value'); 
-            $this->id = trim($id);
-        }
 
         public function getCpf() {
             return $this->cpf;

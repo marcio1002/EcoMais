@@ -6,6 +6,5 @@ interface DatabaseInterface
     public function show(string $table, array $val,string $prewhere,array $where, int $option);
     public function update(string $table,string $prewher,array $where,array $preVal, array $val);
     public function delete(string $table,string $where,array $val);
-    public static function connectionClose();
 }
 ?>
