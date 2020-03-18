@@ -1,7 +1,7 @@
 <?php
-require_once "../model/register.class.php";
-require_once "../model/product.class.php";
-require_once "../model/data.class.php";
+require_once "../model/dataModel.class.php";
+require_once "../model/productModel.class.php";
+
 try {
      $data = new Data('localhost','root','rootadmin','apiTest');
      $prod = new Product();
@@ -23,7 +23,6 @@ try {
      if (move_uploaded_file($img['tmp_name'], "../src/uploadImages/$tokenName")) {
 
           $data->add("images", ["image"], [$tokenName]);
-          $data->connectionClose();
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }
 } catch (PDOException $ex) {

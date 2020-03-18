@@ -1,8 +1,8 @@
 <?php    
-    require_once "../model/data.class.php";
-    require_once "../model/register.class.php";
+    require_once "../model/dataModel.class.php";
+    require_once "../model/personPhysicalModel.class.php";
     try{
-        $usr = new User();
+        $usr = new PersonPhysical();
         $data = new Data('localhost','root','rootadmin','apiTest');
         $usr->setName($_POST['name']);
         $usr->setEmail($_POST['email']);
@@ -12,7 +12,6 @@
         ["nome = ?","email = ?", "password = ?"],
         [$usr->getName(), $usr->getEmail(), $usr->getPassword()]
         )){
-            $data->connectionClose();
             echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
         }
         

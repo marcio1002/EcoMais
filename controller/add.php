@@ -1,9 +1,9 @@
 <?php
-    require_once "../model/register.class.php";
-    require_once "../model/data.class.php";
+    require_once "../model/dataModel.class.php";
+    require_once "../model/personPhysicalModel.class.php";
     try{
         $data = new Data('localhost','root','rootadmin','apiTest');
-        $register = new User();
+        $register = new PersonPhysical();
 
         $register->setName($_POST['name']);
         $register->setEmail($_POST['email']);

@@ -1,25 +1,24 @@
 <?php
-require_once "../interfaces/userInterface.php";
-class User implements UserInterface {
+require_once "../interfaces/personInterface.php";
+abstract class  Person  implements PersonInterface {
     protected $name;
     protected $passwd;
     protected $email;
-    protected $cpf;
-    protected $cnpj;
     protected $stati;
     protected $city;
     protected $addre;
     protected $number;
     protected $date;
     protected $cep;
+    
 
     public function getName() {
         return $this->name;
     }
 
     public function setName(string $name) {
-        if(empty($name)) throw new Exception('Undefined value');
-        $this->name = $name;
+        if(empty($name)) throw new Exception('Undefined value'); 
+        $this->name = strtolower(trim($name));
     }
 
     public function getPassword() {
@@ -27,70 +26,52 @@ class User implements UserInterface {
     }
 
     public function setPassword(string $password) {
-        if(empty($password)) throw new Exception('Undefined value');
+        if(empty($password)) throw new Exception('Undefined value'); 
         if (strlen($password) > 15) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
-        $this->passwd = $password;
+        $this->passwd = trim($password);
     }
 
     public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail(string $email) {
+    public function setEmail(string $email) { 
         if(empty($email)) throw new Exception('Undefined value');
-        $this->email = $email;
-    }
-
-    public function getCpf() {
-        return $this->cpf;
-    }
-
-    public function setCpf($cpf) {
-        if(empty($cpf)) throw new Exception('Undefined value');
-        if (!is_numeric($cpf)) throw new TypeError("Expected a number format", 1);
-        $this->cpf = $cpf;
+        $this->email = strtolower(trim($email));
     }
     public function getCep() {
         return $this->cep;
     }
-    public function setCep($cep) {
+    public function setCep(int $cep) { 
         if(empty($cep)) throw new Exception('Undefined value');
-        $this->cep = $cep;
+        $this->cep = trim($cep);
     }
-    public function getCnpj() {
-        return $this->cnpj;
-    }
-    public function setCnpj(string $cnpj) {
-        if(empty($cnpj)) throw new Exception('Undefined value');
-        if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
-        $this->cnpj = $cnpj;
-    }
-
+    
     public function getStati() {
         return $this->stati;
     }
 
-    public function setStati(string $stati) {
+    public function setStati(string $stati) { 
         if(empty($stati)) throw new Exception('Undefined value');
-        $this->stati = $stati;
+        $this->stati = strtolower(trim($stati));
     }
 
     public function getCity() {
         return $this->city;
     }
 
-    public function setCity(string $city) {
+    public function setCity(string $city) { 
         if(empty($city)) throw new Exception('Undefined value');
-        $this->city = $city;
+        $this->city = strtolower(trim($city));
     }
 
     public function getAddre() {
         return $this->addre;
     }
 
-    public function setAddre(string $addre) {
+    public function setAddre(string $addre) { 
         if(empty($addre)) throw new Exception('Undefined value');
-        $this->addre = $addre;
+        $this->addre = strtolower(trim($addre));
     }
 
     public function getNumber(){
@@ -99,8 +80,8 @@ class User implements UserInterface {
 
     public function setNumber(int $number) {
         if(empty($number)) throw new Exception('Undefined value');
-        if (!is_numeric($number)) throw new TypeError("Expected a number format", 1);
-        $this->number = $number;
+        if (!is_numeric($number)) throw new TypeError("Expected a number format", 1); 
+        $this->number = trim($number);
     }
     public function createAt() {
         date_default_timezone_set("America/Sao_paulo");

@@ -1,5 +1,5 @@
 <?php 
-    interface UserInterface {
+    interface PersonInterface {
 
         public function getName();
         public function setName(string $name);
@@ -7,12 +7,8 @@
         public function setPassword(string $password);
         public function getEmail();
         public function setEmail(string $email);
-        public function getCpf();
-        public function setCpf(string $cpf);
         public function getCep();
-        public function setCep($cep);
-        public function getCnpj();
-        public function setCnpj(string $cnpj);
+        public function setCep(int $cep);
         public function getStati();
         public function setStati(string $stati);
         public function getCity();

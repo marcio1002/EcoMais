@@ -11,22 +11,22 @@
 require_once "../interfaces/databaseInterface.php";
 
 final class Data implements DatabaseInterface {
-    private $res = 0;
-    private $pdo = null;
-    private $host;
-    private $user;
-    private $passwd;
-    private $database;
+    private  $res = 0;
+    private  $pdo = null;
+    private  $host;
+    private  $user;
+    private  $passwd;
+    private  $database;
 
     function __construct(string $host,string $user,string $passwd,string $database) {
         $this->host = $host;
         $this->user = $user;
         $this->passwd = $passwd;
         $this->database = $database;
-        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
+        if(!$this->pdo) $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
-    public function connectionClose() {
+    public static function connectionClose() {
         unset($this->pdo);
     }
 
@@ -47,6 +47,8 @@ final class Data implements DatabaseInterface {
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
         
         return $this->res;
+
+        self::connectionClose();
     }
     /**  
     * @param $option  São  5 opções para selecionar sua busca 
@@ -92,7 +94,9 @@ final class Data implements DatabaseInterface {
 
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
 
-        return $query->fetchAll();
+        return ($query->rowCount() == 1) ? $query->fetch() : $query->fetchAll();
+
+        self::connectionClose();
     }
     /**  
     * @param array $val
@@ -124,6 +128,8 @@ final class Data implements DatabaseInterface {
 
             if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),400);
             return $this->res;
+
+            self::connectionClose();
     }
     /**
      * @param string $where
@@ -145,6 +151,8 @@ final class Data implements DatabaseInterface {
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
     
         return $this->res;
+
+        self::connectionClose();
     }
 }
 ?>
