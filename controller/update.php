@@ -12,7 +12,10 @@
         $postPreVal =["nome = ?","email = ?", "password = ?"];
         $postVal = [$usr->getName(), $usr->getEmail(), $usr->getPassword()];
 
+        $data->open();
+
         if($data->update("usuarios","id_usuario = ?",$id,$postPreVal,$postVal)){
+            $data->close();
             echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
         }
         

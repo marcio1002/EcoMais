@@ -13,9 +13,15 @@
 
         $array_columns = array("nome","email","password","date");
         $array_register = array($register->getName(),$register->getEmail(),$passwd,$register->createAt());
-        $data->add("usuarios",$array_columns,$array_register);
+
+        $data->open();
         
-        echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
+        if($data->add("usuarios",$array_columns,$array_register)) {
+            $data->close();
+            echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
+        }
+        
+        
 
     }catch(PDOException $ex) {   
         echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);

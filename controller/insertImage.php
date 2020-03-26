@@ -21,7 +21,9 @@ try {
      $tokenName = $safety->criptImage("jpg|png|jpeg|bmp",$img['name']);
 
      if (move_uploaded_file($img['tmp_name'], "../src/uploadImages/$tokenName")) {
+          $data->open();
           $data->add("images", ["image"], [$tokenName]);
+          $data->close();
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }
 } catch (PDOException $ex) {

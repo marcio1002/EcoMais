@@ -2,12 +2,16 @@
     require_once "../server/dataModel.class.php";
 
     try{
+        $data = new Data();
+        
         $img = $_POST['img'];
         if(empty($img)) throw new Exception("Value undefined") ;
 
-        $data = new Data();
 
-        if($res = $data->delete("images","image = ?",[$img])){
+        $data->open();
+
+        if($data->delete("images","image = ?",[$img])){
+            $data->close();
             unlink("../src/uploadImages/$img");
             echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
         }

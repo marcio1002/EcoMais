@@ -10,9 +10,12 @@
         $usr->setEmail($_GET['email']);
         $usr->setPassword($_GET['pwd']);
         $passwd = $poli->criptPasswd($usr->getPassword());
+
+        $data->open();
         $res = $data->show('usuarios',[],"email = ? AND password = ?",[$usr->getEmail(),$passwd],3);
         
         if($res){
+            $data->close();
             echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
             $usr->setName($res['nome']);
             $usr->setId($res['id_usuario']);
