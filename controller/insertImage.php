@@ -1,10 +1,12 @@
 <?php
-require_once "../model/dataModel.class.php";
+require_once "../server/dataModel.class.php";
+require_once "../model/safety.class.php";
 require_once "../model/productModel.class.php";
 
 try {
-     $data = new Data('localhost','root','rootadmin','apiTest');
+     $data = new Data();
      $prod = new Product();
+     $safety = new Safety();
 
      $width = 2200;
      $height = 2215;
@@ -16,12 +18,9 @@ try {
 
      if (($imgInfoSize[0] > $width)|| ($imgInfoSize[1] > $height) || ($img['size'] > $byte)) throw new Exception('maximum size exceeded',4);
 
-     preg_match("/\.(jpg|png|jpeg|bmp)$/", $img['name'], $ext);
-
-     $tokenName = md5(uniqid(time())) . "." . $ext[1];
+     $tokenName = $safety->criptImage("jpg|png|jpeg|bmp",$img['name']);
 
      if (move_uploaded_file($img['tmp_name'], "../src/uploadImages/$tokenName")) {
-
           $data->add("images", ["image"], [$tokenName]);
           echo "<script>confirm('Imagem salva com sucesso'); location.href = '../view/image.php';</script>";
      }

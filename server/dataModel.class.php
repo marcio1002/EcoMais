@@ -18,11 +18,11 @@ final class Data implements DatabaseInterface {
     private  $passwd;
     private  $database;
 
-    function __construct(string $host,string $user,string $passwd,string $database) {
-        $this->host = $host;
-        $this->user = $user;
-        $this->passwd = $passwd;
-        $this->database = $database;
+    function __construct() {
+        $this->host = 'localhost';
+        $this->user = 'root';
+        $this->passwd = 'rootadmin';
+        $this->database = 'apiTest';
         if(!$this->pdo) $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8",$this->user,$this->passwd,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
@@ -41,11 +41,12 @@ final class Data implements DatabaseInterface {
         $query->execute();
 
         $this->res = $this->pdo->commit();
+
+        unset($this->pdo);
+        
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
         
         return $this->res;
-
-        unset($this->pdo);
     }
     /**  
     * @param $option  São  5 opções para selecionar sua busca 
@@ -89,18 +90,18 @@ final class Data implements DatabaseInterface {
         $query->execute();
         $this->res = $this->pdo->commit();
 
+        unset($this->pdo);
+
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
 
-        return ($query->rowCount() == 1) ? $query->fetch() : $query->fetchAll();
-
-        unset($this->pdo);
+        return ($query->rowCount() == 1) ? $query->fetch(PDO::FETCH_ASSOC) : $query->fetchAll();
     }
     /**  
     * @param array $val
     * @param array $preval
     *
-    * Variáveis de array $preval e $prewhe é definido como array e é passado dentro do array nome da coluna e o valor em aspas simples
-    * exem: nome_da_coluna = '?'
+    * Variáveis $preval e $prewhe é definido como array.$preVal é  passado dentro de cada array nome da coluna e o valor em aspas simples
+    * exem: nome_da_coluna = ?
     */
     public function update(string $table,string $prewher,array $where ,array $preval,array $val) {
         if (empty($table) || empty($prewher) || empty($preval) ||empty($where) || empty($val) ) throw new Exception("Error null values",411);
@@ -123,15 +124,16 @@ final class Data implements DatabaseInterface {
             $query->execute();
             $this->res = $this->pdo->commit();
 
-            if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),400);
-            return $this->res;
-
             unset($this->pdo);
+
+            if (!$this->res) throw  new PDOException(print_r($query->errorInfo()),400);
+            
+            return $this->res;
     }
     /**
      * @param string $where
      *  @param array $val
-     * Where é definido a opção de deleção e valor deve ser definido em array
+     * 
      * exem: id =  ?
      */
     public function delete(string $table,string $where,array $val) {
@@ -145,11 +147,12 @@ final class Data implements DatabaseInterface {
         $query->execute();
         $this->res = $this->pdo->commit();
 
+        unset($this->pdo);
+
         if (!$this->res) throw new PDOException(print_r($query->errorInfo()),400);
     
         return $this->res;
 
-        unset($this->pdo);
     }
 }
 ?>

@@ -8,6 +8,7 @@ const passwd = $("#pwd");
 const statiElem = $("#stati");
 
 $('#search').click(() => searchCep());
+$('select').formSelect();
 
 iptCep.keypress((evt) => {
     if(evt.keyCode === 13) {
@@ -27,7 +28,7 @@ $("#btnPwd").click(() => {
 });
 
 passwd.keypress((evt) =>{
-    const divElem = $('span#length').add('div');
+    const divElem = $('span#length');
     divElem.html(evt.target.value.length);
 })
 

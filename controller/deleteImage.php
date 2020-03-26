@@ -1,11 +1,11 @@
 <?php    
-    require_once "../model/dataModel.class.php";
+    require_once "../server/dataModel.class.php";
 
     try{
         $img = $_POST['img'];
         if(empty($img)) throw new Exception("Value undefined") ;
 
-        $data = new Data('localhost','root','rootadmin','apiTest');
+        $data = new Data();
 
         if($res = $data->delete("images","image = ?",[$img])){
             unlink("../src/uploadImages/$img");
@@ -14,9 +14,9 @@
         
     }catch(PDOException $ex){
        echo json_encode( ["error"=> true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
-        die($data->connectionClose());
+        die();
     }catch(Exception $ex) {
         echo json_encode( ["error" => true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
-        die($data->connectionClose());
+        die();
     }
 ?>

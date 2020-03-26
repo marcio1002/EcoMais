@@ -1,24 +1,25 @@
 <?php
-    require_once "../model/dataModel.class.php";
+    require_once "../server/dataModel.class.php";
+    require_once "../model/safety.class.php";
     require_once "../model/personPhysicalModel.class.php";
     try{
         $data = new Data('localhost','root','rootadmin','apiTest');
         $register = new PersonPhysical();
-
+        $safety = new Safety();
         $register->setName($_POST['name']);
         $register->setEmail($_POST['email']);
         $register->setPassword($_POST['pwd']);
+        $passwd = $safety->criptPasswd($register->getPassword());
 
         $array_columns = array("nome","email","password","date");
-        $array_register = array($register->getName(),$register->getEmail(),$register->getPassword(),$register->createAt());
+        $array_register = array($register->getName(),$register->getEmail(),$passwd,$register->createAt());
         $data->add("usuarios",$array_columns,$array_register);
-        $data->connectionClose();
-        return "ok";
-        header("location: ../view/index.php");
+        
+        echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
 
-    }catch(PDOException $erro) {   
-        return die($erro->getMessage());
+    }catch(PDOException $ex) {   
+        echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
     }catch(Exception $ex) {
-        return die($ex->getMessage());
+        echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
     }
 ?>
