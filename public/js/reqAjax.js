@@ -1,4 +1,4 @@
-$('body').ready(function (){
+$('body').ready(() => {
     
     $('#submit').click(() =>{
         let data = {
@@ -7,12 +7,14 @@ $('body').ready(function (){
             pwd: $('#pwd').val()
         };
     
-        $.post( '../controller/add.php',data)
+        $.post( '../controller/addAccount.php',data)
         .done((result) => {
             const res = JSON.parse(result);
             if (!res.error) {
                 M.toast({html: 'Cadastro realizado com sucesso', classes: "text",outDuration: 210});
-                $('input').val("");
+                $('input[type=text]').val("");
+                $('input[type=email]').val("");
+                $('input[type=password]').val("");
             } else{
                 M.toast({html: 'Cadastro realizado com sucesso', classes: "alert",outDuration: 210});
                 return console.log(res.status,res.msg);
@@ -33,7 +35,6 @@ $('body').ready(function (){
             .fail((xhr,desc,err)=> console.log(`ErrXHR: ${xhr} \n Description: ${desc} \n Error: ${err}`));
     });
 
-
     $('#btnUpdate').click(function (){
         const data = {
             name: $('input[name=name]').val(),
@@ -41,7 +42,7 @@ $('body').ready(function (){
             passwd: $('input[name=passwd]').val(),
             id: $('input[name=id]').val(),
         }
-        $.post('../controller/update.php', data)
+        $.post('../controller/updateAccount.php', data)
             .done((result) =>{
                 const res = JSON.parse(result);
                 return (!res.error) ? M.toast({html: 'Dados Atualizado', classes: "text",outDuration: 210}): console.log(res.status,res.msg);
@@ -52,7 +53,7 @@ $('body').ready(function (){
     $('#btndelete').click(() =>{
         const data = { id: $('input[name=id]').val() }
         if(!confirm("Deseja realmente deletar!")) return;
-        $.post('../controller/deleteUser.php',data)
+        $.post('../controller/deleteAccount.php',data)
             .done((result) =>{
                 const res = JSON.parse(result);
                 return (!res.error) ? M.toast({html: 'Usuario deleteado', classes: "text",outDuration: 210}): console.log(res.status,res.msg);
@@ -61,7 +62,7 @@ $('body').ready(function (){
     });
 
     $('#login').click(()  => {
-        $.get('./controller/login.php',{ email: $("#email").val(),pwd: $('#pwd').val() })
+        $.get('../controller/login.php',{ email: $("#email").val(),pwd: $('#pwd').val() })
             .done((result) => {
             const res = JSON.parse(result);
             console.log(res);

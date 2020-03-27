@@ -1,5 +1,6 @@
 <?php
     require_once "../interfaces/productInterface.php";
+
     class Product implements ProductInterface {
         protected $name;
         protected $price;

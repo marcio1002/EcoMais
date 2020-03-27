@@ -1,5 +1,5 @@
 <?php
-    require_once "../model/PersonModel.class.php";
+    require_once "personModel.class.php";
     require_once "../interfaces/personLegalInterface.php";
     
     class PersonLegal extends person implements PersonLegalInterface{
