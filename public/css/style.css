@@ -90,7 +90,7 @@ tr:nth-child(even) {
 
 .alert {
   border-radius: 20px;
-  background: rgba(248, 85, 57, 0.815) ;
+  background: rgba(247, 82, 53, 0.788) ;
   color: #f0eedb !important;
   font-weight: 600;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -102,4 +102,8 @@ span#length {
 
 .btn {
   font-weight: 600;
+}
+.flex {
+  display: flex;
+
 }

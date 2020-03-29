@@ -1,6 +1,6 @@
 <?php
-    require_once "personModel.class.php";
-    require_once "../interfaces/personLegalInterface.php";
+    require_once __DIR__."/pessoaModel.class.php";
+    require_once __DIR__."/../interfaces/pessoaJuridicaInterface.php";
     
     class PersonLegal extends person implements PersonLegalInterface{
 

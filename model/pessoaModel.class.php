@@ -1,5 +1,5 @@
 <?php
-require_once "../interfaces/personInterface.php";
+require_once __DIR__."/../interfaces/pessoaInterface.php";
 abstract class  Person  implements PersonInterface {
     private $id;
     protected $name;

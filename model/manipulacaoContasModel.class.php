@@ -1,9 +1,11 @@
 <?php
-    require_once "../interfaces/accountHandlingInterface.php";
-    require_once "../server/dataModel.class.php";
-    require_once "safetyModel.class.php";
+    require_once __DIR__."/../interfaces/manipulacaoContasInterface.php";
+    require_once __DIR__."/../server/dataModel.class.php";
+    require_once __DIR__."/segurancaModel.class.php";
 
     class AccountHandling  implements accountHandlingInterface{
+        private $_id;
+        private $_token;
 
         public function createAccount(PersonPhysical $person)
         {
@@ -81,9 +83,11 @@
              }
         }
 
-        public function login()
+        public function isLogged()
         {
-            
+            if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+            return (empty($_SESSION['_token']) && empty($_SESSION['_id']))? false : true; 
         }
 
         public function isAdmin()

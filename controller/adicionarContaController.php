@@ -1,7 +1,9 @@
-<?php
-    require_once "../model/accountHandlingmodel.class.php";
-    require_once "../model/personPhysicalModel.class.php";
+<?php   
+    require_once "../model/manipulacaoContasModel.class.php";
+    require_once "../model/pessoaFisicaModel.class.php";
+    
     try{
+
         $account = new AccountHandling();
         $register = new PersonPhysical();
 

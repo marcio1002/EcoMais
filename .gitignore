@@ -5,10 +5,10 @@ src/
 /view/index.php
 /view/mostrar.php
 /view/image.php
-/view/styles/
 
 /controller/showRegistry.php
-/controller/deleteUser.php
+/controller/deletarContaController.php
+/controller/atualizarContaController.php
 
 /public/styles/style.css
 index.php

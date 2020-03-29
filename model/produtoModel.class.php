@@ -1,5 +1,5 @@
 <?php
-    require_once "../interfaces/productInterface.php";
+    require_once __DIR__."/../interfaces/produtoInterface.php";
 
     class Product implements ProductInterface {
         protected $name;

@@ -1,5 +1,5 @@
 <?php
-interface DatabaseInterface
+interface DataInterface
 {
     public function open();
     public function close();

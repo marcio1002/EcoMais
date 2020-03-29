@@ -1,6 +1,6 @@
 <?php    
     require_once "../server/dataModel.class.php";
-
+    
     try{
         $data = new Data();
         

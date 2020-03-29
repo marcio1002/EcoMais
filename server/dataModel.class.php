@@ -9,9 +9,9 @@
  * É definido como um número de opções. É usado no metodo show.
  */
 
-require_once "../interfaces/databaseInterface.php";
+require_once __DIR__."/../interfaces/dataInterface.php";
 
-final class Data implements DatabaseInterface
+final class Data implements DataInterface
 {
     private  $res = 0;
     private  $pdo = null;
