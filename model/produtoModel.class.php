@@ -20,7 +20,7 @@
 
         public function setName(string $name) {
             if(empty($name)) throw new Exception('Error null values',1);
-            $this->name = strtolower(trim($name));
+            $this->name = trim($name);
         }
         
         public function getPrice() {
@@ -38,7 +38,7 @@
         
         public function setBrand(string $brand) {
             if(empty($brand)) throw new Exception('Error null values',1);
-            $this->brand = strtolower(trim($brand));
+            $this->brand = trim($brand);
         }
 
         public function getMerchant() {
@@ -47,7 +47,7 @@
 
         public function setMerchant(string $mrt) {
             if(empty($mrt)) throw new Exception('Error null values',1);
-            $this->merchant = strtolower(trim($mrt));
+            $this->merchant = trim($mrt);
         }
 
         public function getClassification() {
@@ -56,7 +56,7 @@
 
         public function setClassification(string $ctr) {
             if(empty($ctr)) throw new Exception('Error null values',1);
-            $this->category = strtolower(trim($ctr));
+            $this->category = trim($ctr);
         }
         
         public function getImage() {

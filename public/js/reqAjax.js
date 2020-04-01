@@ -1,5 +1,22 @@
+let option = {
+    method: String,
+    url: String,
+    cache: Boolean,
+    processData: Boolean,
+    dataType: String,
+    data: Object,
+    accepts: Object,
+    xhrFields: Object,
+    statusCode: Object,
+    beforeSend: Function,
+    error: Function,
+    dataFilter: Function,
+    success: Function,
+    complete: Function,
+        
+}
+
 $('body').ready(() => {
-    
     $('#submit').click((evt) =>{
         evt.preventDefault();
         let data = {
@@ -7,98 +24,118 @@ $('body').ready(() => {
             email: $("#email").val(),
             pwd: $('#pwd').val()
         };
-            const res = reqAjax('POST','../controller/adicionarContaController.php',data, (res) =>{
+        option = 
+        {
+            method: 'POST',
+            url: '../controller/adicionarContaController.php',
+            dataType: "json",
+            data,
+            success: (res) =>{
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
             
                 if (!res.error) {
-                    M.toast({html: 'Cadastro realizado com sucesso', classes: "text",outDuration: 210});
+                    alertify.success('Cadastro realizado com sucesso');
                     $('input[type=text]').val("");
                     $('input[type=email]').val("");
                     $('input[type=password]').val("");
                 } else{
-                    M.toast({html: 'Tente cadastrar novamente', classes: "alert",outDuration: 210});
+                    if(res.status == 0) alertify.error("Preencha todos os campos!");
+                    if(res,status != 0) alertify.error("Não foi possível fazer o cadastro");
                     return console.log(res.status,res.msg);
                 } 
-            });
+            }
+        }
+
+            reqAjax(option);
 
     });
 
     $('#btndelete').click((evt) =>{
         evt.preventDefault();
         const data = { id: $('input[name=id]').val() }
-        if(!confirm("Deseja realmente deletar!")) return;
+        option = 
+        {
+            method: 'POST',
+            url: '../controller/deletarContaController.php',
+            dataType: "json",
+            data,
+            success: (res) =>{
+                if(typeof res == "undefined" || !res) throw new TypeError("Object null");
+                return (!res.error) ? alertify.success('Usuario deletado com sucesso'): console.log(res.status,res.msg);
+            },
+        }
 
-        const res = reqAjax('POST','../controller/deletarContaController.php',data,(res) =>{
-            if(typeof res == "undefined" || !res) throw new TypeError("Object null");
-            return (!res.error) ? M.toast({html: 'Usuario deletado com sucesso', classes: "text",outDuration: 210}): console.log(res.status,res.msg);
-        });
-    });
+        alertify.confirm("Confirme a deleção","Deseja realmente deletar ?",() => reqAjax(option),() => {return} )
 
-
-    $('#btnDltImage').click(function (evt){
-        evt.preventDefault();
-        if(!confirm('Deseja realmente deletar!')) return;
-
-        const data = {img: $('input[name=image]').val()};
-    
-        const res = reqAjax('POST','../controller/deletarImagemController.php', data, (res) =>{
-            if(typeof res == "undefined" || !res ) throw new TypeError("Object null");
-
-            return (!res.error) ? M.toast({html: 'Imagem deletada', classes: "text",outDuration: 210}): console.log(res.status,res.msg);
-        });
-
-       
     });
 
     $('#btnUpdate').click(function (evt){
         evt.preventDefault();
-        const data = {
+        const data = 
+        {
             name: $('input[name=name]').val(),
             email: $('input[name=email]').val(),
             passwd: $('input[name=passwd]').val(),
             id: $('input[name=id]').val(),
         }
-            const res =  reqAjax('POST','../controller/atualizarContaController.php', data,(res) =>{
+
+        option = 
+        {
+            method: 'POST',
+            url: '../controller/atualizarContaController.php',
+            dataType: "json",
+            data,
+            sucess: (res) =>{
 
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
 
-            return (!res.error) ? M.toast({html: 'Dados Atualizado', classes: "text",outDuration: 210}): console.log(res.status,res.msg);
-            } );
+                return (!res.error) ? alertify.success('Dados Atualizado'): alertify.error("Não foi possível fazer a atualização!");
+            },
+        }
+
+            reqAjax(option);
             
     });
 
     $('#login').click((evt)  => {
-        evt.preventDefault();
+        
         const data = { email: $("#email").val(),pwd: $('#pwd').val() };
-
-        reqAjax('GET','./controller/loginController.php',data, (res) =>{
-            if(typeof res == "undefined" ||!res) throw new TypeError("Object null");
-            if (!res.error) {
-                location.href = "./view/mostrar.php";
-            } else{
-                if(res.status == 0) M.toast({html: 'Preencha todos os campos!', classes: "alert",outDuration: 210});
-                if(res.status == 3) M.toast({html: 'Email ou senha inválidos', classes: "alert",outDuration: 210});
+        option = {
+            method: 'GET',
+            url: './controller/loginController.php',
+            dataType: "json",
+            data,
+            success: (res) =>{
+                if(typeof res == "undefined" ||!res) throw new TypeError("Object null");
+                if (!res.error) {
+                    location.href = "./view/mostrar.php";
+                } else{
+                    (res.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
+                }
             }
-        });
+        }
+        reqAjax(option);
 
     })
 });
 
 
 /**
- * @param method String
- * @param url  String
- * @param data Object
- * @param response Callback
+ * @param option Object
+ * Defini uma option de parametros para o ajax;
  */
-function reqAjax(method,url,data,response) {
+function reqAjax(opt = option) {
+
+    const {method, url, data,dataType,xhrFields,success,error,beforeSend,accepts} = option;
+
     $.ajax({
         method,
         url,
         data,
-        dataType: "json",
-        success: (res) =>{ response(res); },
-        error: (xhr,desc,err) => { throw new Error(`ErrXHR: ${xhr.status} \n ${xhr.responseText} Description: ${desc} \n Error: ${err}`); },
+        dataType,
+        xhrFields,
+        success,
+        error: (xhr,desc,err) => { throw new Error(`ErrXHR: ${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
     })
     
 }

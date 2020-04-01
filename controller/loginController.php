@@ -1,26 +1,19 @@
 <?php
-    require_once "../server/dataModel.class.php";
+    require_once "../model/manipulacaoContasModel.class.php";
     require_once "../model/segurancaModel.class.php";
     require_once "../model/pessoaFisicaModel.class.php";
     
     try{
-        $data = new Data();
+        $handling = new AccountHandling;
         $usr = new PersonPhysical();
         $poli = new Safety();
         
         $usr->setEmail($_GET['email']);
-        $usr->setPassword($_GET['pwd']);
-        $passwd = $poli->criptPasswd($usr->getPassword());
-
-        $data->open();
-        $res = $data->show('usuarios',[],"email = ? AND password = ?",[$usr->getEmail(),$passwd],3);
+        $passwd = $poli->criptPasswd($_GET['pwd']);
         
-        if($res){
-            $data->close();
-            $usr->setName($res['nome']);
-            $usr->setId($res['id_usuario']);
-            $temp = time() + (1000 * 24 * 3600);
-            session_cache_expire($temp);
+        if($handling->login($usr,$passwd)){
+            $temp = time() + (2 * 24 * 3600);
+            setcookie(session_name(),session_id(),$temp);
 
             if(session_status() !== PHP_SESSION_ACTIVE) session_start();
             
@@ -31,9 +24,6 @@
             throw new Exception('No results found',3);
         }
 
-    }catch(PDOException $ex){
-        echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
-        die();
     }catch(Exception $ex) {
         echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
         die();

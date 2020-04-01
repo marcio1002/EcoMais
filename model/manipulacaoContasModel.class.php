@@ -83,6 +83,29 @@
              }
         }
 
+        public function login(PersonPhysical $person,string $pwd)
+        {
+            try {
+                $data = new Data();
+                $where =  [$person->getEmail(),$pwd];
+
+                $data->open();
+
+                return $data->show('usuarios',[],"email = ? AND password = ?",$where,3);
+
+                $data->close();
+            }
+            catch(PDOException $ex)
+            {
+                echo json_encode( ["error"=> true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
+                die();
+             } catch(Exception $ex) 
+             {
+                echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
+                die();
+             }
+        }
+
         public function isLogged()
         {
             if(session_status() !== PHP_SESSION_ACTIVE) session_start();

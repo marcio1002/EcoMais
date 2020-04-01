@@ -59,7 +59,7 @@ h1{
     font-size: 66px;
 
 }
-.login input[type="submit"]{
+.login #login{
     border: none;
     outline: none;
     height: 35px;
@@ -68,7 +68,7 @@ h1{
     border-radius: 20px;
     transition: 0.2s;
 }
-.login input[type="submit"]:hover {
+.login #login:hover {
     cursor: pointer;
     background: #ff4d4d;
     transition: 0.2s;

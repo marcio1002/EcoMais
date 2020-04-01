@@ -1,6 +1,7 @@
 <?php
 
 /** 
+ * @author Marcio Alemão <marcioalemao190@gmail.com>
  * @param $table, $val
  * São parâmetros patrões.
  * @param array $where  

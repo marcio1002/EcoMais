@@ -6,7 +6,7 @@
     <title>Error 404</title>
     <style>
         body {
-            background: url("../src/imgs/error.png") #DBA1E0;
+            background: url("../src/assets/imgs/error.png") #DBA1E0;
             background-size: cover;
         }
     </style>

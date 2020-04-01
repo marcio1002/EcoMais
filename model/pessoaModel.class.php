@@ -27,7 +27,7 @@ abstract class  Person  implements PersonInterface {
 
     public function setName(string $name) {
         if(empty($name)) throw new Exception('Undefined value'); 
-        $this->name = strtolower(trim($name));
+        $this->name = trim($name);
     }
 
     public function getPassword() {
@@ -46,7 +46,7 @@ abstract class  Person  implements PersonInterface {
 
     public function setEmail(string $email) { 
         if(empty($email)) throw new Exception('Undefined value');
-        $this->email = strtolower(trim($email));
+        $this->email = trim($email);
     }
     public function getCep() {
         return $this->cep;
@@ -62,7 +62,7 @@ abstract class  Person  implements PersonInterface {
 
     public function setStati(string $stati) { 
         if(empty($stati)) throw new Exception('Undefined value');
-        $this->stati = strtolower(trim($stati));
+        $this->stati = strtoupper(trim($stati));
     }
 
     public function getCity() {
@@ -71,7 +71,7 @@ abstract class  Person  implements PersonInterface {
 
     public function setCity(string $city) { 
         if(empty($city)) throw new Exception('Undefined value');
-        $this->city = strtolower(trim($city));
+        $this->city = trim($city);
     }
 
     public function getAddre() {
@@ -80,7 +80,7 @@ abstract class  Person  implements PersonInterface {
 
     public function setAddre(string $addre) { 
         if(empty($addre)) throw new Exception('Undefined value');
-        $this->addre = strtolower(trim($addre));
+        $this->addre = trim($addre);
     }
 
     public function getNumber(){
