@@ -163,10 +163,11 @@ iptEmail.focusout(() =>{
 });
 
 function clearInput() {
-    iptCep.val("");
-    iptCity.val("");
-    iptAddre.val("");
-    statiElem.val("");
+    $('input[type=text]').val("");
+    $('input[type=email]').val("");
+    $('input[type=password]').val("");
+    $('input[type=tel]').val("");
+
 }
 
 $('.smoothScroll').click(function(elem)  {

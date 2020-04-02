@@ -11,14 +11,18 @@
         $usr->setEmail($_GET['email']);
         $passwd = $poli->criptPasswd($_GET['pwd']);
         
-        if($handling->login($usr,$passwd)){
-            $temp = time() + (2 * 24 * 3600);
-            setcookie(session_name(),session_id(),$temp);
+        if($res = $handling->login($usr,$passwd)){
+            $usr->setId($res['id_usuario']);
+            $temp = time() + (1*12*30 * 24 * 3600);
+            $token =  uniqid(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
-            if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+            session_set_cookie_params($temp,'/',null,false,false);
+            session_name(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
+
+            if(session_status() == PHP_SESSION_DISABLED) session_start();
             
-            $_SESSION['_id'] = $usr->getId();
-            $_SESSION['_token']= uniqid(md5(time() * strlen($usr->getName())));
+            setcookie('_id',$usr->getId(),$temp,'/',null,false,true);
+            setcookie('_token', $token,$temp,'/',null,false,true);
             echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"]);
         }else {
             throw new Exception('No results found',3);

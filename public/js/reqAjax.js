@@ -117,6 +117,9 @@ $('body').ready(() => {
         reqAjax(option);
 
     })
+}).keypress((evt) => {
+    if(evt.key === "Enter") 
+    $('#login').click();
 });
 
 
@@ -126,7 +129,7 @@ $('body').ready(() => {
  */
 function reqAjax(opt = option) {
 
-    const {method, url, data,dataType,xhrFields,success,error,beforeSend,accepts} = option;
+    const {method, url, data,dataType,xhrFields,success,error,beforeSend,accepts} = opt;
 
     $.ajax({
         method,

@@ -8,12 +8,13 @@ async function searchCep() {
 
         const {logradouro,localidade,bairro,uf,erro} = info.data;
         
-        if(erro) throw new Error("Undefined value");
+        if(erro) throw new Error("0");
         iptCity.val(localidade)[0];
         iptAddre.val(`${bairro}, ${logradouro}`)[0];
-        statiElem.val("SP")[0];     
+        statiElem.val(uf)[0];     
     } catch (erro) {
-        alert('Cep inválido');
-        clearInput();
+        const UNDEFINED = "Error: 0";
+        if(erro == UNDEFINED) return alertify.error("Não foi possível buscar o cep!");
+        alertify.error('Cep inválido');
     }
 }
