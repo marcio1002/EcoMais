@@ -120,8 +120,6 @@
 
         public function isLogged()
         {
-            // if(session_status() == PHP_SESSION_DISABLED) session_start();
-
             return (empty($_COOKIE['_id']) || empty($_COOKIE['_token']))? false : true; 
         }
 
