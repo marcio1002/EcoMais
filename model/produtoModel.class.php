@@ -1,5 +1,8 @@
 <?php
-    require_once __DIR__."/../interfaces/produtoInterface.php";
+ namespace Model;
+
+    use Interfaces\ProductInterface;
+    use FFI\Exception;
 
     class Product implements ProductInterface {
         protected $name;
@@ -108,4 +111,4 @@
             return $this->date;
         }
     }
-?>
+    

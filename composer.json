@@ -1,10 +1,10 @@
 {
-    "name": "apiecomais/apiecomais",
+    "name": "apiecomais",
     "description": "Um crud para manipulação de dados do EcoMais",
     "license": "proprietary",
     "version": "v1.1.10",
     "keywords": ["Query","dados","api","EcoMais"],
-    "homepage": "https://github.com/marcio1002/ApiEcoMais",
+    "homepage": "https://github.com/marcio1002/CrudEcoMais",
     "authors": [
         {
             "name": "Marcio Alemão",
@@ -13,8 +13,19 @@
             "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "server\\": "server/",
+           "model\\" : "Model/",
+           "controller\\": "controller/"
+        }
+    },
     "require": {
         "php": ">=7.0.0"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 
 }

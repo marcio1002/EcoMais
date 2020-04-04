@@ -1,9 +1,13 @@
 <?php
+namespace Interfaces;
+        
+    use Model;
+
     interface AccountHandlingInterface {
-        public function createAccount(PersonPhysical $person);
-        public function deleteAccount(PersonPhysical $person);
-        public function updateAccount(PersonPhysical  $person);
-        public function login(PersonPhysical $person,string $pwd);
+        public function createAccount(Model\PersonPhysical $person);
+        public function deleteAccount(Model\PersonPhysical $person);
+        public function updateAccount(Model\PersonPhysical  $person);
+        public function login(Model\PersonPhysical $person,string $pwd);
         public function isLogged();
     }
 ?>

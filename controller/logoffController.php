@@ -1,5 +1,9 @@
 <?php
-if (strcmp(basename($_SERVER['SCRIPT_NAME']), basename(__FILE__)) === 0) header("location: ../view/error.php");
+namespace Controller {
+
+    use Model\AccountHandling;
+
+    if (strcmp(basename($_SERVER['SCRIPT_NAME']), basename(__FILE__)) === 0) header("location: ../view/error.php");
 
     require_once "../model/manipulacaoContasModel.class.php";
     $handling = new AccountHandling();
@@ -9,4 +13,5 @@ if (strcmp(basename($_SERVER['SCRIPT_NAME']), basename(__FILE__)) === 0) header(
         }
 
     header("location: ../index.php");
+}
 ?>

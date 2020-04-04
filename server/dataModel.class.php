@@ -10,7 +10,12 @@
  * É definido como um número de opções. É usado no metodo show.
  */
 
-require_once __DIR__."/../interfaces/dataInterface.php";
+namespace Server;
+
+use Interfaces\DataInterface;
+Use PDO;
+use PDOException;
+use FFI\Exception;
 
 final class Data implements DataInterface
 {
@@ -20,10 +25,11 @@ final class Data implements DataInterface
     private  $user = 'root';
     private  $passwd = 'rootadmin';
     private  $database = 'apiTest';
+    private $typeDatabase = 'mysql';
 
     public function open()
     {
-        if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8", $this->user, $this->passwd, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
+        if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO("$this->typeDatabase:host=$this->host;dbname=$this->database;charset=utf8", $this->user, $this->passwd, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
     public function close()

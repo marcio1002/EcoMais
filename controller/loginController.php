@@ -1,8 +1,11 @@
 <?php
-    require_once "../model/manipulacaoContasModel.class.php";
-    require_once "../model/segurancaModel.class.php";
-    require_once "../model/pessoaFisicaModel.class.php";
-    
+namespace Controller {
+
+    use Model\PersonPhysical;
+    use Model\AccountHandling;
+    use Model\Safety;
+    use Exception;
+
     try{
         $handling = new AccountHandling;
         $usr = new PersonPhysical();
@@ -32,4 +35,4 @@
         echo json_encode( ["error" => true,"status"=> $ex->getCode(),"msg" => $ex->getMessage()]);
         die();
     }
-?>
+}
