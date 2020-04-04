@@ -101,7 +101,7 @@ $('body').ready(() => {
         
         const data = { email: $("#email").val(),pwd: $('#pwd').val() };
         option = {
-            method: 'GET',
+            method: 'POST',
             url: './controller/loginController.php',
             dataType: "json",
             data,
@@ -124,7 +124,7 @@ $('body').ready(() => {
 
 
 /**
- * @param option Object
+ * @param {Object} option
  * Defini uma option de parametros para o ajax;
  */
 function reqAjax(opt = option) {

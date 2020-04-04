@@ -4,8 +4,6 @@
     require_once __DIR__."/segurancaModel.class.php";
 
     class AccountHandling  implements accountHandlingInterface{
-        private $_id;
-        private $_token;
 
         public function createAccount(PersonPhysical $person)
         {
@@ -15,7 +13,7 @@
             try
             {
 
-                $passwd = $safety->criptPasswd($person->getPassword());
+                $passwd =  $safety->criptPasswd($person->getPassword());
                 $array_columns = ["nome","email","password","date"];
                 $array_register = [$person->getName(),$person->getEmail(),$passwd,$person->createAt()];
 

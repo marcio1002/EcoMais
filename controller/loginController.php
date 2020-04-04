@@ -8,8 +8,8 @@
         $usr = new PersonPhysical();
         $poli = new Safety();
         
-        $usr->setEmail($_GET['email']);
-        $passwd = $poli->criptPasswd($_GET['pwd']);
+        $usr->setEmail($_POST['email']);
+        $passwd = $poli->criptPasswd($_POST['pwd']);
         
         if($res = $handling->login($usr,$passwd)){
             $usr->setId($res['id_usuario']);
