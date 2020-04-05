@@ -1,9 +1,9 @@
 <?php
-namespace Controller {
-
-     use Model\Product;
+namespace Controller;
+     require_once __DIR__."/../vendor/autoload.php";
+     
+     use Model\{Product,Safety};
      use Server\Data;
-     use Model\Safety;
      use Exception;
      use PDOException;
      
@@ -35,4 +35,3 @@ namespace Controller {
      }catch(Exception $ex) {
           die($ex->getMessage());
      }
-}

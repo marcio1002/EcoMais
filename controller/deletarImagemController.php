@@ -1,5 +1,7 @@
 <?php    
-namespace Controller {
+namespace Controller;
+
+    require_once __DIR__."/../vendor/autoload.php";
         
         use Server\Data;
         use Exception;
@@ -27,4 +29,3 @@ namespace Controller {
             echo json_encode( ["error" => true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
             die();
         }
-}

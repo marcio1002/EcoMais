@@ -17,6 +17,7 @@ let option = {
 }
 
 $('body').ready(() => {
+
     $('#submit').click((evt) =>{
         evt.preventDefault();
         let data = {
@@ -27,7 +28,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/adicionarContaController.php',
+            url: '../controller/AccountManagerController.php',
             dataType: "json",
             data,
             success: (res) =>{
@@ -56,7 +57,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/deletarContaController.php',
+            url: '../controller/AccountManagerController.php',
             dataType: "json",
             data,
             success: (res) =>{
@@ -82,7 +83,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/atualizarContaController.php',
+            url: '../controller/AccountManagerController.php',
             dataType: "json",
             data,
             sucess: (res) =>{
@@ -102,7 +103,7 @@ $('body').ready(() => {
         const data = { email: $("#email").val(),pwd: $('#pwd').val() };
         option = {
             method: 'POST',
-            url: './controller/loginController.php',
+            url: './controller/AccountManagerController.php',
             dataType: "json",
             data,
             success: (res) =>{

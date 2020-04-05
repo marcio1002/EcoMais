@@ -6,4 +6,19 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Controller\\AccountManager' => $baseDir . '/controller/AccountManagerController.class.php',
+    'Controller\\ComponenteElement' => $baseDir . '/controller/ComponenteElementController.class.php',
+    'Interfaces\\AccountHandlingInterface' => $baseDir . '/interfaces/AccountHandlingInterface.php',
+    'Interfaces\\DataInterface' => $baseDir . '/interfaces/DataInterface.php',
+    'Interfaces\\PersonInterface' => $baseDir . '/interfaces/PersonInterface.php',
+    'Interfaces\\PersonLegalInterface' => $baseDir . '/interfaces/PersonLegalInterface.php',
+    'Interfaces\\PersonPhysicalInterface' => $baseDir . '/interfaces/PersonPhysicalInterface.php',
+    'Interfaces\\ProductInterface' => $baseDir . '/interfaces/ProductInterface.php',
+    'Model\\AccountHandling' => $baseDir . '/model/AccountHandlingModel.class.php',
+    'Model\\Person' => $baseDir . '/model/PersonModel.class.php',
+    'Model\\PersonLegal' => $baseDir . '/model/PersonLegal.class.php',
+    'Model\\PersonPhysical' => $baseDir . '/model/PersonPhysicalModel.class.php',
+    'Model\\Product' => $baseDir . '/model/ProductModel.class.php',
+    'Model\\Safety' => $baseDir . '/model/SafetyModel.class.php',
+    'Server\\Data' => $baseDir . '/server/DataServer.class.php',
 );

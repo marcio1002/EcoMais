@@ -1,13 +1,8 @@
-assets/
-
 /view/index.php
 /view/mostrar.php
 /view/image.php
 
-/controller/showRegistry.php
-/controller/deletarContaController.php
-/controller/atualizarContaController.php
+vendor/
 
-/public/styles/style.css
 index.php
 .vscode
