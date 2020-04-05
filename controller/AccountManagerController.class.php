@@ -10,20 +10,29 @@ use PDOException;
 
 class AccountManager
 {
+    private $account;
+    private $usr;
+    private $safety ;
+
+    function __construct()
+    {
+        $this->account = new AccountHandling();
+        $this->usr = new PersonPhysical();
+        $this->safety = new Safety();
+    }
 
     public function  addAccount()
     {
         try {
 
-            $account = new AccountHandling();
-            $register = new PersonPhysical();
+            
 
-            $register->setName($_POST['name']);
-            $register->setEmail($_POST['email']);
-            $register->setPassword($_POST['pwd']);
+            $this->usr->setName($_POST['name']);
+            $this->usr->setEmail($_POST['email']);
+            $this->usr->setPassword($_POST['pwd']);
 
-            if ($account->createAccount($register)) {
-                echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"],);
+            if ($this->account->createAccount($this->usr)) {
+                echo json_encode(["error" => false, "status" => 201, "msg" => "Ok"],);
             } else {
                 throw new Exception("Ocorreu um erro ao criar conta");
             }
@@ -35,16 +44,13 @@ class AccountManager
     {
         try {
 
-            $usr = new PersonPhysical();
-            $account = new AccountHandling();
-
-            $usr->setName($_POST['name']);
-            $usr->setEmail($_POST['email']);
-            $usr->setPassword($_POST['passwd']);
-            $usr->setId($_POST['id']);
+            $this->usr->setName($_POST['name']);
+            $this->usr->setEmail($_POST['email']);
+            $this->usr->setPassword($_POST['passwd']);
+            $this->usr->setId($_POST['id']);
 
 
-            if ($account->updateAccount($usr)) {
+            if ($this->account->updateAccount($this->usr)) {
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"],);
             } else {
                 throw new Exception("Ocorreu ao atualizar");
@@ -61,11 +67,10 @@ class AccountManager
     public function  deleteAccount()
     {
         try {
-            $account = new AccountHandling();
-            $pess = new PersonPhysical();
-            $pess->setId($_POST['id']);
+            
+            $this->usr->setId($_POST['id']);
 
-            if ($account->deleteAccount($pess)) {
+            if ($this->account->deleteAccount($this->usr)) {
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"],);
             } else {
                 throw new Exception("Ocorreu um erro ao deletar o usuario");
@@ -77,15 +82,12 @@ class AccountManager
     public function login()
     {
         try {
-            $handling = new AccountHandling;
-            $usr = new PersonPhysical();
-            $poli = new Safety();
+            
+            $this->usr->setEmail($_POST['email']);
+            $passwd = $this->safety->criptPasswd($_POST['pwd']);
 
-            $usr->setEmail($_POST['email']);
-            $passwd = $poli->criptPasswd($_POST['pwd']);
-
-            if ($res = $handling->setLogin($usr, $passwd)) {
-                $usr->setId($res['id_usuario']);
+            if ($res = $this->account->setLogin($this->usr, $passwd)) {
+                $this->usr->setId($res['id_usuario']);
                 $temp = time() + (1 * 12 * 30 * 24 * 3600);
                 $token =  uniqid(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
@@ -94,7 +96,7 @@ class AccountManager
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start();
 
-                setcookie('_id', $usr->getId(), $temp, '/', null, false, true);
+                setcookie('_id', $this->usr->getId(), $temp, '/', null, false, true);
                 setcookie('_token', $token, $temp, '/', null, false, true);
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
             } else {
@@ -110,9 +112,7 @@ class AccountManager
     {
         if (strcmp(basename($_SERVER['SCRIPT_NAME']), basename(__FILE__)) === 0) header("location: ../view/error.php");
 
-        require_once "../model/manipulacaoContasModel.class.php";
-        $handling = new AccountHandling();
-        if ($handling->isLogged()) {
+        if ($this->account->isLogged()) {
             setcookie('_id', "", time() -  36000, "/");
             setcookie('_token', "", time() -  36000, "/");
         }

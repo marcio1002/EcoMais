@@ -3,7 +3,7 @@ namespace Controller;
 
     require_once __DIR__."/../vendor/autoload.php";
         
-        use MOdel\{Product,Safety};
+        use Model\{Product,Safety};
         use Server\Data;
         use Exception;
         use PDOException;

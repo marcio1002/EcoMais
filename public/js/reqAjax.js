@@ -31,7 +31,8 @@ $('body').ready(() => {
             url: '../controller/AccountManagerController.class.php',
             dataType: "json",
             data,
-            success: (res) =>{
+            success: (response) =>{
+                const res = JSON.parse(response);
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
             
                 if (!res.error) {
@@ -60,7 +61,8 @@ $('body').ready(() => {
             url: '../controller/AccountManagerController.class.php',
             dataType: "json",
             data,
-            success: (res) =>{
+            success: (response) =>{
+                const res = JSON.parse(response);
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
                 return (!res.error) ? alertify.success('Usuario deletado com sucesso'): console.log(res.status,res.msg);
             },
@@ -86,8 +88,8 @@ $('body').ready(() => {
             url: '../controller/AccountManagerController.class.php',
             dataType: "json",
             data,
-            sucess: (res) =>{
-
+            sucess: (response) =>{
+               const res = JSON.parse(response);
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
 
                 return (!res.error) ? alertify.success('Dados Atualizado'): alertify.error("Não foi possível fazer a atualização!");
@@ -106,7 +108,8 @@ $('body').ready(() => {
             url: './controller/AccountManagerController.class.php',
             dataType: "json",
             data,
-            success: (res) =>{
+            success: (response) =>{
+              const  res = JSON.parse(response);
                 if(typeof res == "undefined" ||!res) throw new TypeError("Object null");
                 if (!res.error) {
                     location.href = "./view/mostrar.php";
@@ -139,7 +142,7 @@ function reqAjax(opt = option) {
         dataType,
         xhrFields,
         success,
-        error: (xhr,desc,err) => { throw new Error(`ErrXHR: ${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
+        error: (xhr,desc,err) => { throw new Error(`${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
     })
     
 }
