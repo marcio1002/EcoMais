@@ -7,7 +7,7 @@ namespace Interfaces;
         public function createAccount(Model\PersonPhysical $person);
         public function deleteAccount(Model\PersonPhysical $person);
         public function updateAccount(Model\PersonPhysical  $person);
-        public function login(Model\PersonPhysical $person,string $pwd);
+        public function setLogin(Model\PersonPhysical $person,string $pwd);
         public function isLogged();
     }
 ?>

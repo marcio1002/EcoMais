@@ -26,17 +26,9 @@
             "Server\\": "server/",
             "Model\\": "model/",
             "Controller\\": "controller/"
-        },
-        "files": [
-            "controller/deletarImagemController.php",
-            "controller/inserirImagemController.php"
-        ]
+        }
     },
     "repositories": {
-        "0": {
-            "type": "composer",
-            "url": "https://repo.packagist.com/ecomais/"
-        },
         "packagist.org": false,
         "private-packagist": {
             "type": "composer",

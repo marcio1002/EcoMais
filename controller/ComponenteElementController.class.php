@@ -1,21 +1,23 @@
 <?php
+
 namespace Controller;
 
-  require_once __DIR__."/../vendor/autoload.php";
-  
-  use Server\Data;
-  use Exception;
-  use PDOException;
+require_once __DIR__ . "/../vendor/autoload.php";
 
- class ComponenteElement {
+use Server\Data;
+use Exception;
+use PDOException;
+
+class ComponenteElement
+{
   public function showRegistry()
-    {
-      try {
-        $sql = new Data();
-        $sql->open();
-        $res =  $sql->show("usuarios");
-        if(empty($res) || !is_array($res)) return;
-            echo "<table>
+  {
+    try {
+      $sql = new Data();
+      $sql->open();
+      $res =  $sql->show("usuarios");
+      if (empty($res) || !is_array($res)) return;
+      echo "<table>
             <thead>
               <tr>
                   <th>Nome</th>
@@ -26,10 +28,10 @@ namespace Controller;
             </thead>
             <tbody>
             ";
-            if(count($res,COUNT_RECURSIVE) > 5){
-              foreach ($res as $array_res) {
-                $date = $array_res['date'];
-                echo "   
+      if (count($res, COUNT_RECURSIVE) > 5) {
+        foreach ($res as $array_res) {
+          $date = $array_res['date'];
+          echo "   
                 <tr>
                   <td><input type='text' value='$array_res[nome]' name='name' class='infoUser' /></td>
                   <td><input type='text' value='$array_res[email]' name='email' class='infoUser'/></td>
@@ -41,9 +43,9 @@ namespace Controller;
                 </tr>
                 </form>
                       ";
-                }
-            }else {
-              echo "   
+        }
+      } else {
+        echo "   
                 <tr>
                   <td><input type='text' value='$res[nome]' name='name' class='infoUser' /></td>
                   <td><input type='text' value='$res[email]' name='email' class='infoUser'/></td>
@@ -54,28 +56,28 @@ namespace Controller;
                   <td><input type='button' id='btndelete' value='Deletar'/></td> 
                 </tr>
                 </form>";
-            }
-            echo "</tbody>
-    </table>";
-          $sql->close();
-      } catch (PDOException $ex) {
-        die($ex->getMessage());
-      }catch(Exception $ex) {
-        die($ex->getMessage());
       }
+      echo "</tbody>
+    </table>";
+      $sql->close();
+    } catch (PDOException $ex) {
+      die($ex->getMessage());
+    } catch (Exception $ex) {
+      die($ex->getMessage());
+    }
   }
-  
- public function showImage()
+
+  public function showImage()
   {
     try {
       $sql = new Data();
       $sql->open();
-      $res = $sql->show('images',[],"ORDER BY image ASC",[],2);
-      if(empty($res) || !is_array($res)) return;
+      $res = $sql->show('images', [], "ORDER BY image ASC", [], 2);
+      if (empty($res) || !is_array($res)) return;
       echo "<div id='box'>";
-        if(count($res,COUNT_RECURSIVE) > 2){
-          foreach ($res as $array_res) {
-            echo "
+      if (count($res, COUNT_RECURSIVE) > 2) {
+        foreach ($res as $array_res) {
+          echo "
             <div id='boxImg'>
                 <div id='boxBtnDelete'>
                   <p id='btnDelete'>
@@ -86,9 +88,9 @@ namespace Controller;
               <img src='../src/uploadImages/$array_res[image]' id='plan'/>
             </div>
             ";
-          }
-        }else {
-          echo "
+        }
+      } else {
+        echo "
           <div id='boxImg'>
               <div id='boxBtnDelete'>
                 <p id='btnDelete'>
@@ -99,15 +101,13 @@ namespace Controller;
             <img src='../src/uploadImages/$res[image]' id='plan'/>
           </div>
           ";
-        }
+      }
       echo "</div>";
-        $sql->close(); 
-      
+      $sql->close();
     } catch (PDOException $ex) {
       die($ex->getMessage());
-    }catch(Exception $ex) {
+    } catch (Exception $ex) {
       die($ex->getMessage());
     }
   }
-  
- }
+}
