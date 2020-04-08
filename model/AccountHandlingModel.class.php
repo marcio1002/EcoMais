@@ -1,5 +1,6 @@
 <?php    
 namespace Model;
+
     use Model\{PersonPhysical,Safety};
     use Interfaces\AccountHandlingInterface;
     use Server\Data;

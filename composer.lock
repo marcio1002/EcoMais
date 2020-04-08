@@ -4,9 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c270eab495de53b68a99588871f695ec",
+    "content-hash": "c8679504cbeb48c931a78cdf150d7635",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "coffeecode/router",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robsonvleite/router.git",
+                "reference": "e3b94f72bc389e8b97d82a0fd0e5bff743e51667"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robsonvleite/router/zipball/e3b94f72bc389e8b97d82a0fd0e5bff743e51667",
+                "reference": "e3b94f72bc389e8b97d82a0fd0e5bff743e51667",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://repo.packagist.com/ecomais/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoffeeCode\\Router\\": "src"
+                }
+            },
+            "notification-url": "https://repo.packagist.com/ecomais/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robson V. Leite",
+                    "email": "cursos@upinside.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A classic CoffeeCode Router is easy, fast and extremely uncomplicated. Create and manage your routes in minutes!",
+            "homepage": "http://www.upinside.com.br",
+            "keywords": [
+                "Coffeecode",
+                "route",
+                "router",
+                "routes",
+                "upinside"
+            ],
+            "time": "2019-09-30T16:29:47+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "dev-master",
@@ -835,12 +886,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "52c02a965ffa8d63515efad50c04cbd1353cb86f"
+                "reference": "901c3a286e907f15ebbfebb47af8b2e1761a6c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/52c02a965ffa8d63515efad50c04cbd1353cb86f",
-                "reference": "52c02a965ffa8d63515efad50c04cbd1353cb86f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/901c3a286e907f15ebbfebb47af8b2e1761a6c11",
+                "reference": "901c3a286e907f15ebbfebb47af8b2e1761a6c11",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -879,7 +930,8 @@
                 "sebastian/version": "^3.0"
             },
             "require-dev": {
-                "ext-pdo": "*"
+                "ext-pdo": "*",
+                "phpspec/prophecy-phpunit": "^2.0"
             },
             "suggest": {
                 "ext-soap": "*",
@@ -920,7 +972,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-04-05T12:24:46+00:00"
+            "time": "2020-04-07T09:44:06+00:00"
         },
         {
             "name": "sebastian/code-unit",
