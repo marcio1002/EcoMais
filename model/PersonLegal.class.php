@@ -10,11 +10,13 @@
 
         protected $cnpj;
     
-            public function getCnpj() {
+            public function getCnpj():int
+             {
                 return $this->cnpj;
             }
     
-            public function setCnpj(int $cnpj) { 
+            public function setCnpj(int $cnpj):void
+             { 
                 if(empty($cnpj)) throw new Exception('Undefined value');
                 if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
                 $this->cnpj = trim($cnpj);

@@ -16,6 +16,8 @@ use Interfaces\DataInterface;
 Use PDO;
 use PDOException;
 use FFI\Exception;
+use PDORow;
+use PHPUnit\Framework\MockObject\Rule\AnyParameters;
 
 final class Data implements DataInterface
 {
@@ -27,17 +29,17 @@ final class Data implements DataInterface
     private  $database = 'apiTest';
     private $typeDatabase = 'mysql';
 
-    public function open()
+    public function open():void
     {
         if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO("$this->typeDatabase:host=$this->host;dbname=$this->database;charset=utf8", $this->user, $this->passwd, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
-    public function close()
+    public function close():void
     {
         unset($this->pdo);
     }
 
-    public function add(string $table, array $columns, array $val)
+    public function add(string $table, array $columns, array $val):AnyParameters
     {
         if (empty($table) || empty($columns) || empty($val)) throw new Exception("Error null values", 411);
 
@@ -67,7 +69,7 @@ final class Data implements DataInterface
      * 6: Busca select com valores definidos e where  manipulações de opções.
      */
 
-    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1)
+    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1):PDORow
     {
         if (empty($table)) throw new Exception("Error null values", 411);
         if (!$option) throw new Exception("Value 0 (zero) is not accepted", 411);
@@ -115,7 +117,7 @@ final class Data implements DataInterface
      * Variáveis $preval e $prewhe é definido como array.$preVal é  passado dentro de cada array nome da coluna e o valor em aspas simples
      * exem: nome_da_coluna = ?
      */
-    public function update(string $table, string $prewher, array $where, array $preval, array $val)
+    public function update(string $table, string $prewher, array $where, array $preval, array $val):AnyParameters
     {
         if (empty($table) || empty($prewher) || empty($preval) || empty($where) || empty($val)) throw new Exception("Error null values", 411);
 
@@ -147,7 +149,7 @@ final class Data implements DataInterface
      * 
      * exem: id =  ?
      */
-    public function delete(string $table, string $where, array $val)
+    public function delete(string $table, string $where, array $val):AnyParameters
     {
         if (empty($table) || empty($where) || empty($val)) throw new Exception("Error null values", 411);
         $this->pdo->beginTransaction();

@@ -1,4 +1,4 @@
-let option = {
+var option = {
     method: String,
     url: String,
     cache: Boolean,
@@ -17,6 +17,7 @@ let option = {
 }
 
 $('body').ready(() => {
+    const BASE_URL = "https://localhost/WWW/CrudEcoMais";
 
     $('#submit').click((evt) =>{
         evt.preventDefault();
@@ -28,7 +29,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/AccountManagerController.class.php',
+            url: BASE_URL,
             dataType: "json",
             data,
             success: (response) =>{
@@ -58,7 +59,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/AccountManagerController.class.php',
+            url: BASE_URL,
             dataType: "json",
             data,
             success: (response) =>{
@@ -85,7 +86,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: '../controller/AccountManagerController.class.php',
+            url: BASE_URL,
             dataType: "json",
             data,
             sucess: (response) =>{
@@ -105,7 +106,7 @@ $('body').ready(() => {
         const data = { email: $("#email").val(),pwd: $('#pwd').val() };
         option = {
             method: 'POST',
-            url: './controller/AccountManagerController.class.php',
+            url: `${BASE_URL}/controller/`,
             dataType: "json",
             data,
             success: (response) =>{

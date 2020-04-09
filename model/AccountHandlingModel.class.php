@@ -6,10 +6,12 @@ namespace Model;
     use Server\Data;
     use FFI\Exception;
     use PDOException;
+use PDORow;
+use PHPUnit\Framework\MockObject\Rule\AnyParameters;
 
-    class AccountHandling  implements accountHandlingInterface{
+class AccountHandling  implements accountHandlingInterface{
 
-        public function createAccount(PersonPhysical $person)
+        public function createAccount(PersonPhysical $person):AnyParameters
         {
             $safety = new Safety();
             $sql = new Data();
@@ -41,7 +43,7 @@ namespace Model;
                 
             }
     
-            public function deleteAccount(PersonPhysical $person)
+            public function deleteAccount(PersonPhysical $person):AnyParameters
             {
                 try{
                     $sql = new Data();
@@ -66,7 +68,7 @@ namespace Model;
                  }
             }
     
-            public function updateAccount(PersonPhysical $person)
+            public function updateAccount(PersonPhysical $person):AnyParameters
             {
                 try{
                     
@@ -95,7 +97,7 @@ namespace Model;
                  }
             }
     
-            public function setLogin(PersonPhysical $person,string $pwd)
+            public function setLogin(PersonPhysical $person,string $pwd):PDORow
             {
                 try {
                     $data = new Data();
@@ -120,7 +122,7 @@ namespace Model;
                  }
             }
     
-            public function isLogged()
+            public function isLogged():bool
             {
                 return (empty($_COOKIE['_id']) || empty($_COOKIE['_token']))? false : true; 
             }

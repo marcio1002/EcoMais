@@ -4,9 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8679504cbeb48c931a78cdf150d7635",
-    "packages": [],
-    "packages-dev": [
+    "content-hash": "42e23cd7ef78ae31f7ac2ae199ae7ee1",
+    "packages": [
         {
             "name": "coffeecode/router",
             "version": "1.0.7",
@@ -57,7 +56,9 @@
                 "upinside"
             ],
             "time": "2019-09-30T16:29:47+00:00"
-        },
+        }
+    ],
+    "packages-dev": [
         {
             "name": "doctrine/instantiator",
             "version": "dev-master",

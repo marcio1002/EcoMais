@@ -1,2 +1,2 @@
 <?php
-define("BASE_URL","https://localhost/WWW/CrudEcoMais/ecomais");
+define("BASE_URL","https://localhost/WWW/CrudEcoMais");

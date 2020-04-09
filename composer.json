@@ -25,9 +25,12 @@
             "Interfaces\\": "interfaces",
             "Server\\": "server/",
             "Model\\": "model/",
-            "Controller\\": "controller/"
+            "Controller\\": "controller/",
+            "Web\\": "web/" 
         },
-        "files": ["index.php"]
+        "files": [
+            
+        ]
     },
     "repositories": {
         "packagist.org": false,
@@ -37,10 +40,10 @@
         }
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "coffeecode/router": "1.0.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9",
-        "coffeecode/router": "1.0.*"
+        "phpunit/phpunit": "^9"
     }
 }
