@@ -1,12 +1,13 @@
 <?php
 
 /** 
- * @author Marcio Alemão <marcioalemao190@gmail.com>
- * @param $table, $val
+ * @global @author Marcio Alemão <marcioalemao190@gmail.com>
+ * @
+ * @global @param $table, $val
  * São parâmetros patrões.
- * @param array $where  
+ * @global @param array $where  
  * É  um array com valores de manilupação como comparação, ordenação e limitação.
- * @param int $option 
+ *@global  @param int $option 
  * É definido como um número de opções. É usado no metodo show.
  */
 
@@ -15,8 +16,7 @@ namespace Server;
 use Interfaces\DataInterface;
 Use PDO;
 use PDOException;
-use FFI\Exception;
-use PDORow;
+use Exception;
 use PHPUnit\Framework\MockObject\Rule\AnyParameters;
 
 final class Data implements DataInterface
@@ -27,17 +27,40 @@ final class Data implements DataInterface
     private  $user = 'root';
     private  $passwd = 'rootadmin';
     private  $database = 'apiTest';
-    private $typeDatabase = 'mysql';
+    private  $typeDatabase = 'mysql';
+    private  $option = 
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND=> "SET NAMES utf8",
+        PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ 
+    ];
 
+    /**
+     * @return void
+     */
     public function open():void
     {
-        if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO("$this->typeDatabase:host=$this->host;dbname=$this->database;charset=utf8", $this->user, $this->passwd, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]) or die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
+        if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO("$this->typeDatabase:host=$this->host;dbname=$this->database;charset=utf8",
+         $this->user, 
+         $this->passwd,
+         $this->option ) or 
+         die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
     }
 
+    /**
+     * @return void
+     */
     public function close():void
     {
         unset($this->pdo);
     }
+
+    /**
+     * @param  string $table
+     * @param array $columns
+     * @param array $val
+     * @return AnyParameters
+     */
 
     public function add(string $table, array $columns, array $val):AnyParameters
     {
@@ -60,7 +83,13 @@ final class Data implements DataInterface
         return $this->res;
     }
     /**  
-     * @param $option  São  5 opções para selecionar sua busca 
+     * @param string $table
+     * @param array $val
+     * @param string $prewher
+     * @param array $where
+     * @param int $option  
+     * @return array
+     *  --- São  5 opções para selecionar sua busca --- 
      * 1: Busca simpres com select,
      * 2: Busca select com   manipulações de opções,
      * 3: Busca select com where  manipulações de opções,
@@ -69,11 +98,11 @@ final class Data implements DataInterface
      * 6: Busca select com valores definidos e where  manipulações de opções.
      */
 
-    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1):PDORow
+    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1):array
     {
         if (empty($table)) throw new Exception("Error null values", 411);
         if (!$option) throw new Exception("Value 0 (zero) is not accepted", 411);
-        if (!is_numeric($option)) throw new Exception("Non-numeric value", 3);
+        if (!is_numeric($option)) throw new Exception("Non-numeric value", 406);
 
         $valTable = implode(",", $val);
 
@@ -110,13 +139,20 @@ final class Data implements DataInterface
 
         return ($query->rowCount() == 1) ? $query->fetch(PDO::FETCH_ASSOC) : $query->fetchAll();
     }
+
     /**  
+     * @param string $table
+     * @param string $prewher
+     * @param string $where
+     * @param array $preval
+     * @param array $val
      * @param array $val
      * @param array $preval
-     *
+     *@return AnyParameters
      * Variáveis $preval e $prewhe é definido como array.$preVal é  passado dentro de cada array nome da coluna e o valor em aspas simples
      * exem: nome_da_coluna = ?
      */
+
     public function update(string $table, string $prewher, array $where, array $preval, array $val):AnyParameters
     {
         if (empty($table) || empty($prewher) || empty($preval) || empty($where) || empty($val)) throw new Exception("Error null values", 411);
@@ -144,10 +180,12 @@ final class Data implements DataInterface
         return $this->res;
     }
     /**
+     * @param string $table
      * @param string $where
-     *  @param array $val
-     * 
-     * exem: id =  ?
+     * @param array $val
+     * @return AnyParameters
+     *  Passa para o $where como parâmetro a manipulação para deleção do valor e os valores são passado no parãmetro $val  
+     *  exem: id =  ?
      */
     public function delete(string $table, string $where, array $val):AnyParameters
     {

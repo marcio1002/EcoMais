@@ -1,24 +1,26 @@
-<?php    
-  namespace Model;
+<?php
 
-    use Interfaces\PersonLegalInterface;
-    use Model\Person;
-    use FFI\Exception;
-    use TypeError;
+namespace Model;
 
-    class PersonLegal extends person implements PersonLegalInterface{
+use Interfaces\PersonLegalInterface;
+use Model\Person;
+use Exception;
+use TypeError;
 
-        protected $cnpj;
-    
-            public function getCnpj():int
-             {
-                return $this->cnpj;
-            }
-    
-            public function setCnpj(int $cnpj):void
-             { 
-                if(empty($cnpj)) throw new Exception('Undefined value');
-                if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
-                $this->cnpj = trim($cnpj);
-            }
-        }
+class PersonLegal extends person implements PersonLegalInterface
+{
+
+    protected $cnpj;
+
+    public function getCnpj(): int
+    {
+        return $this->cnpj;
+    }
+
+    public function setCnpj(int $cnpj): void
+    {
+        if (empty($cnpj)) throw new Exception('Undefined value');
+        if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
+        $this->cnpj = trim($cnpj);
+    }
+}

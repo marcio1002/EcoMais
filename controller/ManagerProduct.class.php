@@ -10,23 +10,17 @@ namespace Controller;
 
     class ManagerProduct {
         
+        /** Redirecionamento das views produtos */
+
+        public function showProduct() {
+            require_once __DIR__."/../view/mostrar.php";
+        }
+
+        /** Metodos para os produtos */
         public function deleteImage() 
         {
 
             try{
-                $data = new Data();
-                
-                $img = $_POST['img'];
-                if(empty($img)) throw new Exception("Value undefined") ;
-        
-        
-                $data->open();
-        
-                if($data->delete("images","image = ?",[$img])){
-                    $data->close();
-                    unlink("../src/uploadImages/$img");
-                    echo json_encode( ["error" => false,"status"=> 200,"msg" => "Ok"],);
-                }
                 
             }catch(PDOException $ex){
                echo json_encode( ["error"=> true,"errCode"=> $ex->getCode(),"msg" => $ex->getMessage()], );
@@ -69,6 +63,7 @@ namespace Controller;
                 die($ex->getMessage());
            }
         }
+
        public function activeImage() 
         {
 

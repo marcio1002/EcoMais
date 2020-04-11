@@ -1,4 +1,6 @@
-var option = {
+const BASE_URL = "https://localhost/WWW/CrudEcoMais";
+var option = 
+{
     method: String,
     url: String,
     cache: Boolean,
@@ -17,23 +19,21 @@ var option = {
 }
 
 $('body').ready(() => {
-    const BASE_URL = "https://localhost/WWW/CrudEcoMais";
-
+//cadastro do usuario
     $('#submit').click((evt) =>{
         evt.preventDefault();
-        let data = {
+        let person = {
             name : $('#name').val(),
             email: $("#email").val(),
-            pwd: $('#pwd').val()
+            passwd: $('#pwd').val()
         };
         option = 
         {
             method: 'POST',
             url: BASE_URL,
             dataType: "json",
-            data,
-            success: (response) =>{
-                const res = JSON.parse(response);
+            data: {person},
+            success: (res) =>{
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
             
                 if (!res.error) {
@@ -62,8 +62,7 @@ $('body').ready(() => {
             url: BASE_URL,
             dataType: "json",
             data,
-            success: (response) =>{
-                const res = JSON.parse(response);
+            success: (res) =>{
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
                 return (!res.error) ? alertify.success('Usuario deletado com sucesso'): console.log(res.status,res.msg);
             },
@@ -89,8 +88,7 @@ $('body').ready(() => {
             url: BASE_URL,
             dataType: "json",
             data,
-            sucess: (response) =>{
-               const res = JSON.parse(response);
+            sucess: (res) =>{
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
 
                 return (!res.error) ? alertify.success('Dados Atualizado'): alertify.error("Não foi possível fazer a atualização!");
@@ -100,20 +98,19 @@ $('body').ready(() => {
             reqAjax(option);
             
     });
-
+//requisição de login
     $('#login').click((evt)  => {
         
-        const data = { email: $("#email").val(),pwd: $('#pwd').val() };
+        const person = { email: $("#email").val(),passwd: $('#pwd').val() };
         option = {
             method: 'POST',
-            url: `${BASE_URL}/controller/`,
+            url: `${BASE_URL}/manager`,
             dataType: "json",
-            data,
-            success: (response) =>{
-              const  res = JSON.parse(response);
+            data: person,
+            success: (res) =>{
                 if(typeof res == "undefined" ||!res) throw new TypeError("Object null");
                 if (!res.error) {
-                    location.href = "./view/mostrar.php";
+                    location.href = `${BASE_URL}/product/`;
                 } else{
                     (res.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
                 }
@@ -130,7 +127,7 @@ $('body').ready(() => {
 
 /**
  * @param {Object} option
- * Defini uma option de parametros para o ajax;
+ * Defini uma opção de parametros para o ajax;
  */
 function reqAjax(opt = option) {
 

@@ -24,18 +24,20 @@ $router->get("/{errCode}","WebApp:typeError");
 
 /**
  * @namespace Controller
- */
+ * 
+ * * rotas para os metodos controllers */
 $router->namespace("Controller");
-/** rotas para os metodos controllers */
+
 $router->group("manager");
 $router->post("/","AccountManager:login");
+$router->post("/{person}","AccountManager:login");
 
 /** rotas para product*/
 $router->group("product");
-$router->get("/","ComponenteElement:showImages");
+$router->get("/","ManagerProduct:showProduct");
 
 
 
 $router->dispatch();
 
-if($router->error())$router->redirect("/error/{$router->error()}");
+if($router->error()) $router->redirect("/error/{$router->error()}");

@@ -1,19 +1,21 @@
 <?php
 namespace Model;
 
-    use FFI\Exception;
+    use Exception;
         
     class Safety {
 
         private $passwd;
         private $imageName;
     
-        public function criptPasswd(string $passwd) {
+        public function criptPasswd(string $passwd):string 
+        {
             $this->passwd = strtoupper(hash("whirlpool",$passwd));
             return $this->passwd;
         }
     
-        public function criptImage(string $exReg,string $imageName ) {
+        public function criptImage(string $exReg,string $imageName ):string 
+        {
             if(empty($exReg) || empty($imageName)) throw new Exception("Null value");
     
             preg_match("/\.($exReg)$/",$imageName,$ext);

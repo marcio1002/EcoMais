@@ -2,7 +2,7 @@
  namespace Model;
 
     use Interfaces\ProductInterface;
-    use FFI\Exception;
+    use Exception;
 
     class Product implements ProductInterface {
         protected $name;
@@ -17,52 +17,63 @@
         protected $pd;
         protected $status;
 
-        public function getName() {
+        public function getName():string 
+        {
             return $this->name;
         }
 
-        public function setName(string $name) {
+        public function setName(string $name):void
+        {
             if(empty($name)) throw new Exception('Error null values',1);
             $this->name = trim($name);
         }
         
-        public function getPrice() {
+        public function getPrice():int 
+        {
             return $this->price;
         }
 
-        public function setPrice(string $price) {
+        public function setPrice(string $price):void 
+        {
             if(empty($price)) throw new Exception('Error null values',1);
             $this->price = trim($price);
         }
         
-        public function getBrand() {
+        public function getBrand():string 
+        {
             return $this->brand;
         }
         
-        public function setBrand(string $brand) {
+        public function setBrand(string $brand):void 
+        {
             if(empty($brand)) throw new Exception('Error null values',1);
             $this->brand = trim($brand);
         }
 
-        public function getMerchant() {
+        public function getMerchant():string 
+        {
             return $this->merchant;
         }
 
-        public function setMerchant(string $mrt) {
+        public function setMerchant(string $mrt):void 
+        {
             if(empty($mrt)) throw new Exception('Error null values',1);
             $this->merchant = trim($mrt);
         }
 
-        public function getClassification() {
+        public function getClassification():string 
+        {
            return $this->category; 
         }
 
-        public function setClassification(string $ctr) {
+        public function setClassification(string $ctr):void 
+        {
             if(empty($ctr)) throw new Exception('Error null values',1);
             $this->category = trim($ctr);
         }
         
-        public function getImage() {
+        public function getImage():array 
+        {
             return $this->file;
         }
         /**
@@ -72,40 +83,48 @@
          * exem: ext| ext| ext;
         */
         
-        public function setImage( string $exReg,array $file) {
+        public function setImage( string $exReg,array $file):void 
+        {
             if($file['error'] === 4) throw new Exception('file undefined',1);
             if($file['error'] === 1) throw new Exception('File size not supported by the system',4);
             if(!preg_match("/\.($exReg)$/",$file['name'])) throw new Exception('Format not support!',5);
             $this->file = $file;
         }
 
-        public function getDescription() {
+        public function getDescription():string 
+        {
             return $this->desc;
         }
 
-        public function setDescription(string $desc) {
+        public function setDescription(string $desc):void 
+        {
             if(empty($desc)) throw new Exception('Error null values',1);
             $this->desc = trim($desc);
         }
 
-        public function getPeriod() {
+        public function getPeriod():string 
+        {
             return $this->pd;
         }
 
-        public function setPeriod(String $pd) {
+        public function setPeriod(string $pd):void 
+        {
             if(empty($pd)) throw new Exception('Error null values',1);
             $this->pd = trim($pd);
         }
 
-        public function getStatus() {
+        public function getStatus():int 
+        {
            return $this->status; 
         }
 
-        public function setStatus(int $status) {
+        public function setStatus(int $status):void 
+        {
             $this->status = trim($status);
         }
 
-        public function createAt() {
+        public function createAt():string 
+        {
             date_default_timezone_set("America/Sao_paulo");
             $this->date =   date( 'd/m/Y(N)-A-H:i:s');
             return $this->date;

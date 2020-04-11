@@ -2,10 +2,8 @@
  namespace Model;
 
     use Interfaces\PersonInterface;
-    use FFI\Exception;
-use SebastianBergmann\ObjectEnumerator\Enumerator;
-use Server\Data;
-use TypeError;
+    use Exception;
+    use TypeError;
 
     abstract class  Person  implements PersonInterface {
         private $id;
@@ -63,10 +61,12 @@ use TypeError;
             if(empty($email)) throw new Exception('Undefined value');
             $this->email = trim($email);
         }
+
         public function getCep():int 
         {
             return $this->cep;
         }
+
         public function setCep(int $cep):void 
         { 
             if(empty($cep)) throw new Exception('Undefined value');
@@ -79,7 +79,7 @@ use TypeError;
         }
     
         public function setStati(string $stati):void
-         { 
+        { 
             if(empty($stati)) throw new Exception('Undefined value');
             $this->stati = strtoupper(trim($stati));
         }
@@ -117,6 +117,7 @@ use TypeError;
             if (!is_numeric($number)) throw new TypeError("Expected a number format", 1); 
             $this->number = trim($number);
         }
+
         public function createAt():string
         {
             date_default_timezone_set("America/Sao_paulo");
