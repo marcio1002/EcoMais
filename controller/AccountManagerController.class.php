@@ -7,7 +7,6 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use Model\{AccountHandling,Person, PersonPhysical, Safety};
 use Exception;
 use PDOException;
-use phpDocumentor\Reflection\Types\Array_;
 
 class AccountManager
 {
@@ -21,7 +20,9 @@ class AccountManager
         $this->usr = new PersonPhysical();
         $this->safety = new Safety();
     }
-
+    public function test(array $usr) {
+       echo json_encode(['code'=> '200','status' => 'OK','data' => ['name'=> $usr['name'],'idade'=> $usr['idade'],'city'=> $usr['city'],'pais'=>$usr['pais']]]);
+    }
     public function  addAccount(Person $person)
     {
         try {
@@ -73,7 +74,7 @@ class AccountManager
         }
     }
     
-    public function login(array $person)
+    public function login($person)
     {
         try {
             $this->usr->setEmail($person['email']);
@@ -86,7 +87,6 @@ class AccountManager
                 $token =  uniqid(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
                 session_set_cookie_params($temp, '/', null, false, false);
-                session_name(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start();
 

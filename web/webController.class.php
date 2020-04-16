@@ -7,6 +7,11 @@ namespace Web;
             require_once __DIR__."/.././home.php";
         }
 
+        public function register()
+        {
+            require_once __DIR__."/../view/register.php";
+        }
+
  
         public function typeError($http_err):void
         {

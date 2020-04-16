@@ -18,6 +18,7 @@ $router->namespace("Web");
  */
 $router->group(null);
 $router->get("/","WebApp:home");
+$router->get("/cadastro","WebApp:register");
 
 $router->group("error");
 $router->get("/{errCode}","WebApp:typeError");
@@ -29,8 +30,8 @@ $router->get("/{errCode}","WebApp:typeError");
 $router->namespace("Controller");
 
 $router->group("manager");
-$router->post("/","AccountManager:login");
-$router->post("/{person}","AccountManager:login");
+$router->post("/login?{person}","AccountManager:login");
+$router->post('/bnguser?{usr}','AccountManager:test');
 
 /** rotas para product*/
 $router->group("product");

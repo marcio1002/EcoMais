@@ -89,9 +89,9 @@ tr:nth-child(even) {
 }
 
 .alert {
-  border-radius: 20px;
-  background: rgba(247, 82, 53, 0.788) ;
-  color: #f0eedb !important;
+  border-radius: 7px;
+  background: rgba(67, 55, 83, 0.932) ;
+  color: #e7e6de !important;
   font-weight: 600;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

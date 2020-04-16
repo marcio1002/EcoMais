@@ -6,16 +6,11 @@ const iptCpf= $("#cpf");
 const iptName = $("#name");
 const passwd = $("#pwd"); 
 const statiElem = $("#stati");
+let connection;
 
 $('#search').click(() => searchCep());
 $('select').formSelect();
 
-iptCep.keypress((evt) => {
-    if(evt.keyCode === 13) {
-        evt.preventDefault();
-        searchCep();
-    }   
-});
 
 $("#btnPwd").click(() => {
    if(passwd[0].type === "password") {
@@ -27,10 +22,7 @@ $("#btnPwd").click(() => {
    }   
 });
 
-passwd.keypress((evt) =>{
-    const divElem = $('span#length');
-    divElem.html(evt.target.value.length);
-})
+
 
 iptCpf.focusout((evt) => {
     let cpf = evt.target.value;
@@ -157,18 +149,9 @@ iptEmail.focusout(() =>{
         if(!regExp.test(iptEmail.val())) throw new TypeError("Invalid format");
 
     }catch(error) {
-        alert("Formato inválido");
-        console.log(error);
+        setMessage({html: "Digite um email válido",classes:"alert"});
     }
 });
-
-function clearInput() {
-    $('input[type=text]').val("");
-    $('input[type=email]').val("");
-    $('input[type=password]').val("");
-    $('input[type=tel]').val("");
-
-}
 
 $('.smoothScroll').click(function(elem)  {
     elem.preventDefault();
@@ -177,3 +160,36 @@ $('.smoothScroll').click(function(elem)  {
     target = $(id).offset().top - menuHeight;
     $(doc).animate({  scrollTop: target  },800);
 })
+
+//eventos para manipulação do teclado
+passwd.keyup( evt => { $('span#length').html(evt.target.value.length);});
+
+iptCep.keyup( evt => { if(evt.keyCode == 13) searchCep() });
+
+//eventos de conexão
+window.ononline = () => {
+    (connection === "OFFLINE")? setMessage({html: "Sua Conexão voltou"}) : setMessage({html: "Conectado"});
+    connection = "ONLINE";
+};
+window.onoffline = () => {
+    connection = "OFFLINE";
+    setMessage({html: "Você está offline"});
+};
+
+/**
+ * funções para manipular os elementos
+ * 1 - Limpar os inputs,
+ * 2 - Mostrar load,
+ * 3 - Eventos do teclado
+ */
+function clearInput() {
+    $('input[type=text]').val("");
+    $('input[type=email]').val("");
+    $('input[type=password]').val("");
+    $('input[type=tel]').val("");
+
+}
+
+function setMessage(option = Object) {
+    M.toast(option);
+}

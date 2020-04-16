@@ -32,7 +32,7 @@ $('body').ready(() => {
             method: 'POST',
             url: BASE_URL,
             dataType: "json",
-            data: {person},
+            data: person,
             success: (res) =>{
                 if(typeof res == "undefined" || !res) throw new TypeError("Object null");
             
@@ -99,7 +99,7 @@ $('body').ready(() => {
             
     });
 //requisição de login
-    $('#login').click((evt)  => {
+    $('#login').click(()  => {
         
         const person = { email: $("#email").val(),passwd: $('#pwd').val() };
         option = {
@@ -108,39 +108,18 @@ $('body').ready(() => {
             dataType: "json",
             data: person,
             success: (res) =>{
-                if(typeof res == "undefined" ||!res) throw new TypeError("Object null");
-                if (!res.error) {
+                if(typeof response == "undefined" ||!res) throw new TypeError("Object null");
+                if (! response.error) {
                     location.href = `${BASE_URL}/product/`;
                 } else{
-                    (res.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
+                    ( response.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
                 }
             }
         }
         reqAjax(option);
 
     })
-}).keypress((evt) => {
-    if(evt.key === "Enter") 
-    $('#login').click();
-});
-
-
-/**
- * @param {Object} option
- * Defini uma opção de parametros para o ajax;
- */
-function reqAjax(opt = option) {
-
-    const {method, url, data,dataType,xhrFields,success,error,beforeSend,accepts} = opt;
-
-    $.ajax({
-        method,
-        url,
-        data,
-        dataType,
-        xhrFields,
-        success,
-        error: (xhr,desc,err) => { throw new Error(`${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
-    })
-    
-}
+    $("#pwd").keyup( evt =>{
+        if(evt.keyCode === 13)  $("#login").click();
+    });
+})
