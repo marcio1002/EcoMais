@@ -23,9 +23,10 @@ async function searchCep() {
  * @param {Object} option
  * Defini uma opção de parametros para o ajax;
  */
-function reqAjax(opt = option) {
+function reqAjax(opt = option) 
+{
 
-    const {method, url, data,dataType,xhrFields,success,error,beforeSend,accepts} = opt;
+    const {method, url, data,dataType,xhrFields,success,error,beforeSend,complete,accepts} = opt;
 
     $.ajax({
         method,
@@ -33,6 +34,8 @@ function reqAjax(opt = option) {
         data,
         dataType,
         xhrFields,
+        beforeSend,
+        complete,
         success,
         error: (xhr,desc,err) => { throw new Error(`${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
     })

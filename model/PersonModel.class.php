@@ -2,7 +2,7 @@
  namespace Model;
 
     use Interfaces\PersonInterface;
-    use Exception;
+    use Model\DataException;
     use TypeError;
 
     abstract class  Person  implements PersonInterface {
@@ -24,7 +24,7 @@
     
         public function setId(int $id):void 
         {
-            if(empty($id)) throw new Exception('Undefined value'); 
+            if(empty($id)) throw new DataException ('Undefined value'); 
             $this->id = trim($id);
         }
     
@@ -35,7 +35,7 @@
     
         public function setName(string $name):void 
         {
-            if(empty($name)) throw new Exception('Undefined value'); 
+            if(empty($name)) throw new DataException ('Undefined value'); 
             $this->name = trim($name);
         }
     
@@ -46,8 +46,8 @@
     
         public function setPassword(string $password):void 
         {
-            if(empty($password)) throw new Exception('Undefined value'); 
-            if (strlen($password) > 15) throw new Exception("Character numbers have been exceeded, maximum 10 characters");
+            if(empty($password)) throw new DataException ('Undefined value'); 
+            if (strlen($password) > 15) throw new DataException ("Character numbers have been exceeded, maximum 10 characters");
             $this->passwd = trim($password);
         }
     
@@ -58,7 +58,7 @@
     
         public function setEmail(string $email):void 
         { 
-            if(empty($email)) throw new Exception('Undefined value');
+            if(empty($email)) throw new DataException ('Undefined value');
             $this->email = trim($email);
         }
 
@@ -69,7 +69,7 @@
 
         public function setCep(int $cep):void 
         { 
-            if(empty($cep)) throw new Exception('Undefined value');
+            if(empty($cep)) throw new DataException ('Undefined value');
             $this->cep = trim($cep);
         }
         
@@ -80,7 +80,7 @@
     
         public function setStati(string $stati):void
         { 
-            if(empty($stati)) throw new Exception('Undefined value');
+            if(empty($stati)) throw new DataException ('Undefined value');
             $this->stati = strtoupper(trim($stati));
         }
     
@@ -91,7 +91,7 @@
     
         public function setCity(string $city):void 
         { 
-            if(empty($city)) throw new Exception('Undefined value');
+            if(empty($city)) throw new DataException ('Undefined value');
             $this->city = trim($city);
         }
     
@@ -102,7 +102,7 @@
     
         public function setAddre(string $addre):void 
         { 
-            if(empty($addre)) throw new Exception('Undefined value');
+            if(empty($addre)) throw new DataException ('Undefined value');
             $this->addre = trim($addre);
         }
     
@@ -113,7 +113,7 @@
     
         public function setNumber(int $number):void 
         {
-            if(empty($number)) throw new Exception('Undefined value');
+            if(empty($number)) throw new DataException ('Undefined value');
             if (!is_numeric($number)) throw new TypeError("Expected a number format", 1); 
             $this->number = trim($number);
         }

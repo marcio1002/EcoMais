@@ -3,7 +3,7 @@
     "description": "Um crud para manipulação de dados do EcoMais",
     "minimum-stability": "dev",
     "license": "proprietary",
-    "version": "v1.1.11",
+    "version": "v1.1.12",
     "keywords": [
         "Query",
         "dados",
@@ -45,7 +45,7 @@
     "require": {
         "php": ">=7.0.0",
         "coffeecode/router": "1.0.*",
-        "phpmailer/phpmailer": "6.1.*"
+        "phpmailer/phpmailer": "~6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"

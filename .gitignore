@@ -4,5 +4,6 @@
 
 vendor/
 
+textEmail.php
 home.php
 .vscode

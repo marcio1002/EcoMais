@@ -2,17 +2,22 @@
 namespace Web;
 
     class WebApp {
-        public  function home()
+
+        public  function home():void
         {
-            require_once __DIR__."/.././home.php";
+            require_once __DIR__."/../home.php";
         }
 
-        public function register()
+        public function register():void
         {
             require_once __DIR__."/../view/register.php";
         }
 
- 
+        public function textEmail():void
+        {
+            require_once __DIR__."/../view/textEmail.php";
+        }
+        
         public function typeError($http_err):void
         {
             $codeError = $http_err['errCode'] ;

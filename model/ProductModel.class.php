@@ -5,6 +5,10 @@
     use Exception;
 
     class Product implements ProductInterface {
+
+        const ACTIVATED = 1;
+        const DISABLED = 0;
+
         protected $name;
         protected $price;
         protected $brand;
@@ -15,7 +19,8 @@
         protected $date;
         protected $desc;
         protected $pd;
-        protected $status;
+        protected $status = self::ACTIVATED | self::DISABLED;
+        
 
         public function getName():string 
         {
@@ -24,7 +29,7 @@
 
         public function setName(string $name):void
         {
-            if(empty($name)) throw new Exception('Error null values',1);
+            if(empty($name)) throw new DataException('Error null values',1);
             $this->name = trim($name);
         }
         
@@ -35,7 +40,7 @@
 
         public function setPrice(string $price):void 
         {
-            if(empty($price)) throw new Exception('Error null values',1);
+            if(empty($price)) throw new DataException('Error null values',1);
             $this->price = trim($price);
         }
         
@@ -46,7 +51,7 @@
         
         public function setBrand(string $brand):void 
         {
-            if(empty($brand)) throw new Exception('Error null values',1);
+            if(empty($brand)) throw new DataException('Error null values',1);
             $this->brand = trim($brand);
         }
 
@@ -57,7 +62,7 @@
 
         public function setMerchant(string $mrt):void 
         {
-            if(empty($mrt)) throw new Exception('Error null values',1);
+            if(empty($mrt)) throw new DataException('Error null values',1);
             $this->merchant = trim($mrt);
         }
 
@@ -68,7 +73,7 @@
 
         public function setClassification(string $ctr):void 
         {
-            if(empty($ctr)) throw new Exception('Error null values',1);
+            if(empty($ctr)) throw new DataException('Error null values',1);
             $this->category = trim($ctr);
         }
         
@@ -85,9 +90,9 @@
         
         public function setImage( string $exReg,array $file):void 
         {
-            if($file['error'] === 4) throw new Exception('file undefined',1);
-            if($file['error'] === 1) throw new Exception('File size not supported by the system',4);
-            if(!preg_match("/\.($exReg)$/",$file['name'])) throw new Exception('Format not support!',5);
+            if($file['error'] === 4) throw new DataException('file undefined',1);
+            if($file['error'] === 1) throw new DataException('File size not supported by the system',4);
+            if(!preg_match("/\.($exReg)$/",$file['name'])) throw new DataException('Format not support!',5);
             $this->file = $file;
         }
 
@@ -98,7 +103,7 @@
 
         public function setDescription(string $desc):void 
         {
-            if(empty($desc)) throw new Exception('Error null values',1);
+            if(empty($desc)) throw new DataException('Error null values',1);
             $this->desc = trim($desc);
         }
 
@@ -113,14 +118,14 @@
             $this->pd = trim($pd);
         }
 
-        public function getStatus():int 
+        public function getStatus():int
         {
-           return $this->status; 
+            return $this->status;
         }
 
-        public function setStatus(int $status):void 
+        public function setStatus(int $status):void
         {
-            $this->status = trim($status);
+            $this->status = $status;
         }
 
         public function createAt():string 

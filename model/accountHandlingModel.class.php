@@ -1,12 +1,9 @@
 <?php    
 namespace Model;
 
-    use Model\{PersonPhysical,Safety};
+    use Model\{PersonPhysical,Safety,DataException};
     use Interfaces\AccountHandlingInterface;
     use Server\Data;
-    use Exception;
-    use PDOException;
-    use PHPUnit\Framework\MockObject\Rule\AnyParameters;
 
 class AccountHandling  implements accountHandlingInterface{
 
@@ -18,7 +15,7 @@ class AccountHandling  implements accountHandlingInterface{
         $this->safety = new Safety();
     }
 
-    public function createAccount(PersonPhysical $person):AnyParameters
+    public function createAccount(PersonPhysical $person):int
     {
         try
         {
@@ -31,12 +28,8 @@ class AccountHandling  implements accountHandlingInterface{
 
             return $this->sql->add("usuarios",$array_columns,$array_register);
 
-        } catch(PDOException $ex) 
+        } catch(DataException $ex) 
         {   
-            $ex->getMessage();
-            die();
-        } catch(Exception $ex) 
-        {
             $ex->getMessage();
             die();
         }finally 
@@ -46,7 +39,7 @@ class AccountHandling  implements accountHandlingInterface{
             
     }
     
-    public function deleteAccount(PersonPhysical $person):AnyParameters
+    public function deleteAccount(PersonPhysical $person):int
     {
             try{
                 $id = [ $person->getId() ];
@@ -54,22 +47,17 @@ class AccountHandling  implements accountHandlingInterface{
                 $this->sql->open();
                 return $this->sql->delete("usuarios","id_usuario = ?",$id);
                 
-            } catch(PDOException $ex)
+            } catch(DataException $ex)
             {
                 $ex->getMessage();
                 die();
-            } catch(Exception $ex) 
-            {
-                $ex->getMessage();
-                die();
-            }
-                finally 
+            }finally 
             {
                 $this->sql->close();
             }
     }
     
-    public function updateAccount(PersonPhysical $person):AnyParameters
+    public function updateAccount(PersonPhysical $person):int
     {
             try{
                 $pwd = $this->safety->criptPasswd($person->getPassword());
@@ -80,11 +68,7 @@ class AccountHandling  implements accountHandlingInterface{
 
                 return $this->sql->update("usuarios","id_usuario = ?",$preWhere,$postPreVal,$postVal);
 
-            } catch(PDOException $ex)
-            {
-                $ex->getMessage();
-                die();
-            } catch(Exception $ex) 
+            } catch(DataException $ex)
             {
                 $ex->getMessage();
                 die();
@@ -104,11 +88,7 @@ class AccountHandling  implements accountHandlingInterface{
 
                 return $this->sql->show('usuarios',[],"email = ? AND password = ?",$where,3);
             }
-            catch(PDOException $ex)
-            {
-                $ex->getMessage();
-                die();
-            } catch(Exception $ex) 
+            catch(DataException $ex)
             {
                 $ex->getMessage();
                 die();
@@ -121,16 +101,15 @@ class AccountHandling  implements accountHandlingInterface{
     public function isLogged():bool
     {
         if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-            $token =  uniqid(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
             $this->sql->open();
-            $res = $this->sql->show("usuarios",[],"id_usuario IN(?)",[$_COOKIE['_id']]);
+            $res = $this->sql->show("usuarios",[],"id_usuario IN(?)",[$_COOKIE['_id']],3);
             if($res) {
-                $this->sql->close();
+
+                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 $id = $res["id_usuario"];
-                echo $_COOKIE['_token'] ,$token ,$_COOKIE['_id'] , $id;
-                exit;
-                return ($_COOKIE['_token'] === $token && $_COOKIE['_id'] === $id)? true : false;  
-            }  
+                if ($_COOKIE['_token'] == $token && $_COOKIE['_id'] == $id) return true;  
+            } 
+            $this->sql->close(); 
         } 
         return false;
     }

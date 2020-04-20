@@ -1,13 +1,13 @@
 <?php
 
 /** 
- * @global @author Marcio Alemão <marcioalemao190@gmail.com>
- * @
- * @global @param $table, $val
+ *@author Marcio Alemão <marcioalemao190@gmail.com>
+ * 
+ *@param $table, $val
  * São parâmetros patrões.
- * @global @param array $where  
+ *@param array $where  
  * É  um array com valores de manilupação como comparação, ordenação e limitação.
- *@global  @param int $option 
+ *@param int $option 
  * É definido como um número de opções. É usado no metodo show.
  */
 
@@ -15,9 +15,7 @@ namespace Server;
 
 use Interfaces\DataInterface;
 Use PDO;
-use PDOException;
-use Exception;
-use PHPUnit\Framework\MockObject\Rule\AnyParameters;
+use Model\DataException;
 
 final class Data implements DataInterface
 {
@@ -32,8 +30,18 @@ final class Data implements DataInterface
     [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_INIT_COMMAND=> "SET NAMES utf8",
-        PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_OBJ 
+        PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC 
     ];
+
+    /**
+     * DESTRUCTOR destrói @var $pdo @see null
+     * @return void
+     */
+    public function __destruct()
+    {
+        if(!empty($this->pdo)) unset($this->pdo); 
+    }
+
 
     /**
      * @return void
@@ -44,7 +52,7 @@ final class Data implements DataInterface
          $this->user, 
          $this->passwd,
          $this->option ) or 
-         die("⛔ Error: 401 <br/>" . $this->pdo->errorInfo());
+         die("⛔ Error: 401 <br/>");
     }
 
     /**
@@ -59,12 +67,12 @@ final class Data implements DataInterface
      * @param  string $table
      * @param array $columns
      * @param array $val
-     * @return AnyParameters
+     * @return int
      */
 
-    public function add(string $table, array $columns, array $val):AnyParameters
+    public function add(string $table, array $columns, array $val):int
     {
-        if (empty($table) || empty($columns) || empty($val)) throw new Exception("Error null values", 411);
+        if (empty($table) || empty($columns) || empty($val)) throw new DataException("Error null values",DataException::NOT_ACCEPTABLE);
 
         $colTable = implode(",", $columns);
         $preVal = implode(",", array_fill(0, count($val), '?'));
@@ -78,31 +86,30 @@ final class Data implements DataInterface
 
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()), 400);
+        if (!$this->res) throw new DataException(print_r($query->errorInfo()), DataException::REQ_INVALID);
 
         return $this->res;
     }
     /**  
-     * @param string $table
-     * @param array $val
-     * @param string $prewher
-     * @param array $where
-     * @param int $option  
-     * @return array
-     *  --- São  5 opções para selecionar sua busca --- 
+     * --- São  5 opções para selecionar sua busca --- 
+     * 
      * 1: Busca simpres com select,
      * 2: Busca select com   manipulações de opções,
      * 3: Busca select com where  manipulações de opções,
      * 4: Busca select com valores definidos,
      * 5: Busca select com valores e manipulações de opções,
      * 6: Busca select com valores definidos e where  manipulações de opções.
+     * @param string $table
+     * @param array $val
+     * @param string $prewher
+     * @param array $where
+     * @param int $option  
+     * @return array
      */
-
-    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1):array
+    public function show(string $table, array $val = [], string $prewher = "", array $where = [], int $option = 1): ?array
     {
-        if (empty($table)) throw new Exception("Error null values", 411);
-        if (!$option) throw new Exception("Value 0 (zero) is not accepted", 411);
-        if (!is_numeric($option)) throw new Exception("Non-numeric value", 406);
+        if (!$option) throw new DataException("Value 0 (zero) is not accepted", DataException::REQUIRED_LENGTH);
+        if (!is_numeric($option)) throw new DataException("Non-numeric value", DataException::NOT_ACCEPTABLE);
 
         $valTable = implode(",", $val);
 
@@ -135,7 +142,7 @@ final class Data implements DataInterface
         $query->execute();
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()), 400);
+        if (!$this->res) throw new DataException(print_r($query->errorInfo()), DataException::REQ_INVALID);
 
         return ($query->rowCount() == 1) ? $query->fetch(PDO::FETCH_ASSOC) : $query->fetchAll();
     }
@@ -148,14 +155,14 @@ final class Data implements DataInterface
      * @param array $val
      * @param array $val
      * @param array $preval
-     *@return AnyParameters
+     *@return int
      * Variáveis $preval e $prewhe é definido como array.$preVal é  passado dentro de cada array nome da coluna e o valor em aspas simples
      * exem: nome_da_coluna = ?
      */
 
-    public function update(string $table, string $prewher, array $where, array $preval, array $val):AnyParameters
+    public function update(string $table, string $prewher, array $where, array $preval, array $val):int
     {
-        if (empty($table) || empty($prewher) || empty($preval) || empty($where) || empty($val)) throw new Exception("Error null values", 411);
+        if (empty($table) || empty($prewher) || empty($preval) || empty($where) || empty($val)) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
 
         $preVal = trim(implode(", ", $preval));
         $this->pdo->beginTransaction();
@@ -175,7 +182,7 @@ final class Data implements DataInterface
         $query->execute();
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw  new PDOException(print_r($query->errorInfo()), 400);
+        if (!$this->res) throw  new DataException(print_r($query->errorInfo()), DataException::REQ_INVALID);
 
         return $this->res;
     }
@@ -183,13 +190,13 @@ final class Data implements DataInterface
      * @param string $table
      * @param string $where
      * @param array $val
-     * @return AnyParameters
+     * @return int
      *  Passa para o $where como parâmetro a manipulação para deleção do valor e os valores são passado no parãmetro $val  
      *  exem: id =  ?
      */
-    public function delete(string $table, string $where, array $val):AnyParameters
+    public function delete(string $table, string $where, array $val):int
     {
-        if (empty($table) || empty($where) || empty($val)) throw new Exception("Error null values", 411);
+        if (empty($table) || empty($where) || empty($val)) throw new DataException("Error null values",DataException::NOT_ACCEPTABLE);
         $this->pdo->beginTransaction();
         $query = $this->pdo->prepare("DELETE FROM $table WHERE $where");
 
@@ -199,7 +206,7 @@ final class Data implements DataInterface
         $query->execute();
         $this->res = $this->pdo->commit();
 
-        if (!$this->res) throw new PDOException(print_r($query->errorInfo()), 400);
+        if (!$this->res) throw new DataException(print_r($query->errorInfo()), DataException::REQ_INVALID);
 
         return $this->res;
     }

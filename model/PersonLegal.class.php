@@ -3,8 +3,8 @@
 namespace Model;
 
 use Interfaces\PersonLegalInterface;
-use Model\Person;
-use Exception;
+use Model\{Person,DataException};
+
 use TypeError;
 
 class PersonLegal extends person implements PersonLegalInterface
@@ -19,7 +19,7 @@ class PersonLegal extends person implements PersonLegalInterface
 
     public function setCnpj(int $cnpj): void
     {
-        if (empty($cnpj)) throw new Exception('Undefined value');
+        if (empty($cnpj)) throw new DataException('Undefined value');
         if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
         $this->cnpj = trim($cnpj);
     }

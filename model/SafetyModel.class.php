@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-    use Exception;
+    use Model\DataException;
         
     class Safety {
 
@@ -16,7 +16,7 @@ namespace Model;
     
         public function criptImage(string $exReg,string $imageName ):string 
         {
-            if(empty($exReg) || empty($imageName)) throw new Exception("Null value");
+            if(empty($exReg) || empty($imageName)) throw new DataException("Null value");
     
             preg_match("/\.($exReg)$/",$imageName,$ext);
             $this->imageName = md5(uniqid(time())) . "." . $ext[1];

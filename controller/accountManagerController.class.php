@@ -5,14 +5,12 @@ namespace Controller;
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Model\{AccountHandling,Person, PersonPhysical, Safety};
-use Exception;
-use PDOException;
+use Model\DataException;
 
 class AccountManager
 {
     private $account;
     private $usr;
-    private $safety;
 
     function __construct()
     {
@@ -20,19 +18,23 @@ class AccountManager
         $this->usr = new PersonPhysical();
         $this->safety = new Safety();
     }
-    public function test(array $usr) {
-       echo json_encode(['code'=> '200','status' => 'OK','data' => ['name'=> $usr['name'],'idade'=> $usr['idade'],'city'=> $usr['city'],'pais'=>$usr['pais']]]);
-    }
-    public function  addAccount(Person $person)
+
+    public function  addAccount($person)
     {
         try {
-            if ($this->account->createAccount($person)) {
+            $this->usr->setName($person['name']);
+            $this->usr->setEmail($person['email']);
+            $this->usr->setPassword($person['passwd']);
+
+            if ($this->account->createAccount($this->usr)) {
+                
                 echo json_encode(["error" => false, "status" => 201, "msg" => "Ok"],);
             } else {
-                throw new Exception("Ocorreu um erro ao criar conta");
+                throw new DataException("Ocorreu um erro ao criar conta");
             }
-        } catch (Exception $ex) {
+        } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
+            die();
         }
     }
 
@@ -49,28 +51,28 @@ class AccountManager
             if ($this->account->updateAccount($this->usr)) {
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"],);
             } else {
-                throw new Exception("Ocorreu ao atualizar");
+                throw new DataException("Ocorreu ao atualizar");
             }
-        } catch (Exception $ex) {
+        } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
-        } catch (PDOException $pdoEx) {
-            echo json_encode(["error" => true, "status" => $pdoEx->getCode(), "msg" => $pdoEx->getMessage()]);
+            die();
         }
     }
 
-    public function  deleteAccount()
+    public function  deleteAccount($person)
     {
         try {
 
-            $this->usr->setId($_POST['id']);
+            $this->usr->setId($person['id']);
 
             if ($this->account->deleteAccount($this->usr)) {
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"],);
             } else {
-                throw new Exception("Ocorreu um erro ao deletar o usuario");
+                throw new DataException("Ocorreu um erro ao deletar o usuario");
             }
-        } catch (Exception $ex) {
+        } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
+            die();
         }
     }
     
@@ -84,7 +86,7 @@ class AccountManager
 
                 $this->usr->setId($res['id_usuario']);
                 $temp = time() + (1 * 12 * 30 * 24 * 3600);
-                $token =  uniqid(md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
+                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
 
                 session_set_cookie_params($temp, '/', null, false, false);
 
@@ -94,9 +96,9 @@ class AccountManager
                 setcookie('_token', $token, $temp, '/', null, false, true);
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
             } else {
-                throw new Exception('No results found',404);
+                throw new DataException('No results found',404);
             }
-        } catch (Exception $ex) {
+        } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
             die();
         }
@@ -104,8 +106,6 @@ class AccountManager
 
     public function logoff()
     {
-        if (strcmp(basename($_SERVER['SCRIPT_NAME']), basename(__FILE__)) === 0) header("location: ".BASE_URL."/error/406");
-
         if ($this->account->isLogged()) {
             setcookie('_id', "", time() -  36000, "/");
             setcookie('_token', "", time() -  36000, "/");

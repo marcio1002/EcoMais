@@ -11,6 +11,7 @@ var option =
     xhrFields: Object,
     statusCode: Object,
     beforeSend: Function,
+    complete: Function,
     error: Function,
     dataFilter: Function,
     success: Function,
@@ -30,11 +31,11 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: BASE_URL,
+            url: `${BASE_URL}/manager/addconta`,
             dataType: "json",
             data: person,
             success: (res) =>{
-                if(typeof res == "undefined" || !res) throw new TypeError("Object null");
+                if(typeof res == undefined || !res) throw new TypeError("Object null");
             
                 if (!res.error) {
                     alertify.success('Cadastro realizado com sucesso');
@@ -53,18 +54,18 @@ $('body').ready(() => {
 
     });
 
-    $('#btndelete').click((evt) =>{
+    $('#infor_users #btndelete').click((evt) =>{
         evt.preventDefault();
         const data = { id: $('input[name=id]').val() }
         option = 
         {
             method: 'POST',
-            url: BASE_URL,
+            url: `${BASE_URL}/manager/removeuser`,
             dataType: "json",
             data,
             success: (res) =>{
-                if(typeof res == "undefined" || !res) throw new TypeError("Object null");
-                return (!res.error) ? alertify.success('Usuario deletado com sucesso'): console.log(res.status,res.msg);
+                if(typeof res == undefined || !res) throw new TypeError("Object null");
+                return (!res.error) ? ( alertify.success('Usuario deletado com sucesso'), location.href = "http://localhost/WWW/CrudEcoMais/product" ): console.log(res.status,res.msg);
             },
         }
 
@@ -72,7 +73,7 @@ $('body').ready(() => {
 
     });
 
-    $('#btnUpdate').click(function (evt){
+    $('#infor_users #btnUpdate').click(function (evt){
         evt.preventDefault();
         const data = 
         {
@@ -104,21 +105,22 @@ $('body').ready(() => {
         const person = { email: $("#email").val(),passwd: $('#pwd').val() };
         option = {
             method: 'POST',
-            url: `${BASE_URL}/manager`,
+            url: `${BASE_URL}/manager/login`,
             dataType: "json",
             data: person,
             success: (res) =>{
-                if(typeof response == "undefined" ||!res) throw new TypeError("Object null");
-                if (! response.error) {
+                if(typeof res == undefined ||!res) throw new TypeError("Object null");
+                if (! res.error) {
                     location.href = `${BASE_URL}/product/`;
                 } else{
-                    ( response.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
+                    ( res.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
                 }
             }
         }
         reqAjax(option);
 
     })
+
     $("#pwd").keyup( evt =>{
         if(evt.keyCode === 13)  $("#login").click();
     });
