@@ -19,7 +19,7 @@ class EmailECM  extends EmailProps {
      * @return void
      */
     public function __construct() {
-        $this->email = new PHPMailer(true);
+        $this->email = new PHPMailer();
   
         $this->email->isSMTP();
         $this->email->isHTML();
@@ -105,6 +105,6 @@ class EmailECM  extends EmailProps {
      */
     public function error():DataException
     {  
-        return new DataException($this->err);
+        throw new DataException($this->err);
     }
 }

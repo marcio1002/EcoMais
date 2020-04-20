@@ -15,9 +15,6 @@ class ComponenteElement
       $sql = new Data();
       $sql->open();
       $res =  $sql->show("usuarios");
-      echo "<pre>";
-      print_r(count($res,COUNT_RECURSIVE));
-      echo "</pre>";
       if (empty($res) || !is_array($res)) return;
       echo "<table id='infor_users'>
             <thead>
