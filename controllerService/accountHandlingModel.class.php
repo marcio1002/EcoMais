@@ -1,9 +1,9 @@
 <?php    
-namespace Model;
+namespace ControllerService;
 
     use Model\{PersonPhysical,Safety,DataException};
     use Interfaces\AccountHandlingInterface;
-    use Server\Data;
+    use Service\Data;
 
 class AccountHandling  implements accountHandlingInterface{
 
@@ -107,7 +107,9 @@ class AccountHandling  implements accountHandlingInterface{
 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 $id = $res["id_usuario"];
-                if ($_COOKIE['_token'] == $token && $_COOKIE['_id'] == $id) return true;  
+                echo strcasecmp($_COOKIE['_token'],$token);
+                if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) 
+                    return true;  
             } 
             $this->sql->close(); 
         } 

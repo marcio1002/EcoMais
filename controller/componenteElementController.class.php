@@ -16,7 +16,7 @@ class ComponenteElement
       $sql->open();
       $res =  $sql->show("usuarios");
       if (empty($res) || !is_array($res)) return;
-      echo "<table id='infor_users'>
+      echo "<table id='info_users'>
             <thead>
               <tr>
                   <th>Nome</th>

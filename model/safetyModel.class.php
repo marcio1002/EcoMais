@@ -8,12 +8,23 @@ namespace Model;
         private $passwd;
         private $imageName;
     
+        /**
+         * Criptografia Whirlpool
+         * @param string $passwd
+         * @return string
+         */
         public function criptPasswd(string $passwd):string 
         {
             $this->passwd = strtoupper(hash("whirlpool",$passwd));
             return $this->passwd;
         }
-    
+
+        /**
+         * Criptografia MD5
+         * @param string $exReg
+         * @param string $imageName
+         * @return string
+         */
         public function criptImage(string $exReg,string $imageName ):string 
         {
             if(empty($exReg) || empty($imageName)) throw new DataException("Null value");

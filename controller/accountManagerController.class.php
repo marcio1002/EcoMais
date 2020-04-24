@@ -4,8 +4,8 @@ namespace Controller;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Model\{AccountHandling,Person, PersonPhysical, Safety};
-use Model\DataException;
+use Model\{DataException,PersonPhysical, Safety};
+use ControllerService\AccountHandling;
 
 class AccountManager
 {
@@ -19,7 +19,7 @@ class AccountManager
         $this->safety = new Safety();
     }
 
-    public function  addAccount($person)
+    public function  addAccount($person):void
     {
         try {
             $this->usr->setName($person['name']);
@@ -38,7 +38,7 @@ class AccountManager
         }
     }
 
-    public function updateAccount()
+    public function updateAccount():void
     {
         try {
 
@@ -59,7 +59,7 @@ class AccountManager
         }
     }
 
-    public function  deleteAccount($person)
+    public function  deleteAccount($person):void
     {
         try {
 
@@ -76,7 +76,7 @@ class AccountManager
         }
     }
     
-    public function login($person)
+    public function login($person):void
     {
         try {
             $this->usr->setEmail($person['email']);
@@ -104,7 +104,7 @@ class AccountManager
         }
     }
 
-    public function logoff()
+    public function logoff():void
     {
         if ($this->account->isLogged()) {
             setcookie('_id', "", time() -  36000, "/");

@@ -1,4 +1,4 @@
-const BASE_URL = "https://localhost/WWW/CrudEcoMais";
+const BASE_URL = "https://www.localhost/WWW/CrudEcoMais";
 var option = 
 {
     method: String,
@@ -54,7 +54,7 @@ $('body').ready(() => {
 
     });
 
-    $('#infor_users #btndelete').click((evt) =>{
+    $('#info_users #btndelete').click((evt) =>{
         evt.preventDefault();
         const data = { id: $('input[name=id]').val() }
         option = 

@@ -11,7 +11,7 @@
  * É definido como um número de opções. É usado no metodo show.
  */
 
-namespace Server;
+namespace Service;
 
 use Interfaces\DataInterface;
 Use PDO;
@@ -34,7 +34,7 @@ final class Data implements DataInterface
     ];
 
     /**
-     * DESTRUCTOR destrói @var $pdo @see null
+     * DESTRUCTOR destrói @var $pdo
      * @return void
      */
     public function __destruct()

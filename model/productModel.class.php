@@ -81,13 +81,13 @@
         {
             return $this->file;
         }
+
         /**
-         * @param string $ext -> o tipo de formato para validação  
-         * @param array $file -> o arquivo
-         * separar por barra vertical
+         * separar os tipos de extensão por barra vertical
          * exem: ext| ext| ext;
+         * @param string $ext  o tipo de formato para validação  
+         * @param array $file  o arquivo
         */
-        
         public function setImage( string $exReg,array $file):void 
         {
             if($file['error'] === 4) throw new DataException('file undefined',1);
@@ -131,7 +131,7 @@
         public function createAt():string 
         {
             date_default_timezone_set("America/Sao_paulo");
-            $this->date =   date( 'd/m/Y(N)-A-H:i:s');
+            $this->date =   date( 'Y/m/d-(N)-A%H:i');
             return $this->date;
         }
     }

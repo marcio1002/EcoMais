@@ -1,5 +1,5 @@
 <?php
-namespace Server;
+namespace Service;
 
 use Model\{DataException,EmailProps};
 use PHPMailer\PHPMailer\{PHPMailer,Exception};
@@ -22,7 +22,7 @@ class EmailECM  extends EmailProps {
         $this->email = new PHPMailer();
   
         $this->email->isSMTP();
-        $this->email->isHTML();
+        $this->email->isHTML(true);
         $this->email->setLanguage("br");
         $this->email->SMTPAuth= true;
         $this->email->CharSet = PHPMailer::CHARSET_UTF8;
@@ -44,11 +44,11 @@ class EmailECM  extends EmailProps {
      * @param string $recipient_name
      * @return EmailECM
      */
-    public function add(string $subject,string $body,string $altBody, string $recipient_name,string $recipient_email):EmailECM
+    public function add(string $subject,string $body, string $recipient_name,string $recipient_email,string $altBody = ""):EmailECM
     {
-        $this->$subject = $subject;
-        $this->body = $body;
-        $this->altBody = $altBody;
+        $this->subjecProp = $subject;
+        $this->bodyProp = $body;
+        $this->altBodyProp = $altBody;
         $this->recipient_Name = $recipient_name;
         $this->recipient_Email = $recipient_email;
 
@@ -63,7 +63,7 @@ class EmailECM  extends EmailProps {
      */
     public function attach(string $filePath, string $fileName):EmailECM
     {
-        $this->attach[$filePath] = $fileName;   
+        $this->attachProp[$filePath] = $fileName;   
 
         return $this;
     }
@@ -82,12 +82,12 @@ class EmailECM  extends EmailProps {
 
             $this->email->setFrom($from_email,$from_name);
             $this->email->addAddress($this->recipient_Email,$this->recipient_Name);
-            $this->email->Subject = $this->subject;
-            $this->email->msgHTML($this->body);
-            $this->email->AltBody = $this->altBody;
+            $this->email->Subject = $this->subjecProp;
+            $this->email->msgHTML($this->bodyProp);
+            $this->email->AltBody = $this->altBodyProp;
 
-            if(!empty($this->attach)) {
-                foreach($this->attach as $path => $name) {
+            if(!empty($this->attachProp)) {
+                foreach($this->attachProp as $path => $name) {
                     $this->email->addAttachment($path,$name);
                 }
             }
@@ -96,7 +96,7 @@ class EmailECM  extends EmailProps {
             return true;
         }catch(Exception $ex) 
         {
-            $this->err = $ex->getMessage();
+            $this->err = $ex->getMessage() | $ex->errorMessage();
             return false;
         }
     }

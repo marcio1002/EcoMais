@@ -12,11 +12,6 @@ namespace Web;
         {
             require_once __DIR__."/../view/register.php";
         }
-
-        public function textEmail():void
-        {
-            require_once __DIR__."/../view/textEmail.php";
-        }
         
         public function typeError($http_err):void
         {
