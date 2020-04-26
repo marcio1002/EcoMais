@@ -1,3 +1,7 @@
+<?php
+    $bundle = new  Bundles\Bundles();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,9 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link type='text/css' rel='stylesheet' href='http://localhost/WWW/CrudEcoMais/src/css/style.css'/>
-    <link type="text/css" rel="stylesheet" href='http://localhost/WWW/CrudEcoMais/src/css/themes/default.min.css'/>
-    <link type='text/css' rel='stylesheet' href='http://localhost/WWW/CrudEcoMais/src/css/alertify.min.css'>
+    <?php
+        
+        $bundle->loadCss([
+            "css/materialize",
+            "css/alertify",
+            "css/style"
+            ]);
+    ?>
 </head>
 
 <body>
@@ -101,13 +110,17 @@
     </form>
     <button  class='btn indigo lighten-1'><a  class='black-text' href='http://localhost/WWW/CrudEcoMais/product'>Visualizar</a></button>
 
-    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
-    <script src='http://localhost/WWW/CrudEcoMais/src/js/apis.js'></script>
-    <script src='http://localhost/WWW/CrudEcoMais/src/js/manipulation.js'></script>
-    <script src='http://localhost/WWW/CrudEcoMais/src/js/alertify.min.js'></script>
-    <script src='http://localhost/WWW/CrudEcoMais/src/js/reqAjax.js'></script>
+   <?php
+    $bundle->loadJs([
+        "js/jquery",
+        "js/alertify",
+        "js/axios",
+        "js/ajax",
+        "js/regAjax",
+        "js/apis",
+        "js/manipulation",
+    ])
+   ?>
 </body>
 
 </html>

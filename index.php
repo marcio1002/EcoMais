@@ -7,6 +7,12 @@ require_once "./config.php";
 use CoffeeCode\Router\Router;
 
 
+
+header('Access-Control-Allow-Origin: *');   
+header('Access-Control-Allow-Headers: X-PINGARUNER');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Content-type: text/html');
+
 $router = new Router(BASE_URL);
 
 /**
@@ -19,6 +25,7 @@ $router->namespace("Web");
 $router->group(null);
 $router->get("/","WebApp:home");
 $router->get("/registro","WebApp:register");
+$router->get("/terms","WebApp:terms");
 
 $router->group("error");
 $router->get("/{errCode}","WebApp:typeError");

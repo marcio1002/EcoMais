@@ -12,6 +12,11 @@ namespace Web;
         {
             require_once __DIR__."/../view/register.php";
         }
+
+        public function terms():void 
+        {
+            require_once __DIR__."/../view/politicaPrivacidadeTermos.php";
+        }
         
         public function typeError($http_err):void
         {

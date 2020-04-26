@@ -10,7 +10,7 @@
         "crud",
         "EcoMais"
     ],
-    "homepage": "https://github.com/marcio1002/CrudEcoMais",
+    "homepage": "https://github.com/marcio1002/EcoMais",
     "type": "package",
     "authors": [
         {
@@ -30,17 +30,17 @@
             "Model\\": "model/",
             "Controller\\": "controller/",
             "ControllerService\\": "controllerService",
-            "Web\\": "web/"
+            "Web\\": "web/",
+            "Bundles\\": "./"
         },
         "files": [
             "config.php"
         ]
     },
     "repositories": {
-        "packagist.org": false,
-        "private-packagist": {
-            "type": "composer",
-            "url": "https://repo.packagist.com/ecomais/"
+        "0": {
+            "type": "github",
+            "url": "https://github.com/marcio1002/EcoMais"
         }
     },
     "require": {

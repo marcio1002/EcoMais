@@ -107,9 +107,8 @@ class AccountHandling  implements accountHandlingInterface{
 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 $id = $res["id_usuario"];
-                echo strcasecmp($_COOKIE['_token'],$token);
-                if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) 
-                    return true;  
+
+                if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;  
             } 
             $this->sql->close(); 
         } 
