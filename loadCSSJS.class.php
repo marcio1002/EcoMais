@@ -13,17 +13,17 @@ class Bundles
      */
     public  function  loadCss(array $urlName): void
     {
-        if(empty($urlName)) return;
+        if(empty($urlName) ) return;
 
         foreach ($urlName as $url) {
 
-            if( empty(( $this->import[$url] )) ) return;
+            if( empty( $this->import[$url] ) ) return;
 
             if (is_array($this->import[$url])) {
 
-                foreach ($this->import[$url] as $chv) {
+                foreach ($this->import[$url] as $r) {
 
-                    echo "<link rel='stylesheet' href='$chv'/>";
+                    echo "<link rel='stylesheet' href='$r'/>";
                 }
             } else {
                 $r = $this->import[$url];
@@ -38,13 +38,13 @@ class Bundles
 
         foreach ($urlName as $url) {
 
-            if( empty(( $this->import[$url] )) ) return;
+            if( empty( $this->import[$url] ) ) return;
 
             if (is_array($this->import[$url])) {
 
-                foreach ($this->import[$url] as $chv) {
+                foreach ($this->import[$url] as $r) {
 
-                    echo " <script src='$chv'></script>";
+                    echo " <script src='$r'></script>";
                 }
             } else {
                 $r = $this->import[$url];

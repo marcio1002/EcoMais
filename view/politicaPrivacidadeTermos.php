@@ -14,7 +14,7 @@
     <section id="row">
         <div class="col s12 m12">
             <article class="col s5 m5 container z-depth-3 white p-10 line-height-2em">
-               
+
                 <h4 class="center-align">Política de privacidade do <em>EcoMais</em></h4>
 
                 <p>Todas as suas informações pessoais recolhidas, serão usadas para o ajudar a tornar a sua visita no nosso site o mais produtiva e agradável possível.</p>
@@ -28,17 +28,17 @@
                 <p>O uso do <strong class="blue-text">Ecomais</strong> pressupõe a aceitação deste Acordo de privacidade. A equipe do <strong class="blue-text">Ecomais</strong> reserva-se ao direito de alterar este acordo sem aviso prévio. Deste modo, recomendamos que consulte a nossa política de privacidade com regularidade de forma a estar sempre atualizado.</p>
 
                 <h4 class="center-align">CONSENTIMENTO</h4>
-                
+
                 <h5>Como vocês obtêm meu consentimento?</h5>
-                
+
                 <p>Quando você nos fornece as suas informações pessoais para completar uma transação, verificar seu cartão de crédito, fazer um pedido, providenciar uma entrega ou retornar uma compra, você está concordando com a nossa coleta e uso de informações pessoais apenas para esses fins específicos.</p>
-                
+
                 <p>Se pedirmos suas informações pessoais por uma razão secundária, como marketing, vamos pedir seu consentimento, ou te dar a oportunidade de dizer não.</p>
-                
+
                 <h5>Como posso retirar o meu consentimento?</h5>
 
                 <p>Caso depois de fornecer seus dados você mude de ideia, você pode retirar o seu consentimento quando quiser e assim evitar que entremos em contato para obter ou divulgar informações. Entre em contato conosco através do e-email <strong>ecomais5354@gmail.com</strong> ou por correio: &nbsp; <strong>Porto Alegre Jardim Annita, São Paulo, SP, 08573380, Brazil</strong></p>
-                
+
                 <h4 class="center-align">Os anúncios</h4>
 
                 <p>Tal como outros websites, coletamos e utilizamos informação contida nos anúncios.
@@ -59,6 +59,16 @@
 
                     Não nos responsabilizamos pela política de privacidade ou conteúdo presente nesses mesmos sites.</p>
 
+
+                <p>Termos e condições gerais de uso do site
+
+                    Estes Termos e condições gerais aplicam-se ao uso dos serviços oferecidos pelo EBAZAR.COM.BR LTDA, empresa devidamente inscrita no CNPJ/MF sob o n° 03.007.331/0001-41, situada na Av. das Nações Unidas, nº 3.003, Bonfim, Osasco/SP, doravante nominada Mercado Livre, por meio dos sites www.mercadolivre.com.br e www.arremate.com.br (“Sites”).
+
+                    Qualquer pessoa, doravante nominada Usuário, que pretenda utilizar os serviços do Mercado Livre deverá aceitar os Termos e condições gerais e todas as demais políticas e princípios que o regem.
+
+                    A aceitação destes Termos e condições gerais é absolutamente indispensável à utilização dos Sites e serviços prestados pelo Mercado Livre.
+
+                    O Usuário deverá ler, certificar-se de haver entendido e aceitar todas as condições estabelecidas nos Termos e condições gerais e nas Políticas de privacidade, assim como nos demais documentos a eles incorporados por referência, antes de seu cadastro como Usuário do Mercado Livre.</p>
             </article>
         </div>
     </section>

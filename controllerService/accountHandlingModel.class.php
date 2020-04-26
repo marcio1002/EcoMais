@@ -116,7 +116,6 @@ class AccountHandling  implements accountHandlingInterface{
     }
 
     public function isAdmin()
-    { 
-                
+    {               
     }
 }

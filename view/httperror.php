@@ -5,7 +5,7 @@
     <title><?php if(isset( $_SESSION['codeError'])) echo  $_SESSION['codeError'];?></title>
     <style>
         body{
-            background: url("https://ecomais.herokuapp.com/src/assets/svgs/codeerror.svg");
+            background: url("../src/assets/svgs/codeerror.svg");
             background-size: 100%;
         }
         .center-align {

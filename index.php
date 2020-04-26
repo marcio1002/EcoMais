@@ -7,12 +7,6 @@ require_once "./config.php";
 use CoffeeCode\Router\Router;
 
 
-
-header('Access-Control-Allow-Origin: *');   
-header('Access-Control-Allow-Headers: X-PINGARUNER');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Content-type: text/html');
-
 $router = new Router(BASE_URL);
 
 /**
@@ -24,7 +18,7 @@ $router->namespace("Web");
  */
 $router->group(null);
 $router->get("/","WebApp:home");
-$router->get("/registro","WebApp:register");
+$router->get("/register","WebApp:register");
 $router->get("/terms","WebApp:terms");
 
 $router->group("error");
@@ -39,9 +33,9 @@ $router->namespace("Controller");
 $router->group("manager");
 $router->post("/login","AccountManager:login");
 $router->get("/logoff","AccountManager:logoff");
-$router->post("/addconta","AccountManager:addAccount");
+$router->post("/addAccount","AccountManager:addAccount");
 $router->post("/removeusuario","AccountManager:deleteAccount");
-$router->put("/recuperasenha","Account:recoverPasswd");
+$router->put("/recoverPasswd","Account:recoverPasswd");
 
 /** rotas para product*/
 $router->group("product");

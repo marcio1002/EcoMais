@@ -9,7 +9,6 @@ const statiElem = $("#stati");
 let connection;
 
 $('#search').click(() => searchCep());
-$('select').formSelect();
 
 
 $("#btnPwd").click(() => {

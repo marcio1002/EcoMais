@@ -108,13 +108,13 @@
             <input type='button' class='btn indigo lighten-1 ' id="submit" value="Cadastra-se"/>
         </div>
     </form>
-    <button  class='btn indigo lighten-1'><a  class='black-text' href='https://ecomais.herokuapp.com/product'>Visualizar</a></button>
+    <button  class='btn indigo lighten-1'><a  class='black-text' href=<?php echo BASE_URL."/product";?> >Visualizar</a></button>
 
    <?php
     $bundle->loadJs([
         "js/jquery",
+        "js/materialize",
         "js/alertify",
-        "js/axios",
         "js/regAjax",
         "js/apis",
         "js/manipulation",

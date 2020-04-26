@@ -5,17 +5,17 @@ namespace Web;
 
         public  function home():void
         {
-            require_once "https://ecomais.herokuapp.com/home.php";
+            require_once __DIR__."/../home.php";
         }
 
         public function register():void
         {
-            require_once "https://ecomais.herokuapp.com/view/register.php";
+            require_once __DIR__."/../view/register.php";
         }
 
         public function terms():void 
         {
-            require_once "https://ecomais.herokuapp.com/view/politicaPrivacidadeTermos.php";
+           require_once __DIR__."/../view/politicaPrivacidadeTermos.php"; 
         }
         
         public function typeError($http_err):void
@@ -23,11 +23,11 @@ namespace Web;
             $codeError = $http_err['errCode'] ;
 
             if($codeError == 404){
-                require_once "https://ecomais.herokuapp.com/registro/view/error404.php";
+                require_once __DIR__."/../view/error404.php";
             } else {
                 if(session_status() == PHP_SESSION_DISABLED) session_start();
                 $_SESSION['codeError'] = $codeError;
-                require_once "https://ecomais.herokuapp.com/registro/view/httperror.php";
+                require_once __DIR__."/../view/httperror.php";
             }
         }
     }
