@@ -115,7 +115,6 @@
         "js/jquery",
         "js/alertify",
         "js/axios",
-        "js/ajax",
         "js/regAjax",
         "js/apis",
         "js/manipulation",

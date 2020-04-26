@@ -25,7 +25,7 @@ namespace Controller;
          */
         public function showProduct():void 
         {
-            require_once __DIR__."/../view/mostrar.php";
+            require_once "https://ecomais.herokuapp.com/view/mostrar.php";
         }
 
         /** 
