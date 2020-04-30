@@ -16,5 +16,6 @@ define("BUNDLES_URL",
     "js/alertify" => BASE_URL."/src/js/alertify.min.js",
     "js/apis" => BASE_URL."/src/js/apis.js",
     "js/regAjax" => BASE_URL."/src/js/reqAjax.js",
-    "js/manipulation"=> BASE_URL."/src/js/manipulation.js"
+    "js/manipulation"=> BASE_URL."/src/js/manipulation.js",
+    "js/mainMethods" => BASE_URL."/src/js/mainMethods.js"
 ]);

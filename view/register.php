@@ -118,6 +118,7 @@
         "js/regAjax",
         "js/apis",
         "js/manipulation",
+        "js/mainMethods"
     ])
    ?>
 </body>

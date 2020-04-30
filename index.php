@@ -33,7 +33,7 @@ $router->namespace("Controller");
 $router->group("manager");
 $router->post("/login","AccountManager:login");
 $router->get("/logoff","AccountManager:logoff");
-$router->post("/addAccount","AccountManager:addAccount");
+$router->post("/addaccount","AccountManager:addAccount");
 $router->post("/removeusuario","AccountManager:deleteAccount");
 $router->put("/recoverPasswd","Account:recoverPasswd");
 

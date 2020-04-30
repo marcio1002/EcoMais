@@ -106,7 +106,6 @@ class AccountManager
 
     public function logoff(): void
     {
-
         if (session_status() == PHP_SESSION_DISABLED) session_start();
 
         if (!empty($_COOKIE['_id']) && !empty($_COOKIE['_token'])) 

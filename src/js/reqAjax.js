@@ -31,7 +31,7 @@ $('body').ready(() => {
         option = 
         {
             method: 'POST',
-            url: `${BASE_URL}/manager/addconta`,
+            url: `${BASE_URL}/manager/addaccount`,
             dataType: "json",
             data: person,
             success: (res) =>{

@@ -131,7 +131,7 @@
         public function createAt():string 
         {
             date_default_timezone_set("America/Sao_paulo");
-            $this->date =   date( 'Y/m/d-(N)-A%H:i');
+            $this->date =   date( 'Y-m-d(N)A%H:i:s');
             return $this->date;
         }
     }
