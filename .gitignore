@@ -1,6 +1,6 @@
-/view/index.php
-/view/mostrar.php
-/view/image.php
+/views/index.php
+/views/mostrar.php
+/views/image.php
 
 vendor/
 
