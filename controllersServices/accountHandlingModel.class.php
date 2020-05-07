@@ -1,11 +1,10 @@
 <?php    
-namespace ControllerService;
+namespace ControllersServices;
 
-    use Model\{PersonPhysical,Safety,DataException};
-    use Interfaces\AccountHandlingInterface;
-    use Service\Data;
+    use Models\{PersonPhysical,Safety,DataException};
+    use Services\Data;
 
-class AccountHandling  implements accountHandlingInterface{
+class AccountHandling {
 
     private $sql;
     private $safety;
@@ -21,7 +20,7 @@ class AccountHandling  implements accountHandlingInterface{
         {
 
             $passwd =  $this->safety->criptPasswd($person->getPassword());
-            $array_columns = ["nome","email","password","date"];
+            $array_columns = "nome,email,password,date";
             $array_register = [$person->getName(),$person->getEmail(),$passwd,$person->createAt()];
 
             $this->sql->open();
@@ -30,8 +29,7 @@ class AccountHandling  implements accountHandlingInterface{
 
         } catch(DataException $ex) 
         {   
-            $ex->getMessage();
-            die();
+            return die( $ex->getMessage() );
         }finally 
         {
             $this->sql->close();
@@ -49,8 +47,7 @@ class AccountHandling  implements accountHandlingInterface{
                 
             } catch(DataException $ex)
             {
-                $ex->getMessage();
-                die();
+                die( $ex->getMessage() );
             }finally 
             {
                 $this->sql->close();
@@ -61,7 +58,7 @@ class AccountHandling  implements accountHandlingInterface{
     {
             try{
                 $pwd = $this->safety->criptPasswd($person->getPassword());
-                $postPreVal = ["nome = ?","email = ?", "password = ?"];
+                $postPreVal = "nome = ?,email = ?,password = ?";
                 $postVal = [$person->getName(), $person->getEmail(), $pwd];
                 $preWhere = [$person->getId()];
                 $this->sql->open();
@@ -70,8 +67,7 @@ class AccountHandling  implements accountHandlingInterface{
 
             } catch(DataException $ex)
             {
-                $ex->getMessage();
-                die();
+                die( $ex->getMessage() );
             }finally 
             {
                 $this->sql->close();
@@ -86,33 +82,32 @@ class AccountHandling  implements accountHandlingInterface{
 
                 $this->sql->open();
 
-                return $this->sql->show('usuarios',[],"email = ? AND password = ?",$where,3);
+                return $this->sql->show('usuarios',"","email = ? AND password = ?",$where,3);
             }
             catch(DataException $ex)
+            { 
+               return die( $ex->getMessage() );
+
+            } finally 
             {
-                $ex->getMessage();
-                die();
-            }finally 
-            {
-                $this->sql->close();
+                //$this->sql->close();
             }
     }
 
     public function isLogged():bool
     {
-        if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-            $this->sql->open();
-            $res = $this->sql->show("usuarios",[],"id_usuario IN(?)",[$_COOKIE['_id']],3);
-            if($res) {
-
-                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-                $id = $res["id_usuario"];
-
-                if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;  
+            if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
+                $this->sql->open();
+                $res = $this->sql->show("usuarios","","id_usuario = ?",[$_COOKIE['_id']],3);
+                if($res) {
+    
+                    $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                    $id = $res["id_usuario"];
+                    if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;  
+                } 
+                $this->sql->close(); 
             } 
-            $this->sql->close(); 
-        } 
-        return false;
+            return false;
     }
 
     public function isAdmin()

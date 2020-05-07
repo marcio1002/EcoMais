@@ -1,5 +1,8 @@
 RewriteEngine On
 Options All -Indexes
+# AllowOverride All
+# Order allow,deny
+#  Allow from all
 
 # ROUTER WWW Redirect.
 # RewriteCond %{HTTP_HOST} !^www\. [NC]

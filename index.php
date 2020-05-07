@@ -28,7 +28,7 @@ $router->get("/{errCode}","WebApp:typeError");
  * @namespace Controller
  * 
  * * rotas para os metodos controllers */
-$router->namespace("Controller");
+$router->namespace("Controllers");
 
 $router->group("manager");
 $router->post("/login","AccountManager:login");

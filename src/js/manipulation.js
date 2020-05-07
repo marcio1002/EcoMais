@@ -8,7 +8,7 @@ const passwd = $("#pwd");
 const statiElem = $("#stati");
 
 $('#search').click(() => searchCep());
-
+$('.carousel').carousel();
 
 $("#btnPwd").on("click", () => {
    if(passwd[0].type === "password") {
@@ -22,17 +22,10 @@ $("#btnPwd").on("click", () => {
 });
 
 
+//metodos para o cadastros
+//iptCpf.val(cpf.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4"));
 
-iptCpf.on("focusout", function() {
-    let cpf = $(this).val();
-    iptCpf.val(cpf.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4"));
-});
-
-iptCpf.focusin((evt) =>{
-    let cpf = evt.target.value;
-    iptCpf.val(cpf.replace(/[.-]/g,""));
-
-})
+$("input[name='cpf'],#cpf").mask("000.000.000-00",{placeholder: "NNN.NNN.NNN-NN"});
 
 iptEmail.focusout(() =>{  
 

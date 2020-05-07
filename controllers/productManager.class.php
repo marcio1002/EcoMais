@@ -1,9 +1,9 @@
 <?php    
-namespace Controller;
+namespace Controllers;
 
     require_once __DIR__."/../vendor/autoload.php";
         
-        use Model\{DataException,Product};
+        use Models\{DataException,Product};
 
     class ManagerProduct {
         private $prod;
@@ -25,7 +25,7 @@ namespace Controller;
          */
         public function showProduct():void 
         {
-            require_once __DIR__."/../view/mostrar.php";
+            require_once __DIR__."/../views/mostrar.php";
         }
 
         /** 

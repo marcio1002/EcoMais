@@ -121,7 +121,5 @@ $('body').ready(() => {
 
     })
 
-    $("#pwd").keyup( evt =>{
-        if(evt.keyCode === 13)  $("#login").click();
-    });
+    $("#pwd").keyup( evt => { if(evt.keyCode === 13)  $("#login").click(); });
 })

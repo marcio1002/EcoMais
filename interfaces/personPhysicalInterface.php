@@ -2,8 +2,12 @@
 namespace Interfaces;
 
     interface PersonPhysicalInterface {
-        public function getCpf();
-        public function setCpf(int $cpf);
+        public function getCpf():int;
+        /**
+         * @param int $cpf
+         * O cpf do usuário
+         */
+        public function setCpf(string $cpf):void;
     }
 
 ?>    

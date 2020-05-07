@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundles;
+namespace  Web;
 
 class Bundles
 {
@@ -11,7 +11,7 @@ class Bundles
      * @param array  $urlName
      * @return void
      */
-    public  function  loadCss(array $urlName): void
+    public  function  bundleCss(array $urlName): void
     {
         if(empty($urlName) ) return;
 
@@ -23,16 +23,16 @@ class Bundles
 
                 foreach ($this->import[$url] as $r) {
 
-                    echo "<link rel='stylesheet' href='$r'/>";
+                    echo "<link rel='stylesheet' href='$r'/> \n";
                 }
             } else {
                 $r = $this->import[$url];
-                echo "<link rel='stylesheet' href='$r'/>";
+                echo "<link rel='stylesheet' href='$r'/> \n";
             }
         }
     }
 
-    public  function  loadJs(array $urlName): void
+    public  function  bundleJs(array $urlName): void
     {
         if(empty($urlName)) return;
 

@@ -26,12 +26,11 @@
     "autoload": {
         "psr-4": {
             "Interfaces\\": "interfaces",
-            "Service\\": "service/",
-            "Model\\": "model/",
-            "Controller\\": "controller/",
-            "ControllerService\\": "controllerService",
-            "Web\\": "web/",
-            "Bundles\\": "./"
+            "Services\\": "services/",
+            "Models\\": "models/",
+            "Controllers\\": "controllers/",
+            "ControllersServices\\": "controllersServices",
+            "Web\\": "web/"
         },
         "files": [
             "config.php"

@@ -1,5 +1,5 @@
 <?php
-    $bundle = new  Bundles\Bundles();
+    $bundle = new  Web\Bundles();
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <?php
         
-        $bundle->loadCss([
+        $bundle->bundleCss([
             "css/materialize",
             "css/alertify",
             "css/style"
@@ -111,7 +111,7 @@
     <button  class='btn indigo lighten-1'><a  class='black-text' href=<?php echo BASE_URL."/product";?> >Visualizar</a></button>
 
    <?php
-    $bundle->loadJs([
+    $bundle->bundleJs([
         "js/jquery",
         "js/materialize",
         "js/alertify",

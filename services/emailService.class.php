@@ -1,7 +1,7 @@
 <?php
-namespace Service;
+namespace Services;
 
-use Model\{DataException,EmailProps};
+use Models\{DataException,EmailProps};
 use PHPMailer\PHPMailer\{PHPMailer,Exception};
 
 class EmailECM  extends EmailProps {
@@ -12,12 +12,6 @@ class EmailECM  extends EmailProps {
 
     private $err;
 
-
-
-    /**
-     * CONSTRUCT 
-     * @return void
-     */
     public function __construct() {
         $this->email = new PHPMailer();
   

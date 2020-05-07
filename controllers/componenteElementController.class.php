@@ -1,15 +1,15 @@
 <?php
 
-namespace Controller;
+namespace Controllers;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Service\Data;
-use Model\DataException;
+use Services\Data;
+use Models\DataException;
 
 class ComponenteElement
 {
-  public function showRegistry()
+  public static function showRegistry()
   {
     try {
       $sql = new Data();

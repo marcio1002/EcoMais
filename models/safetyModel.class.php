@@ -1,7 +1,7 @@
 <?php
-namespace Model;
+namespace Models;
 
-    use Model\DataException;
+    use Models\DataException;
         
     class Safety {
 

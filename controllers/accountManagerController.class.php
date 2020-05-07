@@ -1,11 +1,11 @@
 <?php
 
-namespace Controller;
+namespace Controllers;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Model\{DataException, PersonPhysical, Safety};
-use ControllerService\AccountHandling;
+use Models\{DataException, PersonPhysical, Safety};
+use ControllersServices\AccountHandling;
 
 class AccountManager
 {
@@ -28,13 +28,12 @@ class AccountManager
 
             if ($this->account->createAccount($this->usr)) {
 
-                echo json_encode(["error" => false, "status" => 201, "msg" => "Ok"],);
+                echo json_encode(["error" => false, "status" => 201, "msg" => "Ok"]);
             } else {
                 throw new DataException("Ocorreu um erro ao criar conta");
             }
         } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
-            die();
         }
     }
 
@@ -88,11 +87,12 @@ class AccountManager
                 $temp = time() + (1 * 12 * 30 * 24 * 3600);
                 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                session_name($token);
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start();
 
-                setcookie('_id', $this->usr->getId(), $temp, '/', null, false, true);
-                setcookie('_token', $token, $temp, '/', null, false, true);
+                setcookie('_id', $this->usr->getId(), $temp, '/', "", false, true);
+                setcookie('_token', $token, $temp, '/', "", false, true);
                 
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
             } else {
@@ -101,6 +101,10 @@ class AccountManager
         } catch (DataException $ex) {
             echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
             die();
+        }
+        finally 
+        { 
+            if(session_status() == PHP_SESSION_ACTIVE) session_destroy();
         }
     }
 
@@ -112,10 +116,13 @@ class AccountManager
         {
             setcookie('_id', "", 0, "/");
             setcookie('_token', "", 0, "/");
+           
             header("location:" . BASE_URL);
         } else 
         {
+           
             header("location: " . BASE_URL . "/product");
         }
+        session_destroy();
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Model;
+namespace Models;
 
 use Interfaces\PersonLegalInterface;
-use Model\{Person,DataException};
+use Models\{Person,DataException};
 
 use TypeError;
 

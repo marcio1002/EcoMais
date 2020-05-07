@@ -1,8 +1,8 @@
 <?php
- namespace Model;
+ namespace Models;
 
     use Interfaces\PersonInterface;
-    use Model\DataException;
+    use Models\DataException;
     use TypeError;
 
     abstract class  Person  implements PersonInterface {
@@ -10,12 +10,13 @@
         protected $name;
         protected $passwd;
         protected $email;
-        protected $stati;
+        protected $uf;
         protected $city;
         protected $addre;
         protected $number;
         protected $date;
         protected $cep;
+        protected $typeUser;
         
         public function getId():int
         {
@@ -24,7 +25,8 @@
     
         public function setId(int $id):void 
         {
-            if(empty($id)) throw new DataException ('Undefined value'); 
+            if(empty($id)) throw new DataException('Null values',DataException::REQ_INVALID);
+
             $this->id = trim($id);
         }
     
@@ -35,7 +37,8 @@
     
         public function setName(string $name):void 
         {
-            if(empty($name)) throw new DataException ('Undefined value'); 
+            if(empty($name)) throw new DataException('Null values',DataException::REQ_INVALID);
+
             $this->name = trim($name);
         }
     
@@ -46,8 +49,9 @@
     
         public function setPassword(string $password):void 
         {
-            if(empty($password)) throw new DataException ('Undefined value'); 
-            if (strlen($password) > 15) throw new DataException ("Character numbers have been exceeded, maximum 10 characters");
+            if(empty($password)) throw new DataException('Null values',DataException::REQ_INVALID);; 
+            if (strlen($password) > 25) throw new DataException ("Character numbers have been exceeded, maximum 10 characters");
+            
             $this->passwd = trim($password);
         }
     
@@ -58,7 +62,8 @@
     
         public function setEmail(string $email):void 
         { 
-            if(empty($email)) throw new DataException ('Undefined value');
+            if(empty($email)) throw new DataException('Null values',DataException::REQ_INVALID);
+            
             $this->email = trim($email);
         }
 
@@ -69,19 +74,21 @@
 
         public function setCep(int $cep):void 
         { 
-            if(empty($cep)) throw new DataException ('Undefined value');
+            if(empty($cep)) throw new DataException('Null values',DataException::REQ_INVALID);;
+            
             $this->cep = trim($cep);
         }
         
-        public function getStati():int 
+        public function getUF():string 
         {
-            return $this->stati;
+            return $this->uf;
         }
     
-        public function setStati(string $stati):void
+        public function setUF(string $uf):void
         { 
-            if(empty($stati)) throw new DataException ('Undefined value');
-            $this->stati = strtoupper(trim($stati));
+            if(empty($uf)) throw new DataException('Null values',DataException::REQ_INVALID);;
+            
+            $this->uf = strtoupper(trim($uf));
         }
     
         public function getCity():string 
@@ -91,7 +98,8 @@
     
         public function setCity(string $city):void 
         { 
-            if(empty($city)) throw new DataException ('Undefined value');
+            if(empty($city)) throw new DataException('Null values',DataException::REQ_INVALID);;
+           
             $this->city = trim($city);
         }
     
@@ -102,7 +110,8 @@
     
         public function setAddre(string $addre):void 
         { 
-            if(empty($addre)) throw new DataException ('Undefined value');
+            if(empty($addre)) throw new DataException('Null values',DataException::REQ_INVALID);
+            
             $this->addre = trim($addre);
         }
     
@@ -113,14 +122,28 @@
     
         public function setNumber(int $number):void 
         {
-            if(empty($number)) throw new DataException ('Undefined value');
-            if (!is_numeric($number)) throw new TypeError("Expected a number format", 1); 
+            if(empty($number)) throw new DataException('Null values',DataException::REQ_INVALID);
+            if (!is_numeric($number)) throw new TypeError("Expected a number format", DataException::REQ_INVALID); 
+            
             $this->number = trim($number);
+        }
+     
+        public function getTypeUser(): int
+        {
+            return $this->typeUser;
+        }
+
+        public function setTyperUser(int $typeUser):void
+        {
+            if(empty($typeUser)) throw new DataException('Null values',DataException::REQ_INVALID);
+            
+            $this->typeUser = trim($typeUser);  
         }
 
         public function createAt():string
         {
             date_default_timezone_set("America/Sao_paulo");
+            
             $this->date =   date( 'd/m/Y(N)-A-H:i:s');
             return $this->date;
         }
