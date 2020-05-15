@@ -1,27 +1,31 @@
 <?php
-
 namespace Controllers;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Models\{DataException, PersonPhysical, Safety};
 use ControllersServices\AccountHandling;
+use Services\EmailECM;
 
 class AccountManager
 {
     private $account;
     private $usr;
+    private $safety;
+    private $email;
 
     function __construct()
     {
         $this->account = new AccountHandling();
         $this->usr = new PersonPhysical();
         $this->safety = new Safety();
+        $this->email = new EmailECM();
     }
 
     public function  addAccount($person): void
     {
         try {
+
             $this->usr->setName($person['name']);
             $this->usr->setEmail($person['email']);
             $this->usr->setPassword($person['passwd']);
@@ -124,5 +128,34 @@ class AccountManager
             header("location: " . BASE_URL . "/product");
         }
         session_destroy();
+    }
+
+    public function recoverPasswd($param):void 
+    {
+        try {
+
+            if($param['option'] == 0) {
+                $this->email->add(
+                    "Recuperar senha",
+                    "<div style='width: 80%;margin: 0 25%'>
+                    <h1>Chave de recuperação de senha</h1>
+                    <div style='width:20%; padding:50px;background:#f5f5f5;margin: 0 15%;text-align:center'>
+                      <p>33543534</p>
+                    </div>
+                  </div>",
+                  $param['value'],
+                  $param['value']
+                )->send();
+            } else {
+                $pwd = $this->safety->criptPasswd($param['value']);
+                $this->usr->setPassword($pwd);
+                $this->account->recoverPasswd($this->usr);
+            }
+
+
+        }catch(DataException $ex) {
+
+            echo json_encode(["error" => true, "status" => $ex->getCode(), "msg" => $ex->getMessage()]);
+        }
     }
 }

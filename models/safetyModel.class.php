@@ -1,21 +1,24 @@
 <?php
 namespace Models;
 
+require_once __DIR__ . "/../vendor/autoload.php";
+
     use Models\DataException;
         
     class Safety {
 
         private $passwd;
         private $imageName;
+        private $key;
     
         /**
          * Criptografia Whirlpool
          * @param string $passwd
          * @return string
          */
-        public function criptPasswd(string $passwd):string 
+        public function criptPasswd(string $passwd):string
         {
-            $this->passwd = strtoupper(hash("whirlpool",$passwd));
+            $this->passwd = strtoupper(hash("whirlpool",imap_binary($passwd)));
             return $this->passwd;
         }
 
@@ -25,13 +28,25 @@ namespace Models;
          * @param string $imageName
          * @return string
          */
-        public function criptImage(string $exReg,string $imageName ):string 
+        public function criptImage(string $exReg,string $imageName ):string
         {
             if(empty($exReg) || empty($imageName)) throw new DataException("Null value");
     
             preg_match("/\.($exReg)$/",$imageName,$ext);
-            $this->imageName = md5(uniqid(time())) . "." . $ext[1];
+            $this->imageName = md5(uniqid(time($imageName))) . "." . $ext[1];
                 
             return $this->imageName;
         }
+
+        /**
+         * Cria um token de 8 bits
+         * @param string $mixed
+         */
+
+         public function createToken($mixed):string
+          {
+            $this->key =  hash("adler32",imap_binary($mixed));
+
+            return $this->token;
+         }
     }

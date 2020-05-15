@@ -1,5 +1,6 @@
 <?php
 namespace Services;
+require_once __DIR__ . "/../vendor/autoload.php";
 
 use Models\{DataException,EmailProps};
 use PHPMailer\PHPMailer\{PHPMailer,Exception};
@@ -13,12 +14,13 @@ class EmailECM  extends EmailProps {
     private $err;
 
     public function __construct() {
-        $this->email = new PHPMailer();
+        $this->email = new PHPMailer(true);
   
         $this->email->isSMTP();
         $this->email->isHTML(true);
         $this->email->setLanguage("br");
-        $this->email->SMTPAuth= true;
+        $this->email->SMTPAuth= false;
+        $this->email->SMTPAutoTLS = false;
         $this->email->CharSet = PHPMailer::CHARSET_UTF8;
         $this->email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 

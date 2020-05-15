@@ -1,40 +1,29 @@
 const BASE_URL = "https://www.localhost/WWW/CrudEcoMais";
-var option = 
-{
-    method: String,
-    url: String,
-    cache: Boolean,
-    processData: Boolean,
-    dataType: String,
-    data: Object,
-    accepts: Object,
-    xhrFields: Object,
-    statusCode: Object,
-    beforeSend: Function,
-    complete: Function,
-    error: Function,
-    dataFilter: Function,
-    success: Function,
-    complete: Function,
-        
+//Opições  padrão
+option = {
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 }
 
 $('body').ready(() => {
 //cadastro do usuario
-    $('#submit').click((evt) =>{
+    $('#register').click((evt) =>{
         evt.preventDefault();
         let person = {
-            name : $('#name').val(),
-            email: $("#email").val(),
-            passwd: $('#pwd').val()
+          //os dados
         };
         option = 
         {
             method: 'POST',
+            mycustomtype: "application/json",
             url: `${BASE_URL}/manager/addaccount`,
             dataType: "json",
             data: person,
+            error: (e) => console.log(`estado pronto: ${e.readyState} \nestado: ${e.status} \nestado texto: ${e.statusText}: \nfunção estado: ${e.state()}`),
+            beforeSend: () => {
+              load(true);
+            },
             success: (res) =>{
+                load(false);
                 if(typeof res == undefined || !res) throw new TypeError("Object null");
             
                 if (!res.error) {
@@ -47,19 +36,20 @@ $('body').ready(() => {
                     if(res,status != 0) alertify.error("Não foi possível fazer o cadastro");
                     return console.log(res.status,res.msg);
                 } 
-            }
+            },
+            
         }
 
             reqAjax(option);
 
     });
 
-    $('#info_users #btndelete').click((evt) =>{
+    $('*#btnDelete').click((evt) =>{
         evt.preventDefault();
         const data = { id: $('input[name=id]').val() }
         option = 
         {
-            method: 'POST',
+            type: 'DELETE',
             url: `${BASE_URL}/manager/removeuser`,
             dataType: "json",
             data,
@@ -67,13 +57,16 @@ $('body').ready(() => {
                 if(typeof res == undefined || !res) throw new TypeError("Object null");
                 return (!res.error) ? ( alertify.success('Usuario deletado com sucesso'), location.href = "http://localhost/WWW/CrudEcoMais/product" ): console.log(res.status,res.msg);
             },
+            error: (err) => {
+                alertify.error("Ocorreu um erro no servidor");
+            }
         }
 
-        alertify.confirm("Confirme a deleção","Deseja realmente deletar ?",() => reqAjax(option),() => {return} )
+        alertify.confirm("Confirme a deleção","Deseja realmente deletar ?",() => reqAjax(option), () => {return} )
 
     });
 
-    $('#infor_users #btnUpdate').click(function (evt){
+    $('*#btnUpdate').click(function (evt){
         evt.preventDefault();
         const data = 
         {
@@ -85,7 +78,7 @@ $('body').ready(() => {
 
         option = 
         {
-            method: 'POST',
+            type: 'POST',
             url: BASE_URL,
             dataType: "json",
             data,
@@ -99,21 +92,30 @@ $('body').ready(() => {
             reqAjax(option);
             
     });
+    
 //requisição de login
-    $('#login').click(()  => {
+    $('#btnLogar').click(()  => {
         
-        const person = { email: $("#email").val(),passwd: $('#pwd').val() };
+        const person = { email: $("#inputEmail").val(),passwd: $('#inputPwd').val() };
         option = {
             method: 'POST',
+            mycustomtype: "application/json",
             url: `${BASE_URL}/manager/login`,
             dataType: "json",
             data: person,
             success: (res) =>{
+
                 if(typeof res == undefined ||!res) throw new TypeError("Object null");
                 if (! res.error) {
                     location.href = `${BASE_URL}/product/`;
                 } else{
-                    ( res.status == 0) ?  alertify.error( 'Preencha todos os campos!') : alertify.error( 'Email ou senha inválidos');
+                    if( res.status == 400) {
+                        $("#inputEmail").addClass("inputError");
+                        $('#inputPwd').addClass("inputError");
+                        alertify.error( 'Preencha todos os campos!');
+                    } else {
+                        alertify.error( 'Email ou senha inválidos');
+                    }
                 }
             }
         }
@@ -121,5 +123,31 @@ $('body').ready(() => {
 
     })
 
-    $("#pwd").keyup( evt => { if(evt.keyCode === 13)  $("#login").click(); });
+//recuperar senha 
+$("#btnrRcoverPwd").click(() => {
+    if(!$("input:eq(0)").hasClass("inputError")) {
+        let data = {
+            option: $("#checkChave").val(),
+            value: $("#recoverpwd").val(),
+        };
+
+        option = {
+            method: 'PUT',
+            mycustomtype: "application/json",
+            url: `${BASE_URL}/manager/recoverpwd`,
+            dataType: "json",
+            data: data,
+            success: (res) =>{
+                if(typeof res == undefined || !res) throw new TypeError("Object null");
+                console.log(res);
+            } ,
+            error: (err) => {
+                alertify.error("OCorreu um erro no servidor")
+            }
+        }
+        reqAjax(option);
+    }
+})
+
+    $("#passwd").keyup( evt => { if(evt.keyCode === 13)  $("#login").click(); });
 })

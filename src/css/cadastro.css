@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    
+}
+.cad{
+    width:550px;
+    height:700px;
+    color: #000;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 68px 28px
+
+}
+.input [type="submit"]{
+    border: none;
+    outline: none;
+    height: 35px;
+    color:#000;
+    background: #fff;
+    border-radius: 20px;
+    transition: 0.2s;
+}

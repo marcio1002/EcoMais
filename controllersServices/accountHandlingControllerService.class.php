@@ -47,7 +47,8 @@ class AccountHandling {
                 
             } catch(DataException $ex)
             {
-                die( $ex->getMessage() );
+                return die( $ex->getMessage() );
+
             }finally 
             {
                 $this->sql->close();
@@ -67,7 +68,7 @@ class AccountHandling {
 
             } catch(DataException $ex)
             {
-                die( $ex->getMessage() );
+                throw new DataException($ex->getMessage());
             }finally 
             {
                 $this->sql->close();
@@ -86,11 +87,11 @@ class AccountHandling {
             }
             catch(DataException $ex)
             { 
-               return die( $ex->getMessage() );
+               throw new DataException($ex->getMessage());
 
             } finally 
             {
-                //$this->sql->close();
+                $this->sql->close();
             }
     }
 
@@ -112,5 +113,24 @@ class AccountHandling {
 
     public function isAdmin()
     {               
+    }
+
+    public function recoverPasswd(PersonPhysical $person) 
+    {
+        try {
+
+            $pwd = [$this->safety->criptPasswd($person->getPassword())];
+
+            $this->sql->open();
+
+            return $this->sql->update("usuarios","password = ?",$pwd,"password = '?'",[$pwd]);
+            
+        }catch(DataException $ex) {
+            throw new DataException($ex->getMessage());
+        }finally {
+            
+            $this->sql->close();
+        }
+
     }
 }

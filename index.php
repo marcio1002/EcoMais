@@ -18,7 +18,9 @@ $router->namespace("Web");
  */
 $router->group(null);
 $router->get("/","WebApp:home");
+$router->get("/login","WebApp:login");
 $router->get("/register","WebApp:register");
+$router->get("/recoverpassword","WebApp:recoverpasswd");
 $router->get("/terms","WebApp:terms");
 
 $router->group("error");
@@ -34,8 +36,8 @@ $router->group("manager");
 $router->post("/login","AccountManager:login");
 $router->get("/logoff","AccountManager:logoff");
 $router->post("/addaccount","AccountManager:addAccount");
-$router->post("/removeusuario","AccountManager:deleteAccount");
-$router->put("/recoverPasswd","Account:recoverPasswd");
+$router->delete("/removeuser","AccountManager:deleteAccount");
+$router->put("/recoverpwd","AccountManager:recoverPasswd");
 
 /** rotas para product*/
 $router->group("product");

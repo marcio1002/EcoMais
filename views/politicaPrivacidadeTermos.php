@@ -7,13 +7,12 @@
     <title>Política de Privacidade e Termos</title>
     <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="Stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="http://localhost/WWW/CrudEcoMais/src/css/style.css" />
 </head>
 
 <body class="grey lighten-2">
     <section id="row">
         <div class="col s12 m12">
-            <article class="col s5 m5 container z-depth-3 white p-10 line-height-2em">
+            <article class="col s5 m5 container z-depth-3 white line-height-2em" style='padding: 0 10px'    >
 
                 <h4 class="center-align">Política de privacidade do <em>EcoMais</em></h4>
 

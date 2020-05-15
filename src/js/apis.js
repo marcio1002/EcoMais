@@ -1,6 +1,7 @@
 const {prototype, permission,requestPermission, } = window.Notification;
 
-let message = {
+let message = 
+{
     title: String,
     opt : {
         badge: String,
@@ -22,21 +23,41 @@ let message = {
         silent: Boolean,
     }
 }
+let option = 
+{
+    method: String,
+    type: String,
+    url: String,
+    cache: Boolean,
+    mycustomtype: String,
+    contentType: String | Boolean,
+    processData: Boolean,
+    dataType: String,
+    async: Boolean,
+    data: Object,
+    accepts: Object,
+    xhrFields: Object,
+    statusCode: Object,
+    beforeSend: Function,
+    complete: Function,
+    error: Function,
+    dataFilter: Function,
+    success: Function,
+    complete: Function,
+        
+}
 
-async function searchCep() {
+async function searchCep(cep) {
     try {
-        const cep = iptCep.val();
         const validcep = /[0-9]{8}$/;
         if (!validcep.test(cep)) throw TypeError('Invalid zip code');
         
         const info  = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
 
-        const {logradouro,localidade,bairro,uf,erro} = info;
+        if(info.erro) throw new Error("0");
+
+        return info;   
         
-        if(erro) throw new Error("0");
-        iptCity.val(localidade)[0];
-        iptAddre.val(`${bairro}, ${logradouro}`)[0];
-        statiElem.val(uf)[0];     
     } catch (erro) {
         const UNDEFINED = "Error: 0";
         if(erro == UNDEFINED) return alertify.error("Não foi possível buscar o cep!");
@@ -50,21 +71,7 @@ async function searchCep() {
  */
 function reqAjax(opt = option) 
 {
-
-    const {method, url, data,dataType,xhrFields,success,error,beforeSend,complete,accepts} = opt;
-
-    $.ajax({
-        method,
-        url,
-        data,
-        dataType,
-        xhrFields,
-        beforeSend,
-        complete,
-        success,
-        error: (xhr,desc,err) => { throw new Error(`${xhr.status} \n xhr descrition: ${xhr.responseText} \n Description: ${desc} \n Error: ${err}`); },
-    })
-    
+    $.ajax(opt);
 }
 
 const apiNotification = {

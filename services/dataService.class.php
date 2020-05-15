@@ -7,6 +7,8 @@
 
 namespace Services;
 
+require_once __DIR__ . "/../vendor/autoload.php";
+
 use Exception;
 use Interfaces\DataInterface;
 use PDO;
@@ -14,37 +16,35 @@ use Models\DataException;
 
 final class Data implements DataInterface
 {
-    private  $row = null;
-    private  $pdo = null;
-    private  $host = 'localhost';
-    private  $user = 'root';
-    private  $passwd = 'rootadmin';
-    private  $database = 'apiTest';
-    private  $typeDatabase = 'mysql';
-    private $query = null;
-    private  $option =
+    const  PARAM_HOST = 'localhost';
+    const  PARAM_USER = 'root';
+    const  PARAM_PASSWD = 'rootadmin';
+    const  PARAM_DATA = 'apiTest';
+    const  TYPE_SBGD = 'mysql';
+    const PARAM_PORT = "3306";
+    const OPTIONS =
     [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ];
+    private  $row = null;
+    private  $pdo = null;
+    private $query = null;
 
 
     public function __destruct()
     {
         if (!empty($this->pdo)) unset($this->pdo);
     }
-
-
-    /**
-     * @return void
-     */
+    
     public function open(): void
     {
-        if (!$this->pdo || $this->pdo != null) $this->pdo = new PDO(
-            "$this->typeDatabase:host=$this->host;dbname=$this->database",
-            $this->user,
-            $this->passwd,
-            $this->option
+        if (!$this->pdo || $this->pdo != null) 
+        $this->pdo = new PDO(
+            DATA::TYPE_SBGD.":host=".Data::PARAM_HOST.";port=".Data::PARAM_PORT.";dbname=".Data::PARAM_DATA,
+            Data::PARAM_USER,
+            DATA::PARAM_PASSWD,
+            DATA::OPTIONS
         ) 
         or
         die("⛔ Error: 401 <br/>");
@@ -77,7 +77,7 @@ final class Data implements DataInterface
             $this->row = $this->pdo->commit();
         } catch (Exception $ex) {
 
-            return new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage());
         }
 
             return $this->row;
@@ -94,22 +94,22 @@ final class Data implements DataInterface
 
                 switch ($option) {
                 case 1:
-                    $this->query = $this->pdo->prepare("SELECT * FROM $table");
+                    $this->query = $this->pdo->prepare("dfgf * FROM $table");
                     break;
                 case 2:
-                    $this->query = $this->pdo->prepare("SELECT * FROM $table $prewhere");
+                    $this->query = $this->pdo->prepare("dfgf * FROM $table $prewhere");
                     break;
                 case 3:
-                    $this->query = $this->pdo->prepare("SELECT * FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("dfgf * FROM $table WHERE $prewhere");
                     break;
                 case 4:
-                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table");
+                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table");
                     break;
                 case 5:
-                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table  $prewhere");
+                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table  $prewhere");
                     break;
                 case 6:
-                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table WHERE $prewhere");
                     break;
             }
 
@@ -127,7 +127,7 @@ final class Data implements DataInterface
         
         } catch (Exception $ex) {
 
-            return new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage());
         }
 
         return null;
@@ -176,7 +176,7 @@ final class Data implements DataInterface
 
             foreach ($val as $c => $v) {
                 $c += 1;
-                $this->query->bindParam($c + 1, $val[$c]);
+                $this->query->bindParam($c, $val[$c - 1]);
             }
             $this->query->execute();
             $this->row = $this->pdo->commit();

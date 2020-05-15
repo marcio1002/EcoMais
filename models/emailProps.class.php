@@ -1,11 +1,12 @@
 <?php
-
 namespace Models;
+
+require_once __DIR__ . "/../vendor/autoload.php";
 
 abstract class EmailProps {
     
     const HOST_EM = "smtp.gmail.com";
-    const PORT_EM = '465';
+    const PORT_EM = '587';
     const USER_EM = "EcoMais";
     const PASSWD_EM = "ecoMaisDeveloper";
     const FROM_NAME = "Marcio Alemão";

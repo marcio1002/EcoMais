@@ -16,12 +16,11 @@ function clearInput() {
 }
 
 window.ononline = () => {
-    if (connection === "OFFLINE") M.toast({ html: "Sua Conexão voltou", classes: "green black-text" });
+    // if (connection === "OFFLINE") 
     connection = "ONLINE";
 };
 window.onoffline = () => {
     connection = "OFFLINE";
-    M.toast({ html: "Você está offline" });
 };
 
 function isValidEmail(email) {
@@ -40,7 +39,6 @@ function isValidEmail(email) {
         ".mobi",
         ".in",
         ".me",
-        ".co",
         ".online",
         ".site",
         ".top",
