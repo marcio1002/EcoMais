@@ -65,7 +65,7 @@ class ComponenteElement
               <input type='password' class='form-control' id='inputPwd'>
             </div>
             <div class='form-check'>
-              <input type='checkbox' class='form-check-input' id='dropdownCheck'>
+              <input type='checkbox' class='form-check-input' id='manterConectado'>
               <label class='form-check-label ' for='dropdownCheck'>
                 Mantenha-me conectado
               </label>

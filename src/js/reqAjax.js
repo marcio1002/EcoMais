@@ -96,7 +96,11 @@ $('body').ready(() => {
 //requisição de login
     $('#btnLogar').click(()  => {
         
-        const person = { email: $("#inputEmail").val(),passwd: $('#inputPwd').val() };
+        const person = { 
+            email: $("#inputEmail").val(),
+            passwd: $('#inputPwd').val() ,
+            conectedLogin: $('#manterConectado').is(":checked") ? 1 : 0
+        };
         option = {
             method: 'POST',
             mycustomtype: "application/json",
@@ -107,7 +111,7 @@ $('body').ready(() => {
 
                 if(typeof res == undefined ||!res) throw new TypeError("Object null");
                 if (! res.error) {
-                    location.href = `${BASE_URL}/product/`;
+                   // location.href = `${BASE_URL}/product/`;
                 } else{
                     if( res.status == 400) {
                         $("#inputEmail").addClass("inputError");

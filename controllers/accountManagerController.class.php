@@ -84,11 +84,13 @@ class AccountManager
         try {
             $this->usr->setEmail($person['email']);
             $this->usr->setPassword($person['passwd']);
+            $temp = time() + (24 * 36000);
 
             if ($res = $this->account->setLogin($this->usr)) {
+                
+                if($person['conectedLogin'] == 1) $temp = time() + (1 * 12 * 30 * 24 * 3600);
 
                 $this->usr->setId($res['id_usuario']);
-                $temp = time() + (1 * 12 * 30 * 24 * 3600);
                 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
@@ -99,6 +101,7 @@ class AccountManager
                 setcookie('_token', $token, $temp, '/', "", false, true);
                 
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
+                
             } else {
                 throw new DataException('No results found', 404);
             }

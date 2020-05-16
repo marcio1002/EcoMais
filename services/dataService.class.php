@@ -94,22 +94,22 @@ final class Data implements DataInterface
 
                 switch ($option) {
                 case 1:
-                    $this->query = $this->pdo->prepare("dfgf * FROM $table");
+                    $this->query = $this->pdo->prepare("SELECT * FROM $table");
                     break;
                 case 2:
-                    $this->query = $this->pdo->prepare("dfgf * FROM $table $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT * FROM $table $prewhere");
                     break;
                 case 3:
-                    $this->query = $this->pdo->prepare("dfgf * FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT * FROM $table WHERE $prewhere");
                     break;
                 case 4:
-                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table");
+                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table");
                     break;
                 case 5:
-                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table  $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table  $prewhere");
                     break;
                 case 6:
-                    $this->query = $this->pdo->prepare("dfgf $columns FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table WHERE $prewhere");
                     break;
             }
 

@@ -29,7 +29,7 @@ class AccountHandling {
 
         } catch(DataException $ex) 
         {   
-            return die( $ex->getMessage() );
+            throw new DataException( $ex->getMessage(),$ex->getCode() );
         }finally 
         {
             $this->sql->close();
@@ -47,7 +47,7 @@ class AccountHandling {
                 
             } catch(DataException $ex)
             {
-                return die( $ex->getMessage() );
+                throw new DataException( $ex->getMessage(), $ex->getCode() );
 
             }finally 
             {
@@ -68,7 +68,7 @@ class AccountHandling {
 
             } catch(DataException $ex)
             {
-                throw new DataException($ex->getMessage());
+                throw new DataException($ex->getMessage(), $ex->getCode() );
             }finally 
             {
                 $this->sql->close();
@@ -87,7 +87,7 @@ class AccountHandling {
             }
             catch(DataException $ex)
             { 
-               throw new DataException($ex->getMessage());
+               throw new DataException( $ex->getMessage(), $ex->getCode() );
 
             } finally 
             {
@@ -126,7 +126,7 @@ class AccountHandling {
             return $this->sql->update("usuarios","password = ?",$pwd,"password = '?'",[$pwd]);
             
         }catch(DataException $ex) {
-            throw new DataException($ex->getMessage());
+            throw new DataException( $ex->getMessage(), $ex->getCode() );
         }finally {
             
             $this->sql->close();
