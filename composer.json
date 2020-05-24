@@ -1,9 +1,8 @@
 {
     "name": "marcio1002/ecomais",
-    "description": "Um crud para manipulação de dados do EcoMais",
-    "minimum-stability": "dev",
+    "description": "Um website que divulga promoçoes de atacarejos",
     "license": "proprietary",
-    "version": "v1.1.12",
+    "version": "v1.1.13",
     "keywords": [
         "Query",
         "dados",
@@ -25,23 +24,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Interfaces\\": "interfaces",
-            "Services\\": "services/",
-            "Models\\": "models/",
-            "Controllers\\": "controllers/",
-            "ControllersServices\\": "controllersServices",
-            "Web\\": "web/"
+            "Ecomais\\": "src/"
         },
         "files": [
-            "config.php"
+            "src/config.php",
+            "src/filesBundles.php"
         ]
     },
-    "repositories": {
-        "0": {
+    "repositories": [
+        {
             "type": "github",
             "url": "https://github.com/marcio1002/EcoMais"
         }
-    },
+    ],
     "require": {
         "php": ">=7.0.0",
         "coffeecode/router": "1.0.*",

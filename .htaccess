@@ -1,5 +1,6 @@
 RewriteEngine On
 Options All -Indexes
+
 # AllowOverride All
 # Order allow,deny
 #  Allow from all
