@@ -34,12 +34,12 @@ $("#btnrRcoverPwd").click(() => {
     }
 
     if($("#checkChave").val() == 0){
-        if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("inputError");
+        if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("formError");
     } 
 
-    if($("#recoverpwd").val() == "") return $("#recoverpwd").addClass("inputError");
+    if($("#recoverpwd").val() == "") return $("#recoverpwd").addClass("formError");
     
-    $("#recoverpwd").removeClass("inputError");
+    $("#recoverpwd").removeClass("formError");
     reqAjax(option);
 
 })

@@ -4,12 +4,12 @@ let loadSpinner = `<span class="spinner-border spinner-border-sm align-vertical 
 
 // <--- functions users --->
 
-function load(l = false) {
+function load(l = false, elem) {
    if(l) {
-      let value =  $(".setLoad:eq(0)").text();
-      $(".setLoad").html(`${loadSpinner} ${value}`);
+      let value =  $(elem).text();
+      $(elem).html(`${loadSpinner} ${value}`);
    } else {
-      $(".setLoad").find(".spinner-border").remove();
+      $(elem).find(".spinner-border").remove();
    }
 }
 

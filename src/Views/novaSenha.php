@@ -30,7 +30,6 @@ use Ecomais\Web\Bundles;
             <label for="newPasswd" id="recover-label">Digite a nova senha:</label>
             <input type="text" class="form-control" id="newPasswd" aria-describedby="emailHelp"/>
             <small class="form-text text-muted">
-              <span id="statusPasswd"></span>
               <div class="progress" style="width: 70%">
                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
               </div>

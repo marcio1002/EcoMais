@@ -75,7 +75,7 @@ class ComponenteElement
             </div>
           </form>
           <div class='modal-footer'>
-            <button type='button' class='btn btn-primary setLoad' id='btnLogar'>Entrar</button>
+            <button type='button' class='btn btn-primary' id='btnLogar'>Entrar</button>
           </div>
         </div>
       </div>

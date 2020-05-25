@@ -49,7 +49,7 @@ let option =
 
 async function searchCep(cep) {
     try {
-        const validcep = /[0-9]{8}$/;
+        const validcep = /\d{8}$/;
         if (!validcep.test(cep)) throw TypeError('Invalid zip code');
         
         const info  = await $.get(`https://viacep.com.br/ws/${cep}/json/`);

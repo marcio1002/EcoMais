@@ -1,4 +1,3 @@
-const BASE_URL = "https://www.localhost/WWW/CrudEcoMais";
 //Opições  padrão
 option = {
     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

@@ -13,12 +13,12 @@ use Ecomais\Web\Bundles;
   <?php
   Bundles::renderCss([
     "css/fonts",
+    "js/iconsAwesome",
     "css/manipulation",
     "js/jquery",
     "bootstrap",
-    "js/jquery",
+    "css/style",
     "alertify",
-    "css/style"
   ])
   ?>
 </head>
@@ -40,27 +40,32 @@ use Ecomais\Web\Bundles;
             <div class="cad">
               <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-6 ">
-                  <label for="inputName1">Nome Completo:</label>
-                  <input type="text" class="form-control nextItem" id="inputName1">
+                  <label for="inputName">Nome Completo:</label>
+                  <input type="text" class="form-control nextItem" id="inputName" data-required="" />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="inputEmail4">Email:</label>
-                  <input type="email" class="form-control nextItem" id="email">
+                  <label for="text">Email:</label>
+                  <input type="email" class="form-control nextItem" id="email" placeholder="seumail@test.dominio" data-required="" />
                 </div>
               </div>
               <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Crie uma senha:</label>
                   <div class="input-group">
-                    <input type="password" class="form-control nextItem" id="passwd">
+                    <input type="password" class="form-control nextItem" id="passwd" maxlength="20" data-required="" />
                     <div class="input-group-prepend">
-                      <button type="button" class="btn btn-info input-group-text" id="searchCep"></button>
+                      <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
                     </div>
                   </div>
+                  <small class="form-text text-muted">
+                    <div class="progress" style="width: 100%; height: 5px;">
+                      <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </small>
                 </div>
                 <div class="form-group col-md-6 pb-3">
                   <label for="cpf">CPF: </label>
-                  <input type="text" class="form-control nextItem" id="cpf">
+                  <input type="text" class="form-control nextItem" id="cpf" data-required="" />
                 </div>
               </div>
               <div class="form-row col-md-12 pb-3">
@@ -72,14 +77,13 @@ use Ecomais\Web\Bundles;
                       <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
                     </div>
                   </div>
-
                 </div>
               </div>
               <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-5">
                   <label for="inputState">Unidade Federativa:</label>
-                  <select id='stati' name='stati' class="form-control nextItem">
-                    <option selected>Escolha...</option>
+                  <select id='uf' name='uf' class="form-control nextItem" data-required="">
+                    <option value="" selected>Escolha...</option>
                     <option value='AC'>Acre</option>
                     <option value='AL'>Alagoas</option>
                     <option value='AP'>Amapá</option>
@@ -111,21 +115,21 @@ use Ecomais\Web\Bundles;
               </div>
               <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-6 ">
-                  <label for="inputAddress">Endereço:</label>
-                  <input type="address" class="form-control nextItem" id="inputAddress">
+                  <label for="inputAddres">Endereço:</label>
+                  <input type="address" class="form-control nextItem" id="inputAddres" />
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="cpf">Cidade: </label>
-                  <input type="text" class="form-control nextItem" id="city">
+                  <input type="text" class="form-control nextItem" id="localidade" data-required="" />
                 </div>
               </div>
               <div class="custom-control custom-switch pb-5">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                <label class="custom-control-label" for="customSwitch1">Li e concordo com os <a href=<?php echo BASE_URL . "/terms"; ?>>Termos de uso</a></label>
+                <input type="checkbox" class="custom-control-input" id="termos">
+                <label class="custom-control-label" for="termos">Li e concordo com os <a href=<?php echo BASE_URL . "/terms"; ?>>Termos de uso</a></label>
               </div>
               <div class="cols-md-12">
-                <button type="button" class="btn btn-success nextItem setLoad align-center" id="register">Cadastrar</button>
+                <button type="button" class="btn btn-success nextItem align-center nextItem" id="btnRegister">Cadastrar</button>
               </div>
             </div>
           </form>
@@ -138,6 +142,7 @@ use Ecomais\Web\Bundles;
 Bundles::renderJs([
   "js/apis",
   "js/regAjax",
+  "js/register",
   "js/manipulation",
   "js/mainMethods"
 ])
