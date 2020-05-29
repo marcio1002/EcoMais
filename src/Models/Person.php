@@ -16,11 +16,11 @@ abstract class  Person  implements PersonInterface
     protected $passwd;
     protected $uf;
     protected $city;
-    protected $addre;
+    protected $addres;
     protected $number;
     protected $date;
     protected $cep;
-    protected $typeUser = self::ENABLED | self::DISABLED;
+    protected $statusAccount = self::ENABLED | self::DISABLED;
 
     public function getId(): int
     {
@@ -93,26 +93,26 @@ abstract class  Person  implements PersonInterface
         $this->uf = strtoupper(trim($uf));
     }
 
-    public function getCity(): string
+    public function getLocality(): string
     {
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    public function setLocality(string $city): void
     {
         if (empty($city)) throw new DataException('Null values', DataException::REQ_INVALID);;
 
         $this->city = trim($city);
     }
 
-    public function getAddre(): string
+    public function getAddres(): string
     {
-        return $this->addre;
+        return $this->addres;
     }
 
-    public function setAddre(string $addre = null): void
+    public function setAddres(string $addres = null): void
     {
-        $this->addre = $addre;
+        $this->addres = $addres;
     }
 
     public function getNumber(): int
@@ -130,21 +130,21 @@ abstract class  Person  implements PersonInterface
 
     public function getStatusAccount(): bool
     {
-        return $this->typeUser;
+        return $this->statusAccount;
     }
 
     public function setStatusAccount(bool $typeUser): void
     {
         if (empty($typeUser)) throw new DataException('Null values', DataException::REQ_INVALID);
 
-        $this->typeUser = trim($typeUser);
+        $this->statusAccount = trim($typeUser);
     }
 
     public function createAt(): string
     {
         date_default_timezone_set("America/Sao_paulo");
 
-        $this->date =   date('d/m/Y(N)-A-H:i:s');
+        $this->date =   date('Y-m-d H:i:s');
         return $this->date;
     }
 }

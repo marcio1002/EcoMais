@@ -99,7 +99,7 @@ use Ecomais\Controllers\ComponenteElement;
         <div class="carousel-inner">
 
           <div class="carousel-item active">
-            <img src=<? echo BASE_URL . "/src/assets/imgs/planta.jpg"; ?> class="d-block w-100" alt="missao">
+            <img src=<? echo BASE_URL . "/src/assets/imgs/planta.jpg" ; ?> class="d-block w-100" alt="missao">
             <div class="carousel-caption d-none d-md-block">
               <h2>Impacto Positivo</h2>
               <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -108,7 +108,7 @@ use Ecomais\Controllers\ComponenteElement;
             </div>
           </div>
           <div class="carousel-item">
-            <img src=<? echo BASE_URL . "/src/assets/imgs/maca.jpg"; ?> class="d-block w-100" alt="iamgem de negocios">
+            <img src=<? echo BASE_URL . "/src/assets/imgs/maca.jpg" ; ?> class="d-block w-100" alt="iamgem de negocios">
             <div class="carousel-caption d-none d-md-block">
               <h2>Benefícios para os consumidores</h2>
               <p> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
@@ -117,7 +117,7 @@ use Ecomais\Controllers\ComponenteElement;
             </div>
           </div>
           <div class="carousel-item ">
-            <img src=<? echo BASE_URL . "/src/assets/imgs/mission.jpg"; ?> class="d-block w-100" alt="Mercado">
+            <img src=<? echo BASE_URL . "/src/assets/imgs/mission.jpg" ; ?> class="d-block w-100" alt="Mercado">
             <div class="carousel-caption d-none d-md-block">
 
               <h2>Mais que um simples negócio, uma missão</h2>
@@ -182,6 +182,12 @@ use Ecomais\Controllers\ComponenteElement;
       </div>
     </div>
   </footer>
+  <?php
+  echo "
+    <script type='text/javascript'>
+        const BASE_URL = '" . BASE_URL . "';
+    </script>";
+  ?>
 </body>
 
 </html>

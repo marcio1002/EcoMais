@@ -26,8 +26,12 @@ use Ecomais\Web\Bundles;
     <div class="col-12">
       <div class="row-cols-md-3 " style="position: relative; top: 25%">
         <form class="m-auto">
+        <div class="form-group">
+            <label for="username">Nome:</label>
+            <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+          </div>
           <div class="form-group">
-            <label for="recoverpwd" id="recover-label">Digite o email:</label>
+            <label for="recoverpwd" id="recover-label">Email:</label>
             <input type="text" class="form-control" id="recoverpwd" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Informe o email ou chave de acesso clicando na opção "<strong>Eu tenho a chave de acesso</strong>" .</small>
           </div>
@@ -35,7 +39,7 @@ use Ecomais\Web\Bundles;
             <input type="checkbox" class="form-check-input" id="checkChave" value="0">
             <label class="form-check-label" for="checkChave">Eu tenho a chave de acesso</label>
           </div>
-          <button type="button" class="btn btn-primary" id="btnrRcoverPwd">Enviar</button>
+          <button type="button" class="btn btn-primary" id="btnRecoverPwd">Enviar</button>
         </form>
       </div>
     </div>
@@ -47,7 +51,11 @@ use Ecomais\Web\Bundles;
     "js/mainMethods",
     "js/manipulation",
     "js/recoverPasswd"
-  ])
+  ]);
+  echo "
+  <script>
+    const BASE_URL = '" . BASE_URL . "'
+  </script>";
   ?>
 </body>
 

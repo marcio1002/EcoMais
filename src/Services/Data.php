@@ -4,8 +4,6 @@
  * 
 */
 
-require_once __DIR__ . "/../../vendor/autoload.php";
-
 namespace Ecomais\Services;
 
 

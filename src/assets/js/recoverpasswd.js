@@ -11,11 +11,12 @@ $("#checkChave").change(function () {
 
 
 
-$("#btnrRcoverPwd").click(() => {
+$("#btnRecoverPwd").click(() => {
 
     let data = {
         option: $("#checkChave").val(),
         value: $("#recoverpwd").val(),
+        name: $("#username").val()
     };
 
     option = {
@@ -25,19 +26,23 @@ $("#btnrRcoverPwd").click(() => {
         dataType: "json",
         data: data,
         success: (res) => {
-            if (typeof res == undefined || !res) throw new TypeError("Object null");
-            console.log(res);
+            if (res) 
+                if(!res.error) {
+                    var token = '';
+                    for (var i = 80; i > 0; --i) token += (Math.floor(Math.random()*256)).toString(16);
+                    location.href = `${BASE_URL}/recuperarsenha/novasenha/${token}`
+                }
+            
         },
         error: (err) => {
-            alertify.error("OCorreu um erro no servidor");
+            alertify.error("Ocorreu um erro no servidor");
         }
     }
 
-    if($("#checkChave").val() == 0){
-        if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("formError");
-    } 
-
-    if($("#recoverpwd").val() == "") return $("#recoverpwd").addClass("formError");
+    if($("#checkChave").val() == 0) if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("formError");
+    
+    if($("#username").val().length == 0) return $("#username").addClass("formError");
+    if($("#recoverpwd").val().length == 0 ) return $("#recoverpwd").addClass("formError");
     
     $("#recoverpwd").removeClass("formError");
     reqAjax(option);

@@ -59,7 +59,7 @@ $('body').ready(() => {
         const person = {
             email: $("#inputEmail").val(),
             passwd: $('#inputPwd').val(),
-            conectedLogin: $('#manterConectado').is(":checked") ? 1 : 0
+            conectedLogin: $('#manterConectado').is(":checked") ? 18 : 0
         };
         option = {
             method: 'POST',
@@ -68,11 +68,9 @@ $('body').ready(() => {
             dataType: "json",
             data: person,
             success: (res) => {
-
+                console.table(res);
                 if (typeof res == undefined || !res) throw new TypeError("Object null");
-                if (!res.error) {
-                    // location.href = `${BASE_URL}/product/`;
-                } else {
+                if (res.error) {
                     if (res.status == 400) {
                         $("#inputEmail").addClass("inputError");
                         $('#inputPwd').addClass("inputError");
@@ -80,6 +78,8 @@ $('body').ready(() => {
                     } else {
                         alertify.error('Email ou senha inválidos');
                     }
+                } else {
+                    // location.href = `${BASE_URL}/product/`;
                 }
             }
         }

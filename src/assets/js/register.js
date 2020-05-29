@@ -1,11 +1,8 @@
 let forca = 0;
 
 //mascaras
-$("input[name='cpf'],#cpf").mask("000.000.000-00", { placeholder: "NNN.NNN.NNN-NN", clearIfNotMatch: true });
 $("#inputCep").mask("00000000", { placeholder: "NNNNNNNN ", clearIfNotMatch: true })
 
-
-//eventos para manipulação do teclado
 
 //verifica o email
 $("#email").focusout(() => {
@@ -41,32 +38,39 @@ $("#passwd").keypress(function () {
         .removeClass("bg-info")
         .removeClass("bg-success");
 
-    if (($(this).val().length > 4) && ($(this).val().length < 8)) 
-        forca += 10;     
+    if (($(this).val().length > 4) && ($(this).val().length < 8))
+        forca += 10;
     else if (($(this).val().length > 8) && ($(this).val().match(/[a-z]+/)))
         forca += 40;
     else if (($(this).val().length > 8) && ($(this).val().match(/[A-Z]+/)))
         forca += 50;
     else if (($(this).val().length > 8) && ($(this).val().match(/[\d+]+/)))
         forca += 100;
-    
 
-    if(forca < 30 )
+
+    if (forca < 30)
         $("#progress-bar").css("width", "20%").addClass("bg-danger");
-    else if(forca > 30 && forca < 60)
+    else if (forca > 30 && forca < 60)
         $("#progress-bar").css("width", "40%").addClass("bg-warning");
-    else if(forca > 60 && forca < 80)
+    else if (forca > 60 && forca < 80)
         $("#progress-bar").css("width", "60%").addClass("bg-info");
-    else 
+    else
         $("#progress-bar").css("width", "100%").addClass("bg-success");
 })
 
 $("#searchCep").on("click", async function () {
-    const res = await searchCep($("#inputCep").val())
-
-    $("#uf").val(res.uf);
-    $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
-    $("#localidade").val(res.localidade);
+    try {
+        const res = await searchCep($("#inputCep").val())
+        if (res !== null) {
+            $("#uf").val(res.uf);
+            $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
+            $("#localidade").val(res.localidade);
+        } else {
+           return alertify.error("Não foi possível buscar o cep informado!")
+        }
+    } catch (e) {
+       return alertify.error('Cep inválido');
+    }
 });
 
 $("#inputCep").keyup(async function (evt) { if (evt.keyCode == 13) $("#searchCep").trigger("click") });
@@ -93,7 +97,7 @@ $('#btnRegister').click(() => {
             }
     })
 
-    if (forError) return alertify.error("Corrija os campos em vermelho");
+    if (forError) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
 
     let person = {
@@ -106,14 +110,12 @@ $('#btnRegister').click(() => {
         addres: $("#inputAddres").val(),
         localidade: $("#localidade").val(),
     };
-    option =
-    {
+    option = {
         method: 'POST',
         mycustomtype: "application/json",
-        url: `${BASE_URL}/manager/addaccount`,
+        url: `${BASE_URL}/manager/addaccountpersonphysical`,
         dataType: "json",
         data: person,
-        error: (e) => console.log(`estado pronto: ${e.readyState} \nestado: ${e.status} \nestado texto: ${e.statusText}: \nfunção estado: ${e.state()}`),
         beforeSend: () => {
             load(true, "#btnRegister");
         },
@@ -126,10 +128,11 @@ $('#btnRegister').click(() => {
             } else {
                 if (res.status == 0) alertify.error("Preencha todos os campos!");
                 if (res, status != 0) alertify.error("Não foi possível fazer o cadastro");
-                return console.log(res.status, res.msg);
             }
         },
-
+        error: (e) =>  {
+            alertify.error("Houve um erro no sistema!");
+        }
     }
     reqAjax(option);
 

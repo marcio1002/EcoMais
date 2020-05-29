@@ -30,10 +30,9 @@ $router->namespace("Ecomais\Web");
  */
 $router->group(null);
 $router->get("/", "WebApp:home");
-$router->get("/login", "WebApp:login");
 $router->get("/cadastro", "WebApp:register");
 $router->get("/recuperarsenha", "WebApp:recoverPasswd");
-$router->get("/recuperarsenha/novasenha","WebApp:newPasswd");
+$router->get("/recuperarsenha/novasenha/{token}","WebApp:newPasswd");
 $router->get("/terms", "WebApp:terms");
 
 $router->group("error");
@@ -48,7 +47,7 @@ $router->namespace("Ecomais\Controllers");
 $router->group("manager");
 $router->post("/login", "AccountManager:login");
 $router->get("/logoff", "AccountManager:logoff");
-$router->post("/addaccount", "AccountManager:addAccount");
+$router->post("/addaccountpersonphysical", "AccountManager:addAccountPersonPhysical");
 $router->delete("/removeuser", "AccountManager:deleteAccount");
 $router->put("/recoverpwd", "AccountManager:recoverPasswd");
 

@@ -63,12 +63,6 @@ use Ecomais\Web\Bundles;
                     </div>
                   </small>
                 </div>
-                <div class="form-group col-md-6 pb-3">
-                  <label for="cpf">CPF: </label>
-                  <input type="text" class="form-control nextItem" id="cpf" data-required="" />
-                </div>
-              </div>
-              <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-6">
                   <label for="inputCep">Cep</label>
                   <div class="input-group">
@@ -112,16 +106,15 @@ use Ecomais\Web\Bundles;
                     <option value='TO'>Tocantins</option>
                   </select>
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="cpf">Cidade: </label>
+                  <input type="text" class="form-control nextItem" id="localidade" data-required="" />
+                </div>
               </div>
               <div class="form-row col-md-12 pb-3">
                 <div class="form-group col-md-6 ">
                   <label for="inputAddres">Endereço:</label>
                   <input type="address" class="form-control nextItem" id="inputAddres" />
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="cpf">Cidade: </label>
-                  <input type="text" class="form-control nextItem" id="localidade" data-required="" />
                 </div>
               </div>
               <div class="custom-control custom-switch pb-5">
@@ -145,7 +138,11 @@ Bundles::renderJs([
   "js/register",
   "js/manipulation",
   "js/mainMethods"
-])
+]);
+echo "
+<script>
+  const BASE_URL = '" . BASE_URL . "'
+</script>";
 ?>
 
 </html>

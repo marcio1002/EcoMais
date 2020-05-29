@@ -9,7 +9,7 @@ interface PersonLegalInterface
      * @param int $cnpj
      * O cnpj do usuário
      */
-    public function setCnpj(int $cnpj): void;
+    public function setCnpj(string $cnpj): void;
 
     public function getTypePackage(): int;
     /**

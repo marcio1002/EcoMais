@@ -52,21 +52,21 @@ interface PersonInterface
      */
     public function setUF(string $uf): void;
     //----------------------------
-    public function getCity(): string;
+    public function getLocality(): string;
     /**
      * @param string $locality
      * Localidade do usuário
      * @return void
      */
-    public function setCity(string $locality): void;
+    public function setLocality(string $locality): void;
     //----------------------------
-    public function getAddre(): string;
+    public function getAddres(): string;
     /**
      * @param string $addre
      * Endereço do usuário
      * @return void
      */
-    public function setAddre(string $addre = null): void;
+    public function setAddres(string $addre = null): void;
     //----------------------------
     public function getNumber(): int;
 

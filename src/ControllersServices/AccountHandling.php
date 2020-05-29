@@ -1,7 +1,8 @@
 <?php 
 namespace Ecomais\ControllersServices;
 
-    use Ecomais\Models\{PersonPhysical,Safety,DataException};
+use Ecomais\Controllers\AccountManager;
+use Ecomais\Models\{PersonPhysical,Safety,DataException};
     use Ecomais\Services\Data;
 
 class AccountHandling {
@@ -14,22 +15,33 @@ class AccountHandling {
         $this->safety = new Safety();
     }
 
-    public function createAccount(PersonPhysical $person):int
+    public function createAccountPersonPhysical(PersonPhysical $person):int
     {
         try
         {
 
             $passwd =  $this->safety->criptPasswd($person->getPassword());
-            $array_columns = "nome,email,password,date";
-            $array_register = [$person->getName(),$person->getEmail(),$passwd,$person->createAt()];
+            $array_columns = "nome,email,senha,cep,uf,cidade,endereco,statusconta,data_criacao";
+            $array_register = array(
+                $person->getName(),
+                $person->getEmail(),
+                $passwd,
+                $person->getCep(),
+                $person->getUF(),
+                $person->getLocality(),
+                $person->getAddres(),
+                $person->getStatusAccount(),
+                $person->createAt()
+            );
 
             $this->sql->open();
 
-            return $this->sql->add("usuarios",$array_columns,$array_register);
+            return $this->sql->add("usuario",$array_columns,$array_register);
 
         } catch(DataException $ex) 
         {   
             throw new DataException( $ex->getMessage(),$ex->getCode() );
+
         }finally 
         {
             $this->sql->close();
@@ -83,10 +95,9 @@ class AccountHandling {
 
                 $this->sql->open();
 
-                return $this->sql->show('usuarios',"","email = ? AND password = ?",$where,3);
+                return $this->sql->show('usuario',"","email = ? AND senha = ?",$where,3);
             }
-            catch(DataException $ex)
-            { 
+            catch(DataException $ex) { 
                throw new DataException( $ex->getMessage(), $ex->getCode() );
 
             } finally 
@@ -115,15 +126,14 @@ class AccountHandling {
     {               
     }
 
-    public function recoverPasswd(PersonPhysical $person) 
+    public function recoverPasswdKey(string $key):array 
     {
         try {
-
-            $pwd = [$this->safety->criptPasswd($person->getPassword())];
+            $preWhere = [$key];
 
             $this->sql->open();
 
-            return $this->sql->update("usuarios","password = ?",$pwd,"password = '?'",[$pwd]);
+            return $this->sql->show("usuario","senha","senha = ?",$preWhere);
             
         }catch(DataException $ex) {
             throw new DataException( $ex->getMessage(), $ex->getCode() );

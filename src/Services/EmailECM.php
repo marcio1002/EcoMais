@@ -1,12 +1,11 @@
 <?php
-require_once __DIR__ . "/../../vendor/autoload.php";
-
 namespace Ecomais\Services;
 
+use Ecomais\Interfaces\EmailECMInterface;
 use Ecomais\Models\{DataException, EmailProps};
-use PHPMailer\PHPMailer\{PHPMailer, Exception};
+use PHPMailer\PHPMailer\{PHPMailer, Exception, SMTP};
 
-class EmailECM  extends EmailProps
+class EmailECM  extends EmailProps implements EmailECMInterface
 {
     /**
      * @var PHPMailer 
@@ -20,12 +19,13 @@ class EmailECM  extends EmailProps
         $this->email = new PHPMailer(true);
 
         $this->email->isSMTP();
+        $this->email->SMTPDebug = 2;
         $this->email->isHTML(true);
         $this->email->setLanguage("br");
-        $this->email->SMTPAuth = false;
-        $this->email->SMTPAutoTLS = false;
+        $this->email->SMTPAuth = true;
+        $this->email->SMTPAutoTLS = true;
+        $this->email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->email->CharSet = PHPMailer::CHARSET_UTF8;
-        $this->email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 
 
         $this->email->Host = parent::HOST_EM;

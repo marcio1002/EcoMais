@@ -1,9 +1,9 @@
-const {prototype, permission,requestPermission, } = window.Notification;
+const { prototype, permission, requestPermission, } = window.Notification;
 
-let message = 
+let message =
 {
     title: String,
-    opt : {
+    opt: {
         badge: String,
         body: String,
         data: null,
@@ -23,7 +23,7 @@ let message =
         silent: Boolean,
     }
 }
-let option = 
+let option =
 {
     method: String,
     type: String,
@@ -44,47 +44,39 @@ let option =
     dataFilter: Function,
     success: Function,
     complete: Function,
-        
+
 }
 
 async function searchCep(cep) {
-    try {
-        const validcep = /\d{8}$/;
-        if (!validcep.test(cep)) throw TypeError('Invalid zip code');
-        
-        const info  = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
+    const validcep = /\d{8}$/;
+    if (!validcep.test(cep)) throw TypeError('Invalid zip code');
 
-        if(info.erro) throw new Error("0");
+    const info = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
+    
+    if (info.erro) return null;
+    return info;
 
-        return info;   
-        
-    } catch (erro) {
-        const UNDEFINED = "Error: 0";
-        if(erro == UNDEFINED) return alertify.error("Não foi possível buscar o cep!");
-        alertify.error('Cep inválido');
-    }
 }
 
 /**
  * @param {Object} op
  * Defini uma opção de parametros para o ajax;
  */
-function reqAjax(opt = option) 
-{
+function reqAjax(opt = option) {
     $.ajax(opt);
 }
 
 const apiNotification = {
 
     setPermission: async () => {
-       return await requestPermission();
+        return await requestPermission();
     },
 
     /**
      * @var {Object} msg
      */
     message: (msg = message) => {
-        let notfy = new Notification(msg.title,msg.opt);
+        let notfy = new Notification(msg.title, msg.opt);
         return notfy
     },
 }

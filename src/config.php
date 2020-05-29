@@ -1,13 +1,11 @@
 <?php
 
-define("BASE_URL", "http://www.localhost:26011/www/EcoMais");
-echo "
-<script type='text/javascript'>
-    const BASE_URL = '". BASE_URL ."';
-</script>";
+define("BASE_URL", "https://www.localhost/www/EcoMais");
 
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: X-PINGARUNER');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Content-type: text/html');
+header('Access-Control-Allow-Headers: X-PINGARUNER, Content-Type');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
+header('Content-type: text/html; application/json');
+header("Accept-Language: *");
+header("Content-Language: pt-BR,en");

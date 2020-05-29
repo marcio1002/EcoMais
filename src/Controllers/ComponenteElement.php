@@ -1,6 +1,7 @@
 <?php
 namespace Ecomais\Controllers;
 use Ecomais\Models\DataException;
+use Ecomais\Web\Bundles;
 
 class ComponenteElement
 {
@@ -35,7 +36,13 @@ class ComponenteElement
   </div>
 </header>
 <div class='subNavBar'>
-</div>";
+</div> ". PHP_EOL . Bundles::renderJs(
+  [
+    "js/apis",
+    "js/regAjax",
+    "alertify"
+  ]);
+;
   }
 
   public static function modalLogin():void
@@ -80,7 +87,10 @@ class ComponenteElement
         </div>
       </div>
     </div>
-    </div>";
+    </div>
+    
+    ";
+
   }
 
   public function showImage()

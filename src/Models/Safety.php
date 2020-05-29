@@ -8,6 +8,7 @@ class Safety
 
     private $passwd;
     private $imageName;
+    private $key;
 
     /**
      * Criptografia Whirlpool
@@ -38,13 +39,14 @@ class Safety
 
     /**
      * Cria um token de 8 bits
-     * @param string $mixed
+     * @param string $string
      */
 
-    public function createToken($mixed): string
+    public function createToken(string $param): string
     {
-        $this->key =  hash("adler32", imap_binary($mixed));
+        $numberRandom = random_int(100,1999);
+        $this->key =  hash("sha512", uniqid(imap_binary($param)) . $numberRandom);
 
-        return $this->token;
+        return $this->key;
     }
 }

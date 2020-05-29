@@ -21,19 +21,15 @@ class WebApp
         require_once __DIR__ . "/../Views/recuperarSenha.php";
     }
 
-    public function newPasswd(): void
+    public function newPasswd($token): void
     {
+        if(count($token) == 0 ) require_once __DIR__ . "/../Views/error404.php";
         require_once __DIR__ . "/../Views/novaSenha.php";
     }
 
     public function terms(): void
     {
         require_once __DIR__ . "/../Views/politicaPrivacidadeTermos.php";
-    }
-
-    public function login(): void
-    {
-        require_once __DIR__ . "/../Views/login.php";
     }
     /**
      * Http erro
