@@ -1,19 +1,28 @@
 <?php
 namespace Ecomais\Web;
 
-class WebApp
+use League\Plates\Engine;
+
+class Router
 {
+    private Engine $view;
+
+    public function __construct()
+    {
+        $this->view  = new Engine(__DIR__ . "/../Views","php");
+    }
+
     /**
      * redirecionamento da urls
      */
     public  function home(): void
     {
-        require_once __DIR__ . "/../Views/home.php";
+        echo $this->view->render("home");
     }
 
     public function register(): void
     {
-        require_once __DIR__ . "/../Views/cadastro.php";
+        echo $this->view->render("cadastro");
     }
 
     public function recoverPasswd(): void

@@ -1,21 +1,20 @@
 <?php 
 namespace Ecomais\ControllersServices;
 
-use Ecomais\Controllers\AccountManager;
-use Ecomais\Models\{PersonPhysical,Safety,DataException};
+use Ecomais\Models\{Safety,DataException, Person, PersonLegal};
     use Ecomais\Services\Data;
 
 class AccountHandling {
 
-    private $sql;
-    private $safety;
+    private Data $sql;
+    private Safety $safety;
 
     public function __construct() {
         $this->sql = new Data();
         $this->safety = new Safety();
     }
 
-    public function createAccountPersonPhysical(PersonPhysical $person):int
+    public function createAccountPersonPhysical(Person $person):int
     {
         try
         {
@@ -48,8 +47,11 @@ class AccountHandling {
         }
             
     }
+
+    public function createAccountPersonLegal(PersonLegal $personLegal)
+    {}
     
-    public function deleteAccount(PersonPhysical $person):int
+    public function deleteAccount(Person $person):int
     {
             try{
                 $id = [ $person->getId() ];
@@ -67,7 +69,7 @@ class AccountHandling {
             }
     }
     
-    public function updateAccount(PersonPhysical $person):int
+    public function updateAccountPersonPhysical(Person $person):int
     {
             try{
                 $pwd = $this->safety->criptPasswd($person->getPassword());
@@ -86,8 +88,11 @@ class AccountHandling {
                 $this->sql->close();
             }
     }
+
+    public function updateAccountPersonLegal(PersonLegal $personLegal)
+    {}
     
-    public function setLogin(PersonPhysical $person):array
+    public function setLogin(Person $person):array
     {
             try {
                 $pwd = $this->safety->criptPasswd($person->getPassword());

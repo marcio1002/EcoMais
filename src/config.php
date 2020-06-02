@@ -9,3 +9,8 @@ header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
 header('Content-type: text/html; application/json');
 header("Accept-Language: *");
 header("Content-Language: pt-BR,en");
+
+function renderUrl(?string $url = null):string
+{
+    return empty($url) ? BASE_URL : BASE_URL . "/$url";    
+}

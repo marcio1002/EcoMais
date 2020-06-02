@@ -3,72 +3,74 @@ namespace Ecomais\Web;
 
 class Bundles
 {
+    const LB = "<br/>";
 
     private static $import = BUNDLES_URL;
+    private static  string $renderFile = "";
 
     /**
      * @param array  $urlName
-     * @return void
+     * @return string
      */
     public static  function  renderCss(array $urlName): void
     {
-        if (empty($urlName)) return;
-
         foreach ($urlName as $url) {
 
-            if (empty(self::$import[$url])) return;
+            if (empty(self::$import[$url])) continue;
 
             if (is_array(self::$import[$url])) {
 
                 foreach (self::$import[$url] as $r) {
 
-                    echo "$r" . PHP_EOL;
+                    self::$renderFile .= $r . PHP_EOL;
                 }
             } else {
                 $r = self::$import[$url];
-                echo "$r\n";
+                self::$renderFile .= $r . PHP_EOL;
             }
+
         }
+        echo self::$renderFile;
     }
 
     public static  function  renderJs(array $urlName): void
     {
-        if (empty($urlName)) return;
-
         foreach ($urlName as $url) {
 
-            if (empty(self::$import[$url])) return;
+            if (empty(self::$import[$url])) continue;
 
             if (is_array(self::$import[$url])) {
 
                 foreach (self::$import[$url] as $r) {
 
-                    echo "$r" . PHP_EOL;
+                    self::$renderFile .= $r . PHP_EOL;
                 }
             } else {
                 $r = self::$import[$url];
-                echo "$r" . PHP_EOL;
+                self::$renderFile .= $r . PHP_EOL;
             }
+
         }
+        echo self::$renderFile;
     }
+    
     public static  function  renderBundle(array $urlName): void
     {
-        if (empty($urlName)) return;
-
         foreach ($urlName as $url) {
 
-            if (empty(self::$import[$url])) return;
+            if (empty(self::$import[$url])) continue;
 
             if (is_array(self::$import[$url])) {
 
                 foreach (self::$import[$url] as $r) {
 
-                    echo "$r" . PHP_EOL;
+                    self::$renderFile .= $r . PHP_EOL;
                 }
             } else {
                 $r = self::$import[$url];
-                echo "$r" . PHP_EOL;
+                self::$renderFile .= $r . PHP_EOL;
             }
         }
+        echo self::$renderFile;
     }
 }

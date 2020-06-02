@@ -11,15 +11,15 @@ abstract class EmailProps
     const FROM_NAME = "EcoMais";
     const FROM_EMAIL = "ecomais5354@gmail.com";
 
-    protected $subjecProp;
+    protected string $subjecProp;
 
-    protected $bodyProp;
+    protected string $bodyProp;
 
-    protected $altBodyProp;
+    protected string $altBodyProp;
 
-    protected $recipient_Name;
+    protected string $recipient_Name;
 
-    protected $recipient_Email;
+    protected string $recipient_Email;
 
-    protected $attachProp;
+    protected array $attachProp;
 }

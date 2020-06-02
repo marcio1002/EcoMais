@@ -9,8 +9,8 @@ use TypeError;
 class PersonLegal extends person implements PersonLegalInterface
 {
 
-    private $cnpj;
-    private $typePackage;
+    private int $cnpj;
+    private int $typePackage;
 
     public function getCnpj(): int
     {

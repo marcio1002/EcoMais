@@ -44,8 +44,8 @@ final class Data implements DataInterface
                 DATA::PARAM_PASSWD,
                 DATA::OPTIONS
             )
-                or
-                die("⛔ Error: 401 <br/>");
+            or
+            die(header($_SERVER["SERVER_PROTOCOL"].DataException::NOT_AUTHORIZED." Not authorized"));
     }
 
     public function close(): void
@@ -75,7 +75,7 @@ final class Data implements DataInterface
             $this->row = $this->pdo->commit();
         } catch (Exception $ex) {
 
-            throw new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
         }
 
         return $this->row;
@@ -123,7 +123,7 @@ final class Data implements DataInterface
                 return ($this->query->rowCount() == 1) ? $this->query->fetch(PDO::FETCH_ASSOC) : $this->query->fetchAll();
         } catch (Exception $ex) {
 
-            throw new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage(), DataException::REQ_INVALID);
         }
 
         return null;
@@ -153,10 +153,8 @@ final class Data implements DataInterface
             $this->query->execute();
             $this->row = $this->pdo->commit();
 
-            if (!$this->row) throw  new DataException(print_r($this->query->errorInfo()), DataException::REQ_INVALID);
         } catch (Exception $ex) {
-
-            throw new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
         }
         return $this->row;
     }
@@ -175,11 +173,8 @@ final class Data implements DataInterface
             }
             $this->query->execute();
             $this->row = $this->pdo->commit();
-
-            if (!$this->row) throw new DataException(print_r($this->query->errorInfo()), DataException::REQ_INVALID);
         } catch (Exception $ex) {
-
-            throw new DataException($ex->getMessage());
+            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
         }
         return $this->row;
     }

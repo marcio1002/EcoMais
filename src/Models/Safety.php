@@ -6,9 +6,9 @@ use Ecomais\Models\DataException;
 class Safety
 {
 
-    private $passwd;
-    private $imageName;
-    private $key;
+    private string $passwd;
+    private string $imageName;
+    private string $key;
 
     /**
      * Criptografia Whirlpool

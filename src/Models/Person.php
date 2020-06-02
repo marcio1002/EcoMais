@@ -5,22 +5,22 @@ use Ecomais\Interfaces\PersonInterface;
 use Ecomais\Models\DataException;
 use TypeError;
 
-abstract class  Person  implements PersonInterface
+class Person  implements PersonInterface
 {
     const ENABLED = true; 
     const DISABLED = false;
 
-    private $id;
-    protected $name;
-    protected $email;
-    protected $passwd;
-    protected $uf;
-    protected $city;
-    protected $addres;
-    protected $number;
-    protected $date;
-    protected $cep;
-    protected $statusAccount = self::ENABLED | self::DISABLED;
+    private int $id;
+    protected string $name;
+    protected string $email;
+    protected string $passwd;
+    protected string $uf;
+    protected string $city;
+    protected string $addres;
+    protected int $number;
+    protected string $date;
+    protected ?int $cep;
+    protected bool $statusAccount;
 
     public function getId(): int
     {
@@ -42,7 +42,6 @@ abstract class  Person  implements PersonInterface
     public function setName(string $name): void
     {
         if (empty($name)) throw new DataException('Null values', DataException::REQ_INVALID);
-
         $this->name = trim($name);
     }
 
@@ -76,8 +75,9 @@ abstract class  Person  implements PersonInterface
         return $this->cep;
     }
 
-    public function setCep(int $cep = null): void
+    public function setCep(?string $cep): void
     {
+        $cep = preg_replace("/[.-]/","",$cep);
         $this->cep = $cep;
     }
 
@@ -100,7 +100,7 @@ abstract class  Person  implements PersonInterface
 
     public function setLocality(string $city): void
     {
-        if (empty($city)) throw new DataException('Null values', DataException::REQ_INVALID);;
+        if (empty($city)) throw new DataException('Null values', DataException::REQ_INVALID);
 
         $this->city = trim($city);
     }
@@ -110,7 +110,7 @@ abstract class  Person  implements PersonInterface
         return $this->addres;
     }
 
-    public function setAddres(string $addres = null): void
+    public function setAddres(?string $addres): void
     {
         $this->addres = $addres;
     }
@@ -120,7 +120,7 @@ abstract class  Person  implements PersonInterface
         return $this->number;
     }
 
-    public function setNumber(int $number): void
+    public function setNumber($number): void
     {
         if (empty($number)) throw new DataException('Null values', DataException::REQ_INVALID);
         if (!is_numeric($number)) throw new TypeError("Expected a number format", DataException::REQ_INVALID);
@@ -137,7 +137,7 @@ abstract class  Person  implements PersonInterface
     {
         if (empty($typeUser)) throw new DataException('Null values', DataException::REQ_INVALID);
 
-        $this->statusAccount = trim($typeUser);
+        $this->statusAccount = $typeUser;
     }
 
     public function createAt(): string

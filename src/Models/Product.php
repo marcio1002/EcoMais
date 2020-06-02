@@ -10,20 +10,19 @@ class Product implements ProductInterface
     const ACTIVATED = true;
     const DISABLED = false;
 
-    protected $id;
-    protected $name;
-    protected $price;
-    protected $brand;
-    protected $manufacturer;
-    protected $merchant;
-    protected $clt;
-    protected $file;
-    protected $date;
-    protected $desc;
-    protected $pd;
-    protected $quant;
-    protected $fkCompany;
-    protected $status = self::ACTIVATED | self::DISABLED;
+    protected int $id;
+    protected string $name;
+    protected float $price;
+    protected string $brand;
+    protected string $manufacturer;
+    protected string $merchant;
+    protected string $clt;
+    protected string $date;
+    protected string $desc;
+    protected string $period;
+    protected int $quant;
+    protected int $fkCompany;
+    protected bool $status;
 
 
     public function getId(): int
@@ -60,7 +59,7 @@ class Product implements ProductInterface
     {
         if (empty($price)) throw new DataException('Null values', DataException::REQ_INVALID);
 
-        $this->price = trim($price);
+        $this->price = $price;
     }
 
     public function getBrand(): string
@@ -117,7 +116,7 @@ class Product implements ProductInterface
     public function setPeriod(string $pd): void
     {
         if (empty($pd)) throw new DataException('Null values', DataException::REQ_INVALID);
-        $this->pd = trim($pd);
+        $this->pariod = trim($pd);
     }
 
     public function getStatus(): bool

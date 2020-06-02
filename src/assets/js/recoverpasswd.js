@@ -20,7 +20,7 @@ $("#btnRecoverPwd").click(() => {
     };
 
     option = {
-        method: 'PUT',
+        method: 'POST',
         mycustomtype: "application/json",
         url: `${BASE_URL}/manager/recoverpwd`,
         dataType: "json",

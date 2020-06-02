@@ -42,7 +42,7 @@ interface PersonInterface
      * Cep do usuário
      * @return void
      */
-    public function setCep(int $cep = null): void;
+    public function setCep(?string $cep): void;
     //----------------------------
     public function getUF(): string;
     /**
@@ -66,7 +66,7 @@ interface PersonInterface
      * Endereço do usuário
      * @return void
      */
-    public function setAddres(string $addre = null): void;
+    public function setAddres(?string $addres): void;
     //----------------------------
     public function getNumber(): int;
 

@@ -32,30 +32,28 @@ $("#btnViewPasswd").on("click", function () {
 $("#passwd").keyup(function (evt) { $('span#length').html($(this).val().length) });
 
 $("#passwd").keypress(function () {
-    $(this)
-        .removeClass("bg-danger")
-        .removeClass("bg-warning")
-        .removeClass("bg-info")
-        .removeClass("bg-success");
+    $("#progress-bar").removeClass().addClass("progress-bar");
+    let value = $(this).val();
+    forca = 5;
+    if (value.length < 8 ) {
+        if(/[A-Z]+/.test(value)  &&  /[a-z]+/.test(value) || /[\d]+/.test(value) && /[a-z]+/.test(value)) forca = 27;
+        if(/[A-Z]+/.test(value) && /[a-z]+/.test(value) && /[\d]+/.test(value)  || /[a-z]+/.test(value) && /[\d]+/.test(value) && /[@!#$%&*/\\]+/.test(value) ) forca = 39;
 
-    if (($(this).val().length > 4) && ($(this).val().length < 8))
-        forca += 10;
-    else if (($(this).val().length > 8) && ($(this).val().match(/[a-z]+/)))
-        forca += 40;
-    else if (($(this).val().length > 8) && ($(this).val().match(/[A-Z]+/)))
-        forca += 50;
-    else if (($(this).val().length > 8) && ($(this).val().match(/[\d+]+/)))
-        forca += 100;
+    }else {
+        if ( /[A-Z]+/.test(value)  &&  /[a-z]+/.test(value) ||/[\d]+/.test(value) &&  /[a-z]+/.test(value) ) forca = 57;
 
+        if ( /[a-z]+/.test(value) && /[\d]+/.test(value) && /[A-Z]+/.test(value)) forca = 80;
+
+        if (/[a-z]+/.test(value) && /[@!#$%&*/\\]+/.test(value) && /[A-Z]+/.test(value) )  forca = 85;
+        if(/[a-z]+/.test(value) && /[A-Z]+/.test(value) && /[@!#$%&*/\\]+/.test(value) && /[\d]+/.test(value)) forca = 100;
+    }
 
     if (forca < 30)
-        $("#progress-bar").css("width", "20%").addClass("bg-danger");
-    else if (forca > 30 && forca < 60)
-        $("#progress-bar").css("width", "40%").addClass("bg-warning");
-    else if (forca > 60 && forca < 80)
-        $("#progress-bar").css("width", "60%").addClass("bg-info");
-    else
-        $("#progress-bar").css("width", "100%").addClass("bg-success");
+        $("#progress-bar").css("width", `${forca}%`).addClass("bg-danger");
+    else if (forca > 30 && forca <= 68)
+        $("#progress-bar").css("width", `${forca}%`).addClass("bg-warning");
+    else if (forca > 70)
+        $("#progress-bar").css("width", `${forca}%`).addClass("bg-success");
 })
 
 $("#searchCep").on("click", async function () {

@@ -29,14 +29,14 @@ $router->namespace("Ecomais\Web");
  * Paginas principais como home,login,cadastro etc.
  */
 $router->group(null);
-$router->get("/", "WebApp:home");
-$router->get("/cadastro", "WebApp:register");
-$router->get("/recuperarsenha", "WebApp:recoverPasswd");
-$router->get("/recuperarsenha/novasenha/{token}","WebApp:newPasswd");
-$router->get("/terms", "WebApp:terms");
+$router->get("/", "Router:home");
+$router->get("/cadastro", "Router:register");
+$router->get("/recuperarsenha", "Router:recoverPasswd");
+$router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
+$router->get("/terms", "Router:terms");
 
 $router->group("error");
-$router->get("/{errCode}", "WebApp:typeError");
+$router->get("/{errCode}", "Router:typeError");
 
 /**
  * @namespace Controller
@@ -49,12 +49,15 @@ $router->post("/login", "AccountManager:login");
 $router->get("/logoff", "AccountManager:logoff");
 $router->post("/addaccountpersonphysical", "AccountManager:addAccountPersonPhysical");
 $router->delete("/removeuser", "AccountManager:deleteAccount");
-$router->put("/recoverpwd", "AccountManager:recoverPasswd");
+$router->post("/recoverpwd", "AccountManager:recoverPasswd");
 
-/** rotas para product*/
-$router->group("product");
+/** rotas para produtos*/
+$router->group("produto");
 $router->get("/", "ManagerProduct:showProduct");
 
+
+/** rotas para empresas */
+$router->group("empresa");
 
 
 $router->dispatch();

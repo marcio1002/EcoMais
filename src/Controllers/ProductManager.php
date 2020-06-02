@@ -6,6 +6,7 @@ use Ecomais\Models\{DataException, Product};
 class ProductManager
 {
 
+    private Product $prod;
     /**
      * CONSTRUSTOR
      * @return void
