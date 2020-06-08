@@ -8,16 +8,16 @@ use Ecomais\Web\Bundles;
 
 <head>
   <meta charset="UTF-8">
-  <title>Recuperação de Senha</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://www.localhost/www/EcoMais/src/assets/css/estilo.css">
   <?php
   Bundles::renderBundle([
-    "css/fonts",
     "css/manipulation",
-    "js/jquery",
     "bootstrap",
     "alertify",
     "css/rsenha"
-  ])
+  ]);
   ?>
 </head>
 
@@ -26,7 +26,9 @@ use Ecomais\Web\Bundles;
     <div class="col-12">
       <div class="row-cols-md-3 " style="position: relative; top: 25%">
         <form class="m-auto">
-        <div class="form-group">
+        <div class="alert " role="alert">     
+        </div>
+          <div class="form-group">
             <label for="username">Nome:</label>
             <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
           </div>
@@ -47,6 +49,7 @@ use Ecomais\Web\Bundles;
 
   <?php
   Bundles::renderJs([
+    "js/jquery",
     "js/apis",
     "js/mainMethods",
     "js/manipulation",

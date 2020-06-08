@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . "/../../vendor/autoload.php";
 
-$this->layout("_theme",["title" => "EcoMais - Home"]);
+$this->layout("_theme", ["title" => "EcoMais - Home"]);
 
 ?>
 <div class="container" id="title-container">
-  <h1>EcoMais</h1>
+  <h1 class="h1">EcoMais</h1>
 </div>
 <div id="about-area">
   <div class="container">
@@ -114,3 +114,39 @@ $this->layout("_theme",["title" => "EcoMais - Home"]);
   </div>
 </div>
 </div>
+<?php $this->start("footer") ?>
+<div id="contact-area" style="background: #fff">
+  <div class="container">
+    <div class="row pb-4">
+    <div class="col-md-12" id="contact-form">
+      <p>Receba nossa Newsletter </p>
+      <div class="col-md-5 m-auto">
+        <input type="text" class="form-control" placeholder="email@exemplo.com" name="email">
+        <input type="button" class="main-btn" value='enviar' />
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="main-title">Entre em contato conosco</h3>
+      </div>
+      <div class="col-md-4 contact-box">
+        <i class="fas fa-phone"></i>
+        <p><span class="contact-tile">Telefone:</span> (48)99999-9999</p>
+        <p><span class="contact-tile">Horários de atendimento:</span><br /> 8:00 - 19:00</p>
+      </div>
+      <div class="col-md-4 contact-box">
+        <i class="fas fa-envelope"></i>
+        <p><span class="contact-tile">Envie um email:</span> ecomais5354@gmail.com</p>
+      </div>
+      <div class="col-md-4 contact-box">
+        <i class="fas fa-map-marker-alt"></i>
+        <p><span class="contact-tile">Endereço:</span><br /> Itaquá Garden Shopping Itaquaquecetuba - SP - 1314</p>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <p>Desenvolvido por <a href="#">EcoMais</a> &copy; 2020</p>
+    </div>
+  </div>
+</div>
+<?php $this->stop() ?>

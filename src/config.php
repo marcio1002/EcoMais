@@ -1,12 +1,12 @@
 <?php
 
-define("BASE_URL", "https://www.localhost/www/EcoMais");
+define("BASE_URL", "https://ecomais.herokuapp.com");
 
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: X-PINGARUNER, Content-Type');
 header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
-header('Content-type: text/html; application/json');
+header('Content-type: text/html; application/json;charset=UTF-8');
 header("Accept-Language: *");
 header("Content-Language: pt-BR,en");
 

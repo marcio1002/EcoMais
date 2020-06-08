@@ -76,7 +76,7 @@ class ComponenteElement
         <div class='modal-body'>
           <form>
             <div class='form-group col-md-12'>
-              <label for='inputEmail3'>Email/CNPJ :</label>
+              <label for='inputEmail3'>Email ou CNPJ :</label>
               <input type='email' class='form-control' id='inputEmail'>
             </div>
             <div class='form-group col-md-12'>
@@ -172,7 +172,7 @@ class ComponenteElement
                                                                     <tbody>
                                                                         <tr>
                                                                             <td style='text-decoration: none;font-weight: 700;font-size: 25px; background-color:#FEF56F;border-radius:4px;border: 1px solid #F1E53D; border-bottom: 3px solid #F1E53D; border-right: 3px solid #F1E53D; padding:20px;' align='center'>
-                                                                                <a style='text-decoration:none' href='https://www.localhost/www/EcoMais/recuperarsenha/novasenha/$token' style='$font2' target='_blank'>Redefinir minha senha</a> 
+                                                                                <a style='text-decoration:none' href='https://www.localhost/www/EcoMais/recuperarsenha/novasenha/t=$token' style='$font2' target='_blank'>Redefinir minha senha</a> 
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -196,7 +196,7 @@ class ComponenteElement
                                                                                     para você a sua economia. Você pode ler
                                                                                     mais sobre os 
                                                                                 <a href='#' style='color:#329af0' target='_blank'>termos de serviço</a> 
-                                                                                para as contas bem a nossa 
+                                                                                para o bem estar nossa platadorma leia também a  
                                                                                 <a href='https://www.localhost/www/EcoMais/terms' style='color:#329af0' target='_blank'> política de  privacidade</a> , se você gostaria. </p>
                                                                             </td>
                                                                         </tr>

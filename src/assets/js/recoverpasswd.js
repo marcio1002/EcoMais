@@ -13,8 +13,12 @@ $("#checkChave").change(function () {
 
 $("#btnRecoverPwd").click(() => {
 
+    $("input").removeClass("formError");
+    $("").removeClass("alert-success").removeClass("alert-danger");
+
+    let func = ($("#checkChave").val() == 0) ? "recoverByMail" : "recoverByKey";
+
     let data = {
-        option: $("#checkChave").val(),
         value: $("#recoverpwd").val(),
         name: $("#username").val()
     };
@@ -22,20 +26,23 @@ $("#btnRecoverPwd").click(() => {
     option = {
         method: 'POST',
         mycustomtype: "application/json",
-        url: `${BASE_URL}/manager/recoverpwd`,
+        url: `${BASE_URL}/manager/${func}`,
         dataType: "json",
         data: data,
         success: (res) => {
+            console.table(res);
             if (res) 
                 if(!res.error) {
-                    var token = '';
-                    for (var i = 80; i > 0; --i) token += (Math.floor(Math.random()*256)).toString(16);
-                    location.href = `${BASE_URL}/recuperarsenha/novasenha/${token}`
+                    if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/t=${res.token}`;
+                    $(".alert").addClass("alert-success").text("Enviado com sucesso! verifique seu e-mail");
+                } else {
+                    $(".alert").addClass("alert-danger").text("Verifique os dados!");
                 }
             
         },
         error: (err) => {
-            alertify.error("Ocorreu um erro no servidor");
+            
+            alertify.error("Ocorreu um erro no servidor!");
         }
     }
 

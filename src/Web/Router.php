@@ -32,7 +32,9 @@ class Router
 
     public function newPasswd($token): void
     {
-        if(count($token) == 0 ) require_once __DIR__ . "/../Views/error404.php";
+        if(count($token) == 0 ) $this->typeError([
+            "errCode" => "404"
+        ]);
         require_once __DIR__ . "/../Views/novaSenha.php";
     }
 
@@ -45,14 +47,8 @@ class Router
      */
     public function typeError($http_err): void
     {
-        $codeError = $http_err['errCode'];
-
-        if ($codeError == 404) {
-            require_once __DIR__ . "/../Views/error404.php";
-        } else {
-            if (session_status() == PHP_SESSION_DISABLED) session_start();
-            $_SESSION['codeError'] = $codeError;
-            require_once __DIR__ . "/../Views/httperror.php";
-        }
+        echo $this->view->render("httperror",[
+            "errCode" => $http_err['errCode']
+        ]);  
     }
 }

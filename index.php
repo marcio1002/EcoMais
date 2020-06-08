@@ -32,7 +32,7 @@ $router->group(null);
 $router->get("/", "Router:home");
 $router->get("/cadastro", "Router:register");
 $router->get("/recuperarsenha", "Router:recoverPasswd");
-$router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
+$router->get("/recuperarsenha/novasenha/t={token}","Router:newPasswd");
 $router->get("/terms", "Router:terms");
 
 $router->group("error");
@@ -49,7 +49,8 @@ $router->post("/login", "AccountManager:login");
 $router->get("/logoff", "AccountManager:logoff");
 $router->post("/addaccountpersonphysical", "AccountManager:addAccountPersonPhysical");
 $router->delete("/removeuser", "AccountManager:deleteAccount");
-$router->post("/recoverpwd", "AccountManager:recoverPasswd");
+$router->post("/recoverByKey", "AccountManager:recoverByKey");
+$router->post("/recoverByMail", "AccountManager:recoverByMail");
 
 /** rotas para produtos*/
 $router->group("produto");

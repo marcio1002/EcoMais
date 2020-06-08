@@ -131,14 +131,14 @@ class AccountHandling {
     {               
     }
 
-    public function recoverPasswdKey(string $key):array 
+    public function recoverByKey(string $key):array 
     {
         try {
             $preWhere = [$key];
 
             $this->sql->open();
 
-            return $this->sql->show("usuario","senha","senha = ?",$preWhere);
+            return $this->sql->show("usuario","senha","senha = ?",$preWhere,6);
             
         }catch(DataException $ex) {
             throw new DataException( $ex->getMessage(), $ex->getCode() );

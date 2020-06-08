@@ -15,6 +15,7 @@ define(
             "<link rel='stylesheet' type='text/css' href='" . renderUrl('src/assets/css/alertify.min.css') . "' />",
             "<script type='text/javascript' src='" . renderUrl('src/assets/js/alertify.min.js') . "'/></script>"
         ],
+        "js/jquery" => "<script src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous'></script>",
         "css/rsenha" => "<link rel='stylesheet' type='text/css' href='" . renderUrl('src/assets/css/rsenha.css') . "'/>",
         "css/card" => " <link rel='stylesheet' type='text/css' href='" . renderUrl('src/assets/css/cad.css') . "'/>",
         "css/manipulation" => "<link rel='stylesheet' type='text/css' href='" . renderUrl('src/assets/css/manipulation.css') . "'/>",

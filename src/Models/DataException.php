@@ -18,6 +18,7 @@ class DataException extends Exception
     const AUTHENTICATION_REQUIRED = 407;
     const REQ_TIME_OVER = 408;
     const REQUIRED_LENGTH = 411;
+    const SERVER_ERROR = 500;
     const NOT_IMPLEMENTED = 501;
     const HTTP_NOT_SUPPORTED = 505;
 

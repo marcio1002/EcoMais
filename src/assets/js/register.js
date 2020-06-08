@@ -129,7 +129,7 @@ $('#btnRegister').click(() => {
             }
         },
         error: (e) =>  {
-            alertify.error("Houve um erro no sistema!");
+            alertify.error("Ocorreu um erro no servidor!");
         }
     }
     reqAjax(option);
