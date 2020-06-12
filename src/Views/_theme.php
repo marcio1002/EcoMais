@@ -14,7 +14,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>
     <link rel='stylesheet' type='text/css' href=<?=renderUrl("src/assets/css/estilo.css") ?> />
     <?= $this->section("css"); ?>
-    <title><?= $title; ?></title>
+    <title><?=$title?></title>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_URL", "https://ecomais.herokuapp.com");
+define("BASE_URL", "https://www.localhost/www/EcoMais");
 
 
 header('Access-Control-Allow-Origin: *');

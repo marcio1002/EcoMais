@@ -1,9 +1,4 @@
-<?php
-require_once __DIR__ . "/../../vendor/autoload.php";
-
-$this->layout("_theme", ["title" => "EcoMais - Home"]);
-
-?>
+<?php $this->layout("_theme", ["title" => "EcoMais - Home"]); ?>
 <div class="container" id="title-container">
   <h1 class="h1">EcoMais</h1>
 </div>

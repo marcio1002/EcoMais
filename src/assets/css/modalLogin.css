@@ -1,0 +1,14 @@
+
+.button-login { padding: 5px; background: #ECF971; width: 80%; margin: 0 auto;  border-radius: 10px; }
+
+.font-weigth-800 { font-weight: 800; }
+
+.font-size-1-5em { font-size: 1.5em; }
+
+#modalLogin .form-control {
+    border: none;
+}
+
+#modalLogin .border-bottom-solid-1px {
+    border-bottom: 1px solid #424F5A;
+}

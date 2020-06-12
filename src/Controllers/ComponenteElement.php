@@ -10,7 +10,7 @@ class ComponenteElement
     $urlRegister = BASE_URL . '/cadastro';
     $logo = BASE_URL . '/src/assets/imgs/ecomais-logo-sem-fundo.png';
     $index = BASE_URL;
-    echo "
+echo <<<navBar
       <div class='container' id='nav-container'>
         <nav class='navbar navbar-expand-lg fixed-top navbar-dark'>
           <a class='navbar-brand' href='$index' >
@@ -22,7 +22,7 @@ class ComponenteElement
           </button>
           <div class='collapse navbar-collapse justify-content-end' id='navbar-links'>
             <div class='navbar-nav'>
-              <a class='nav-item nav-link item-hover position-relative' id='home-menu' href='$index'>Home</span></a>
+              <a class='nav-item nav-link item-hover position-relative' id='home-menu' href='{$index}'>Home</span></a>
               <a class='nav-item nav-link item-hover position-relative' id='about-menu' href='$urlRegister' >Cadastre-se</a>
               <a class='nav-item nav-link item-hover position-relative' id='services-menu' href='#'>Serviços</a>
               <a class='nav-item nav-link item-hover position-relative' id='portfolio-menu' href='#'>Projetos</a>
@@ -56,54 +56,61 @@ class ComponenteElement
         </nav>
       </div>
     <div class='subNavBar' style='background: #fff'>
-    </div> ";
+    </div>
+navBar;
   }
 
   public static function modalLogin():void
   {
+    $face = new \Ecomais\ControllersServices\AuthFacebook();
+    $authUrl = $face->getAuthURL("email");
     $urlRegister =  BASE_URL . '/cadastro';
     $urlRecoverPasswd = BASE_URL . "/recuperarsenha";
 
-    echo "<div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='true'>
-    <div class='modal-dialog' role='document'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title' id='exampleModalLabel'>Login</h5>
-          <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-            <span aria-hidden='true'>&times;</span>
-          </button>
-        </div>
-        <div class='modal-body'>
-          <form>
-            <div class='form-group col-md-12'>
-              <label for='inputEmail3'>Email ou CNPJ :</label>
-              <input type='email' class='form-control' id='inputEmail'>
+  echo <<<ModalLogin
+    <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='true'>
+      <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h5 class='modal-title' id='exampleModalLabel'>Login</h5>
+            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>
+          <div class='modal-body'>
+            <div class='m-auto'>
+            <a title='Entrar com facebook' href='$authUrl' style='padding: 10px;background: linear-gradient(to top left,#348ADA,#4097E7);color: #fff;border-radius: 50px;font-size:23px 1.2em;text-decoration:none;font-weight:800;font-family: arial;'><i class='fab fa-facebook' style='font-size: 25px;vertical-align: middle;'></i> Entrar com facebook</a>
             </div>
-            <div class='form-group col-md-12'>
-              <label for='inputPassword3'>Senha :</label>
-              <input type='password' class='form-control' id='inputPwd'>
-            </div>
-            <div class='form-check'>
-              <input type='checkbox' class='form-check-input' id='manterConectado'>
-              <label class='form-check-label ' for='dropdownCheck'>
-                Mantenha-me conectado
-              </label>
-            </div>
+            <form>
+              <div class='form-group col-md-12'>
+                <label for='inputEmail3'>Email ou CNPJ :</label>
+                <input type='email' class='form-control' id='inputEmail'>
+              </div>
+              <div class='form-group col-md-12'>
+                <label for='inputPassword3'>Senha :</label>
+                <input type='password' class='form-control' id='inputPwd'>
+              </div>
+              <div class='form-check'>
+                <input type='checkbox' class='form-check-input' id='manterConectado'>
+                <label class='form-check-label ' for='dropdownCheck'>
+                  Mantenha-me conectado
+                </label>
+              </div>
 
-            <div class='p-3 text-right'>
-              <a  href='$urlRegister'> <button type='button' class='btn btn-link'> Cadastre-se </button></a>
-              <a href='$urlRecoverPasswd'><button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button></a><br>
+              <div class='p-3 text-right'>
+                <a  href='$urlRegister'> <button type='button' class='btn btn-link'> Cadastre-se </button></a>
+                <a href='$urlRecoverPasswd'><button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button></a><br>
+              </div>
+            </form>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-primary' id='btnLogar'>Entrar</button>
             </div>
-          </form>
-          <div class='modal-footer'>
-            <button type='button' class='btn btn-primary' id='btnLogar'>Entrar</button>
           </div>
         </div>
       </div>
     </div>
-    </div>
     
-    ";
+ModalLogin;
 
   }
 
@@ -114,7 +121,8 @@ class ComponenteElement
     $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
     $background = "https://ci4.googleusercontent.com/proxy/zi2B0d_rqBrjZUnbvWBsWVB8fe8l8zm2FoPZ47PHEU2ogMXdxR09xVIKWM8QHcCmFCTyyzH0kRR1HLgukAU2J3cKuZGRln3KRpGokTAh0qER=s0-d-e1-ft#https://img.fortawesome.com/349cfdf6/tile-info-icons-misc1.png";
       return
-      "<div id=':19t' class='ii gt'>
+<<<mail
+      <div id=':19t' class='ii gt'>
         <div id=':19s' class='a3s aXjCH undefined' dir='ltr'><u></u>
             <div bgcolor='#f8f9fa'>
                 <table width='100%' cellspacing='0' cellpadding='0' border='0'>
@@ -246,6 +254,8 @@ class ComponenteElement
                 </table>
             </div>
         </div>
-      </div>";
+      </div>
+mail;
   }
+
 }

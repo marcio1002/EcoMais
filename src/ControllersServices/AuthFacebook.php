@@ -2,10 +2,11 @@
 
 namespace Ecomais\ControllersServices;
 
+use Ecomais\Models\DataException;
 use League\OAuth2\Client\Provider\Facebook;
 
 class AuthFacebook {
-    private $authFacebook;
+    private $facebook;
 
     private $configAuthUser = [
         'clientId'          => '250815926067653',
@@ -14,10 +15,36 @@ class AuthFacebook {
         'graphApiVersion'   => 'v7.0',
     ];
 
-    public function __construct() {
-        $this->authFacebook = new Facebook($this->configAuthUser);  
+    public function __construct() 
+    {
+        $this->facebook = new Facebook($this->configAuthUser);  
     }
 
+    public function getAuthURL(...$scope):string
+    {
+        return $this->facebook->getAuthorizationUrl($scope) ;
+    }
 
+    public function getState():string
+    {
+        return $this->facebook->getState();
+    }
+
+    public function setUserFace(string $code):void 
+    {
+        if(empty($token)) throw new DataException("No code provided");
+        $token = $this->facebook->getAccessToken('authorization_code',[
+            'code' => $code
+        ]);
+    }
+
+    private function createAccountUserFace($token):void
+    {
+        try {
+            
+        }catch(DataException $ex) {
+            throw new DataException($ex->getMessage(), $ex->getCode());
+        }
+    }
 
 }
