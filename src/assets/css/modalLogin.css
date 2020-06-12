@@ -1,14 +1,35 @@
-
-.button-login { padding: 5px; background: #ECF971; width: 80%; margin: 0 auto;  border-radius: 10px; }
+/* --- Formatações --- */
 
 .font-weigth-800 { font-weight: 800; }
 
 .font-size-1-5em { font-size: 1.5em; }
+.margin-auto { margin: 0 auto;}
 
-#modalLogin .form-control {
-    border: none;
-}
 
-#modalLogin .border-bottom-solid-1px {
-    border-bottom: 1px solid #424F5A;
-}
+/* --- Config Modal --- */
+#modalLogin .modal-header {  border: none; }
+#modalLogin .modal-title { font-weight: 900; }
+
+/* --- Input login --- */
+#modalLogin .form-control:focus { border-bottom: 2px solid rgba(100, 127, 153, 0.808); box-shadow: 0 .1em 0 0 rgba(100, 127, 153, 0.25); }
+#modalLogin .form-control { border: 1px solid transparent; }
+#modalLogin .border-bottom-solid-2px { border-radius: 0; border-bottom: 2px solid #5d6a75a2; }
+
+
+/* --- Config Button ---*/
+.btn-login { display: inline-block; vertical-align: middle; border: 1px solid transparent; padding: .375rem .75rem; }
+.button-login { padding: 5px; background: #ECF971; width: 80%;  border-radius: 10px; }
+
+/* --- Config label input--- */
+
+.label-login {color: #454c52c0; font-size:  1em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif }
+
+/* --- icones do login --- */
+#container-account-login .item-account-login { margin-right: 2%; border-radius: 50px; padding: 15px; }
+
+#container-account-login i { font-size: 2em;  vertical-align: middle; }
+
+#container-account-login i,a { color: #ffffff; }
+#container-account-login .facebook { background: #3b5998; }
+
+#container-account-login .google{ background: #ea4335; }

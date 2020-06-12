@@ -1,4 +1,12 @@
-<?php $this->layout("_theme", ["title" => "EcoMais - Home"]); ?>
+<?php 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
+use Ecomais\Web\Bundles;
+$this->layout("_theme", ["title" => "EcoMais - Home"]); 
+
+Bundles::renderCss(["alertify"]);
+?>
+
 <div class="container" id="title-container">
   <h1 class="h1">EcoMais</h1>
 </div>
@@ -145,3 +153,10 @@
   </div>
 </div>
 <?php $this->stop() ?>
+
+<?php 
+$this->start("scripts");
+  Bundles::renderJs(["js/apis"]);
+$this->stop();
+
+?>

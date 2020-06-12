@@ -63,53 +63,65 @@ navBar;
   public static function modalLogin():void
   {
     $face = new \Ecomais\ControllersServices\AuthFacebook();
-    $authUrl = $face->getAuthURL("email");
+    $authFacebookUrl = $face->getAuthURL("email");
     $urlRegister =  BASE_URL . '/cadastro';
     $urlRecoverPasswd = BASE_URL . "/recuperarsenha";
 
   echo <<<ModalLogin
-    <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='true'>
-      <div class='modal-dialog' role='document'>
+    <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='false'>
+    <div class='modal-dialog' role='document'>
         <div class='modal-content'>
-          <div class='modal-header'>
-            <h5 class='modal-title' id='exampleModalLabel'>Login</h5>
-            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span>
-            </button>
-          </div>
-          <div class='modal-body'>
-            <div class='m-auto'>
-            <a title='Entrar com facebook' href='$authUrl' style='padding: 10px;background: linear-gradient(to top left,#348ADA,#4097E7);color: #fff;border-radius: 50px;font-size:23px 1.2em;text-decoration:none;font-weight:800;font-family: arial;'><i class='fab fa-facebook' style='font-size: 25px;vertical-align: middle;'></i> Entrar com facebook</a>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
             </div>
-            <form>
-              <div class='form-group col-md-12'>
-                <label for='inputEmail3'>Email ou CNPJ :</label>
-                <input type='email' class='form-control' id='inputEmail'>
-              </div>
-              <div class='form-group col-md-12'>
-                <label for='inputPassword3'>Senha :</label>
-                <input type='password' class='form-control' id='inputPwd'>
-              </div>
-              <div class='form-check'>
-                <input type='checkbox' class='form-check-input' id='manterConectado'>
-                <label class='form-check-label ' for='dropdownCheck'>
-                  Mantenha-me conectado
-                </label>
-              </div>
+            <div class='modal-body p-3'>
+                <div class='modal-title pt-3 pb-3  mb-4 text-center'>
+                    <h3>Login</h3>
+                </div>
+                <form>
+                    <div class='form-group col-md-12'>
+                        <label for='inputEmail' class='label-login'>Email ou CNPJ :</label>
+                        <input type='email' class='form-control border-bottom-solid-2px' id='inputEmail'>
+                    </div>
+                    <div class='form-group col-md-12'>
+                        <label for='inputPwd' class='label-login'>Senha :</label>
+                        <input type='password' class='form-control border-bottom-solid-2px' id='inputPwd'>
+                    </div>
+                    <div class='form-check'>
+                        <input type='checkbox' class='form-check-input' id='manterConectado'>
+                        <label class='form-check-label ' for='dropdownCheck'>
+                            Mantenha-me conectado
+                        </label>
+                    </div>
 
-              <div class='p-3 text-right'>
-                <a  href='$urlRegister'> <button type='button' class='btn btn-link'> Cadastre-se </button></a>
-                <a href='$urlRecoverPasswd'><button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button></a><br>
-              </div>
-            </form>
-            <div class='modal-footer'>
-              <button type='button' class='btn btn-primary' id='btnLogar'>Entrar</button>
+                    <div class='p-3 text-right'>
+                        <a href='$urlRecoverPasswd'><button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button></a><br>
+                    </div>
+                </form>
+                <div class='col-12'>
+                    <div class='text-center'>
+                        <button type='button' class='button-login text-center btn-login font-weigth-800 font-size-1-5em' id='btnLogar'>Entrar</button>
+                    </div>
+                </div>
+
+                <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
+                    <div class='item-account-login facebook'>
+                        <a title='Entrar com o Facebook' href='$authFacebookUrl'><i class='fab fa-facebook'></i></a>
+                    </div>
+                    <div class='item-account-login google'>
+                        <a title='Entrar com o Google' href=''><i class='fab fa-google'></i></a>
+                    </div>
+                </div>
+                <div class='pt-4 text-center'>
+                    <p>Não tem uma conta ?</p>
+                    <a href='$urlRegister'> <button type='button' class='btn btn-link'> Cadastre-se </button></a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    
+    </div>  
 ModalLogin;
 
   }

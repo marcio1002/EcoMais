@@ -57,11 +57,6 @@ class Router
         require_once __DIR__ . "/../Views/politicaPrivacidadeTermos.php";
     }
 
-    public function loginTeste():void
-    {
-        require_once __DIR__ . "/../Views/login.php";
-    }
-
 
     /**
      * @group Empresa

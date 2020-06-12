@@ -34,7 +34,6 @@ $router->get("/cadastro", "Router:register");
 $router->get("/recuperarsenha", "Router:recoverPasswd");
 $router->get("/recuperarsenha/novasenha/t={token}","Router:newPasswd");
 $router->get("/terms", "Router:terms");
-$router->get("/login","Router:loginTeste");
 
 $router->group("error");
 $router->get("/{errCode}", "Router:typeError");
