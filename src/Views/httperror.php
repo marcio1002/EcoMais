@@ -4,7 +4,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 $this->layout("_theme", ["title" => $errCode]);
 
 $info = ($errCode == "404") ? "Pagina Não encontrada" : "Houve um erro no servidor volte para a página principal ou relate ao suporte sobre o erro";
-$background  = ($errCode == "404") ? renderUrl("src/assets/imgs/errorhttp404.jpg") : renderUrl("src/assets/imgs/error404.jpg");
+$background  = ($errCode == "404") ? renderUrl("src/assets/imgs/error404.jpg") : renderUrl("src/assets/imgs/error404.jpg");
 
 $this->start("error");
     echo "

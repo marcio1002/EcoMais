@@ -3,24 +3,27 @@ namespace Ecomais\Web;
 
 use League\Plates\Engine;
 
-class Router
+class  Router
 {
-    private Engine $view;
-    private Engine $viewCompany;
-    private Engine $viewUser;
+    protected Engine $view;
 
-    public function __construct()
+    public function __construct(){}
+
+
+    private function route(?string $dir = null):void 
     {
-        $this->view  = new Engine(__DIR__ . "/../Views","php");
-        $this->viewCompany = new Engine(__DIR__ . "/../Views/company","php");
-        $this->viewUser = new Engine(__DIR__ . "/../Views/user","php");
-    }
+        $dir = __DIR__ . "/../Views/" . $dir ?? dirname(__DIR__, 2 ) . "/Views/";
+
+        $this->view = new Engine($dir,"php");
+
+    } 
 
     /**
      * Http erro
      */
     public function typeError($http_err): void
     {
+        $this->route();
         echo $this->view->render("httperror",[
             "errCode" => $http_err['errCode']
         ]);  
@@ -31,11 +34,13 @@ class Router
      */
     public  function home(): void
     {
+        $this->route();
         echo $this->view->render("home");
     }
 
     public function register(): void
     {
+        $this->route();
         echo $this->view->render("cadastro");
     }
 
@@ -63,12 +68,14 @@ class Router
      */
     public function indexCompany(?array $param = array()): void
     {
-        echo $this->viewCompany->render("index", $param);
+        $this->route("company");
+        echo $this->view->render("index", $param);
     }
 
 
     public function configCompany(?array $param = array()):void
     {
-        echo $this->viewCompany->render("configuration",$param);
+        $this->route("company");
+        echo $this->view->render("configuration",$param);
     }
 }
