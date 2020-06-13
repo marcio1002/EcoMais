@@ -1,7 +1,27 @@
 let forca = 0;
 
+
+function validaForm() {
+    var forError = false;
+
+    $("[data-required]").each(function () {
+        if ($(this).is("input"))
+            if ($(this).val().length == 0) {
+                forError = true;
+                $(this).addClass("formError");
+            }
+        if ($(this).is("select"))
+            if ($(this).val().length == 0 || !$(this).val()) {
+                forError = true;
+                $(this).addClass("formError");
+            }
+    });
+
+    return forError;
+}
+
 //mascaras
-$("#inputCep").mask("00000000", { placeholder: "NNNNNNNN ", clearIfNotMatch: true })
+$("#inputCep").mask("00000000", { placeholder: "nnnnnnnn", clearIfNotMatch: true })
 
 
 //verifica o email
@@ -77,25 +97,13 @@ $("#inputCep").keyup(async function (evt) { if (evt.keyCode == 13) $("#searchCep
 // <--- Functions Server --->
 
 $('#btnRegister').click(() => {
-    let forError = false;
 
     load(false, "#btnRegister");
     $("[data-required]").removeClass("formError");
 
-    $("[data-required]").each(function () {
-        if ($(this).is("input"))
-            if ($(this).val().length == 0) {
-                forError = true;
-                $(this).addClass("formError");
-            }
-        if ($(this).is("select"))
-            if ($(this).val().length == 0 || !$(this).val()) {
-                forError = true;
-                $(this).addClass("formError");
-            }
-    })
+    let formError = validaForm();
 
-    if (forError) return alertify.error("Preencha os campos em vermelho!");
+    if (formError) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
 
     let person = {

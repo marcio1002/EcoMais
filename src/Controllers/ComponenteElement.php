@@ -67,7 +67,7 @@ navBar;
     $urlRegister =  BASE_URL . '/cadastro';
     $urlRecoverPasswd = BASE_URL . "/recuperarsenha";
 
-  echo <<<ModalLogin
+echo <<<ModalLogin
     <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='false'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -77,7 +77,7 @@ navBar;
                 </button>
             </div>
             <div class='modal-body p-3'>
-                <div class='modal-title pt-3 pb-3  mb-4 text-center'>
+                <div class='modal-title mb-4 text-center'>
                     <h3>Login</h3>
                 </div>
                 <form>
@@ -107,12 +107,16 @@ navBar;
                 </div>
 
                 <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
-                    <div class='item-account-login facebook'>
-                        <a title='Entrar com o Facebook' href='$authFacebookUrl'><i class='fab fa-facebook'></i></a>
-                    </div>
-                    <div class='item-account-login google'>
-                        <a title='Entrar com o Google' href=''><i class='fab fa-google'></i></a>
-                    </div>
+                    <a title='Entrar com o Facebook' href='$authFacebookUrl' class='mr-3'>   
+                        <div class='item-account-login facebook'>
+                            <i class='fab fa-facebook'></i>
+                        </div>
+                    </a>
+                    <a title='Entrar com o Google' href=''>
+                        <div class='item-account-login google' class='mr-3'>
+                            <i class='fab fa-google'></i>
+                        </div>
+                    </a>
                 </div>
                 <div class='pt-4 text-center'>
                     <p>Não tem uma conta ?</p>
