@@ -38,13 +38,4 @@ class AuthFacebook {
         ]);
     }
 
-    private function createAccountUserFace($token):void
-    {
-        try {
-            
-        }catch(DataException $ex) {
-            throw new DataException($ex->getMessage(), $ex->getCode());
-        }
-    }
-
 }

@@ -25,11 +25,11 @@ $("#inputCep").mask("00000000", { placeholder: "nnnnnnnn", clearIfNotMatch: true
 
 
 //verifica o email
-$("#email").focusout(() => {
-    if (!isValidEmail($("#email").val())) {
-        $("#email").addClass("formError");
+$("#cadEmail").focusout(function(e) {
+    if (!isValidEmail($("#cadEmail").val())) {
+        $("#cadEmail").addClass("formError");
     } else {
-        $("#email").removeClass("formError");
+        $("#cadEmail").removeClass("formError");
     }
 });
 
@@ -108,7 +108,7 @@ $('#btnRegister').click(() => {
 
     let person = {
         name: $("#inputName").val(),
-        email: $("#email").val(),
+        email: $("#cadEmail").val(),
         passwd: $("#passwd").val(),
         cpf: $("#cpf").val(),
         cep: $("#inputCep").val(),

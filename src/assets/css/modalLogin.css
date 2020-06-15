@@ -29,9 +29,9 @@
 /* --- icones do login --- */
 #container-account-login .item-account-login { border-radius: 50px; padding: 10px; }
 
-#container-account-login i { font-size: 1.6em;  vertical-align: middle; }
+#container-account-login .i { font-size: 1.6em;  vertical-align: middle; }
 
-#container-account-login i,a { color: #ffffff; }
+#container-account-login .i,.a { color: #ffffff; }
 #container-account-login .facebook { background: #3b5998; }
 
 #container-account-login .google{ background: #ea4335; }

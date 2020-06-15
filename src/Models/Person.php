@@ -1,6 +1,7 @@
 <?php
 namespace Ecomais\Models;
 
+use DateTime;
 use Ecomais\Interfaces\PersonInterface;
 use Ecomais\Models\DataException;
 use TypeError;
@@ -16,7 +17,7 @@ class Person  implements PersonInterface
     protected string $passwd;
     protected string $uf;
     protected string $city;
-    protected string $addres;
+    protected ?string $addres;
     protected int $number;
     protected string $date;
     protected ?int $cep;
@@ -70,7 +71,7 @@ class Person  implements PersonInterface
         $this->email = trim($email);
     }
 
-    public function getCep(): int
+    public function getCep(): ?int
     {
         return $this->cep;
     }
@@ -78,7 +79,7 @@ class Person  implements PersonInterface
     public function setCep(?string $cep): void
     {
         $cep = preg_replace("/[.-]/","",$cep);
-        $this->cep = $cep;
+        $this->cep = is_int($cep) ? $cep : null;
     }
 
     public function getUF(): string
@@ -105,14 +106,14 @@ class Person  implements PersonInterface
         $this->city = trim($city);
     }
 
-    public function getAddres(): string
+    public function getAddres(): ?string
     {
         return $this->addres;
     }
 
     public function setAddres(?string $addres): void
     {
-        $this->addres = $addres;
+        $this->addres = isset($addres) ?? null;
     }
 
     public function getNumber(): int
@@ -144,7 +145,7 @@ class Person  implements PersonInterface
     {
         date_default_timezone_set("America/Sao_paulo");
 
-        $this->date =   date('Y-m-d H:i:s');
+        $this->date = date('Y-m-d H:i:s');
         return $this->date;
     }
 }

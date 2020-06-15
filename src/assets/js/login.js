@@ -28,5 +28,8 @@ $('#btnLogar').click(() => {
         }
     }
     
-    reqAjax(option);
+    if($("#inputEmail").val().length > 0 && $("#inputPwd").val().length > 0) 
+        reqAjax(option);
+    else 
+        return alertify.error("Preencha os campos!");
 })

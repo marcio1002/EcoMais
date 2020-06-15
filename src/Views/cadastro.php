@@ -21,7 +21,7 @@ $this->stop();
 <div class="row">
   <div class="col-12">
     <div class="col-8 offset-md-2">
-      <form>
+      <form action="return false">
         <div class="cad">
           <div class="form-row col-md-12 pb-3">
             <div class="form-group col-md-6 ">
@@ -30,7 +30,7 @@ $this->stop();
             </div>
             <div class="form-group col-md-6">
               <label for="text">Email:</label>
-              <input type="email" class="form-control nextItem" id="email" placeholder="seumail@test.dominio" data-required="" />
+              <input type="text" class="form-control nextItem" id="cadEmail" placeholder="seumail@test.dominio" data-required="" />
             </div>
           </div>
           <div class="form-row col-md-12 pb-3">

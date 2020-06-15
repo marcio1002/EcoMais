@@ -97,7 +97,9 @@ echo <<<ModalLogin
                     </div>
 
                     <div class='p-3 text-right'>
-                        <a href='$urlRecoverPasswd'><button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button></a><br>
+                        <a href='$urlRecoverPasswd' class='a'>
+                            <button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button>
+                        </a>
                     </div>
                 </form>
                 <div class='col-12'>
@@ -107,14 +109,15 @@ echo <<<ModalLogin
                 </div>
 
                 <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
-                    <a title='Entrar com o Facebook' href='$authFacebookUrl' class='mr-3'>   
+                    <a title='Entrar com o Facebook' href='$authFacebookUrl' class='mr-3 a' 
+                        onclick='window.open(this.href, this.target, "width=604,height=560,left="+ (window.innerWidth-600)/2 +", top="+  (window.innerWidth-100)/2 +" "); return false;'>   
                         <div class='item-account-login facebook'>
-                            <i class='fab fa-facebook'></i>
+                            <i class='fab fa-facebook i'></i>
                         </div>
                     </a>
-                    <a title='Entrar com o Google' href=''>
+                    <a title='Entrar com o Google' href='' class='a'>
                         <div class='item-account-login google' class='mr-3'>
-                            <i class='fab fa-google'></i>
+                            <i class='i fab fa-google'></i>
                         </div>
                     </a>
                 </div>

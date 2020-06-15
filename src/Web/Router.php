@@ -68,14 +68,14 @@ class  Router
      */
     public function indexCompany(?array $param = array()): void
     {
-        $this->route("company");
+        $this->route("Company");
         echo $this->view->render("index", $param);
     }
 
 
     public function configCompany(?array $param = array()):void
     {
-        $this->route("company");
+        $this->route("Company");
         echo $this->view->render("configuration",$param);
     }
 }

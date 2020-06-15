@@ -36,7 +36,7 @@ interface PersonInterface
      */
     public function setEmail(string $email): void;
     //----------------------------
-    public function getCep(): int;
+    public function getCep(): ?int;
     /**
      * @param int $cep
      * Cep do usuário
@@ -60,7 +60,7 @@ interface PersonInterface
      */
     public function setLocality(string $locality): void;
     //----------------------------
-    public function getAddres(): string;
+    public function getAddres(): ?string;
     /**
      * @param string $addre
      * Endereço do usuário

@@ -75,7 +75,7 @@ final class Data implements DataInterface
             $this->row = $this->pdo->commit();
         } catch (Exception $ex) {
 
-            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
+            throw new DataException($ex->getMessage(),DataException::SERVER_ERROR);
         }
 
         return $this->row;
@@ -85,7 +85,7 @@ final class Data implements DataInterface
     {
         try {
             if (empty($table)) throw new DataException("Error null values", DataException::NOT_IMPLEMENTED);
-            if ($option <= 0 || $option > 6) throw new DataException("Value $option is not accepted", DataException::REQ_INVALID);
+            if ($option <= 0 || $option > 6) throw new DataException("Value $option is not accepted", DataException::SERVER_ERROR);
             if (!is_numeric($option)) throw new DataException("Non-numeric value", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();
@@ -123,7 +123,7 @@ final class Data implements DataInterface
                 return ($this->query->rowCount() == 1) ? $this->query->fetch(PDO::FETCH_ASSOC) : $this->query->fetchAll();
         } catch (Exception $ex) {
 
-            throw new DataException($ex->getMessage(), DataException::REQ_INVALID);
+            throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);
         }
 
         return null;
@@ -154,7 +154,7 @@ final class Data implements DataInterface
             $this->row = $this->pdo->commit();
 
         } catch (Exception $ex) {
-            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
+            throw new DataException($ex->getMessage(),DataException::SERVER_ERROR);
         }
         return $this->row;
     }
@@ -174,7 +174,7 @@ final class Data implements DataInterface
             $this->query->execute();
             $this->row = $this->pdo->commit();
         } catch (Exception $ex) {
-            throw new DataException($ex->getMessage(),DataException::REQ_INVALID);
+            throw new DataException($ex->getMessage(),DataException::SERVER_ERROR);
         }
         return $this->row;
     }

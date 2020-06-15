@@ -11,6 +11,10 @@
  * @license 
  */
 
+/*
+ * Rotas mostrada para o usuario são mostrada em português (pt-BR)
+ */
+
 require __DIR__ . "/vendor/autoload.php";
 
 require_once __DIR__ . "/src/config.php";
@@ -54,18 +58,24 @@ $router->namespace("Ecomais\Controllers");
 $router->group("manager");
 $router->post("/login", "AccountManager:login");
 $router->get("/logoff", "AccountManager:logoff");
-$router->post("/addaccountpersonphysical", "AccountManager:addAccountPersonPhysical");
-$router->delete("/removeuser", "AccountManager:deleteAccount");
 $router->post("/recoverByKey", "AccountManager:recoverByKey");
 $router->post("/recoverByMail", "AccountManager:recoverByMail");
 
-/** rotas para produtos*/
-$router->group("produto");
-$router->get("/", "ManagerProduct:showProduct");
+
+/** rotas para Empresas*/
+
+$router->namespace("Ecomais\Controllers\Company");
+$router->group("manager");
+
+/** rotas para Usuários */
+$router->namespace("Ecomais\Controllers\User");
+
+$router->group("manager");
+$router->post("/addaccountpersonphysical", "AccountManager:addAccountPersonPhysical");
 
 
 /** rotas para empresas */
-$router->group("empresa");
+//$router->group("managerempresa");
 
 
 $router->dispatch();

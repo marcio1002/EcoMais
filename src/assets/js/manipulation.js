@@ -18,13 +18,12 @@ $(".nextItem").keypress(function (e) {
    var tecla = e.keyCode ? e.keyCode : e.which;
    if (tecla == 13) {
       e.preventDefault();
-      e.stopPropagation();
 
       var indexof = $(".nextItem").index(this) + 1;
 
       if (indexof < $(".nextItem:not(input[readonly])").length)
          $(`.nextItem:eq(${indexof})`).focus();
       else
-         $("#btnSalvaItem").trigger('click');
+         return
    }
 });

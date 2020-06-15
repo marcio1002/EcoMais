@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_URL", "https://www.localhost/www/EcoMais");
+define("BASE_URL", "https://www.localhost/www/ecomais");
 
 
 header('Access-Control-Allow-Origin: *');
@@ -14,3 +14,5 @@ function renderUrl(?string $url = null):string
 {
     return empty($url) ? BASE_URL : BASE_URL . "/$url";    
 }
+
+mb_http_output('UTF-8');

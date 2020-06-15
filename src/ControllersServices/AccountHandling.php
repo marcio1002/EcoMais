@@ -16,12 +16,10 @@ class AccountHandling {
 
     public function createAccountPersonPhysical(Person $person):int
     {
-        try
-        {
-
+        try {
             $passwd =  $this->safety->criptPasswd($person->getPassword());
-            $array_columns = "nome,email,senha,cep,uf,cidade,endereco,statusconta,data_criacao";
-            $array_register = array(
+            $columns = "nome,email,senha,cep,uf,cidade,endereco,statusconta,data_criacao";
+            $data = array(
                 $person->getName(),
                 $person->getEmail(),
                 $passwd,
@@ -35,63 +33,17 @@ class AccountHandling {
 
             $this->sql->open();
 
-            return $this->sql->add("usuario",$array_columns,$array_register);
+            return $this->sql->add("usuario",$columns,$data);
 
-        } catch(DataException $ex) 
-        {   
+        } catch(DataException $ex)  {   
             throw new DataException( $ex->getMessage(),$ex->getCode() );
-
-        }finally 
-        {
+            
+        } finally {
             $this->sql->close();
         }
             
     }
 
-    public function createAccountPersonLegal(PersonLegal $personLegal)
-    {}
-    
-    public function deleteAccount(Person $person):int
-    {
-            try{
-                $id = [ $person->getId() ];
-                
-                $this->sql->open();
-                return $this->sql->delete("usuarios","id_usuario = ?",$id);
-                
-            } catch(DataException $ex)
-            {
-                throw new DataException( $ex->getMessage(), $ex->getCode() );
-
-            }finally 
-            {
-                $this->sql->close();
-            }
-    }
-    
-    public function updateAccountPersonPhysical(Person $person):int
-    {
-            try{
-                $pwd = $this->safety->criptPasswd($person->getPassword());
-                $postPreVal = "nome = ?,email = ?,password = ?";
-                $postVal = [$person->getName(), $person->getEmail(), $pwd];
-                $preWhere = [$person->getId()];
-                $this->sql->open();
-
-                return $this->sql->update("usuarios","id_usuario = ?",$preWhere,$postPreVal,$postVal);
-
-            } catch(DataException $ex)
-            {
-                throw new DataException($ex->getMessage(), $ex->getCode() );
-            }finally 
-            {
-                $this->sql->close();
-            }
-    }
-
-    public function updateAccountPersonLegal(PersonLegal $personLegal)
-    {}
-    
     public function setLogin(Person $person):array
     {
             try {
