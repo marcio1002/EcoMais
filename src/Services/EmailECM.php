@@ -1,11 +1,10 @@
 <?php
 namespace Ecomais\Services;
 
-use Ecomais\Interfaces\EmailECMInterface;
 use Ecomais\Models\{DataException, EmailProps};
 use PHPMailer\PHPMailer\{PHPMailer, Exception, SMTP};
 
-class EmailECM  extends EmailProps implements EmailECMInterface
+class EmailECM  extends EmailProps 
 {
     /**
      * @var PHPMailer 

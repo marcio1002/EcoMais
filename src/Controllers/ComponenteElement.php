@@ -62,8 +62,7 @@ navBar;
 
   public static function modalLogin():void
   {
-    $face = new \Ecomais\ControllersServices\AuthFacebook();
-    $authFacebookUrl = $face->getAuthURL("email");
+    $authFacebookUrl = BASE_URL . "/manager/loginfacebook";
     $urlRegister =  BASE_URL . '/cadastro';
     $urlRecoverPasswd = BASE_URL . "/recuperarsenha";
 
@@ -107,7 +106,6 @@ echo <<<ModalLogin
                         <button type='button' class='button-login text-center btn-login font-weigth-800 font-size-1-5em' id='btnLogar'>Entrar</button>
                     </div>
                 </div>
-
                 <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
                     <a title='Entrar com o Facebook' href='$authFacebookUrl' class='mr-3 a' 
                         onclick='window.open(this.href, this.target, "width=604,height=560,left="+ (window.innerWidth-600)/2 +", top="+  (window.innerWidth-100)/2 +" "); return false;'>   

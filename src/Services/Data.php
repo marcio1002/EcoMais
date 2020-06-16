@@ -8,11 +8,10 @@ namespace Ecomais\Services;
 
 
 use Exception;
-use Ecomais\Interfaces\DataInterface;
 use PDO;
 use Ecomais\Models\DataException;
 
-final class Data implements DataInterface
+final class Data
 {
     const  PARAM_HOST = 'localhost';
     const  PARAM_USER = 'marcio';
@@ -32,7 +31,7 @@ final class Data implements DataInterface
 
     public function __destruct()
     {
-        if (!empty($this->pdo)) unset($this->pdo);
+        if (isset($this->pdo)) unset($this->pdo);
     }
 
     public function open(): void

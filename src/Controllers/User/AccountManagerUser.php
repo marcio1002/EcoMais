@@ -19,14 +19,14 @@ class AccountManagerUser {
     {
         try {
 
-            $this->usr->setName($param['name']);
-            $this->usr->setEmail($param['email']);
-            $this->usr->setPassword($param['passwd']);
-            $this->usr->setCep($param['cep']);
-            $this->usr->setUF($param['uf']);
-            $this->usr->setAddres($param['addres']);
-            $this->usr->setLocality($param['localidade']);
-            $this->usr->setStatusAccount(Person::ENABLED);
+            $this->usr->name = $param['name'];
+            $this->usr->email = $param['email'];
+            $this->usr->passwd = $param['passwd'];
+            $this->usr->cep = $param['cep'];
+            $this->usr->uf = $param['uf'];
+            $this->usr->addres = $param['addres'];
+            $this->usr->locality = $param['localidade'];
+            $this->usr->statusAccount = Person::ENABLED;
 
             if ($this->account->createAccountPersonPhysical($this->usr)) {
                 echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "msg" => "Ok"]);

@@ -1,37 +1,23 @@
 <?php
 namespace Ecomais\Models;
 
-use Ecomais\Interfaces\PersonLegalInterface;
 use Ecomais\Models\{Person, DataException};
 
 use TypeError;
 
-class PersonLegal extends person implements PersonLegalInterface
+class PersonLegal extends person 
 {
-
-    private int $cnpj;
+    private int $cnpj; //preg_replace("/[.\/-]/","",$cnpj)
     private int $typePackage;
 
-    public function getCnpj(): int
+    public function __set($name, $value)
     {
-        return $this->cnpj;
+        if (empty($name) || empty($value)) throw new DataException('Null values', DataException::REQ_INVALID);
+        $this->$name = $value;
     }
 
-    public function setCnpj(string $cnpj): void
+    public function __get($name)
     {
-        if (empty($cnpj)) throw new DataException('Undefined value');
-        $cnpj = preg_replace("/[.\/-]/","",$cnpj);
-        if (!is_numeric($cnpj)) throw new TypeError("Expected a number format", 1);
-        $this->cnpj = trim($cnpj);
-    }
-
-    public function getTypePackage(): int
-    {
-        return $this->typePackage;
-    }
-
-    public function setTypePackage(int $typePackage): void
-    {
-        $this->typePackage = $typePackage;
+        return $this->$name;
     }
 }

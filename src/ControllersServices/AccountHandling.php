@@ -17,17 +17,17 @@ class AccountHandling {
     public function createAccountPersonPhysical(Person $person):int
     {
         try {
-            $passwd =  $this->safety->criptPasswd($person->getPassword());
+            $passwd =  $this->safety->criptPasswd($person->passwd);
             $columns = "nome,email,senha,cep,uf,cidade,endereco,statusconta,data_criacao";
             $data = array(
-                $person->getName(),
-                $person->getEmail(),
+                $person->name,
+                $person->email,
                 $passwd,
-                $person->getCep(),
-                $person->getUF(),
-                $person->getLocality(),
-                $person->getAddres(),
-                $person->getStatusAccount(),
+                $person->cep,
+                $person->uf,
+                $person->locality,
+                $person->addres,
+                $person->statusAccount,
                 $person->createAt()
             );
 
@@ -47,8 +47,8 @@ class AccountHandling {
     public function setLogin(Person $person):array
     {
             try {
-                $pwd = $this->safety->criptPasswd($person->getPassword());
-                $where =  [$person->getEmail(),$pwd];
+                $pwd = $this->safety->criptPasswd($person->passwd);
+                $where =  [$person->email,$pwd];
 
                 $this->sql->open();
 
@@ -57,10 +57,25 @@ class AccountHandling {
             catch(DataException $ex) { 
                throw new DataException( $ex->getMessage(), $ex->getCode() );
 
-            } finally 
-            {
+            } finally {
                 $this->sql->close();
             }
+    }
+
+    public function setLoginAuthFacebook(PersonLegal $person):array
+    {
+        try {
+            $where = [];
+
+                $this->sql->open();
+
+            return $this->sql->show('usuario',"","email = ?",$where,3);
+
+        }catch(DataException $ex) {
+            throw new DataException($ex->getCode(), $ex->getMessage());
+        } finally {
+            $this->sql->close();
+        }
     }
 
     public function isLogged():bool

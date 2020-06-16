@@ -26,21 +26,21 @@ class AccountManager
     public function login($param): void
     {
         try {
-            $this->usr->setEmail($param['email']);
-            $this->usr->setPassword($param['passwd']);
+            $this->usr->email = $param['email'];
+            $this->usr->passwd = $param['passwd'];
 
             if ($res = $this->account->setLogin($this->usr)) {
 
                 $temp = ($param['conectedLogin'] == 18) ? time() + (1 * 12 * 30 * 24 * 3600) : time() + (24 * 36000);
 
-                $this->usr->setId($res['id_usuario']);
+                $this->usr->id = $res['id_usuario'];
 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start();
 
-                setcookie('_id', $this->usr->getId(), $temp, '/', "", false, true);
+                setcookie('_id', $this->usr->id, $temp, '/', "", false, true);
                 setcookie('_token', $token, $temp, '/', "", false, true);
 
                 echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
@@ -54,6 +54,30 @@ class AccountManager
         }
     }
 
+    public function loginAuthFacebook(): void
+    {
+        $face = new \Ecomais\Models\AuthFacebook();
+        $authFacebookUrl = $face->getAuthURL("email","location","hometown");
+
+        $code = filter_input(INPUT_GET,"code",FILTER_SANITIZE_STRIPPED);
+        $err  = filter_input(INPUT_GET,"error",FILTER_SANITIZE_STRIPPED);
+
+        if(empty($code) && empty($err)) header("location: $authFacebookUrl");
+
+        if(!empty($code)) {
+            $data = $face->getData($code);
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+        }else {
+            echo "<script> window.close(); </script>";
+        }
+
+        
+    }
+
+    public function loginAuthGoogle(): void {}
+
     public function logoff(): void
     {
         if (session_status() == PHP_SESSION_DISABLED) session_start();
@@ -65,7 +89,7 @@ class AccountManager
             header("location:" . BASE_URL);
         } else {
 
-            //header("location: " . BASE_URL . "/product");
+            header("location: " . BASE_URL);
         }
         if (session_status() == PHP_SESSION_ACTIVE) session_destroy();
     }

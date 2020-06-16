@@ -118,7 +118,7 @@ $('#btnRegister').click(() => {
     };
     option = {
         method: 'POST',
-        mycustomtype: "application/json",
+        mycustomtype: "application/json charset=utf-8",
         url: `${BASE_URL}/manager/addaccountpersonphysical`,
         dataType: "json",
         data: person,
