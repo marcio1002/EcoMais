@@ -12,7 +12,7 @@ class  Router
 
     private function route(?string $dir = null):void 
     {
-        $dir = __DIR__ . "/../Views/" . $dir ?? dirname(__DIR__, 2 ) . "/Views/";
+        $dir = dirname(__DIR__, 1 ) . "/Views/" . $dir ?? dirname(__DIR__, 1 ) . "/Views/";
 
         $this->view = new Engine($dir,"php");
 

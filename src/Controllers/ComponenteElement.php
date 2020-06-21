@@ -5,35 +5,12 @@ use Ecomais\Web\Bundles;
 
 class ComponenteElement
 {
-  public static function navBarHome(): void
+  public static function navBarHome():string
   {
-    $urlRegister = BASE_URL . '/cadastro';
-    $logo = BASE_URL . '/src/assets/imgs/ecomais-logo-sem-fundo.png';
-    $index = BASE_URL;
-echo <<<navBar
-      <div class='container' id='nav-container'>
-        <nav class='navbar navbar-expand-lg fixed-top navbar-dark'>
-          <a class='navbar-brand' href='$index' >
-            <img id='logo' src='$logo' alt='ecom'>
-          </a>
-          <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
-            aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
-            <span class='navbar-toggler-icon'></span>
-          </button>
-          <div class='collapse navbar-collapse justify-content-end' id='navbar-links'>
-            <div class='navbar-nav'>
-              <a class='nav-item nav-link item-hover position-relative' id='home-menu' href='{$index}'>Home</span></a>
-              <a class='nav-item nav-link item-hover position-relative' id='about-menu' href='$urlRegister' >Cadastre-se</a>
-              <a class='nav-item nav-link item-hover position-relative' id='services-menu' href='#'>Serviços</a>
-              <a class='nav-item nav-link item-hover position-relative' id='portfolio-menu' href='#'>Projetos</a>
-              <a class='nav-item nav-link item-hover position-relative' id='contact-menu' data-toggle='modal' data-target='#modalLogin' href=''>Entrar</a>
-            </div>
-          </div> 
-
-        </nav>
-      </div>
-    </header>
-          <header>
+    $urlRegister = renderUrl('/cadastro');
+    $logo = renderUrl('/src/assets/imgs/ecomais-logo-sem-fundo.png');
+    $index = renderUrl();
+return <<<navBar
       <div class='container' id='nav-container'>
         <nav class='navbar navbar-expand-lg fixed-top navbar-dark'>
           <a class='navbar-brand' href='$index' >
@@ -52,7 +29,6 @@ echo <<<navBar
               <a class='nav-item nav-link item-hover position-relative' id='contact-menu' data-toggle='modal' data-target='#modalLogin' href=''>Entrar</a>
             </div>
           </div> 
-
         </nav>
       </div>
     <div class='subNavBar' style='background: #fff'>
@@ -60,13 +36,13 @@ echo <<<navBar
 navBar;
   }
 
-  public static function modalLogin():void
+  public static function modalLogin():string
   {
-    $authFacebookUrl = BASE_URL . "/manager/loginfacebook";
-    $urlRegister =  BASE_URL . '/cadastro';
-    $urlRecoverPasswd = BASE_URL . "/recuperarsenha";
+    $authGoogleUrl = renderUrl("/manager/logingoogle");
+    $urlRegister =  renderUrl('/cadastro');
+    $urlRecoverPasswd = renderUrl("/recuperarsenha");
 
-echo <<<ModalLogin
+return <<<ModalLogin
     <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='false'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -107,13 +83,7 @@ echo <<<ModalLogin
                     </div>
                 </div>
                 <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
-                    <a title='Entrar com o Facebook' href='$authFacebookUrl' class='mr-3 a' 
-                        onclick='window.open(this.href, this.target, "width=604,height=560,left="+ (window.innerWidth-600)/2 +", top="+  (window.innerWidth-100)/2 +" "); return false;'>   
-                        <div class='item-account-login facebook'>
-                            <i class='fab fa-facebook i'></i>
-                        </div>
-                    </a>
-                    <a title='Entrar com o Google' href='' class='a'>
+                    <a title='Entrar com o Google' href='$authGoogleUrl' class='a'>
                         <div class='item-account-login google' class='mr-3'>
                             <i class='i fab fa-google'></i>
                         </div>
@@ -128,7 +98,6 @@ echo <<<ModalLogin
     </div>
     </div>  
 ModalLogin;
-
   }
 
   public static function mail($name,$token):string
@@ -137,8 +106,7 @@ ModalLogin;
     $font2 ="font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
     $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
     $background = "https://ci4.googleusercontent.com/proxy/zi2B0d_rqBrjZUnbvWBsWVB8fe8l8zm2FoPZ47PHEU2ogMXdxR09xVIKWM8QHcCmFCTyyzH0kRR1HLgukAU2J3cKuZGRln3KRpGokTAh0qER=s0-d-e1-ft#https://img.fortawesome.com/349cfdf6/tile-info-icons-misc1.png";
-      return
-<<<mail
+return<<<mail
       <div id=':19t' class='ii gt'>
         <div id=':19s' class='a3s aXjCH undefined' dir='ltr'><u></u>
             <div bgcolor='#f8f9fa'>

@@ -16,6 +16,12 @@
 
                 <h4 class="center-align">Política de privacidade do <em>EcoMais</em></h4>
 
+                <p>A sua privacidade é importante para nós. A política do <strong class="blue-text">EcoMais</strong> respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site EcoMais.</p>
+                
+                <p>Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado. </p>
+                
+                <p>Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis ​​para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</p>
+                
                 <p>Todas as suas informações pessoais recolhidas, serão usadas para o ajudar a tornar a sua visita no nosso site o mais produtiva e agradável possível.</p>
 
                 <p>A garantia da confidencialidade dos dados pessoais dos utilizadores do nosso site é importante para o <strong class="blue-text">Ecomais</strong>.</p>
@@ -23,6 +29,8 @@
                 <p>Todas as informações pessoais relativas a membros, assinantes, clientes ou visitantes que usem o <strong class="blue-text">Ecomais</strong> serão tratadas em concordância com a <a href="http://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2018/Lei/L13709.htm"><strong>Lei da Proteção de Dados Pessoais</strong></a> (LGPD) de 14 de AGOSTO de 2018 <strong>(LEI Nº 13.709)</strong>.</p>
 
                 <p>As informações pessoais recolhida pode incluir o seu nome, e-mail, número de telefone e/ou telemóvel, morada, data de nascimento entre outros.</p>
+
+                <p>O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas <strong>íticas de privacidade.</strong> </p>
 
                 <p>O uso do <strong class="blue-text">Ecomais</strong> pressupõe a aceitação deste Acordo de privacidade. A equipe do <strong class="blue-text">Ecomais</strong> reserva-se ao direito de alterar este acordo sem aviso prévio. Deste modo, recomendamos que consulte a nossa política de privacidade com regularidade de forma a estar sempre atualizado.</p>
 

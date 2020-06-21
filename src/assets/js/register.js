@@ -49,7 +49,6 @@ $("#btnViewPasswd").on("click", function () {
         icon.addClass("fa-eye-slash");
     }
 });
-$("#passwd").keyup(function (evt) { $('span#length').html($(this).val().length) });
 
 $("#passwd").keypress(function () {
     $("#progress-bar").removeClass().addClass("progress-bar");

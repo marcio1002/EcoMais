@@ -54,29 +54,25 @@ class AccountManager
         }
     }
 
-    public function loginAuthFacebook(): void
-    {
-        $face = new \Ecomais\Models\AuthFacebook();
-        $authFacebookUrl = $face->getAuthURL("email","location","hometown");
+    public function loginAuthGoogle(): void {
+        $google  = new \Ecomais\Models\AuthGoogle();
 
+        $authGoogleUrl = $google->getAuthURL();
+        
         $code = filter_input(INPUT_GET,"code",FILTER_SANITIZE_STRIPPED);
         $err  = filter_input(INPUT_GET,"error",FILTER_SANITIZE_STRIPPED);
 
-        if(empty($code) && empty($err)) header("location: $authFacebookUrl");
+        if(empty($code) && empty($err)) header("location: $authGoogleUrl");
 
         if(!empty($code)) {
-            $data = $face->getData($code);
+            $data = $google->getData($code);
             echo "<pre>";
             print_r($data);
             echo "</pre>";
         }else {
             echo "<script> window.close(); </script>";
         }
-
-        
     }
-
-    public function loginAuthGoogle(): void {}
 
     public function logoff(): void
     {

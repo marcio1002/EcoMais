@@ -21,9 +21,12 @@ $(".nextItem").keypress(function (e) {
 
       var indexof = $(".nextItem").index(this) + 1;
 
-      if (indexof < $(".nextItem:not(input[readonly])").length)
+      if (indexof < $(".nextItem:not(input[readonly])").length) {
+
          $(`.nextItem:eq(${indexof})`).focus();
-      else
-         return
+      }
+      else {
+         return null
+      }
    }
 });

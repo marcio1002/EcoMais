@@ -1,10 +1,15 @@
 <?php 
 require_once __DIR__ . "/../../vendor/autoload.php";
 
-use Ecomais\Web\Bundles;
-$this->layout("_theme", ["title" => "EcoMais - Home"]); 
+  use Ecomais\Web\Bundles;
 
-Bundles::renderCss(["alertify"]);
+ $this->layout("_theme", ["title" => "EcoMais - Home"]); 
+?>
+
+<?
+  $this->start("css");
+    Bundles::renderCss(["css/alertify"]);
+  $this->stop();
 ?>
 
 <div class="container" id="title-container">
@@ -17,7 +22,7 @@ Bundles::renderCss(["alertify"]);
         <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
       </div>
       <div class="col-md-6">
-        <img class="img-fluid" src=<?= renderUrl("src/assets/imgs/nlogo.png"); ?> alt="Ecomais">
+        <img class="img-fluid" src=<?= renderUrl("/src/assets/imgs/nlogo.png"); ?> alt="Ecomais">
       </div>
       <div class="col-md-6">
         <h3 class="about-title">Uma Organização que pensa no futuro e saúde do planeta</h3>
@@ -39,7 +44,7 @@ Bundles::renderCss(["alertify"]);
   </div>
 </div>
 
-<div class="row">
+<div class="d-flex flex-row py-4">
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
@@ -49,7 +54,7 @@ Bundles::renderCss(["alertify"]);
           você e muito mais!
           Crie o seu cadastro agora mesmo!
         </p>
-        <a href=<?= renderUrl("cadastro"); ?> class="btn btn-primary">Acesse-já</a>
+        <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-primary">Acesse-já</a>
       </div>
     </div>
   </div>
@@ -79,7 +84,7 @@ Bundles::renderCss(["alertify"]);
     <div class="carousel-inner">
 
       <div class="carousel-item active">
-        <img src=<?= renderUrl("src/assets/imgs/planta.jpg"); ?> class="d-block w-100" alt="missao">
+        <img src=<?= renderUrl("/src/assets/imgs/planta.jpg"); ?> class="d-block w-100" alt="missao">
         <div class="carousel-caption d-none d-md-block">
           <h2>Impacto Positivo</h2>
           <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -88,7 +93,7 @@ Bundles::renderCss(["alertify"]);
         </div>
       </div>
       <div class="carousel-item">
-        <img src=<?= renderUrl("src/assets/imgs/maca.jpg"); ?> class="d-block w-100" alt="iamgem de negocios">
+        <img src=<?= renderUrl("/src/assets/imgs/maca.jpg"); ?> class="d-block w-100" alt="iamgem de negocios">
         <div class="carousel-caption d-none d-md-block">
           <h2>Benefícios para os consumidores</h2>
           <p> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
@@ -97,7 +102,7 @@ Bundles::renderCss(["alertify"]);
         </div>
       </div>
       <div class="carousel-item ">
-        <img src=<?= renderUrl("src/assets/imgs/mission.jpg"); ?> class="d-block w-100" alt="Mercado">
+        <img src=<?= renderUrl("/src/assets/imgs/mission.jpg"); ?> class="d-block w-100" alt="Mercado">
         <div class="carousel-caption d-none d-md-block">
 
           <h2>Mais que um simples negócio, uma missão</h2>
@@ -156,7 +161,10 @@ Bundles::renderCss(["alertify"]);
 
 <?php 
 $this->start("scripts");
-  Bundles::renderJs(["js/apis"]);
+  Bundles::renderJs([
+    "js/jquery",
+    "js/apis",
+    ]);
 $this->stop();
 
 ?>

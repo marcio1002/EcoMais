@@ -22,6 +22,8 @@ require_once __DIR__ . "/src/config.php";
 
 use CoffeeCode\Router\Router;
 
+ob_start();
+ob_clean();
 $router = new Router(BASE_URL);
 
 /**
@@ -36,7 +38,7 @@ $router->namespace("Ecomais\Web");
     $router->get("/cadastro", "Router:register");
     $router->get("/recuperarsenha", "Router:recoverPasswd");
     $router->get("/recuperarsenha/novasenha/t={token}","Router:newPasswd");
-    $router->get("/terms", "Router:terms");
+    $router->get("/politica-privacidade-e-termos", "Router:terms");
 
     $router->group("error");
     $router->get("/{errCode}", "Router:typeError");
@@ -60,6 +62,7 @@ $router->namespace("Ecomais\Controllers");
     $router->post("/recoverByKey", "AccountManager:recoverByKey");
     $router->post("/recoverByMail", "AccountManager:recoverByMail");
     $router->get("/loginfacebook","AccountManager:loginAuthFacebook");
+    $router->get("/logingoogle","AccountManager:loginAuthGoogle");
 
 
     /** rotas para Empresas*/
@@ -76,3 +79,8 @@ $router->namespace("Ecomais\Controllers\User");
 $router->dispatch();
 
 if ($router->error()) $router->redirect("/error/{$router->error()}");
+
+$content =  ob_get_contents();
+ob_clean();
+
+echo $content;

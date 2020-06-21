@@ -18,7 +18,7 @@
 
 
 /* --- Config Button ---*/
-.btn-login { display: inline-block; vertical-align: middle; border: 1px solid transparent; padding: .375rem .75rem; }
+.btn-login { display: inline-block; vertical-align: middle; border: 1px solid transparent; padding: .375rem .75rem;cursor: pointer; }
 .button-login { padding: 5px; background: #f0ff64; width: 80%;  border-radius: 10px; }
 .button-login:hover { background: #f9fc55}
 
