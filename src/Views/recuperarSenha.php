@@ -8,51 +8,67 @@ use Ecomais\Web\Bundles;
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="https://www.localhost/www/EcoMais/src/assets/css/estilo.css">
-  <?php
-  Bundles::renderBundle([
-    "css/manipulation",
-    "bootstrap",
-    "alertify",
-    "css/rsenha"
-  ]);
+  <?=
+    Bundles::renderCss([
+      "css/manipulation",
+      "css/bootstrap",
+      "css/alertify",
+      "css/rsenha"
+    ]);
   ?>
 </head>
 
 <body>
-  <div class='body-em d-flex flex-column align-self-stretch'>
-    <div class="col-12">
-      <div class="row-cols-md-3 " style="position: relative; top: 25%">
-        <form class="m-auto">
-        <div class="alert " role="alert">     
+  <div class='body-em d-flex flex-column justify-content-xl-center justify-content-lg-center justify-content-md-center'>
+    <div>
+      <div class="col-12">
+        <div class="col-12">
+          <form>
+            <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+              <div class="alert " role="alert">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+                <label for="username">Nome:</label>
+                <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+                <label for="recoverpwd" id="recover-label">Email:</label>
+                <input type="text" class="form-control" id="recoverpwd" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">Informe o email ou chave de acesso clicando na opção "<strong>Eu tenho a chave de acesso</strong>" .</small>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-check col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+                <input type="checkbox" class="form-check-input" id="checkChave" value="0">
+                <label class="form-check-label" for="checkChave">Eu tenho a chave de acesso</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+                <div class="col-xl-7 col-lg-7 col-md-7 col-xm-10 m-auto">
+                  <button type="button" class="btn btn-lg btn-block btn-primary" id="btnEnviPwd">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-          <div class="form-group">
-            <label for="username">Nome:</label>
-            <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
-          </div>
-          <div class="form-group">
-            <label for="recoverpwd" id="recover-label">Email:</label>
-            <input type="text" class="form-control" id="recoverpwd" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">Informe o email ou chave de acesso clicando na opção "<strong>Eu tenho a chave de acesso</strong>" .</small>
-          </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="checkChave" value="0">
-            <label class="form-check-label" for="checkChave">Eu tenho a chave de acesso</label>
-          </div>
-          <button type="button" class="btn btn-primary" id="btnRecoverPwd">Enviar</button>
-        </form>
       </div>
     </div>
+
   </div>
 
   <?php
-  Bundles::renderJs([
+  echo Bundles::renderJs([
     "js/jquery",
+    "js/bootstrap",
+    "js/alertify",
     "js/apis",
-    "js/mainMethods",
     "js/manipulation",
+    "js/mainMethods",
     "js/recoverPasswd"
   ]);
   echo "

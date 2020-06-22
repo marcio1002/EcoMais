@@ -11,8 +11,7 @@ $this->stop();
 
 <div class="container" id="title-container">
 </div>
-
-<div class="">
+<div class="container">
   <div class="col-12">
     <div class="col-8 offset-2">
       <form onsubmit="return false">

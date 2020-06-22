@@ -55,15 +55,18 @@ $("#passwd").keypress(function () {
     let value = $(this).val();
     forca = 5;
     if (value.length < 8 ) {
-        if(/[A-Z]+/.test(value)  &&  /[a-z]+/.test(value) || /[\d]+/.test(value) && /[a-z]+/.test(value)) forca = 27;
-        if(/[A-Z]+/.test(value) && /[a-z]+/.test(value) && /[\d]+/.test(value)  || /[a-z]+/.test(value) && /[\d]+/.test(value) && /[@!#$%&*/\\]+/.test(value) ) forca = 39;
+        if(/[A-Z]+/.test(value)  &&  /[a-z]+/.test(value) ) forca = 13;
+        if( /[\d]+/.test(value) && /[a-z]+/.test(value)) forca = 23
+        if(/[A-Z]+/.test(value) && /[a-z]+/.test(value) && /[\d]+/.test(value)) forca = 32;
+        if(/[a-z]+/.test(value) && /[\d]+/.test(value) && /[@!#$%&*/\\]+/.test(value) ) forca = 40
 
     }else {
-        if ( /[A-Z]+/.test(value)  &&  /[a-z]+/.test(value) ||/[\d]+/.test(value) &&  /[a-z]+/.test(value) ) forca = 57;
+        if ( /[A-Z]+/.test(value)  &&  /[a-z]+/.test(value)) forca = 32;
+        if(/[\d]+/.test(value) &&  /[a-z]+/.test(value)) forca = 42
 
-        if ( /[a-z]+/.test(value) && /[\d]+/.test(value) && /[A-Z]+/.test(value)) forca = 80;
+        if ( /[a-z]+/.test(value) && /[\d]+/.test(value) && /[A-Z]+/.test(value)) forca = 55;
 
-        if (/[a-z]+/.test(value) && /[@!#$%&*/\\]+/.test(value) && /[A-Z]+/.test(value) )  forca = 85;
+        if (/[a-z]+/.test(value) && /[@!#$%&*/\\]+/.test(value) && /[A-Z]+/.test(value) )  forca = 75;
         if(/[a-z]+/.test(value) && /[A-Z]+/.test(value) && /[@!#$%&*/\\]+/.test(value) && /[\d]+/.test(value)) forca = 100;
     }
 

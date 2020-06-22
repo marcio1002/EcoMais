@@ -46,20 +46,22 @@ class  Router
 
     public function recoverPasswd(): void
     {
-        require_once __DIR__ . "/../Views/recuperarSenha.php";
+        $this->route();
+        echo $this->view->render("recuperarSenha");
     }
 
     public function newPasswd($token): void
     {
-        if(count($token) == 0 ) $this->typeError([
-            "errCode" => "404"
+        $this->route();
+        echo $this->view->render("novaSenha",[
+            "v" => $token
         ]);
-        require_once __DIR__ . "/../Views/novaSenha.php";
     }
 
     public function terms(): void
     {
-        require_once __DIR__ . "/../Views/politicaPrivacidadeTermos.php";
+        $this->route();
+        echo $this->view->render("politicaPrivacidadeTermos");
     }
 
 

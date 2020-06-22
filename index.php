@@ -37,7 +37,7 @@ $router->namespace("Ecomais\Web");
     $router->get("/", "Router:home");
     $router->get("/cadastro", "Router:register");
     $router->get("/recuperarsenha", "Router:recoverPasswd");
-    $router->get("/recuperarsenha/novasenha/t={token}","Router:newPasswd");
+    $router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
     $router->get("/politica-privacidade-e-termos", "Router:terms");
 
     $router->group("error");
@@ -59,10 +59,10 @@ $router->namespace("Ecomais\Controllers");
     $router->group("manager");
     $router->post("/login", "AccountManager:login");
     $router->get("/logoff", "AccountManager:logoff");
+    $router->get("/logingoogle","AccountManager:loginAuthGoogle");
     $router->post("/recoverByKey", "AccountManager:recoverByKey");
     $router->post("/recoverByMail", "AccountManager:recoverByMail");
-    $router->get("/loginfacebook","AccountManager:loginAuthFacebook");
-    $router->get("/logingoogle","AccountManager:loginAuthGoogle");
+    $router->post("/recoverpasswd", "AccountManager:recoverPasswd");
 
 
     /** rotas para Empresas*/

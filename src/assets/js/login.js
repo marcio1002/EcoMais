@@ -33,3 +33,8 @@ $('#btnLogar').click(() => {
     else 
         return alertify.error("Preencha os campos!");
 })
+
+$('#container-account-login a').click(function(e) {
+    e.preventDefault();
+    window.open($(this).attr("href"),'janela','width=600, height=600, top=100, left=400, scrollbars=no, status=no, toolbar=no, location=no, menubar=no, resizable=no, fullscreen=no');
+});

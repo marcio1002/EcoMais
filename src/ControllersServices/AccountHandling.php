@@ -115,4 +115,18 @@ class AccountHandling {
         }
 
     }
+
+    public function recoverPasswd(Person $usr, int $option):int
+    {
+        try{
+            $this->sql->open();
+            $where = ($option == 1) ? "email = ?" : "senha = ?";
+            $vals = ($option == 1) ? [$usr->email] : [$usr->passwd];
+            return $this->sql->update("usuario",$where,$vals,$where,$vals);
+        }catch(DataException $ex) {
+            throw new DataException( $ex->getMessage(), $ex->getCode() );
+        }finally {
+            $this->sql->close();
+        }
+    }
 }

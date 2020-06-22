@@ -131,7 +131,7 @@ final class Data
     public function update(string $table, string $prewhere, array $where, string $preVal, array $val): int
     {
         try {
-            if (empty($table) || empty($prewhere) || empty($preval) || empty($where) || empty($val)) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
+            if (empty($table) || empty($prewhere) || empty($preVal) || empty($where) || empty($val)) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();
             $this->query = $this->pdo->prepare("UPDATE $table SET $preVal WHERE $prewhere");

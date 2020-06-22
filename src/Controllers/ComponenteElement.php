@@ -83,9 +83,10 @@ return <<<ModalLogin
                     </div>
                 </div>
                 <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
-                    <a title='Entrar com o Google' href='$authGoogleUrl' class='a'>
-                        <div class='item-account-login google' class='mr-3'>
+                    <a title='Entrar com o Google' href='$authGoogleUrl' class='a col-7 text-center align-middle color-white'>
+                        <div class='item-account-login google ' class='mr-3'>
                             <i class='i fab fa-google'></i>
+                            Entrar com o Google
                         </div>
                     </a>
                 </div>
@@ -102,6 +103,7 @@ ModalLogin;
 
   public static function mail($name,$token):string
   {
+    $url = renderUrl("/recuperarsenha/novasenha/$token");
     $font1 = "padding:0;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
     $font2 ="font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
     $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
@@ -143,7 +145,7 @@ return<<<mail
                                                                                 <p
                                                                                     style='color:#a3daff;font-size:20px;line-height:30px;margin:0'>
                                                                                     Para redefinir sua senha click no
-                                                                                    botão logo abaixo, você será redirecionado para a tela de recupação de senha.<br/><strong>A url se expira em um dia.</strong>
+                                                                                    botão logo abaixo, você será redirecionado para a tela de recupação de senha.<br/><strong>A url se expira em 2 horas.</strong>
                                                                                 </p>
                                                                             </td>
                                                                         </tr>
@@ -165,7 +167,7 @@ return<<<mail
                                                                     <tbody>
                                                                         <tr>
                                                                             <td style='text-decoration: none;font-weight: 700;font-size: 25px; background-color:#FEF56F;border-radius:4px;border: 1px solid #F1E53D; border-bottom: 3px solid #F1E53D; border-right: 3px solid #F1E53D; padding:20px;' align='center'>
-                                                                                <a style='text-decoration:none' href='https://www.localhost/www/EcoMais/recuperarsenha/novasenha/t=$token' style='$font2' target='_blank'>Redefinir minha senha</a> 
+                                                                                <a style='text-decoration:none' href='$url' style='$font2' target='_blank'>Redefinir minha senha</a> 
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>

@@ -7,11 +7,17 @@ $("#checkChave").change(function () {
         $("#recover-label").html("Digite o email:");
         $(this).attr("value", "0");
     }
+});
+
+$("#recoverpwd").keypress(function(e) {
+    let key = e.keycode? e.keycode : e.charCode;
+    if(key == 13) {
+        e.preventDefault();
+        $("#btnEnviPwd").click();
+    }
 })
 
-
-
-$("#btnRecoverPwd").click(() => {
+$("#btnEnviPwd").click(() => {
 
     $("input").removeClass("formError");
     $("").removeClass("alert-success").removeClass("alert-danger");
@@ -28,17 +34,15 @@ $("#btnRecoverPwd").click(() => {
         mycustomtype: "application/json",
         url: `${BASE_URL}/manager/${func}`,
         dataType: "json",
-        data: data,
+        data,
         success: (res) => {
-            console.table(res);
             if (res) 
                 if(!res.error) {
-                    if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/t=${res.token}`;
+                    if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
                     $(".alert").addClass("alert-success").text("Enviado com sucesso! verifique seu e-mail");
                 } else {
                     $(".alert").addClass("alert-danger").text("Verifique os dados!");
-                }
-            
+                } 
         },
         error: (err) => {
             
