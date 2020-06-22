@@ -12,21 +12,25 @@ class ComponenteElement
     $index = renderUrl();
 return <<<navBar
       <div class='container' id='nav-container'>
-        <nav class='navbar navbar-expand-sm fixed-top navbar-dark'>
-          <a class='navbar-brand' href='$index' >
-            <img id='logo' src='$logo' alt='ecom'>
-          </a>
+        <nav class='navbar navbar-expand-sm fixed-top navbar-dark font-weight-bold'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
           </button>
-          <div class='collapse navbar-collapse justify-content-end' id='navbar-links'>
+          <div class='collapse navbar-collapse  justify-content-between' id='navbar-links'>
+            <div>
+                <a class='navbar-brand' href='$index' >
+                <img id='logo' src='$logo' alt='ecom'>
+            </a>
+            </div>
             <div class='navbar-nav'>
               <a class='nav-item nav-link item-hover position-relative' id='home-menu' href='$index'>Home</span></a>
               <a class='nav-item nav-link item-hover position-relative' id='about-menu' href='$urlRegister' >Cadastre-se</a>
               <a class='nav-item nav-link item-hover position-relative' id='services-menu' href='#'>Serviços</a>
               <a class='nav-item nav-link item-hover position-relative' id='portfolio-menu' href='#'>Projetos</a>
-              <a class='nav-item nav-link item-hover position-relative' id='contact-menu' data-toggle='modal' data-target='#modalLogin' href=''>Entrar</a>
+            </div>
+            <div>
+            <a class='nav-item nav-link rounded-left rounded-right rounded-bottom rounded-top border border-color-yellow border-success' id='login' data-toggle='modal' data-target='#modalLogin' href=''>Entrar</a>
             </div>
           </div> 
         </nav>
