@@ -1,31 +1,30 @@
 body{
-    font-family: 'roboto', 'sans-serif';
+  font-family: 'roboto', 'sans-serif';
 }
 .row{
-    margin: 0;
+  margin: 0;
 }
 .container{
-    padding: 70px 0;
+  padding: 70px 0;
 }
 
 p,li{
-    color:#444;
-    font-size: 14px;
+  color:#444;
+  font-size: 14px;
 }
 .navbar {
-    background-color:#BE1F0F;
-
+  background-color:#BE1F0F;
   }
   
-  #nav-container {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
+#nav-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
   
-  #logo {
-    width: 90px;
-    height: 60px;
-  }
+#logo {
+  width: 90px;
+  height: 60px;
+}
   
   .navbar-brand {
     padding: 0;
@@ -54,7 +53,7 @@ p,li{
     width: 90%;
     height: 3px;
     left: 5%;
-    bottom: 15px;
+    bottom: 0;
     background-color: #fde24f;
     transform: scaleX(0);
     -webkit-transform: scaleX(0);
@@ -92,7 +91,7 @@ p,li{
     background-size: 300%;
 
 }
-.card{
+.card-home{
   height: 285px; 
 }
 

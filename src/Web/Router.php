@@ -41,19 +41,25 @@ class  Router
     public function register(): void
     {
         $this->route();
-        echo $this->view->render("cadastro");
+        echo $this->view->render("register");
+    }
+
+    public function registerCompany():void
+    {
+        $this->route();
+        echo $this->view->render("registerCompany");
     }
 
     public function recoverPasswd(): void
     {
         $this->route();
-        echo $this->view->render("recuperarSenha");
+        echo $this->view->render("recoverPasswd");
     }
 
     public function newPasswd($token): void
     {
         $this->route();
-        echo $this->view->render("novaSenha",[
+        echo $this->view->render("newPasswd",[
             "v" => $token
         ]);
     }

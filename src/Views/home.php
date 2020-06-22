@@ -46,7 +46,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 <div class="d-flex flex-row py-4">
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card card-home">
       <div class="card-body">
         <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
         <p class="card-text">A plataforma Ecomais é pra você também que é consumidor!
@@ -59,7 +59,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
     </div>
   </div>
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card card-home">
       <div class="card-body">
         <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
         <p class="card-text">Panfletos, folhetos e encartes são alguns mecanismos de divulgação bastante usados quando

@@ -36,6 +36,7 @@ $router->namespace("Ecomais\Web");
     $router->group(null);
     $router->get("/", "Router:home");
     $router->get("/cadastro", "Router:register");
+    $router->get("/cadastro/empresa","Router:registerCompany");
     $router->get("/recuperarsenha", "Router:recoverPasswd");
     $router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
     $router->get("/politica-privacidade-e-termos", "Router:terms");

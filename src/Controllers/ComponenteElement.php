@@ -12,7 +12,7 @@ class ComponenteElement
     $index = renderUrl();
 return <<<navBar
       <div class='container' id='nav-container'>
-        <nav class='navbar navbar-expand-lg fixed-top navbar-dark'>
+        <nav class='navbar navbar-expand-sm fixed-top navbar-dark'>
           <a class='navbar-brand' href='$index' >
             <img id='logo' src='$logo' alt='ecom'>
           </a>
