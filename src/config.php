@@ -1,6 +1,6 @@
 <?php
 
-define("BASE_URL", $_ENV["BASE_URL"] ?? "https://127.0.0.1/www/ecomais");
+define("BASE_URL", getenv("BASE_URL") ?? "https://127.0.0.1/www/ecomais");
 
 
 header('Access-Control-Allow-Origin: *');
