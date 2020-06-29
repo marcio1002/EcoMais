@@ -13,15 +13,14 @@ class Product
     protected string $name;
     protected float $price;
     protected string $brand;
-    protected string $manufacturer;
-    protected string $merchant;
-    protected string $clt;
-    protected string $date;
-    protected string $desc;
-    protected string $period;
-    protected int $quant;
+    protected string $classification;
+    protected string $descrition;
+    protected int $quantity;
+    protected string $period_start;
+    protected string $period_end;
     protected int $fkCompany;
     protected bool $status;
+    protected string $date;
 
     public function __set($name, $value)
     {

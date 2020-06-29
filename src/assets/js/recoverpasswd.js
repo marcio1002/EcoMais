@@ -20,7 +20,7 @@ $("#recoverpwd").keypress(function(e) {
 $("#btnEnviPwd").click(() => {
 
     $("input").removeClass("formError");
-    $("").removeClass("alert-success").removeClass("alert-danger");
+    $(".alert").removeClass("alert-success").removeClass("alert-danger");
 
     let func = ($("#checkChave").val() == 0) ? "recoverByMail" : "recoverByKey";
 
@@ -39,9 +39,15 @@ $("#btnEnviPwd").click(() => {
             if (res) 
                 if(!res.error) {
                     if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
-                    $(".alert").addClass("alert-success").text("Enviado com sucesso! verifique seu e-mail");
+                    $(".alert")
+                        .addClass("alert-success")
+                        .text("Enviado com sucesso! verifique seu e-mail")
+                        .append(`<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>`);
                 } else {
-                    $(".alert").addClass("alert-danger").text("Verifique os dados!");
+                    $(".alert")
+                        .addClass("alert-danger")
+                        .text("Verifique os dados!")
+                        .append(`<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>`);;
                 } 
         },
         error: (err) => {

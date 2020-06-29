@@ -7,7 +7,10 @@ use TypeError;
 
 class PersonLegal extends person 
 {
-    private int $cnpj; //preg_replace("/[.\/-]/","",$cnpj)
+    private int $cnpj;
+    private string $fantasy; 
+    private string $reason;
+    private string $contact;
     private int $typePackage;
 
     public function __set($name, $value)

@@ -1,33 +1,62 @@
 <?php
 
 use Ecomais\Web\Bundles;
+use Ecomais\Controllers\ComponenteElement;
 
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 ?>
 <?php
-$this->start("css");
-echo  Bundles::renderCss(["css/manipulation"]);
-$this->stop();
+  $this->start("css");
+  echo  Bundles::renderCss(["css/manipulation"]);
+  $this->stop();
 ?>
 
-<div class="container" id="title-container">
-</div>
+
 <div class="container">
-  <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 offset-xl-2 offset-lg-2 offset-md-1">
+  <div class="mb-3">
+    <div class="col-12">
+      <div class='col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto'>
+        <div class="btn-group btn-large btn-block">
+          <button class="btn-color-red text-white btn btn-focus-shadow-none">
+            <i class='icon-google fab fa-google'></i>
+          </button>
+          <a title='Registrar com o Google' id="registerGoogle" class='btn btn-large btn-block btn-color-red btn-focus-shadow-none text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
+            <div class='google' <i class='i fab fa-google'></i>
+              Registrar com o Google
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
     <form onsubmit="return false">
-      <div class="cad">
-        <div class="form-row pb-3">
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
-            <label for="inputName">Nome Completo:</label>
-            <input type="text" class="form-control nextItem" id="inputName" data-required="" />
+      <div>
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
+            <label for="text">Nome:</label>
+            <input type="text" class="form-control nextItem" id="name" data-required="" />
           </div>
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
+        </div>
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Email:</label>
             <input type="text" class="form-control nextItem" id="cadEmail" placeholder="seumail@test.dominio" data-required="" />
           </div>
         </div>
-        <div class="form-row pb-3">
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
+            <label for="inputCep">Cep</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="inputCep" maxlength="8" />
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputPassword4">Crie uma senha:</label>
             <div class="input-group">
               <input type="password" class="form-control nextItem" id="passwd" maxlength="20" data-required="" />
@@ -41,18 +70,15 @@ $this->stop();
               </div>
             </small>
           </div>
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
-            <label for="inputCep">Cep</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="inputCep" maxlength="8" />
-              <div class="input-group-prepend">
-                <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
-              </div>
-            </div>
+        </div>
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
+            <label for="cpf">Cidade: </label>
+            <input type="text" class="form-control nextItem" id="localidade" data-required="" />
           </div>
         </div>
-        <div class="form-row pb-3">
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputState">Unidade Federativa:</label>
             <select id='uf' name='uf' class="form-control nextItem" data-required="">
               <option value="" selected>Escolha...</option>
@@ -84,68 +110,33 @@ $this->stop();
               <option value='TO'>Tocantins</option>
             </select>
           </div>
-          <div class="form-group col-xl-5 col-lg-5 col-md-12 col-sm-12">
-            <label for="cpf">Cidade: </label>
-            <input type="text" class="form-control nextItem" id="localidade" data-required="" />
-          </div>
         </div>
-        <div class="form-row pb-3">
-          <div class="form-group col-md-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 offset-xl-2 offset-lg-2">
+        <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputAddres">Endereço:</label>
             <input type="address" class="form-control nextItem" id="inputAddres" />
           </div>
         </div>
-        <div class="custom-control custom-switch pb-5">
-          <input type="checkbox" class="custom-control-input" id="termos">
-          <label class="custom-control-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
+        <div class="custom-control custom-switch pb-5 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
+          <div class="form-group form-check">
+            <input type="checkbox" aria-label="Chebox para permitir input text" id="termos">
+            <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
+          </div>
         </div>
         <div class="col-12">
-          <div class="container">
-            <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 col-xl-0 offset-xl-2 offset-lg-2">
-              <button type="button" class="btn btn-block btn-primary nextItem" id="btnRegister">Cadastrar</button>
-            </div>
+          <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto">
+            <button type="button" class="btn btn-block btn-primary nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
           </div>
         </div>
       </div>
     </form>
   </div>
 </div>
-<?php $this->start("footer") ?>
-<div id="contact-area">
-  <div class="container">
-    <div class="row pb-4">
-      <div class="col-md-12" id="contact-form">
-        <p>Receba nossa Newsletter </p>
-        <div class="col-md-5 m-auto">
-          <input type="text" class="form-control" placeholder="email@exemplo.com" name="email">
-          <input type="button" class="main-btn" value='enviar' />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h3 class="main-title">Entre em contato conosco</h3>
-      </div>
-      <div class="col-md-4 contact-box">
-        <i class="fas fa-phone"></i>
-        <p><span class="contact-tile">Telefone:</span> (48)99999-9999</p>
-        <p><span class="contact-tile">Horários de atendimento:</span><br /> 8:00 - 19:00</p>
-      </div>
-      <div class="col-md-4 contact-box">
-        <i class="fas fa-envelope"></i>
-        <p><span class="contact-tile">Envie um email:</span> ecomais5354@gmail.com</p>
-      </div>
-      <div class="col-md-4 contact-box">
-        <i class="fas fa-map-marker-alt"></i>
-        <p><span class="contact-tile">Endereço:</span><br /> Itaquá Garden Shopping Itaquaquecetuba - SP - 1314</p>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <p>Desenvolvido por <a href="#">EcoMais</a> &copy; 2020</p>
-    </div>
-  </div>
-</div>
-<?php $this->stop() ?>
+<?php
+$this->start("footer");
+echo ComponenteElement::footerHome();
+$this->stop()
+?>
 <?php
 $this->start("scripts");
 echo  Bundles::renderJs([

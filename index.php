@@ -35,6 +35,7 @@ $router->namespace("Ecomais\Web");
 
     $router->group(null);
     $router->get("/", "Router:home");
+    $router->get("/login", "Router:login");
     $router->get("/cadastro", "Router:register");
     $router->get("/cadastro/empresa","Router:registerCompany");
     $router->get("/recuperarsenha", "Router:recoverPasswd");
@@ -61,6 +62,7 @@ $router->namespace("Ecomais\Controllers");
     $router->post("/login", "AccountManager:login");
     $router->get("/logoff", "AccountManager:logoff");
     $router->get("/logingoogle","AccountManager:loginAuthGoogle");
+    $router->get("/registergoogle","AccountManager:registerAuthGoogle");
     $router->post("/recoverByKey", "AccountManager:recoverByKey");
     $router->post("/recoverByMail", "AccountManager:recoverByMail");
     $router->post("/recoverpasswd", "AccountManager:recoverPasswd");
@@ -82,6 +84,8 @@ $router->dispatch();
 if ($router->error()) $router->redirect("/error/{$router->error()}");
 
 $content =  ob_get_contents();
-ob_clean();
+ob_end_clean();
 
 echo $content;
+
+mb_http_output('UTF-8');

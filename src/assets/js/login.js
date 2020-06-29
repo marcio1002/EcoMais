@@ -1,3 +1,7 @@
+alertify.set('notifier','position','top-center');
+
+$("#inputPwd").keypress(function(evt) { if (evt.keyCode == 13) $('#btnLogar').click(); });
+
 $('#btnLogar').click(() => {
 
     const person = {
@@ -12,7 +16,6 @@ $('#btnLogar').click(() => {
         dataType: "json",
         data: person,
         success: (res) => {
-            console.table(res);
             if (typeof res == undefined || !res) throw new TypeError("Object null");
             if (res.error) {
                 if (res.status == 400) {
@@ -30,8 +33,9 @@ $('#btnLogar').click(() => {
     
     if($("#inputEmail").val().length > 0 && $("#inputPwd").val().length > 0) 
         reqAjax(option);
-    else 
-        return alertify.error("Preencha os campos!");
+    else  {
+        return alertify.warning("Preencha os campos!");
+    }
 })
 
 $('#container-account-login a').click(function(e) {

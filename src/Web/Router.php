@@ -38,10 +38,18 @@ class  Router
         echo $this->view->render("home");
     }
 
-    public function register(): void
+    public function login():void
     {
         $this->route();
-        echo $this->view->render("register");
+        echo $this->view->render("login");
+    }
+
+    public function register(?array $data): void
+    {
+        $this->route();
+        echo $this->view->render("register", [
+            "data" => $data
+        ]);
     }
 
     public function registerCompany():void

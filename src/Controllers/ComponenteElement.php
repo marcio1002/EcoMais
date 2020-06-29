@@ -1,7 +1,5 @@
 <?php
 namespace Ecomais\Controllers;
-use Ecomais\Models\DataException;
-use Ecomais\Web\Bundles;
 
 class ComponenteElement
 {
@@ -10,6 +8,7 @@ class ComponenteElement
     $urlRegister = renderUrl('/cadastro');
     $logo = renderUrl('/src/assets/imgs/ecomais-logo-sem-fundo.png');
     $index = renderUrl();
+    $login = renderUrl("/login");
 return <<<navBar
       <div class='container' id='nav-container'>
         <nav class='navbar navbar-expand-sm fixed-top navbar-dark font-weight-bold'>
@@ -18,7 +17,7 @@ return <<<navBar
             <span class='navbar-toggler-icon'></span>
           </button>
           <div class='collapse navbar-collapse  justify-content-between' id='navbar-links'>
-            <div>
+            <div class='' id='box-logo'>
                 <a class='navbar-brand' href='$index' >
                 <img id='logo' src='$logo' alt='ecom'>
             </a>
@@ -30,80 +29,60 @@ return <<<navBar
               <a class='nav-item nav-link item-hover position-relative' id='portfolio-menu' href='#'>Projetos</a>
             </div>
             <div>
-            <a class='nav-item nav-link rounded-left rounded-right rounded-bottom rounded-top border border-color-yellow border-success' id='login' data-toggle='modal' data-target='#modalLogin' href=''>Entrar</a>
+            <a class='nav-item nav-link rounded-left text-center rounded-right rounded-bottom rounded-top border border-color-yellow border-success' id='login' href='$login'>Entrar</a>
             </div>
           </div> 
         </nav>
       </div>
-    <div class='subNavBar' style='background: #fff'>
+    <div class='subNavBar' style='background: transparent'>
     </div>
 navBar;
   }
 
-  public static function modalLogin():string
+  public static function footerHome():string
   {
-    $authGoogleUrl = renderUrl("/manager/logingoogle");
-    $urlRegister =  renderUrl('/cadastro');
-    $urlRecoverPasswd = renderUrl("/recuperarsenha");
-
-return <<<ModalLogin
-    <div class='modal fade' id='modalLogin' role='dialog' aria-labelledby='login' aria-hidden='false'>
-    <div class='modal-dialog' role='document'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            <div class='modal-body p-3'>
-                <div class='modal-title mb-4 text-center'>
-                    <h3>Login</h3>
-                </div>
-                <form>
-                    <div class='form-group col-md-12'>
-                        <label for='inputEmail' class='label-login'>Email ou CNPJ :</label>
-                        <input type='email' class='form-control border-bottom-solid-2px' id='inputEmail'>
-                    </div>
-                    <div class='form-group col-md-12'>
-                        <label for='inputPwd' class='label-login'>Senha :</label>
-                        <input type='password' class='form-control border-bottom-solid-2px' id='inputPwd'>
-                    </div>
-                    <div class='form-check'>
-                        <input type='checkbox' class='form-check-input' id='manterConectado'>
-                        <label class='form-check-label ' for='dropdownCheck'>
-                            Mantenha-me conectado
-                        </label>
-                    </div>
-
-                    <div class='p-3 text-right'>
-                        <a href='$urlRecoverPasswd' class='a'>
-                            <button type='button' class='btn btn-link text-danger'>Esqueceu a Senha?</button>
-                        </a>
-                    </div>
-                </form>
-                <div class='col-12'>
-                    <div class='text-center'>
-                        <button type='button' class='button-login text-center btn-login font-weigth-800 font-size-1-5em' id='btnLogar'>Entrar</button>
-                    </div>
-                </div>
-                <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
-                    <a title='Entrar com o Google' href='$authGoogleUrl' class='a col-7 text-center align-middle color-white'>
-                        <div class='item-account-login google ' class='mr-3'>
-                            <i class='i fab fa-google'></i>
-                            Entrar com o Google
-                        </div>
-                    </a>
-                </div>
-                <div class='pt-4 text-center'>
-                    <p>Não tem uma conta ?</p>
-                    <a href='$urlRegister'> <button type='button' class='btn btn-link'> Cadastre-se </button></a>
+return <<<footer
+    <div id="contact-area">
+    <div class="container">
+        <div class="col-xl-12 col-md-12">
+        <div class="col-md-12" id="contact-form">
+            <p>Receba nossa Newsletter </p>
+            <div class="col-md-5 m-auto">
+            <input type="text" class="form-control" placeholder="email@exemplo.com" name="email">
+            <div class="row pt-3">
+                <button type="button" class="main-btn text-black m-auto">enviar</button>
                 </div>
             </div>
         </div>
+        </div>
+        <div class="col-xl-12 col-md-12 p-xl-4">
+        <div class="col-md-12">
+            <h3 class="main-title">Entre em contato conosco</h3>
+        </div>
+        <div class="row">
+        <div class="col-md-4 contact-box">
+            <i class="fas fa-phone"></i>
+            <p><span class="contact-tile">Telefone:</span> (48)99999-9999</p>
+            <p><span class="contact-tile">Horários de atendimento:</span><br /> 8:00 - 19:00</p>
+        </div>
+        <div class="col-md-4 contact-box">
+            <i class="fas fa-envelope"></i>
+            <p><span class="contact-tile">Envie um email:</span> ecomais5354@gmail.com</p>
+        </div>
+        <div class="col-md-4 contact-box">
+            <i class="fas fa-map-marker-alt"></i>
+            <p><span class="contact-tile">Endereço:</span><br /> Itaquá Garden Shopping Itaquaquecetuba - SP - 1314</p>
+        </div>
+        </div>
+        </div>
+        <div class="col-xl-12 col-md-12">
+        <p>Desenvolvido por <a href="#">EcoMais</a> &copy; 2020</p>
+        </div>
     </div>
-    </div>  
-ModalLogin;
+    </div>
+footer;
   }
+
 
   public static function mail($name,$token):string
   {

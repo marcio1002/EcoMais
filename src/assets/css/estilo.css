@@ -1,14 +1,14 @@
 body{
   font-family: 'roboto', 'sans-serif';
 }
+
 .container{
   padding: 70px 0;
 }
 
-p,li{
-  color:#444;
-  font-size: 14px;
-}
+.icon-google { font-size: 1.6em;  vertical-align: middle; }
+
+
 /* --- menu --- */
 .navbar {
   background-color: #1E513D;
@@ -76,7 +76,7 @@ p,li{
 }
 .subNavBar {
   width: 100%;
-  height: 78px;
+  height: 70px;
 }
 
 #login:active {
@@ -85,7 +85,12 @@ p,li{
 }
 /* ------- */
 
-
+#title-container {
+  background: url("../imgs/casal-no-mercado.jpg") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 70vh;
+}
 .h1{
     font-family: 'Jost', sans-serif;
     margin: 0;
@@ -96,12 +101,8 @@ p,li{
     text-align: center;
     font-size: 75px;
     color: #F9F9F9;
-    background-image: url("../imgs/planta.jpg");
     background-size: 300%;
 
-}
-.card-home{
-  height: 285px; 
 }
 
 .container-fluid {
@@ -109,7 +110,7 @@ p,li{
 }
 
 #mainSlider .carousel-inner, #mainSlider .carousel-item {
-  height: 90vh;
+  max-height: 90vh;
 }
 
 #mainSlider .carousel-caption {
@@ -129,22 +130,31 @@ p,li{
 }
 
 .main-btn {
-  background-color: #BE1F0F;
-  color: #FFF;
+  background-color: #be1e0fc7;
+  color: #ffffff;
   text-transform: uppercase;
-  width: 200px;
-  height: 60px;
-  padding: 10px 20px;
   border-radius: 30px;
-  border: 3px solid transparent;
+  border: 3px solid#BE1F0F;
   transition: .5s;
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
 }
 
 .main-btn:hover {
   text-decoration: none;
-  color: #FFF;
+  color: rgb(37, 37, 37);
   background-color: transparent;
-  border-color: #BE1F0F;
 }
 
 .carousel-indicators .active {
@@ -223,22 +233,35 @@ p,li{
 #msg-box p {
   font-size: 22px;
 }
-
-#contact-form input[type="text"], #contact-form textarea {
-  margin-bottom: 15px;
-  border-radius: 0;
-}
-
 #contact-form .main-btn {
   width: 120px;
-  height: 50px;
-}
-
-#contact-form .main-btn:hover {
-  color: #BE1F0F;
 }
 
 
-.align-vertical {
-  vertical-align: middle;
+
+@media (max-width:720px) { 
+  #login {
+    border: none !important;
+  }
+
+  #login:active{
+    background: transparent !important;
+    color: white !important;
+  }
+  .item-hover:hover::before{
+    visibility: hidden;
+  }
+
+  #box-logo {
+    text-align: center;
+  }
+
+  #navbar-links a {
+    text-align: center;
+  }
+
+  #navbar-links a:hover {
+    color: rgb(241, 226, 91);
+  }
+  
 }

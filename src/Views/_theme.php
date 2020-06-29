@@ -13,9 +13,8 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <?= Bundles::renderCss(["css/bootstrap","css/alertify","fontawesome"]); ?>
+    <?= Bundles::renderCss(["css/bootstrap","css/alertify","fontawesome","css/eco/style"]); ?>
     <link rel='stylesheet' type='text/css' href=<?= renderUrl("/src/assets/css/estilo.css") ?> />
-    <link rel="stylesheet" type='text/css' href=<?= renderUrl("/src/assets/css/modalLogin.css") ?> />
     <?= $this->section("css"); ?>
     <title><?= $title ?></title>
 </head>
@@ -25,7 +24,6 @@ use Ecomais\Controllers\ComponenteElement as componente;
         <?php
             if (!$this->section("error")):
                 echo componente::navBarHome();
-                echo componente::modalLogin();
             endif;
         ?>
     </header>

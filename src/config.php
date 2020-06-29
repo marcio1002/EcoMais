@@ -1,4 +1,6 @@
 <?php
+mb_internal_encoding();
+
 $env = getenv("BASE_URL") ? getenv("BASE_URL") : "https://127.0.0.1/www/ecomais";
 
 define("BASE_URL", $env);
@@ -15,5 +17,3 @@ function renderUrl(?string $url = null):string
     $baseUrl = BASE_URL;
     return empty($url) ? $baseUrl : "$baseUrl$url";    
 }
-
-mb_http_output('UTF-8');

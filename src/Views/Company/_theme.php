@@ -11,7 +11,7 @@ use Ecomais\Web\Bundles;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <?= Bundles::renderCss(["css/bootstrap","css/alertify","fontawesome"]); ?>
+    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome","css/eco/style"]); ?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/themeCompany.css"); ?>>
     <?= $this->section("css"); ?>
     <title><?= $title; ?></title>
@@ -27,7 +27,7 @@ use Ecomais\Web\Bundles;
                     <img src=<?= renderUrl("/src/assets/imgs/nlogo.png") ?> alt="" class="img-fluid">
                 </div>
                 <div class=" ">
-                    
+
                     <ul class="d-flex flex-column justify-content-center align-items-center" role="tablist">
 
                         <li class="nav-item pb-2">
@@ -65,10 +65,10 @@ use Ecomais\Web\Bundles;
                 <? else: ?>
                 <div class="d-flex flex-column container-header">
                     <div class="layote-header py-4 text-white sticky-top d-flex flex-row justify-content-between align-self-stretch">
-                        <div class="col-3" ></div>
+                        <div class="col-3"></div>
                         <div class="header-title text-center col-6"> col 2 Title</div>
                         <div class="col-3">
-                            
+
                             <i class="fas fa-sign-out-alt"></i>
                         </div>
                     </div>
@@ -80,19 +80,19 @@ use Ecomais\Web\Bundles;
         </main>
     </div>
 
-<?php
+    <?php
     Bundles::renderJs([
         "js/jquery",
-        "js/jqueryMask", 
+        "js/jqueryMask",
         "js/bootstrap",
         "js/alertify",
-        ]); 
+    ]);
     echo $this->section("scripts");
 
-    echo"<script>
+    echo "<script>
             const BASE_URL = '" . BASE_URL . "';
         </script>";
-?>
+    ?>
 </body>
 
 </html>

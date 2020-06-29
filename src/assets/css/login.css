@@ -1,0 +1,25 @@
+body { width: 100%; height: 100vh; background-color: #b4b4b49d; }
+
+/* --- Input login --- */
+#container-login .form-control:focus { border-bottom: 2px solid rgba(100, 127, 153, 0.808); box-shadow: 0 .1em 0 0 rgba(100, 127, 153, 0.25); }
+#container-login .form-control { border: 1px solid transparent; }
+#container-login .border-bottom-solid-2px { border-radius: 0; border-bottom: 2px solid #5d6a75a2; }
+#container-login .border-bottom-solid-2px:invalid { border-bottom: 2px solid #f7713d;}
+
+
+/* --- Config Button ---*/
+.btn-login { display: inline-block; border: 1px solid transparent; padding: .375rem .75rem;cursor: pointer; }
+
+.btn-color-login { background: #fff132 }
+
+.btn-color-login:hover { background: #fff23e}
+
+/* --- Config label input--- */
+
+.label-login {color: #454c52c0; font-size:  1em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif }
+
+/* --- icones do login --- */
+
+.btn-google:hover {text-decoration: none;color: #ffffff;}
+
+.icon-google { font-size: 1.6em;  vertical-align: middle; }

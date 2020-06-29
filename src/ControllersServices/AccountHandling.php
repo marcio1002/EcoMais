@@ -62,14 +62,14 @@ class AccountHandling {
             }
     }
 
-    public function setLoginAuthFacebook(PersonLegal $person):array
+    public function setLoginAuthGoogle(Person $person):array
     {
         try {
-            $where = [];
+            $where = [$person->name, $person->email];
 
-                $this->sql->open();
+            $this->sql->open();
 
-            return $this->sql->show('usuario',"","email = ?",$where,3);
+            return $this->sql->show('usuario',"","nome = ? AND email = ?",$where,3);
 
         }catch(DataException $ex) {
             throw new DataException($ex->getCode(), $ex->getMessage());

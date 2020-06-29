@@ -1,5 +1,5 @@
 let forca = 0;
-
+alertify.set('notifier','position', 'top-right');
 
 function validaForm() {
     var forError = false;
@@ -80,6 +80,7 @@ $("#passwd").keypress(function () {
 
 $("#searchCep").on("click", async function () {
     try {
+        alertify.set('notifier','position', 'top-right');
         const res = await searchCep($("#inputCep").val())
         if (res !== null) {
             $("#uf").val(res.uf);
@@ -93,13 +94,12 @@ $("#searchCep").on("click", async function () {
     }
 });
 
-$("#inputCep").keyup(async function (evt) { if (evt.keyCode == 13) $("#searchCep").trigger("click") });
+$("#inputCep").keyup(function (evt) { if (evt.keyCode == 13) $("#searchCep").trigger("click") });
 
 
 // <--- Functions Server --->
 
 $('#btnRegister').click(() => {
-
     load(false, "#btnRegister");
     $("[data-required]").removeClass("formError");
 
@@ -109,7 +109,7 @@ $('#btnRegister').click(() => {
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
 
     let person = {
-        name: $("#inputName").val(),
+        name: $("#name").val(),
         email: $("#cadEmail").val(),
         passwd: $("#passwd").val(),
         cpf: $("#cpf").val(),
@@ -126,6 +126,7 @@ $('#btnRegister').click(() => {
         data: person,
         beforeSend: () => {
             load(true, "#btnRegister");
+            
         },
         success: (res) => {
             load(false, "#btnRegister");
@@ -141,7 +142,24 @@ $('#btnRegister').click(() => {
         error: (e) =>  {
             alertify.error("Ocorreu um erro no servidor!");
         }
-    }
+    };
     reqAjax(option);
 
 });
+
+
+$("#registerGoogle").click(function() {
+    const option = {
+        method: 'GET',
+        mycustomtype: "application/json charset=utf-8",
+        url: `${BASE_URL}/manager/registergoogle`,
+        dataType: "json",
+        success: (e) => {
+            if(e) location.href = e.url;
+        },
+        error: () => {
+            alertify.error("Ocorreu um erro no servidor!");
+        }
+    };
+    reqAjax(option);
+})

@@ -22,9 +22,9 @@ class AccountManagerUser {
             $this->usr->name = $param['name'];
             $this->usr->email = $param['email'];
             $this->usr->passwd = $param['passwd'];
-            $this->usr->cep = $param['cep'];
+            $this->usr->cep = empty($param['cep']) ?? null;
             $this->usr->uf = $param['uf'];
-            $this->usr->addres = $param['addres'];
+            $this->usr->addres = empty($param['addres'] )?? null;
             $this->usr->locality = $param['localidade'];
             $this->usr->statusAccount = Person::ENABLED;
 
