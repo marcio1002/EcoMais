@@ -51,6 +51,10 @@ $router->namespace("Ecomais\Web");
     $router->group("empresa");
     $router->get("/","Router:indexCompany");
     $router->get("/configuracoes","Router:configCompany");
+
+
+    $router->group("user");
+    $router->get("/","Router:indexUser");
 /**
  * @namespace Controller
  * 
@@ -59,16 +63,17 @@ $router->namespace("Ecomais\Web");
 $router->namespace("Ecomais\Controllers");
 
     $router->group("manager");
-    $router->post("/login", "AccountManager:login");
-    $router->get("/logoff", "AccountManager:logoff");
-    $router->get("/logingoogle","AccountManager:loginAuthGoogle");
-    $router->get("/registergoogle","AccountManager:registerAuthGoogle");
-    $router->post("/recoverByKey", "AccountManager:recoverByKey");
-    $router->post("/recoverByMail", "AccountManager:recoverByMail");
-    $router->post("/recoverpasswd", "AccountManager:recoverPasswd");
+    $router->post("/login", "Main:login");
+    $router->get("/logoff", "Main:logoff");
+    $router->get("/logingoogle","Main:loginAuthGoogle");
+    $router->get("/registergoogle","Main:registerAuthGoogle");
+    $router->post("/recoverByKey", "Main:recoverByKey");
+    $router->post("/recoverByMail", "Main:recoverByMail");
+    $router->post("/recoverpasswd", "Main:recoverPasswd");
+    $router->post("/newsletter","Main:newsLetter");
 
 
-    /** rotas para Empresas*/
+/** rotas para Empresas*/
 $router->namespace("Ecomais\Controllers\Company");
     
     $router->group("manager");
@@ -77,7 +82,7 @@ $router->namespace("Ecomais\Controllers\Company");
 $router->namespace("Ecomais\Controllers\User");
 
     $router->group("manager");
-    $router->post("/addaccountpersonphysical", "AccountManagerUser:addAccountPersonPhysical");
+    $router->post("/addaccountpersonphysical", "AccountManagerUser:createAccount");
 
 $router->dispatch();
 

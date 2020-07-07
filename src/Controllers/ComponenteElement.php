@@ -6,11 +6,11 @@ class ComponenteElement
   public static function navBarHome():string
   {
     $urlRegister = renderUrl('/cadastro');
-    $logo = renderUrl('/src/assets/imgs/ecomais-logo-sem-fundo.png');
+    $logo = renderUrl('/src/assets/imgs/ecomais-logo.jpg');
     $index = renderUrl();
     $login = renderUrl("/login");
 return <<<navBar
-      <div class='container' id='nav-container'>
+      <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-sm fixed-top navbar-dark font-weight-bold'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
@@ -23,13 +23,13 @@ return <<<navBar
             </a>
             </div>
             <div class='navbar-nav'>
-              <a class='nav-item nav-link item-hover position-relative' id='home-menu' href='$index'>Home</span></a>
-              <a class='nav-item nav-link item-hover position-relative' id='about-menu' href='$urlRegister' >Cadastre-se</a>
-              <a class='nav-item nav-link item-hover position-relative' id='services-menu' href='#'>Serviços</a>
-              <a class='nav-item nav-link item-hover position-relative' id='portfolio-menu' href='#'>Projetos</a>
+              <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
+              <a class='nav-item nav-link item-hover position-relative text-white' id='about-menu' href='$urlRegister' >Cadastre-se</a>
+              <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='#'>Serviços</a>
+              <a class='nav-item nav-link item-hover position-relative text-white' id='portfolio-menu' href='#'>Projetos</a>
             </div>
             <div>
-            <a class='nav-item nav-link rounded-left text-center rounded-right rounded-bottom rounded-top border border-color-yellow border-success' id='login' href='$login'>Entrar</a>
+            <a class='nav-item nav-link rounded-left text-center rounded-right rounded-bottom rounded-top border border-color-yellow border-success text-white' id='login' href='$login'>Entrar</a>
             </div>
           </div> 
         </nav>
@@ -42,15 +42,15 @@ navBar;
   public static function footerHome():string
   {
 return <<<footer
-    <div id="contact-area">
-    <div class="container">
+    <div id="contact-area" class='text-center bg-color-green-dark-1 text-white'>
+    <div class="container p-2">
         <div class="col-xl-12 col-md-12">
-        <div class="col-md-12" id="contact-form">
+        <div class="col-md-12 p-2" id="contact-form">
             <p>Receba nossa Newsletter </p>
             <div class="col-md-5 m-auto">
-            <input type="text" class="form-control" placeholder="email@exemplo.com" name="email">
+            <input type="text" class="form-control" placeholder="email@exemplo.com" id="emailNewsLetter">
             <div class="row pt-3">
-                <button type="button" class="main-btn text-black m-auto">enviar</button>
+                <button type="button" class="main-btn text-black m-auto" id='btnEnv' >enviar</button>
                 </div>
             </div>
         </div>

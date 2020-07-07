@@ -49,4 +49,9 @@ class Safety
 
         return $this->key;
     }
+
+    public function isEmail($param): bool
+    {
+       return (preg_match("/^(.)+\@[a-zA-Z]+\.[a-zA-Z]+$/i",$param)) ? true : false;
+    }
 }

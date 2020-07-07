@@ -62,7 +62,7 @@ class AccountHandling {
             }
     }
 
-    public function setLoginAuthGoogle(Person $person):array
+    public function getLoginAuthGoogle(Person $person):array
     {
         try {
             $where = [$person->name, $person->email];
@@ -125,6 +125,20 @@ class AccountHandling {
             return $this->sql->update("usuario",$where,$vals,$where,$vals);
         }catch(DataException $ex) {
             throw new DataException( $ex->getMessage(), $ex->getCode() );
+        }finally {
+            $this->sql->close();
+        }
+    }
+
+    public function createNewsLetter($email):int 
+    {
+        try{
+            $this->sql->open();
+            
+            return $this->sql->add("newsletter","email",[$email]);
+        }catch(DataException $ex) {
+            throw new DataException($ex->getMessage(), $ex->getCode());
+
         }finally {
             $this->sql->close();
         }

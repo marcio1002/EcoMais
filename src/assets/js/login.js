@@ -2,8 +2,8 @@ alertify.set('notifier','position','top-center');
 
 $("#inputPwd").keypress(function(evt) { if (evt.keyCode == 13) $('#btnLogar').click(); });
 
-$('#btnLogar').click(() => {
-
+$('#btnLogar').click( function()  {
+    $(this).attr("disabled",true);
     const person = {
         email: $("#inputEmail").val(),
         passwd: $('#inputPwd').val(),
@@ -25,6 +25,7 @@ $('#btnLogar').click(() => {
                 } else {
                     alertify.error('Email ou senha inválidos');
                 }
+                $(this).attr("disabled",false);
             } else {
                 // location.href = `${BASE_URL}/product/`;
             }
@@ -34,6 +35,7 @@ $('#btnLogar').click(() => {
     if($("#inputEmail").val().length > 0 && $("#inputPwd").val().length > 0) 
         reqAjax(option);
     else  {
+        $(this).attr("disabled",false);
         return alertify.warning("Preencha os campos!");
     }
 })

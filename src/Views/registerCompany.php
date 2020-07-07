@@ -2,9 +2,26 @@
 
 use Ecomais\Web\Bundles;
 
+$google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
+
+$authGoogleUrl = $google->getAuthURL();
+
+$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED);
+$err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
+
+$name = "";
+$email = "";
+
+if (!empty($code)) {
+
+    $data = $google->getData($code);
+
+    $name = "value='{$data->getName()}'";
+    $email = "value='{$data->getEmail()}'";
+}
+
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
-?>
-<?php
+
 $this->start("css");
 echo  Bundles::renderCss(["css/manipulation"]);
 $this->stop();
@@ -24,7 +41,7 @@ $this->stop();
                             <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
                         <label for="nome"><b>Fantasia</b></label>
-                        <input type="text" class="form-control" placeholder="Nome da empresa">
+                        <input type="text" <?= $name?>  class="form-control" placeholder="Nome da empresa">
                     </div>
                     <div class="form-group col-md-12">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +62,7 @@ $this->stop();
                             <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
                         <label for="nome"><b>E-mail</b></label>
-                        <input type="text" class="form-control">
+                        <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -53,6 +70,18 @@ $this->stop();
                         </svg>
                         <label for="nome"><b>Telefone de contato</b></label>
                         <input type="text" class="form-control" placeholder="Fixo ou celular">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <label for="inputCep">Cep</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputCep" maxlength="8" />
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-md-12">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,34 +97,60 @@ $this->stop();
                         <label for="nome"><b>Endereço</b></label>
                         <input type="text" class="form-control" placeholder="Rua, bairro e número">
                     </div>
-                    <div class="form-group col-md-12">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>CEP</b></label>
-                        <input type="text" class="form-control" placeholder="xxxxx-xxx">
-                    </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-8">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
                         <label for="nome"><b>Estado</b></label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Escolha...</option>
-                            <option>...</option>
+                        <select id='uf' name='uf' class="form-control custom-select nextItem" data-required="">
+                            <option selected disabled>Escolha...</option>
+                            <option value="" selected>Escolha...</option>
+                            <option value='AC'>Acre</option>
+                            <option value='AL'>Alagoas</option>
+                            <option value='AP'>Amapá</option>
+                            <option value='AM'>Amazonas</option>
+                            <option value='BA'>Bahia</option>
+                            <option value='CE'>Ceará</option>
+                            <option value='DF'>Distrito Federal*</option>
+                            <option value='ES'>Espírito Santo</option>
+                            <option value='GO'>Goiás</option>
+                            <option value='MA'>Maranhão</option>
+                            <option value='MS'>Mato Grosso do Sul</option>
+                            <option value='MG'>Minas Gerais</option>
+                            <option value='PA'>Pará</option>
+                            <option value='PB'>Paraíba</option>
+                            <option value='PR'>Paraná</option>
+                            <option value='PE'>Pernambuco</option>
+                            <option value='PI'>Piauí</option>
+                            <option value='RJ'>Rio de Janeiro</option>
+                            <option value='RN'>Rio Grande do Norte</option>
+                            <option value='RS'>Rio Grande do Sul</option>
+                            <option value='RO'>Rondônia</option>
+                            <option value='RR'>Roraima</option>
+                            <option value='SC'>Santa Catarina</option>
+                            <option value='SP'>São Paulo</option>
+                            <option value='SE'>Sergipe</option>
+                            <option value='TO'>Tocantins</option>
                         </select>
-
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-8">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
                         <label for="nome"><b>Plano</b></label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Escolha...</option>
-                            <option>...</option>
+                        <select id="inputState" class="form-control custom-select">
+                            <option selected disabled>Escolha...</option>
+                            <option value="10">Sacolinha</option>
+                            <option value="20">Cestinha</option>
+                            <option value="30">Carrinho</option>
                         </select>
-
+                    </div>
+                    <div class="form-group col-md-12">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <label for="nome"><b>Defina uma senha</b></label>
+                        <input type="text" class="form-control">
                     </div>
                     <p>
                         <div class="form-check">
@@ -103,10 +158,26 @@ $this->stop();
                                 <path fill-rule="evenodd" d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                             </svg>
                             <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">Li e concordo com os <a href="#">Termos de uso</a></label>
+                            <label class="form-check-label" for="gridCheck">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
                         </div>
                     </p>
-                    <button type="button" class="btn btn-primary">Cadastrar</button>
+                    <div class="form-row">
+                        <div class='col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto'>
+                            <div class="btn-group btn-large btn-block">
+                                <button class="btn-color-red text-white btn btn-focus-shadow-none">
+                                    <i class='icon-google fab fa-google'></i>
+                                </button>
+                                <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red btn-focus-shadow-none text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
+                                    Registrar com o Google
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto">
+                            <button type="button" class="btn btn-block btn-primary nextItem font-size-1-2em text-weight-700" id="btnRegisterCompany">Cadastrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,7 +209,6 @@ $this->stop();
         </div>
     </div>
 </div>
-
 
 <?php
 $this->start("scripts");

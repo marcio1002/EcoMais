@@ -17,7 +17,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
   <h1 class="h1">EcoMais</h1>
 </div>
 <div id="about-area">
-  <div class="container">
+  <div class="container p-3">
     <div class="row col-12">
       <div class="col-12">
         <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
@@ -56,7 +56,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
               você e muito mais!
               Crie o seu cadastro agora mesmo!
             </p>
-            <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-primary">Acesse-já</a>
+            <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-large btn-primary  center">Acesse-já</a>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
           <div class="card-header text-center">
             <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
           </div>
-          <div class="card-body p-2" style="overflow: auto;">
+          <div class="card-body pb-3" style="overflow: auto;">
             <p class="card-text">
               Panfletos, folhetos e encartes são alguns mecanismos de divulgação bastante usados quando
               se quer atrair a atenção do público em cidades da região. De fácil manuseio, essas mídias têm custo de

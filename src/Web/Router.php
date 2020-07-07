@@ -89,9 +89,18 @@ class  Router
     }
 
 
-    public function configCompany(?array $param = array()):void
-    {
-        $this->route("Company");
-        echo $this->view->render("configuration",$param);
+    // public function configCompany(?array $param = array()):void
+    // {
+    //     $this->route("Company");
+    //     echo $this->view->render("configuration",$param);
+    // }
+
+
+    /**
+     * @group User
+     */
+    public function indexUser() {
+        $this->route("User");
+        echo $this->view->render("index");
     }
 }

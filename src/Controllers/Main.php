@@ -5,9 +5,9 @@ namespace Ecomais\Controllers;
 use Ecomais\Models\{DataException, Person, Safety};
 use Ecomais\Controllers\ComponenteElement as Componente;
 use Ecomais\ControllersServices\AccountHandling;
-use Ecomais\Services\{Data, EmailECM};
+use Ecomais\Services\{EmailECM};
 
-class AccountManager
+class Main
 {
     private $sql;
     private $usr;
@@ -72,7 +72,7 @@ class AccountManager
             $this->usr->name = $data->getName(); // O metodo não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
 
-            if($this->sql->setLoginAuthGoogle($this->usr)) {
+            if($this->sql->getLoginAuthGoogle($this->usr)) {
                 $expire =  time() + (1 * 12 * 30 * 24 * 3600);
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
@@ -84,33 +84,9 @@ class AccountManager
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
             } else {
-               //---
+               
             }
 
-        }else {
-            echo "<script> window.close(); </script>";
-        }
-    }
-
-    public function registerAuthGoogle():void 
-    {
-        $google  = new \Ecomais\Models\AuthGoogle("/manager/registergoogle");
-
-        $authGoogleUrl = $google->getAuthURL();
-        
-        $code = filter_input(INPUT_GET,"code",FILTER_SANITIZE_STRIPPED);
-        $err  = filter_input(INPUT_GET,"error",FILTER_SANITIZE_STRIPPED);
-
-        if(empty($code) && empty($err)) {
-            echo json_encode(['url' => $authGoogleUrl]);
-            return;
-        }
-
-        if(!empty($code)) {
-            $data = $google->getData($code);
-            echo json_encode($data);
-            header("location: " . BASE_URL . "/cadastro");
-        
         }else {
             echo "<script> window.close(); </script>";
         }
@@ -192,12 +168,11 @@ class AccountManager
     public function recoverPasswd($param):void
     {
         try{
-
             $email = 1;
             $chave = 2;
             $option = null;
             
-            if($val =  preg_match("/^(.)+\@[a-zA-Z]+\.[a-zA-Z]+$/i",$param["value"])) {
+            if($this->safety->isEmail($param["value"])) {
                 $this->usr->email = $param["value"];
                 $option = $email;
             } else {
@@ -211,6 +186,21 @@ class AccountManager
             echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "ok"]);
 
         }catch(DataException $ex){
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
+        }
+    }
+
+    public function newsLetter($param) {
+        try{
+            
+            if(filter_var($param["newsletter"],FILTER_VALIDATE_EMAIL)) {
+                if($this->sql->createNewsLetter($param["newsletter"])) 
+                echo json_encode([ "res" => true]);
+                return;
+            }
+            echo json_encode([ "res" => false]);
+
+        }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         }
     }

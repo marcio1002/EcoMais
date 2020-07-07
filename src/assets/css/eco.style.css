@@ -15,3 +15,8 @@
 .text-weight-700 { font-weight: 700; }
 
 .btn-focus-shadow-none:focus {  box-shadow: none; }
+
+
+/* --- Background Color --- */
+
+.bg-color-green-dark-1 { background-color: #204839; }

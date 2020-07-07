@@ -1,31 +1,34 @@
 <?php
 namespace Ecomais\Controllers\User;
 
-use Ecomais\Models\{DataException,Person};
+use Ecomais\Controllers\AccountManager;
+use Ecomais\Models\{DataException,Person,Safety};
 use Ecomais\ControllersServices\AccountHandling;
 
 class AccountManagerUser {
 
-    private $account;
-    private $usr;
+    private AccountHandling $account;
+    private Person $usr;
+    private Safety $safety;
 
     function __Construct() 
     {
         $this->usr = new Person();
         $this->account = new AccountHandling();
+        $this->safety = new Safety();
     }
 
-    public function  addAccountPersonPhysical($param): void
+    public function  createAccount($param): void
     {
         try {
 
-            $this->usr->name = $param['name'];
-            $this->usr->email = $param['email'];
-            $this->usr->passwd = $param['passwd'];
-            $this->usr->cep = empty($param['cep']) ?? null;
-            $this->usr->uf = $param['uf'];
-            $this->usr->addres = empty($param['addres'] )?? null;
-            $this->usr->locality = $param['localidade'];
+            $this->usr->name = filter_var($param['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->email = filter_var($param['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->passwd = filter_var($param['passwd'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->cep = filter_var($param['cep'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->uf = filter_var($param['uf'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->addres = filter_var($param['addres'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->locality = filter_var($param['locality'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->usr->statusAccount = Person::ENABLED;
 
             if ($this->account->createAccountPersonPhysical($this->usr)) {

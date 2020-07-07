@@ -80,7 +80,7 @@ use Ecomais\Web\Bundles;
         </main>
     </div>
 
-    <?php
+<?php
     Bundles::renderJs([
         "js/jquery",
         "js/jqueryMask",
@@ -89,10 +89,11 @@ use Ecomais\Web\Bundles;
     ]);
     echo $this->section("scripts");
 
-    echo "<script>
-            const BASE_URL = '" . BASE_URL . "';
-        </script>";
-    ?>
+    echo "
+    <script>
+        const BASE_URL = '" . BASE_URL . "';
+    </script>";
+?>
 </body>
 
 </html>
