@@ -1,3 +1,5 @@
+const { prototype, permission, requestPermission, } = window.Notification;
+
 let message =
 {
     title: String,
@@ -21,7 +23,6 @@ let message =
         silent: Boolean,
     }
 }
-
 let option =
 {
     method: String,
@@ -68,10 +69,12 @@ function reqAjax(opt = option) {
 const apiNotification = {
 
     setPermission: async () => {
-        let { permission, requestPermission, } = window.Notification;
         return await requestPermission();
     },
 
+    /**
+     * @var {Object} msg
+     */
     message: (msg = message) => {
         let notfy = new Notification(msg.title, msg.opt);
         return notfy

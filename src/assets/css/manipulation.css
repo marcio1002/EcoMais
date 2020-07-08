@@ -1,7 +1,14 @@
-.formError {  border-color: #ee3211; outline: 0;box-shadow: 0 0 0 .2rem rgba(243, 42, 7, 0.473); }
+.formError { 
+    border-color: #ee3211;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(243, 42, 7, 0.473);
+ }
 
-.formValid { border-color: #28a745; outline: 0;box-shadow: 0 0 0 .2rem rgba(40,167,69,.25); }
+.formValid {
+    border-color: #28a745;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(40,167,69,.25);
+}
 
-.span#length { float: right;color: #7986cb; }
 
 .required { color:#ee3211; font-weight: bolder; }

@@ -51,13 +51,13 @@ $this->stop();
       <div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="text"><span class='required'>*</span> Nome:</label>
+            <label for="text">Nome:</label>
             <input type="text" <?=$name?>  <?= $name? "readonly": "" ?> class="form-control nextItem" id="name"  data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="text"><span class='required'>*</span> Email:</label>
+            <label for="text">Email:</label>
             <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" id="cadEmail" placeholder="seumail@test.dominio" data-required="" />
           </div>
         </div>
@@ -74,7 +74,7 @@ $this->stop();
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="inputPassword4"><span class='required'>*</span> Crie uma senha:</label>
+            <label for="inputPassword4">Crie uma senha:</label>
             <div class="input-group">
               <input type="password" class="form-control nextItem" id="passwd" maxlength="20" data-required="" />
               <div class="input-group-prepend">
@@ -90,13 +90,13 @@ $this->stop();
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="cpf"><span class='required'>*</span> Cidade: </label>
+            <label for="cpf">Cidade: </label>
             <input type="text" class="form-control nextItem" id="locality" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="inputState"><span class='required'>*</span> Unidade Federativa:</label>
+            <label for="inputState">Unidade Federativa:</label>
             <select id='uf' name='uf' class="form-control custom-select nextItem" data-required="">
               <option value="" selected>Escolha...</option>
               <option value='AC'>Acre</option>
@@ -131,7 +131,7 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputAddres">Endereço:</label>
-            <input type="address" class="form-control nextItem" id="addres" />
+            <input type="address" class="form-control nextItem" id="inputAddres" />
           </div>
         </div>
         <div class="custom-control custom-switch pb-5 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">

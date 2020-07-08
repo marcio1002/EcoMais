@@ -93,8 +93,8 @@ $("#searchCep").on("click", async function () {
         const res = await searchCep($("#inputCep").val())
         if (res !== null) {
             $("#uf").val(res.uf);
-            $("#addres").val(`${res.bairro}, ${res.logradouro}`);
-            $("#locality").val(res.localidade);
+            $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
+            $("#localidade").val(res.localidade);
         } else {
            return alertify.error("Não foi possível buscar o cep informado!")
         }
@@ -123,7 +123,7 @@ $('#btnRegister').click(function() {
         cpf: $("#cpf").val(),
         cep: $("#inputCep").val(),
         uf: $("#uf").val(),
-        addres: $("#addres").val(),
+        addres: $("#inputAddres").val(),
         locality: $("#locality").val(),
     };
     option = {
