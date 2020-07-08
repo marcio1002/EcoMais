@@ -145,12 +145,61 @@ $this->stop();
                             <option value="30">Carrinho</option>
                         </select>
                     </div>
+                    <div class="form-group col-md-8">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <label for="nome"><span class='required'>*</span> <b>Tipo de Pagamento</b></label>
+                        <select id="tipo_pag" class="form-control custom-select">
+                            <option selected disabled>Escolha...</option>
+                            <option value="1">Boleto</option>
+                            <option value="2">Cartão de Crédito</option>
+                            <option value="3">Débito Automatico</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="bandeiraCartao" id="bandeiraCartao">
+                    <input type="hidden" name="valorParcelas" id="valorParcelas">
+                    <input type="hidden" name="tokenCartao" id="tokenCartao">
+                    <input type="hidden" name="hashCartao" id="hashCartao">
+                    
+                    <div class="form-group col-md-12">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <label for="nome"><b>Numero do Cartão</b></label>
+                        <input type="text"  name="numCartao" class="form-control" id="numCartao">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <div class="col-md-6 mb-3 creditCard">
+                            <label class="creditCard"><b>Mês de Validade</b></label>
+                            <input type="text" name="mesValidade" id="mesValidade" maxlength="2" value="12"  class="form-control creditCard">
+                        </div>
+                        <div class="col-md-6 mb-3 creditCard">
+                            <label class="creditCard"><b>Ano de Validade</b></label>
+                            <input type="text" name="anoValidade" id="anoValidade" maxlength="4" value="2030" class="form-control creditCard">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                        <label class="creditCard"><b>CVV do cartão</b></label>
+                            <input type="text" name="numCartao" class="form-control creditCard" id="cvvCartao" maxlength="3" value="123">
+                            <small id="cvvCartao" class="form-text text-muted creditCard">
+                                Código de 3 digitos impresso no verso do cartão
+                            </small>
+                    </div>
+
                     <div class="form-group col-md-12">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
                         <label for="nome"><b>Defina uma senha</b></label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="senha">
                     </div>
                     <p>
                         <div class="form-check">
@@ -208,6 +257,7 @@ $this->stop();
             </div>
         </div>
     </div>
+    
 </div>
 
 <?php
