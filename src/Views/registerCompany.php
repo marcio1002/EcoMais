@@ -125,6 +125,13 @@ $this->stop();
                                 <h1 class="display-4">Planos!</h1>
                                 <p class="lead"> Escolha o pacote que mais se adequá ao seus objetivos.</p>
                             </div>
+                            <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">
+                                <label class="image-checkbox">
+                                    <img class="img-responsive" src="https://image.freepik.com/vetores-gratis/desconto-de-venda-e-design-de-preco_1017-15624.jpg" />
+                                    <input type="checkbox" name="image[]" value="" />
+                                    <i class="fa fa-check hidden"></i>
+                                </label>
+                            </div>
                             <img src="https://image.freepik.com/vetores-gratis/desconto-de-venda-e-design-de-preco_1017-15624.jpg" alt="interrogação" class="img-thumbnail mb-3"> <b>Informações do primeiro plano!!</b>
 
                             <img src="https://image.freepik.com/vetores-gratis/banner-de-venda-sexta-feira-preta-com-detalhes-de-desconto_1419-1753.jpg" alt="interrogação" class="img-thumbnail mb-3"> <b>Informações do segundo plano!!</b>
