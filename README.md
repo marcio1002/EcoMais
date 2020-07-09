@@ -2,7 +2,7 @@
 
 Um crud para manipulação de dados  do EcoMais
 <div align="right">
-    <a href='#'>
+    <a href='./src/assets/logos-icons/ecomais-logo.png'>
         <img width="25%" src="./src/assets/logos-icons/ecomais-logo.png"/>
     </a>
 </div>

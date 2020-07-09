@@ -13,6 +13,7 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/assets/logos-icons/ecomais.ico" type="image/x-icon">
     <?= Bundles::renderBundle(["css/manipulation", "css/bootstrap", "css/alertify", "css/rsenha", "fontawesome", "css/eco/style"]) ?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/login.css") ?>>
     <title>Login</title>

@@ -77,13 +77,12 @@ class AccountHandling {
     public function setLogin(Person $person): ?array
     {
         try {
-            $where =  [$person->email];
 
             $this->sql->open();
 
             return $this->sql
                 ->show('usuario',"","email = ?",3)
-                ->prepareParam($where)
+                ->prepareParam([$person->email])
                 ->executeSql();
         }
         catch(DataException $ex) { 

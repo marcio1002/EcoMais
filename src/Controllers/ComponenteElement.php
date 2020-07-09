@@ -6,22 +6,19 @@ class ComponenteElement
   public static function navBarHome():string
   {
     $urlRegister = renderUrl('/cadastro');
-    $logo = renderUrl('/src/assets/imgs/ecomais-logo.jpg');
+    $logo = renderUrl('/src/assets/logos-icons/ecomais-icon-small.png');
     $index = renderUrl();
     $login = renderUrl("/login");
     $urlRegisterCompany = renderUrl("/cadastro/empresa");
 return <<<navBar
       <div class='container text-white' id='nav-container'>
-        <nav class='navbar navbar-expand-sm fixed-top navbar-dark font-weight-bold'>
+        <nav class='navbar navbar-expand-sm fixed-top navbar-dark text-weight-500  bg-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
           </button>
           <div class='collapse navbar-collapse  justify-content-between' id='navbar-links'>
-            <div class='' id='box-logo'>
-                <a class='navbar-brand' href='$index' >
-                <img id='logo' src='$logo' alt='ecom'>
-            </a>
+            <div class='box-logo'>
             </div>
             <div class='navbar-nav'>
               <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
@@ -30,7 +27,7 @@ return <<<navBar
               <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
             </div>
             <div>
-            <a class='nav-item nav-link rounded-left text-center rounded-right rounded-bottom rounded-top border border-color-yellow border-success text-white' id='login' href='$login'>Entrar</a>
+            <a class='nav-item nav-link text-center rounded bg-red-wine  border border-success text-white' id='login' href='$login'>Entrar</a>
             </div>
           </div> 
         </nav>
@@ -43,7 +40,7 @@ navBar;
   public static function footerHome():string
   {
 return <<<footer
-    <div id="contact-area" class='text-center bg-color-green-dark-1 text-white'>
+    <div id="contact-area" class='text-center bg-dark text-white'>
     <div class="container p-2">
         <div class="col-xl-12 col-md-12">
         <div class="col-md-12 p-2" id="contact-form">

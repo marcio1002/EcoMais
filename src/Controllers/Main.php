@@ -200,7 +200,7 @@ class Main
                 echo json_encode([ "res" => true]);
                 return;
             }
-            echo json_encode([ "res" => false]);
+                echo json_encode([ "res" => false]);
 
         }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");

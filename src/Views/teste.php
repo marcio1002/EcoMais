@@ -1,38 +1,46 @@
 <?php
-    require_once __DIR__ . "/../../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
-    $safety = new Ecomais\Models\Safety();
+use Ecomais\Web\Bundles;
 
-    $prod  = new Ecomais\Controllers\Product\ProductManager();
+$prod  = new Ecomais\Controllers\Product\ProductManager();
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?= Bundles::renderCss(["css/bootstrap", "css/alertify","css/dataTable"])?>
+    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/tableproduct.css")?> >
     <title>Teste</title>
 </head>
+
 <body>
+
+<div id="list-product"></div>
     <?php
-        $values = array(
-            "name" => "Maça Pera",
-            "price" => "23.90",
-            "brand" => "Lacoste",
-            "classification" => "Fruta",
-            "description" => "Maça Pera",
-            "quantity" => 12,
-            "date_start" => "05/07/2020",
-            "date_end" => "08/07/2020",
-            "fkCompany" => 1
-        );
+   echo Bundles::renderJs([
+        "js/jquery",
+        "js/jqueryMask",
+        "js/bootstrap",
+        "js/alertify",
+        "js/dataTable",
+        "js/apis"
+    ]);
 
-        $passwd = $safety->criptPasswd("teste_de_senha1");
-    
-        $prod =  $prod->createProduct($values);
-
-        print_r($prod);
+    echo
+        "
+        <script>
+            const BASE_URL = '" . BASE_URL . "';
+        </script>
+        "
     ?>
+
+<script src=<?=renderUrl('/src/assets/js/product/list-product.js')?> ></script>
 </body>
+
 </html>

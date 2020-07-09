@@ -3,7 +3,7 @@
 namespace Ecomais\Controllers\Product;
 
 use Ecomais\Models\{DataException, Product, Safety};
-use Ecomais\ControllersServices\Product\productHandling;
+use Ecomais\ControllersServices\Product\ProductHandling;
 
 class ProductManager
 {
@@ -16,10 +16,10 @@ class ProductManager
     {
         $this->prod = new Product();
         $this->safety = new Safety();
-        $this->sql = new productHandling();
+        $this->sql = new ProductHandling();
     }
 
-    public function createProduct(array $param)
+    public function createProduct(array $param): void
     {
         try {
             $this->prod->name = filter_var($param['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
@@ -35,11 +35,11 @@ class ProductManager
             $this->prod->createAt();
 
 
-            if($this->sql->createProduct($this->prod)) {
-                echo "tudo certo :)";
-            }else {
-                echo "<script>alert('deu errado')</script>";
-            }
+            if($this->sql->createProduct($this->prod))
+                echo json_encode(["error" => false, "status" => 204, "msg" => "ok"]);
+            else 
+                echo json_encode(["error" => true, "status" => 404, "msg" => "0 rows affected"]);
+            
 
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
@@ -49,7 +49,32 @@ class ProductManager
     /**
      * Ativar e desativar os produtos
      */
-    public function activeImage()
+    public function setStatus(array $param): void
     {
+        try{
+
+            foreach($param as $k => $v) $this->prod->$k = $v;
+
+            if($this->sql->updateStatusProduc($this->prod))
+                echo json_encode(["error" => false, "status" => 204, "msg" => "ok"]); 
+            else
+                echo json_encode(["error" => true, "status" => 404, "msg" => "0 rows affected"]);
+        }catch(DataException $ex) {
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
+        }
+    }
+
+    public function searchProd(array $param): void
+    {
+        try{
+            foreach($param as $k => $v) $this->prod->$k = $v;
+
+            if($row =  $this->sql->searchProd($this->prod))
+                echo json_encode(["error" => false, "status" => 204, "data" => $row]); 
+            else
+                echo json_encode(["error" => true, "status" => 404, "data" => []]);
+        }catch(DataException $ex) {
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
+        }
     }
 }

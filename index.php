@@ -73,9 +73,15 @@ $router->namespace("Ecomais\Controllers");
     $router->get("/registergoogle","Main:registerAuthGoogle");
     $router->post("/recoverByKey", "Main:recoverByKey");
     $router->post("/recoverByMail", "Main:recoverByMail");
-    $router->post("/recoverpasswd", "Main:recoverPasswd");
+    $router->put("/recoverpasswd", "Main:recoverPasswd");
     $router->post("/newsletter","Main:newsLetter");
 
+
+/** rotas para Usuários */
+$router->namespace("Ecomais\Controllers\User");
+
+    $router->group("manager");
+    $router->post("/addaccountpersonphysical", "AccountManagerUser:createAccount");
 
 /** rotas para Empresas*/
 $router->namespace("Ecomais\Controllers\Company");
@@ -83,11 +89,12 @@ $router->namespace("Ecomais\Controllers\Company");
     $router->group("manager");
     //--- Api Pagamento ---
 
-/** rotas para Usuários */
-$router->namespace("Ecomais\Controllers\User");
+$router->namespace("Ecomais\Controllers\Product");
 
     $router->group("manager");
-    $router->post("/addaccountpersonphysical", "AccountManagerUser:createAccount");
+    $router->post("/addproduct","ProductManager:createProduct");
+    $router->put("/setstatus","ProductManager:setStatus");
+    $router->post("/searchproduct","ProductManager:searchProd");
 
 $router->dispatch();
 

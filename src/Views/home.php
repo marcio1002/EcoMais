@@ -22,8 +22,8 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
       <div class="col-12">
         <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
       </div>
-      <div class="col-md-6">
-        <img class="img-fluid" src=<?= renderUrl("/src/assets/imgs/nlogo.png"); ?> alt="Ecomais">
+      <div class="col-md-6 ">
+        <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
       </div>
       <div class="col-md-6">
         <h3 class="about-title">Uma Organização que pensa no futuro e saúde do planeta</h3>

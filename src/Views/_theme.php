@@ -13,7 +13,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" href="./src/assets/icon-ecomais/ecomais-icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./src/assets/logos-icons/ecomais.ico" type="image/x-icon">
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]); ?>
     <link rel='stylesheet' type='text/css' href=<?= renderUrl("/src/assets/css/estilo.css") ?> />
     <?= $this->section("css"); ?>

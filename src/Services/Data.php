@@ -11,6 +11,7 @@ namespace Ecomais\Services;
 use Exception;
 use PDO;
 use Ecomais\Models\DataException;
+use PDOException;
 
 final class Data
 {
@@ -41,7 +42,6 @@ final class Data
      */
     public function open(): void
     {
-        unset($this->pdo);
         if (!isset($this->pdo) || $this->pdo === null) {
             $this->pdo = new PDO(
                 DATA::TYPE_SBGD . ":host=" . Data::PARAM_HOST . ";port=" . Data::PARAM_PORT . ";dbname=" . Data::PARAM_DATA,
@@ -84,9 +84,14 @@ final class Data
      */
     public function executeSql(): ?array
     {
-        $this->query->execute();
-        $this->pdo->commit();
-        return ($this->query->rowCount() == 1) ? $this->query->fetch(PDO::FETCH_ASSOC) : $this->query->fetchAll();
+        try{
+            $this->query->execute();
+            $this->pdo->commit();
+            return ($this->query->rowCount() == 1) ? $this->query->fetch(PDO::FETCH_ASSOC) : $this->query->fetchAll();
+        }catch(PDOException $e) {
+            throw new DataException($e->getMessage(), $e->getCode());
+        }
+        return null;
     }
 
     /**
@@ -95,9 +100,13 @@ final class Data
      */
     public function execNotRowSql(): bool
     {
-        $this->query->execute();
-        $this->pdo->commit();
-        return  ($this->query->rowCount() > 0 ) ? true : false;
+        try{
+            $this->query->execute();
+            $this->pdo->commit();
+            return  ($this->query->rowCount() > 0 ) ? true : false;
+        }catch(PDOException $e){
+            throw new DataException($e->getMessage(),$e->getCode());
+        } 
     }
 
     /**
@@ -155,7 +164,7 @@ final class Data
     {
         try {
             if (empty($table)) throw new DataException("Error null values", DataException::NOT_IMPLEMENTED);
-            if ($option <= 0 || $option > 6) throw new DataException("Value $option is not accepted", DataException::SERVER_ERROR);
+            if ($option <= 0 || $option > 6) throw new DataException("Value <mark>$option</mark> is not accepted", DataException::SERVER_ERROR);
             if (!is_numeric($option)) throw new DataException("Non-numeric value", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();

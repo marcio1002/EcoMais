@@ -113,7 +113,7 @@ $('#btnRegister').click(function() {
 
     let formError = validaForm();
 
-    if (formError) return;
+    if (formError) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
 
     let person = {

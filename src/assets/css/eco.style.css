@@ -8,7 +8,6 @@
 
 .font-size-1-5em { font-size: 1.5em; }
 
-.btn-color-red { background: #ea4335; }
 
 .btn-rounded {border-radius: 10px;}
 
@@ -22,11 +21,19 @@
 
 /* --- Background Color --- */
 
-.bg-color-green-dark-1 { background-color: #204839; }
+.bg-green-dark-1 { background-color: #204839; }
+.bg-red-wine { background-color: rgb(128, 18, 18);}
+
+.bg-red-wine:hover {background-color: rgb(122, 10, 10);}
 
 
+/* --- Borders ---*/
+.border-green-dark-1 {border: 2px solid #28a745}
 /* --- Text Color --- */
 
-.text-green-dark { color: #1D5842
-}
-.text-green-dark-2 { color: #398468}
+.text-green-dark { color: #1D5842;}
+.text-green-dark-2 { color: #398468;}
+.text-red-wine { color: rgb(128, 18, 18) !important;}
+
+/* --- Buttons Colors ---*/
+.btn-color-red { background: #ea4335; }

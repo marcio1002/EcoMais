@@ -1,5 +1,6 @@
 <?php
 
+use Ecomais\Controllers\ComponenteElement;
 use Ecomais\Web\Bundles;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
@@ -11,7 +12,7 @@ $err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
 
 $name = "";
 $email = "";
-$clearResquest = "";
+$clearRequest = "";
 
 $svgCeta = "<svg class='bi bi-caret-right-fill' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/></svg>";
 
@@ -21,7 +22,7 @@ if (!empty($code)) {
         $name = "value='{$data->getName()}'";
         $email = "value='{$data->getEmail()}'";
     } else {
-        $clearResquest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
+        $clearRequest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
     }
 }
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
@@ -271,14 +272,18 @@ $this->stop();
 </div>
 
 <?php
+$this->start("footer");
+    echo ComponenteElement::footerHome();
+$this->stop();
+
 $this->start("scripts");
-echo  Bundles::renderJs([
-    "js/apis",
-    "js/mainMethods",
-    "js/regAjax",
-    "js/manipulation",
-    "js/register",
-]);
-echo $clearResquest;
+    echo  Bundles::renderJs([
+        "js/apis",
+        "js/mainMethods",
+        "js/regAjax",
+        "js/manipulation",
+        "js/register",
+    ]);
+    echo $clearRequest;
 $this->stop();
 ?>
