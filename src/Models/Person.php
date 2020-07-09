@@ -31,6 +31,10 @@ class Person
         return $this->$name;
     }
 
+    /**
+     * Pega todos os valores nos atributos da classe
+     * @return array
+     */
     public function getAll(): array
     {
         $array = array();

@@ -42,7 +42,6 @@ $this->stop();
                     <p class="text-muted ">Faça postagens públicas de seus produtos em promoção!</p>
 
                     <div class="form-group col-md-12">
-<<<<<<< HEAD
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Fantasia</b></label>
                         <input type="text" <?= $name ?> class="form-control" placeholder="Nome da empresa" data-required="">
@@ -61,34 +60,6 @@ $this->stop();
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>E-mail</b></label>
                         <input type="text" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control" data-required="">
-=======
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Fantasia</b></label>
-                        <input type="text" <?= $name?>  class="form-control" placeholder="Nome da empresa">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Razão social</b></label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>CNPJ</b></label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>E-mail</b></label>
-                        <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control">
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
                     </div>
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
@@ -108,24 +79,9 @@ $this->stop();
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-<<<<<<< HEAD
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Cidade</b></label>
                         <input type="text" class="form-control" id="locality" data-required="">
-=======
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Cidade</b></label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Endereço</b></label>
-                        <input type="text" class="form-control" placeholder="Rua, bairro e número">
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
                     </div>
                     <div class="form-group col-md-8">
                         <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -163,7 +119,6 @@ $this->stop();
                             <option value='TO'>Tocantins</option>
                         </select>
                     </div>
-<<<<<<< HEAD
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><b>Endereço</b></label>
@@ -172,13 +127,6 @@ $this->stop();
                     <div class="form-group col-md-8">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Plano</b></label>
-=======
-                    <div class="form-group col-md-8">
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Plano</b></label>
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
                         <select id="inputState" class="form-control custom-select">
                             <option selected disabled>Escolha...</option>
                             <option value="10">Sacolinha</option>
@@ -236,17 +184,9 @@ $this->stop();
                     </div>
 
                     <div class="form-group col-md-12">
-<<<<<<< HEAD
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Defina uma senha</b></label>
                         <input type="text" class="form-control">
-=======
-                        <svg class="bi bi-caret-right-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                        <label for="nome"><b>Defina uma senha</b></label>
-                        <input type="text" class="form-control" id="senha">
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
                     </div>
                     <p>
                         <div class="form-check">

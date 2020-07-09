@@ -1,7 +1,20 @@
 <?php
-
-include './config.php';
-include './Services/Data.php';
+// require_once __DIR__ . "/../../vendor/autoload.php";
+include './config.php'; 
+//use Ecomais\Services\Data;
+include './Services/Data.php'; 
+/**
+ * Pra você chamar uma classe exem:
+ * use Ecomais\Services\Data;
+ * primeiro chama o require_onde __DIR__ . "../vendor/autoload.php";
+ * É ele que faz rodar a por.. toda e que dar dor de cabeça do caralho desculpa o palavrão.
+ * ai nisso você não precisa ficar chamando o config ,
+ * e não precisa ficar dando require_once.
+ * Nos arquivos Models,Web,Services,Controllers e ControllersServices
+ * não precisa chamar o autoload, só chama quando não usa classes
+ * como por exemplos nos arquivos que estão na pasta Views
+ * depois tira esse comentário
+ */
 
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 

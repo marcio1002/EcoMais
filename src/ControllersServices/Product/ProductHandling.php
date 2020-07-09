@@ -6,7 +6,7 @@ use PDO;
 use Ecomais\Models\{Safety,DataException, Product};
 use Ecomais\Services\Data;
 
-class productHandling {
+class ProductHandling {
 
     private Data $sql;
     private Safety $safety;

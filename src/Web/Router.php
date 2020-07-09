@@ -101,6 +101,8 @@ class  Router
         echo $this->view->render("index", $param);
     }
 
+    //--- Api Pagamento ---
+
 
     // public function configCompany(?array $param = array()):void
     // {

@@ -1,11 +1,17 @@
 <?php
 namespace Ecomais\Models;
 
-use Ecomais\Models\{Pagamento, DataException};
+use Ecomais\Models\DataException;
 
 use TypeError;
 
-class PersonLegal extends person 
+/**
+ * pode deixar o PersonLegal como herança porque ele já tem os atributos certos 
+ * e tem a classe Person estendida
+ * 
+ * depois tira esse comentário
+*/
+class Pagamento extends PersonLegal 
 {
     private int $id;
     private int $tipo; 
@@ -15,7 +21,6 @@ class PersonLegal extends person
     private string $link_bd_online;
     private string $data_criacao;
     private string $data_update;
-    private int $fk_empresa;
 
     public function __set($name, $value)
     {
@@ -26,5 +31,18 @@ class PersonLegal extends person
     public function __get($name)
     {
         return $this->$name;
+    }
+
+    /**
+     * Pega todos os valores nos atributos da classe
+     * @return array
+     */
+    public function getAll(): array
+    {
+        $array = array();
+        foreach($this as $key => $val) {
+            $array += array($key => $val);
+        }
+        return $array;
     }
 }
