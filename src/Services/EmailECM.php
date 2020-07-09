@@ -73,13 +73,8 @@ class EmailECM  extends EmailProps
             $this->email->send();
             return true;
         } catch (Exception $ex) {
-            $this->err = $ex->getMessage() | $ex->errorMessage();
-            return false;
+            throw new DataException($ex->getMessage(),$ex->getCode());
         }
-    }
-    
-    public function error(): DataException
-    {
-        throw new DataException($this->err);
+        return false;
     }
 }

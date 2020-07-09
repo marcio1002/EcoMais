@@ -17,9 +17,9 @@ class Person
     protected string $locality;
     protected ?string $addres;
     protected int $number;
-    protected string $date;
     protected ?int $cep;
     protected bool $statusAccount;
+    protected string $date;
 
     public function __set($name, $value)
     {  
@@ -29,6 +29,15 @@ class Person
     public function __get($name)
     {
         return $this->$name;
+    }
+
+    public function getAll(): array
+    {
+        $array = array();
+        foreach($this as $key => $val) {
+            $array += array($key => $val);
+        }
+        return $array;
     }
 
     public function createAt(): string

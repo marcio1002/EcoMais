@@ -14,7 +14,7 @@ class Product
     protected float $price;
     protected string $brand;
     protected string $classification;
-    protected string $descrition;
+    protected string $description;
     protected int $quantity;
     protected string $period_start;
     protected string $period_end;
@@ -31,5 +31,22 @@ class Product
     public function __get($name)
     {
         return $this->$name;
+    }
+
+    public function getAll(): array
+    {
+        $array = array();
+        foreach($this as $key => $val) {
+            $array += array($key => $val);
+        }
+        return $array;
+    }
+
+    public function createAt(): string
+    {
+        date_default_timezone_set("America/Sao_paulo");
+
+        $this->date = date('Y-m-d H:i:s');
+        return $this->date;
     }
 }

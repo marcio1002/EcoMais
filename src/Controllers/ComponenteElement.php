@@ -9,6 +9,7 @@ class ComponenteElement
     $logo = renderUrl('/src/assets/imgs/ecomais-logo.jpg');
     $index = renderUrl();
     $login = renderUrl("/login");
+    $urlRegisterCompany = renderUrl("/cadastro/empresa");
 return <<<navBar
       <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-sm fixed-top navbar-dark font-weight-bold'>
@@ -25,8 +26,8 @@ return <<<navBar
             <div class='navbar-nav'>
               <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='about-menu' href='$urlRegister' >Cadastre-se</a>
-              <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='#'>Serviços</a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='portfolio-menu' href='#'>Projetos</a>
+              <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
             </div>
             <div>
             <a class='nav-item nav-link rounded-left text-center rounded-right rounded-bottom rounded-top border border-color-yellow border-success text-white' id='login' href='$login'>Entrar</a>

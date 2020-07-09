@@ -2,7 +2,7 @@
 
 namespace Ecomais\Controllers;
 
-use Ecomais\Models\{DataException, Person, Safety};
+use Ecomais\Models\{DataException, Person, Safety,AuthGoogle};
 use Ecomais\Controllers\ComponenteElement as Componente;
 use Ecomais\ControllersServices\AccountHandling;
 use Ecomais\Services\{EmailECM};
@@ -22,18 +22,24 @@ class Main
         $this->email = new EmailECM();
     }
 
-    // login server para os dois tipos de usuario empresa/usuario
-    public function login($param): void
+    /**
+     * login server para os dois tipos de usuario empresa/usuario
+     */
+    public function login(array $param): void
     {
         try {
             $this->usr->email = $param['email'];
             $this->usr->passwd = $param['passwd'];
 
-            if ($res = $this->sql->setLogin($this->usr)) {
+            $row = $this->sql->setLogin($this->usr);
+
+            if (count($row) > 0 && password_verify($this->usr->passwd,$row['senha'])) {
+
+                $this->usr->id = $row['id_usuario'];
+
+                $this->sql->verifyUpdateHash($row['senha'],$this->usr);
 
                 $expire = ($param['conectedLogin'] == 18) ? time() + (1 * 12 * 30 * 24 * 3600) : time() + (24 * 36000);
-
-                $this->usr->id = $res['id_usuario'];
 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
@@ -57,7 +63,7 @@ class Main
 
     public function loginAuthGoogle(): void 
     {
-        $google  = new \Ecomais\Models\AuthGoogle("/manager/logingoogle");
+        $google  = new AuthGoogle("/manager/logingoogle");
 
         $authGoogleUrl = $google->getAuthURL();
         
@@ -71,8 +77,11 @@ class Main
             $data = $google->getData($code);
             $this->usr->name = $data->getName(); // O metodo não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
+            $row =  $this->sql->getLoginAuthGoogle($this->usr);
 
-            if($this->sql->getLoginAuthGoogle($this->usr)) {
+            if(count($row) > 0) {
+                $this->usr->id = $row['id_usuario'];
+
                 $expire =  time() + (1 * 12 * 30 * 24 * 3600);
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
@@ -83,13 +92,11 @@ class Main
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
-            } else {
-               
-            }
-
+            } 
         }else {
             echo "<script> window.close(); </script>";
         }
+        session_destroy();
     }
 
     public function logoff(): void
@@ -109,7 +116,7 @@ class Main
     }
     
     // recuperar senha server para os dois tipos de usuario empresa/usuario
-    public function recoverByKey($param): void
+    public function recoverByKey(array $param): void
     {
         try {
             $token = $this->safety->createToken($param["value"]);
@@ -132,7 +139,7 @@ class Main
         }
     }
 
-    public function recoverByMail($param):void 
+    public function recoverByMail(array $param):void 
     {
         try {
             ob_start();
@@ -170,17 +177,12 @@ class Main
         try{
             $email = 1;
             $chave = 2;
-            $option = null;
-            
-            if($this->safety->isEmail($param["value"])) {
-                $this->usr->email = $param["value"];
-                $option = $email;
-            } else {
-                $this->usr->passwd = $param["value"];
-                $option = $chave;
-            }
+            $option = ($this->safety->isEmail($param["value"])) ? $email : $chave;
+            $verification = $param["value"];
+            $this->usr->passwd = $this->safety->criptPasswd($param['passwd']);
 
-            if($this->sql->recoverPasswd($this->usr,$option)) 
+
+            if($this->sql->recoverPasswd($this->usr,$verification,$option)) 
             echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
             else
             echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "ok"]);

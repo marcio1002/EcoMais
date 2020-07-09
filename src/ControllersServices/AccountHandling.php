@@ -1,8 +1,8 @@
 <?php 
 namespace Ecomais\ControllersServices;
 
-use Ecomais\Models\{Safety,DataException, Person, PersonLegal};
-    use Ecomais\Services\Data;
+use Ecomais\Models\{Safety,DataException, Person};
+use Ecomais\Services\Data;
 
 class AccountHandling {
 
@@ -14,7 +14,7 @@ class AccountHandling {
         $this->safety = new Safety();
     }
 
-    public function createAccountPersonPhysical(Person $person):int
+    public function createAccountPersonPhysical(Person $person): bool
     {
         try {
             $passwd =  $this->safety->criptPasswd($person->passwd);
@@ -33,7 +33,10 @@ class AccountHandling {
 
             $this->sql->open();
 
-            return $this->sql->add("usuario",$columns,$data);
+            return $this->sql
+                ->add("usuario",$columns,count($data))
+                ->prepareParam($data)
+                ->execNotRowSql();
 
         } catch(DataException $ex)  {   
             throw new DataException( $ex->getMessage(),$ex->getCode() );
@@ -44,100 +47,121 @@ class AccountHandling {
             
     }
 
-    public function setLogin(Person $person):array
+    /**
+     * Verifica se o hash precisa ser atualizada, se sim ela é atualizada no banco
+     * @param string $passwd
+     * O password hash
+     * @param Person $person
+     * O password a ser atualizado se necessário
+     * @return void
+     */
+    public function verifyUpdateHash(string $passwd, Person $person):void
     {
-            try {
-                $pwd = $this->safety->criptPasswd($person->passwd);
-                $where =  [$person->email,$pwd];
-
+        try{
+            if(password_needs_rehash($passwd, PASSWORD_DEFAULT)) {
+                $parans = array($this->safety->criptPasswd($person->passwd), $person->id);
+                $vals  = [];
                 $this->sql->open();
-
-                return $this->sql->show('usuario',"","email = ? AND senha = ?",$where,3);
+                $this->sql
+                    ->update("usuario","senha = ?","id_usuario = ?")
+                    ->prepareParam($parans)
+                    ->execNotRowSql();
             }
-            catch(DataException $ex) { 
-               throw new DataException( $ex->getMessage(), $ex->getCode() );
-
-            } finally {
-                $this->sql->close();
-            }
+        }catch(DataException $ex) {
+           throw $ex;
+        }finally {
+            $this->sql->close();
+        }
     }
 
-    public function getLoginAuthGoogle(Person $person):array
+    public function setLogin(Person $person): ?array
+    {
+        try {
+            $where =  [$person->email];
+
+            $this->sql->open();
+
+            return $this->sql
+                ->show('usuario',"","email = ?",3)
+                ->prepareParam($where)
+                ->executeSql();
+        }
+        catch(DataException $ex) { 
+            throw $ex;
+            
+        } finally {
+            $this->sql->close();
+        }
+    }
+
+    public function getLoginAuthGoogle(Person $person): ?array
     {
         try {
             $where = [$person->name, $person->email];
 
             $this->sql->open();
 
-            return $this->sql->show('usuario',"","nome = ? AND email = ?",$where,3);
+            return $this->sql
+                ->show('usuario',"","nome = ? AND email = ?",3)
+                ->prepareParam($where)
+                ->executeSql();
 
         }catch(DataException $ex) {
-            throw new DataException($ex->getCode(), $ex->getMessage());
+            throw $ex;
         } finally {
             $this->sql->close();
         }
     }
 
-    public function isLogged():bool
-    {
-            if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-                $this->sql->open();
-                $res = $this->sql->show("usuarios","","id_usuario = ?",[$_COOKIE['_id']],3);
-                if($res) {
-    
-                    $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-                    $id = $res["id_usuario"];
-                    if (strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;  
-                } 
-                $this->sql->close(); 
-            } 
-            return false;
-    }
-
-    public function isAdmin()
-    {               
-    }
-
-    public function recoverByKey(string $key):array 
+    public function recoverByKey(string $key): ?array 
     {
         try {
             $preWhere = [$key];
 
             $this->sql->open();
 
-            return $this->sql->show("usuario","senha","senha = ?",$preWhere,6);
+            return $this->sql
+                ->show("usuario","senha","senha = ?",6)
+                ->prepareParam($preWhere)
+                ->executeSql();
             
         }catch(DataException $ex) {
-            throw new DataException( $ex->getMessage(), $ex->getCode() );
+           throw $ex;
+
         }finally {
-            
             $this->sql->close();
         }
 
     }
 
-    public function recoverPasswd(Person $usr, int $option):int
+    public function recoverPasswd(Person $usr,string $value, int $option): bool
     {
         try{
             $this->sql->open();
             $where = ($option == 1) ? "email = ?" : "senha = ?";
-            $vals = ($option == 1) ? [$usr->email] : [$usr->passwd];
-            return $this->sql->update("usuario",$where,$vals,$where,$vals);
+
+            return $this->sql
+                ->update("usuario","senha = ?",$where)
+                ->prepareParam(array($usr->passwd,$value))
+                ->execNotRowSql();
         }catch(DataException $ex) {
-            throw new DataException( $ex->getMessage(), $ex->getCode() );
+           throw $ex;
         }finally {
             $this->sql->close();
         }
     }
 
-    public function createNewsLetter($email):int 
+    public function createNewsLetter($email): bool
     {
         try{
             $this->sql->open();
             
-            return $this->sql->add("newsletter","email",[$email]);
+            return $this->sql
+                ->add("newsletter","email",1)
+                ->prepareParam([$email])
+                ->execNotRowSql();
         }catch(DataException $ex) {
-            throw new DataException($ex->getMessage(), $ex->getCode());
+            throw $ex;
 
         }finally {
             $this->sql->close();

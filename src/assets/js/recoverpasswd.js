@@ -20,7 +20,7 @@ $("#recoverpwd").keypress(function(e) {
 $("#btnEnviPwd").click(() => {
 
     $("input").removeClass("formError");
-    $(".alert").removeClass("alert-success").removeClass("alert-danger");
+    $(".alert").remove();
 
     let func = ($("#checkChave").val() == 0) ? "recoverByMail" : "recoverByKey";
 

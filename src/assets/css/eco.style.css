@@ -12,7 +12,10 @@
 
 .btn-rounded {border-radius: 10px;}
 
+.text-weight-500 { font-weight: 500; }
+.text-weight-600 { font-weight: 600; }
 .text-weight-700 { font-weight: 700; }
+.text-weight-800 { font-weight: 800; }
 
 .btn-focus-shadow-none:focus {  box-shadow: none; }
 
@@ -20,3 +23,10 @@
 /* --- Background Color --- */
 
 .bg-color-green-dark-1 { background-color: #204839; }
+
+
+/* --- Text Color --- */
+
+.text-green-dark { color: #1D5842
+}
+.text-green-dark-2 { color: #398468}

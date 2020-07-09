@@ -50,7 +50,7 @@ body{
 
 .subNavBar {width: 100%; height: 70px;}
 
-#login:active { background-color: #f0dd72 !important;  color: #444; }
+#login:active { background-color: #f0dd72 !important;  color: #444 !important; }
 /* ------- */
 
 #title-container { background: rgba(68, 68, 68, 0.74) url("../imgs/casal-no-mercado.jpg") no-repeat; background-size: cover; background-attachment: fixed; height: 70vh; }

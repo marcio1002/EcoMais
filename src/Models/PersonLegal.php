@@ -23,4 +23,5 @@ class PersonLegal extends person
     {
         return $this->$name;
     }
+    
 }

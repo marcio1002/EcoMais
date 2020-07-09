@@ -3,6 +3,6 @@
 Um crud para manipulação de dados  do EcoMais
 <div align="right">
     <a href='#'>
-        <img width="25%" src="./src/icon-ecomais/ecomais.png"/>
+        <img width="25%" src="./src/assets/icon-ecomais/ecomais-logo-small.png"/>
     </a>
 </div>

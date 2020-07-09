@@ -3,6 +3,7 @@
 namespace Ecomais\Models;
 
 use Ecomais\Models\DataException;
+use Exception;
 use League\OAuth2\Client\Provider\Facebook;
 use League\OAuth2\Client\Provider\Google;
 
@@ -34,15 +35,20 @@ class AuthGoogle {
         return $this->google->getState();
     }
 
-    public function getData(string $code): \league\OAuth2\Client\Provider\ResourceOwnerInterface
+    public function getData(string $code): ?\league\OAuth2\Client\Provider\ResourceOwnerInterface
     {
-        if(empty($code)) throw new DataException("No code provided");
+        try{
+            if(empty($code)) throw new DataException("No code provided");
 
-        $token = $this->google->getAccessToken('authorization_code',[
-            'code' => $code
-        ]);
+            $token = $this->google->getAccessToken('authorization_code',[
+                'code' => $code
+            ]);
 
-        return $this->google->getResourceOwner($token);
+            return $this->google->getResourceOwner($token);
+
+        }catch(Exception $ex) {
+           return null;
+        }
     }
 
 }

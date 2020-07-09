@@ -40,6 +40,8 @@ $("#newPasswdVerify").keypress(function(e) {
 });
 
 $("#btnRecoverPwd").click(function() {
+
+    $(".alert").removeClass("alert-success").removeClass("alert-danger");
     if($("#newPasswd").val().length == 0) {
         return $("#newPasswd").addClass("formError");
     }
@@ -68,9 +70,9 @@ $("#btnRecoverPwd").click(function() {
             if (res) 
                 if(!res.error) {
                     if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
-                    $(".alert").addClass("alert-success").text("Enviado com sucesso! verifique seu e-mail");
+                    $(".alert").addClass("alert-success").text("Senha atualizada com sucesso");
                 } else {
-                    $(".alert").addClass("alert-danger").text("Verifique os dados!");
+                    $(".alert").addClass("alert-danger").text("Não foi possível a senha!");
                 } 
         },
         error: (err) => {

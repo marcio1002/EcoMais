@@ -4,10 +4,8 @@
     "license": "proprietary",
     "version": "v1.1.14",
     "keywords": [
-        "Query",
-        "dados",
-        "crud",
-        "EcoMais"
+        "PHP",
+        "Composer"
     ],
     "homepage": "https://github.com/marcio1002/EcoMais",
     "type": "package",
@@ -41,7 +39,6 @@
         "php": ">=7.0.0",
         "coffeecode/router": "1.0.*",
         "phpmailer/phpmailer": "~6.1",
-        "league/oauth2-facebook": "^2.0",
         "league/plates": "^3.3",
         "league/oauth2-google": "^3.0"
     }

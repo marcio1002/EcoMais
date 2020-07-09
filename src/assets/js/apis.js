@@ -1,5 +1,45 @@
-let message =
-{
+async function searchCep(cep) {
+    const validcep = /\d{8}$/;
+    if (!validcep.test(cep)) throw TypeError('Invalid zip code');
+
+    const info = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
+    
+    if (info.erro) return null;
+    return info;
+}
+
+/**
+ * @param {object | null} opt
+ * Defini uma opção de parametros para o ajax;
+ * option = {
+
+    method: String,
+    type: String,
+    url: String,
+    cache: Boolean,
+    mycustomtype: String,
+    contentType: String | Boolean,
+    processData: Boolean,
+    dataType: String,
+    async: Boolean,
+    data: Object,
+    accepts: Object,
+    xhrFields: Object,
+    statusCode: Object,
+    beforeSend: Function,
+    complete: Function,
+    error: Function,
+    dataFilter: Function,
+    success: Function,
+    complete: Function,
+} 
+*/
+function reqAjax(opt = option) {
+    $.ajax(opt);
+}
+
+
+var message ={
     title: String,
     opt: {
         badge: String,
@@ -21,50 +61,6 @@ let message =
         silent: Boolean,
     }
 }
-
-let option =
-{
-    method: String,
-    type: String,
-    url: String,
-    cache: Boolean,
-    mycustomtype: String,
-    contentType: String | Boolean,
-    processData: Boolean,
-    dataType: String,
-    async: Boolean,
-    data: Object,
-    accepts: Object,
-    xhrFields: Object,
-    statusCode: Object,
-    beforeSend: Function,
-    complete: Function,
-    error: Function,
-    dataFilter: Function,
-    success: Function,
-    complete: Function,
-
-}
-
-async function searchCep(cep) {
-    const validcep = /\d{8}$/;
-    if (!validcep.test(cep)) throw TypeError('Invalid zip code');
-
-    const info = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
-    
-    if (info.erro) return null;
-    return info;
-
-}
-
-/**
- * @param {Object} op
- * Defini uma opção de parametros para o ajax;
- */
-function reqAjax(opt = option) {
-    $.ajax(opt);
-}
-
 const apiNotification = {
 
     setPermission: async () => {

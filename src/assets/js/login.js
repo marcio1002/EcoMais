@@ -29,6 +29,10 @@ $('#btnLogar').click( function()  {
             } else {
                 // location.href = `${BASE_URL}/product/`;
             }
+        },
+        error: (er) => {
+            $(this).attr("disabled",false);
+            alertify.error("Ocorreu um erro no servidor");
         }
     }
     

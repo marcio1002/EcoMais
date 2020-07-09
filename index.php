@@ -41,6 +41,7 @@ $router->namespace("Ecomais\Web");
     $router->get("/recuperarsenha", "Router:recoverPasswd");
     $router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
     $router->get("/politica-privacidade-e-termos", "Router:terms");
+    $router->get("/teste/{chv}","Router:test");
 
     $router->group("error");
     $router->get("/{errCode}", "Router:typeError");

@@ -13,15 +13,17 @@ $err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
 
 $name = "";
 $email = "";
+$clearResquest = "";
 
 if (!empty($code)) {
-  
-  $data = $google->getData($code);
-  
-  $name = "value='{$data->getName()}'";
-  $email = "value='{$data->getEmail()}'";
-}
 
+  if($data = $google->getData($code)) {
+    $name = "value='{$data->getName()}'";
+    $email = "value='{$data->getEmail()}'";
+  } else {
+    $clearResquest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
+  }
+}
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 ?>
 <?php
@@ -162,5 +164,6 @@ echo  Bundles::renderJs([
   "js/manipulation",
   "js/register",
 ]);
+echo $clearResquest;
 $this->stop();
 ?>
