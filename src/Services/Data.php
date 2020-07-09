@@ -15,8 +15,8 @@ use Ecomais\Models\DataException;
 final class Data
 {
     const  PARAM_HOST = 'localhost';
-    const  PARAM_USER = 'marcio';
-    const  PARAM_PASSWD = 'marcioadmin';
+    const  PARAM_USER = 'root';
+    const  PARAM_PASSWD = '1234';
     const  PARAM_DATA = 'bdecomais';
     const  TYPE_SBGD = 'mysql';
     const PARAM_PORT = "3305";

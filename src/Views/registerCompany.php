@@ -44,22 +44,22 @@ $this->stop();
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Fantasia</b></label>
-                        <input type="text" <?= $name ?> class="form-control" placeholder="Nome da empresa" data-required="">
+                        <input type="text" <?= $name ?> id="fantasia" class="form-control" placeholder="Nome da empresa" data-required="">
                     </div>
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Razão social</b></label>
-                        <input type="text" class="form-control" data-required="">
+                        <input type="text" class="form-control" id="razao" data-required="">
                     </div>
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>CNPJ</b></label>
-                        <input type="text" class="form-control" data-required="">
+                        <input type="text" class="form-control" id="cnpj" data-required="">
                     </div>
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>E-mail</b></label>
-                        <input type="text" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control" data-required="">
+                        <input type="text" <?= $email ?> <?= $email ? "readonly" : "" ?> id="email" class="form-control" data-required="">
                     </div>
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
@@ -186,7 +186,7 @@ $this->stop();
                     <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Defina uma senha</b></label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="senha">
                     </div>
                     <p>
                         <div class="form-check">
