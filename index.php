@@ -53,9 +53,12 @@ $router->namespace("Ecomais\Web");
     $router->get("/","Router:indexCompany");
     $router->get("/configuracoes","Router:configCompany");
 
-
+/**
+ * @group User
+ */
     $router->group("user");
     $router->get("/","Router:indexUser");
+
 /**
  * @namespace Controller
  * 
@@ -78,6 +81,7 @@ $router->namespace("Ecomais\Controllers");
 $router->namespace("Ecomais\Controllers\Company");
     
     $router->group("manager");
+    //--- Api Pagamento ---
 
 /** rotas para Usuários */
 $router->namespace("Ecomais\Controllers\User");

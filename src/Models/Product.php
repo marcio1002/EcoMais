@@ -33,6 +33,10 @@ class Product
         return $this->$name;
     }
 
+    /**
+     * Pega todos os valores nos atributos da classe
+     * @return array
+     */
     public function getAll(): array
     {
         $array = array();
@@ -42,6 +46,7 @@ class Product
         return $array;
     }
 
+    
     public function createAt(): string
     {
         date_default_timezone_set("America/Sao_paulo");

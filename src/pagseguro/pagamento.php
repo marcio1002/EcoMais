@@ -1,5 +1,5 @@
 <?php
-
+// require_once __DIR__ . "/../../vendor/autoload.php";
 include 'config.php';
 
 $url = URL_PAGSEGURO . "sessions?email=" . EMAIL_PAGSEGURO . "&token=" . TOKEN_PAGSEGURO;

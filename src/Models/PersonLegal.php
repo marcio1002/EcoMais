@@ -12,6 +12,7 @@ class PersonLegal extends person
     private string $reason;
     private string $contact;
     private int $typePackage;
+    private int $fk_empresa;
 
     public function __set($name, $value)
     {
