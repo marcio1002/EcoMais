@@ -15,11 +15,11 @@ use Ecomais\Models\DataException;
 final class Data
 {
     const  PARAM_HOST = 'localhost';
-    const  PARAM_USER = 'marcio';
-    const  PARAM_PASSWD = 'marcioadmin';
+    const  PARAM_USER = 'rooy';
+    const  PARAM_PASSWD = '1234';
     const  PARAM_DATA = 'bdecomais';
     const  TYPE_SBGD = 'mysql';
-    const PARAM_PORT = "3306";
+    const PARAM_PORT = "3305";
     const OPTIONS =
     [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

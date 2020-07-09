@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 async function searchCep(cep) {
     const validcep = /\d{8}$/;
     if (!validcep.test(cep)) throw TypeError('Invalid zip code');
@@ -13,6 +14,35 @@ async function searchCep(cep) {
  * Defini uma opção de parametros para o ajax;
  * option = {
 
+=======
+const { prototype, permission, requestPermission, } = window.Notification;
+
+let message =
+{
+    title: String,
+    opt: {
+        badge: String,
+        body: String,
+        data: null,
+        dir: "auto",
+        icon: String,
+        image: String,
+        lang: String,
+        tag: String,
+        sound: String,
+        timestamp: Number,
+        vibrate: [Number],
+        noscreen: String,
+        sticky: Boolean,
+        renotify: Boolean,
+        actions: [Object],
+        requireInteraction: Boolean,
+        silent: Boolean,
+    }
+}
+let option =
+{
+>>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
     method: String,
     type: String,
     url: String,
@@ -64,10 +94,12 @@ var message ={
 const apiNotification = {
 
     setPermission: async () => {
-        let { permission, requestPermission, } = window.Notification;
         return await requestPermission();
     },
 
+    /**
+     * @var {Object} msg
+     */
     message: (msg = message) => {
         let notfy = new Notification(msg.title, msg.opt);
         return notfy
