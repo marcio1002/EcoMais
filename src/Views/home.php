@@ -91,7 +91,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.jpg"); ?> class="d-block w-100" alt="missao">
+          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missao">
           <div class="carousel-caption d-none d-md-block">
             <h2>Impacto Positivo</h2>
             <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -99,7 +99,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
           </div>
         </div>
         <div class="carousel-item">
-          <img src=<?= renderUrl("/src/assets/imgs/supermarket.jpg"); ?> class="d-block w-100" alt="iamgem de negocios">
+          <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="iamgem de negocios">
           <div class="carousel-caption d-none d-md-block">
             <h2>Benefícios para os consumidores</h2>
             <p class=""> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
@@ -108,7 +108,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
           </div>
         </div>
         <div class="carousel-item ">
-          <img src=<?= renderUrl("/src/assets/imgs/fruta.jpg"); ?> class="d-block w-100" alt="Mercado">
+          <img src=<?= renderUrl("/src/assets/imgs/fruta.png"); ?> class="d-block w-100" alt="Mercado">
           <div class="carousel-caption d-none d-md-block">
             <h2>Mais que um simples negócio, uma missão</h2>
             <p> A equipe EcoMais zela pelo meio ambiente e pelo cuidado com planeta</p>

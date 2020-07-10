@@ -1,9 +1,6 @@
 let loadSpinner = `<span class="spinner-border spinner-border-sm align-vertical text-warning" role="status" aria-hidden="true"></span>`;
 
 
-
-// <--- functions users --->
-
 function load(l = false, elem) {
    if(l) {
       let value =  $(elem).text();
@@ -32,3 +29,21 @@ $(".nextItem").keypress(function (e) {
 });
 
 
+function validaForm() {
+   var forError = false;
+
+   $("[data-required]").each(function () {
+       if ($(this).is("input"))
+           if ($(this).val().length == 0) {
+               forError = true;
+               $(this).addClass("formError");
+           }
+       if ($(this).is("select"))
+           if ($(this).val().length == 0 || !$(this).val()) {
+               forError = true;
+               $(this).addClass("formError");
+           }
+   });
+
+   return forError;
+}

@@ -48,7 +48,7 @@ body{
 #login:active { background-color: #239c55 !important;  color: rgb(236, 236, 236) !important; }
 /* ------- */
 
-#title-container { background: rgba(68, 68, 68, 0.74) url("../imgs/casal-no-mercado.jpg") no-repeat; background-size: cover; background-attachment: fixed; height: 70vh; }
+#title-container { background: rgba(68, 68, 68, 0.74) url("../imgs/casal-no-mercado.png") no-repeat; background-size: cover; background-attachment: fixed; height: 70vh; }
 
 .h1{ font-family: 'Jost', sans-serif; margin: 0; padding-top: 20px; padding-left: 0; padding-bottom: 50px; letter-spacing: 8px;text-align: center; font-size: 75px; color: #F9F9F9; background-size: 300%;}
 

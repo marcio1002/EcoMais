@@ -49,6 +49,7 @@ define(
         "js/mainMethods" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/mainMethods.js') . "'></script>",
         "js/recoverPasswd" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/recoverpasswd.js') . "'></script>",
         "js/register" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/register.js') . "'></script>",
+        "js/registerCompany" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/registerCompany.js') . "'></script>",
         "js/home" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/home.js') . "'></script>",
         "js/login" => "<script src= " . renderUrl("/src/assets/js/login.js") . " ></script>",
         "facebookButton" => "<script async defer crossorigin='anonymous' src='https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v7.0&appId=250815926067653&autoLogAppEvents=1'></script>"
