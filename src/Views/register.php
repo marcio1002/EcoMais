@@ -144,7 +144,7 @@ $this->stop();
         </div>
         <div class="col-12">
           <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto">
-            <button type="button" class="btn btn-block bg-red-wine text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
+            <button type="button" class="btn btn-block bg-red-wine remove-focus text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
           </div>
         </div>
       </div>

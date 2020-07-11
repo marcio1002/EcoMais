@@ -55,10 +55,7 @@ function createTable() {
         error: (err) => alertify.error("Ocorreu um erro no servidor!")
     };
 
-
-    reqAjax(option);
-   
-    
+    reqAjax(option); 
 }
 
 createTable();

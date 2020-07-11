@@ -37,3 +37,7 @@
 
 /* --- Buttons Colors ---*/
 .btn-color-red { background: #ea4335; }
+
+/* --- Remove o focus do bootstrap ---*/
+
+.remove-focus:focus { box-shadow: none !important;}

@@ -82,15 +82,14 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
       </div>
     </div>
   </div>
-  <div class="container-fluid">
     <div id="mainSlider" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#mainSlider" data-slide-to="0" class="activate"></li>
         <li data-target="#mainSlider" data-slide-to="1"></li>
         <li data-target="#mainSlider" data-slide-to="2"></li>
       </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
+      <div class="carousel-inner ">
+        <div class="carousel-item active after-color">
           <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missao">
           <div class="carousel-caption d-none d-md-block">
             <h2>Impacto Positivo</h2>
@@ -98,7 +97,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
             <a href="#" class="main-btn text-white">Saiba mais</a>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item after-color ">
           <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="iamgem de negocios">
           <div class="carousel-caption d-none d-md-block">
             <h2>Benefícios para os consumidores</h2>
@@ -107,8 +106,8 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
             <a href="#" class="main-btn text-white">Saiba mais!</a>
           </div>
         </div>
-        <div class="carousel-item ">
-          <img src=<?= renderUrl("/src/assets/imgs/fruta.png"); ?> class="d-block w-100" alt="Mercado">
+        <div class="carousel-item after-color">
+          <img src=<?= renderUrl("/src/assets/imgs/carrinho-com-compras.png"); ?> class="d-block w-100" alt="Mercado">
           <div class="carousel-caption d-none d-md-block">
             <h2>Mais que um simples negócio, uma missão</h2>
             <p> A equipe EcoMais zela pelo meio ambiente e pelo cuidado com planeta</p>
@@ -124,7 +123,6 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </div>
 
   <?php
   $this->start("footer");

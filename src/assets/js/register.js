@@ -101,15 +101,12 @@ $('#btnRegister').click(function() {
         dataType: "json",
         data: person,
         beforeSend: () => {
-            load(true, this);
             $(this).prop("disabled",true);
         },
         complete: () => {
-            load(false, this);
             $(this).prop("disabled",false);
         },
         success: (res) => {
-            load(false, "#btnRegister");
             if (typeof res == undefined || !res) throw new TypeError("Object null");
 
             if (!res.error) {
