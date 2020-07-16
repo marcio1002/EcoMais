@@ -170,13 +170,13 @@ $this->stop();
                         <div class="creditCard">
                             <?= $svgCeta ?>
                             <label class="creditCard"><span class='required'>*</span> <b>Mês/Ano de Validade</b></label>
-                            <input type="text" name="mesAnoValidade" id="mesAnoValidade" class="form-control col-3 creditCard nextItem" data-required=""/>
+                            <input type="text" name="mesAnoValidade" id="mesAnoValidade" class="form-control col-xl-3 col-lg-3 col-md-3 col-sm-4 creditCard nextItem" data-required=""/>
                         </div>
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
                         <label class="creditCard"><span class='required'>*</span> <b>CVV do cartão</b></label>
-                        <input type="text" name="numCartao" class="form-control col-3 creditCard nextItem" id="cvvCartao" data-required=""/>
+                        <input type="text" name="numCartao" class="form-control col-xl-3 col-lg-3 col-md-4  col-sm-4 creditCard nextItem" id="cvvCartao" data-required=""/>
                         <small  class="form-text text-muted creditCard">
                             Código de 3 digitos impresso no verso do cartão
                         </small>
@@ -271,7 +271,6 @@ $this->stop();
 $this->start("scripts");
 echo  Bundles::renderJs([
     "js/mainMethods",
-    "js/regAjax",
     "js/manipulation",
     "js/registerCompany",
 ]);

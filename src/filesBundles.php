@@ -45,7 +45,6 @@ define(
         "js/alertify" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/alertify.min.js') . "'></script>",
         "js/manipulation" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/manipulation.js') . "'></script>",
         "js/apis" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/apis.js') . "'></script>",
-        "js/regAjax" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/reqAjax.js') . "'></script>",
         "js/mainMethods" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/mainMethods.js') . "'></script>",
         "js/recoverPasswd" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/recoverpasswd.js') . "'></script>",
         "js/register" => "<script type='text/javascript' src='" . renderUrl('/src/assets/js/register.js') . "'></script>",

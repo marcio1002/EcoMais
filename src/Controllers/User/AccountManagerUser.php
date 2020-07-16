@@ -26,7 +26,7 @@ class AccountManagerUser {
             $this->usr->passwd = filter_var($param['passwd'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->usr->cep = filter_var($param['cep'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->usr->uf = filter_var($param['uf'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
-            $this->usr->addres = filter_var($param['addres'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+            $this->usr->address = filter_var($param['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->usr->locality = filter_var($param['locality'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->usr->statusAccount = Person::ENABLED;
             $this->usr->createAt();

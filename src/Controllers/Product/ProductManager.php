@@ -9,7 +9,6 @@ class ProductManager
 {
 
     private Product $prod;
-    private Safety $safety;
     private productHandling $sql;
 
     public function __construct()
@@ -72,7 +71,7 @@ class ProductManager
             if($row =  $this->sql->searchProd($this->prod))
                 echo json_encode(["error" => false, "status" => 204, "data" => $row]); 
             else
-                echo json_encode(["error" => true, "status" => 404, "data" => []]);
+                echo json_encode(["error" => false, "status" => 404, "data" => []]);
         }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         }

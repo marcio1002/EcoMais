@@ -132,8 +132,8 @@ $this->stop();
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
-            <label for="inputAddres">Endereço:</label>
-            <input type="address" class="form-control nextItem" id="inputAddres" />
+            <label for="address">Endereço:</label>
+            <input type="address" class="form-control nextItem" id="address" />
           </div>
         </div>
         <div class="custom-control custom-switch pb-5 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
@@ -160,7 +160,6 @@ $this->stop()
 $this->start("scripts");
 echo  Bundles::renderJs([
   "js/mainMethods",
-  "js/regAjax",
   "js/manipulation",
   "js/register",
 ]);

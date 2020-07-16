@@ -14,9 +14,9 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="author" content="EcoMais">
-    <meta name="description" content="Conheça a melhor plataforma de discontos de atacarejos. O ecomais vai te mostrar os melhores discontos perto da sua casa.">
-    <meta name="keywords" content="discontos,atacarejo,supermecado,compras">
-    <link rel="shortcut icon" href=<?=renderUrl("/src/assets/logos-icons/ecomais.ico")?> type="image/x-icon">
+    <meta name="description" content="Conheça a melhor plataforma de descontos de atacarejos. O ecomais vai te mostrar os melhores descontos perto da sua casa.">
+    <meta name="keywords" content="descontos,atacarejos,supermercado,compras">
+    <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]); ?>
     <link rel='stylesheet' type='text/css' href=<?= renderUrl("/src/assets/css/estilo.css") ?> />
     <?= $this->section("css"); ?>
@@ -47,16 +47,15 @@ use Ecomais\Controllers\ComponenteElement as componente;
         endif;
         ?>
     </footer>
-    <?=
-        Bundles::renderJs([
+<?php
+    echo Bundles::renderJs([
             "js/jquery",
             "js/jqueryMask",
             "js/bootstrap",
             "js/alertify",
             "js/apis",
         ]);
-    ?>
-    <?php
+
     echo $this->section("scripts");
     echo "<script>
             const BASE_URL = '" . BASE_URL . "';
@@ -75,15 +74,15 @@ use Ecomais\Controllers\ComponenteElement as componente;
                     newsletter: val
                 },
                 success: (response) => {
-                   
-                    if(response.res) {
+
+                    if (response.res) {
                         alertify.success("Obrigado! <br/>Agora você receberar nossa newsletter").delay(5);
                     }
                 },
                 error: () => {}
             };
 
-            if(val.length > 0) {
+            if (val.length > 0) {
                 reqAjax(option);
             }
         })

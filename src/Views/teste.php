@@ -14,14 +14,14 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?= Bundles::renderCss(["css/bootstrap", "css/alertify","css/dataTable"])?>
+    <?= Bundles::renderCss(["css/bootstrap", "css/alertify","css/dataTable","css/eco/style"])?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/tableproduct.css")?> >
     <title>Teste</title>
 </head>
 
 <body>
 
-<div id="list-product"></div>
+
     <?php
    echo Bundles::renderJs([
         "js/jquery",
@@ -29,9 +29,10 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
         "js/bootstrap",
         "js/alertify",
         "js/dataTable",
-        "js/apis"
+        "js/manipulation",
+        "js/apis",
     ]);
-
+    
     echo
         "
         <script>
@@ -39,8 +40,23 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
         </script>
         "
     ?>
+<script>
+    const options = {
+        method: 'GET',
+        mycustomtype: "application/json",
+        url: `${BASE_URL}/manager/listencompany`,
+        dataType: "json",
+        success: (res) => {
+            console.debug(res);
+        },
+        error: (res) => {
+            console.warn(res.responseText);
+            alertify.alert("Alerta","Não foi possível buscar os atacados");
+        }
+    }
 
-<script src=<?=renderUrl('/src/assets/js/product/list-product.js')?> ></script>
+    reqAjax(options);
+</script>
 </body>
 
 </html>

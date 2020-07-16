@@ -91,7 +91,7 @@ $('#btnRegister').click(function() {
         cpf: $("#cpf").val(),
         cep: $("#inputCep").val(),
         uf: $("#uf").val(),
-        addres: $("#inputAddres").val(),
+        address: $("#address").val(),
         locality: $("#locality").val(),
     };
     option = {

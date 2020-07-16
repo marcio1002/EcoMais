@@ -7,14 +7,6 @@ let connection;
  * 3 - Verificação de email
  */
 
-function clearInput() {
-    $('input[type=text]').val("");
-    $('input[type=email]').val("");
-    $('input[type=password]').val("");
-    $('input[type=tel]').val("");
-
-}
-
 window.ononline = () => {
     // if (connection === "OFFLINE") 
     connection = "ONLINE";

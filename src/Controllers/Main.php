@@ -39,7 +39,7 @@ class Main
 
                 $this->sql->verifyUpdateHash($row['senha'],$this->usr);
 
-                $expire = ($param['conectedLogin'] == 18) ? time() + (1 * 12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                $expire = ($param['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
 
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
@@ -70,6 +70,10 @@ class Main
         $code = filter_input(INPUT_GET,"code",FILTER_SANITIZE_STRIPPED);
         $err  = filter_input(INPUT_GET,"error",FILTER_SANITIZE_STRIPPED);
 
+        if(filter_input(INPUT_GET,"conectedLogin",FILTER_VALIDATE_INT)) {
+            $connected = filter_input(INPUT_GET,"conectedLogin",FILTER_VALIDATE_INT);
+        }
+
         if(empty($code) && empty($err)) header("location: $authGoogleUrl");
 
         if(!empty($code)) {
@@ -82,8 +86,9 @@ class Main
             if(count($row) > 0) {
                 $this->usr->id = $row['id_usuario'];
 
-                $expire =  time() + (1 * 12 * 30 * 24 * 3600);
+                $expire = ($connected == 18) ?  time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
                 $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                
                 session_name($token);
                 session_id(md5(uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
@@ -96,7 +101,7 @@ class Main
         }else {
             echo "<script> window.close(); </script>";
         }
-        session_destroy();
+        if(session_status() == PHP_SESSION_ACTIVE) session_destroy();
     }
 
     public function logoff(): void

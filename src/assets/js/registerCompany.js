@@ -10,7 +10,7 @@ $("#searchCep").on("click", async function () {
         const res = await searchCep($("#inputCep").val())
         if (res !== null) {
             $("#uf").val(res.uf);
-            $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
+            $("#addres").val(`${res.bairro}, ${res.logradouro}`);
             $("#locality").val(res.localidade);
         } else {
            return alertify.error("Não foi possível buscar o cep informado!")

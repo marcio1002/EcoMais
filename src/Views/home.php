@@ -30,7 +30,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
         <p>O EcoMais tem como grande desafio propor economia e sustentabilidade aos seus clientes, trazendo um retorno
           lucrativo, rendível e sustentável a sua empresa, divulgando os produtos em plataformas digitais.</p>
         <p> Você micro-empreendedor poderá cadastrar a sua empresa do ramo alimentício em nossa plataforma, poderá
-          criar panfletos e anunciar promoções, tudo digial! a plataforma e os arquitetos de software estarão
+          criar panfletos e anunciar promoções, tudo digital! a plataforma e os arquitetos de software estarão
           disponibilizando todo suporte para você aproveitar as melhores tecnologias para seus anúncios.</p>
         <p>E nossos designers trabalharão na sua interface/layout para impulsionar os seus anúncios.</p>
         <p>Veja outros diferenciais da equipe:</p>
@@ -73,7 +73,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
               produção geralmente baixo, mas pelo mau uso de quem os distribui e recebe pelas ruas, para muitos, eles têm
               se tornado um sinônimo de transtorno e sujeira. Pensando nisso a equipe do EcoMais busca uma solução mais
               sustentável quanto a isso, que é a utilização das plataformas digitais para os anúncios. Toda a empresa
-              compremetida deve buscar soluções mais sústentavéis. Por isso não perca tempo, Cadastre a sua empresa e
+              comprometida deve buscar soluções mais sustentáveis. Por isso não perca tempo, Cadastre a sua empresa e
               venha participar desta missão!
             </p>
             <a href="#" class="btn btn-primary">Acesse-já</a>

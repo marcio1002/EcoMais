@@ -88,6 +88,8 @@ $router->namespace("Ecomais\Controllers\Company");
     
     $router->group("manager");
     //--- Api Pagamento ---
+    $router->get("/listencompany","AccountManagerCompany:listenCompany");
+    $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
 
 $router->namespace("Ecomais\Controllers\Product");
 

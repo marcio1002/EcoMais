@@ -15,7 +15,7 @@ class Person
     protected ?string $passwd;
     protected string $uf;
     protected string $locality;
-    protected ?string $addres;
+    protected ?string $address;
     protected int $number;
     protected ?int $cep;
     protected bool $statusAccount;

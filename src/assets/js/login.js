@@ -46,5 +46,6 @@ $('#btnLogar').click( function()  {
 
 $('#container-account-login a').click(function(e) {
     e.preventDefault();
-    window.open($(this).attr("href"),'janela','width=600, height=600, top=100, left=400, scrollbars=no, status=no, toolbar=no, location=no, menubar=no, resizable=no, fullscreen=no');
+    let conectedLogin = $('#manterConectado').is(":checked") ? 18 : 0;
+    window.open(`${$(this).attr("href")}?conectedLogin=${conectedLogin}` ,'janela','width=600, height=600, top=100, left=400, scrollbars=no, status=no, toolbar=no, location=no, menubar=no, resizable=no, fullscreen=no');
 });

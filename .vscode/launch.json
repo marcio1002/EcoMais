@@ -1,0 +1,76 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9000
+    },
+    {
+      "type": "firefox",
+      "request": "attach",
+      "name": "localhost Firefox",
+      "url": "https://127.0.0.1/www/ecomais/",
+      "webRoot": "${workspaceFolder}/src/",
+      "clearConsoleOnReload": true,
+      "pathMappings": [
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/register.js",
+          "path": "${workspaceFolder}/src/assets/js/register.js"
+        },
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/login.js",
+          "path": "${workspaceFolder}/src/assets/js/login.js"
+        },
+        {
+          "url": "https://127.0.0.1/www/ecomais/",
+          "path": "${workspaceFolder}/src/assets/js/*.js"
+        },
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/product",
+          "path": "${workspaceFolder}/src/assets/js/product/*.js"
+        },
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/login.js",
+          "path": "${workspaceFolder}/src/assets/js/login.js"
+        },
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/manipulation.js",
+          "path": "${workspaceFolder}/src/assets/js/manipulation.js"
+        }
+      ],
+      "skipFiles": [
+        "**${workspaceFolder}/vendor/**",
+        "**${workspaceFolder}/src/assets/js/bootstrap/**",
+        "**${workspaceFolder}/src/assets/js/dataTable/**",
+        "**${workspaceFolder}/src/assets/js/jquery/**"
+      ],
+      "reloadOnChange": {
+        "watch": "${workspaceFolder}/src/assets/js/*.js",
+        "ignore": "**${workspaceFolder}/src/assets/js/jquery/**"
+      }
+    },
+    {
+      "name": "localhost Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "https://127.0.0.1/www/ecomais/",
+      "showAsyncStacks": true,
+      "runtimeExecutable": "stable",
+      "pathMapping": {
+        "url": "https://127.0.0.1/www/ecomais/",
+        "path": "${workspaceFolder}/src"
+      },
+      "skipFiles": [
+        "**${workspaceFolder}/vendor/**",
+        "**${workspaceFolder}/src/assets/js/bootstrap/**",
+        "**${workspaceFolder}/src/assets/js/dataTable/**",
+        "**${workspaceFolder}/src/assets/js/jquery/**"
+      ]
+    }
+  ]
+}

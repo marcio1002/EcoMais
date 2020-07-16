@@ -12,7 +12,7 @@ class ComponenteElement
     $urlRegisterCompany = renderUrl("/cadastro/empresa");
 return <<<navBar
       <div class='container text-white' id='nav-container'>
-        <nav class='navbar navbar-expand-sm fixed-top navbar-dark text-weight-500  bg-dark'>
+        <nav class='navbar navbar-expand-md fixed-top navbar-dark text-weight-500  bg-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
