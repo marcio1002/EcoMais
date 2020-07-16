@@ -1,5 +1,5 @@
 /**Globais */
-let forca;
+let forca = 0;
 
 $("#newPasswd").keypress(function() {
     $("#progress-bar").removeClass().addClass("progress-bar");
@@ -61,7 +61,7 @@ $("#btnRecoverPwd").click(function() {
     }
 
     const option = {
-        method: 'POST',
+        method: 'PUT',
         mycustomtype: "application/json",
         url: `${BASE_URL}/manager/recoverpasswd`,
         dataType: "json",
@@ -72,7 +72,7 @@ $("#btnRecoverPwd").click(function() {
                     if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
                     $(".alert").addClass("alert-success").text("Senha atualizada com sucesso");
                 } else {
-                    $(".alert").addClass("alert-danger").text("Não foi possível a senha!");
+                    $(".alert").addClass("alert-danger").text("Não foi possível atualizar a senha!");
                 } 
         },
         error: (err) => {

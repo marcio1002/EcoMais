@@ -60,7 +60,7 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Email:</label>
-            <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" id="cadEmail" placeholder="seumail@test.dominio" data-required="" />
+            <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" id="cadEmail" placeholder="seumail@teste.dominio" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
@@ -78,7 +78,7 @@ $this->stop();
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputPassword4">Crie uma senha:</label>
             <div class="input-group">
-              <input type="password" class="form-control nextItem" id="passwd" maxlength="20" data-required="" />
+              <input type="password" class="form-control nextItem" autocomplete="current-password" id="passwd" maxlength="20" data-required="" />
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
               </div>
@@ -144,7 +144,7 @@ $this->stop();
         </div>
         <div class="col-12">
           <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto">
-            <button type="button" class="btn btn-block btn-primary nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
+            <button type="button" class="btn btn-block bg-red-wine remove-focus text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
           </div>
         </div>
       </div>

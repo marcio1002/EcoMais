@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "f5f6de9fde7c3fd9b48751091b2c5b39",
-=======
     "content-hash": "fe8c632f4b287d916a492ee008e540d9",
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
     "packages": [
         {
             "name": "coffeecode/router",
@@ -120,13 +116,6 @@
                 "rest",
                 "web service"
             ],
-<<<<<<< HEAD
-            "support": {
-                "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/6.5"
-            },
-=======
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
             "time": "2020-06-16T21:01:06+00:00"
         },
         {
@@ -319,8 +308,6 @@
             "time": "2018-11-22T18:33:57+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "league/oauth2-facebook",
             "version": "2.0.1",
             "source": {
@@ -372,7 +359,6 @@
             "time": "2017-07-22T01:25:00+00:00"
         },
         {
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
             "name": "league/oauth2-google",
             "version": "3.0.2",
             "source": {
@@ -745,12 +731,6 @@
                 "portable",
                 "shim"
             ],
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.17.1"
-            },
-=======
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -828,12 +808,6 @@
                 "portable",
                 "shim"
             ],
-<<<<<<< HEAD
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/master"
-            },
-=======
->>>>>>> 9699f96eba1486e86b8d05756e6175d16822ae87
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",

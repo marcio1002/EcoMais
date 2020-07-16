@@ -1,9 +1,6 @@
 let loadSpinner = `<span class="spinner-border spinner-border-sm align-vertical text-warning" role="status" aria-hidden="true"></span>`;
 
 
-
-// <--- functions users --->
-
 function load(l = false, elem) {
    if(l) {
       let value =  $(elem).text();
@@ -67,14 +64,15 @@ $('#btnRegisterCompany').click(function() {
        addres: $("#inputAddres").val(),
        locality: $("#locality").val(),
        input: $('#inputState option:selected').val(),
-       senha: $('#senha').val()
+       senha: $('#senha').val(),
+       plano: $('#plano option:selected').val()
    };
    option = {
        method: 'POST',
        mycustomtype: "application/json charset=utf-8",
        url: `${BASE_URL}/manager/`,
        dataType: "json",
-       data: person,
+       data: personLegal,
        beforeSend: () => {
            load(true, this);
            $(this).prop("disabled",true);

@@ -1,27 +1,6 @@
 let forca = 0;
 alertify.set('notifier','position', 'top-right');
 
-function validaForm() {
-    var forError = false;
-
-    $("[data-required]").each(function () {
-        if ($(this).is("input"))
-            if ($(this).val().length == 0) {
-                forError = true;
-                $(this).addClass("formError");
-            }
-        if ($(this).is("select"))
-            if ($(this).val().length == 0 || !$(this).val()) {
-                forError = true;
-                $(this).addClass("formError");
-            }
-    });
-
-    return forError;
-}
-
-//mascaras
-$("#inputCep").mask("00000000", { placeholder: "nnnnnnnn", clearIfNotMatch: true })
 
 
 //verifica o email
@@ -35,18 +14,14 @@ $("#cadEmail").focusout(function(e) {
 
 //mostra o palavra chave (senha)
 $("#btnViewPasswd").on("click", function () {
-    let passwd = $("#passwd:eq(0)");
     let icon = $(this).find("#iconPasswd:eq(0)");
 
-    if (passwd.is("[type='password']")) {
-        passwd.attr('type', 'text');
-        icon.removeClass("fa-eye-slash");
-        icon.addClass("fa-eye");
-
+    if ($("#passwd:eq(0)").is("[type='password']")) {
+        $("#passwd:eq(0)").attr('type', 'text');
+        icon.removeClass("fa-eye-slash").addClass("fa-eye");
     } else {
-        passwd.attr('type', 'password');
-        icon.removeClass("fa-eye");
-        icon.addClass("fa-eye-slash");
+        $("#passwd:eq(0)").attr('type', 'password');
+        icon.removeClass("fa-eye").addClass("fa-eye-slash");
     }
 });
 
@@ -78,14 +53,7 @@ $("#passwd").keypress(function() {
         $("#progress-bar").css("width", `${forca}%`).addClass("bg-success");
 })
 
-$("[data-required]").on("keypress","input",function() {
-    $(this).each(function() {
-        if($(this).val().length > 0 ) {
-            $(this).removeClass("formError");
-            $(this).addClass("formValid");
-        }
-    });
-});
+$("#inputCep").mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true });
 
 $("#searchCep").on("click", async function () {
     try {
@@ -94,7 +62,7 @@ $("#searchCep").on("click", async function () {
         if (res !== null) {
             $("#uf").val(res.uf);
             $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
-            $("#localidade").val(res.localidade);
+            $("#locality").val(res.localidade);
         } else {
            return alertify.error("Não foi possível buscar o cep informado!")
         }
@@ -113,7 +81,7 @@ $('#btnRegister').click(function() {
 
     let formError = validaForm();
 
-    if (formError) return;
+    if (formError) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
 
     let person = {
@@ -133,15 +101,12 @@ $('#btnRegister').click(function() {
         dataType: "json",
         data: person,
         beforeSend: () => {
-            load(true, this);
             $(this).prop("disabled",true);
         },
         complete: () => {
-            load(false, this);
             $(this).prop("disabled",false);
         },
         success: (res) => {
-            load(false, "#btnRegister");
             if (typeof res == undefined || !res) throw new TypeError("Object null");
 
             if (!res.error) {

@@ -7,20 +7,19 @@ use TypeError;
 
 class PersonLegal extends person 
 {
-    private int $id;
-    private int $cnpj;
-    private string $fantasy; 
-    private string $reason;
-    private string $contact;
-    private int $typePackage;
-    private int $fk_empresa;
-    private string $email;
-    private string $uf;
-    private string $locality;
-    private ?string $addres;
-    private int $number;
-    private ?int $cep;
-    private bool $statusAccount;
+    protected int $id;
+    protected int $cnpj;
+    protected string $fantasy; 
+    protected string $reason;
+    protected string $contact;
+    protected int $typePackage;
+    protected string $email;
+    protected string $uf;
+    protected string $locality;
+    protected ?string $addres;
+    protected int $number;
+    protected ?int $cep;
+    protected bool $statusAccount;
 
     public function __set($name, $value)
     {

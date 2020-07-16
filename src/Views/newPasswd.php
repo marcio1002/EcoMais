@@ -51,7 +51,7 @@ if (isset($_SESSION['ssioninfo'])) {
             <div class="form-row">
               <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
                 <label for="newPasswd" id="recover-label">Digite a nova senha:</label>
-                <input type="password" class="form-control" id="newPasswd" aria-describedby="emailHelp" />
+                <input type="password" class="form-control" id="newPasswd" autocomplete="new-password" aria-describedby="emailHelp" />
                 <small class="form-text text-muted">
                   <div class="progress" style="width: 100%; height: 5px;">
                     <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>

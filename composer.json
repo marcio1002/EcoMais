@@ -2,10 +2,12 @@
     "name": "marcio1002/ecomais",
     "description": "Um website que divulga promoçoes de atacarejos",
     "license": "proprietary",
-    "version": "v1.1.14",
+    "version": "v1.1.15",
     "keywords": [
         "PHP",
-        "Composer"
+        "Composer",
+        "crud-application",
+        "discounts"
     ],
     "homepage": "https://github.com/marcio1002/EcoMais",
     "type": "package",

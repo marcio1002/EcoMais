@@ -1,8 +1,8 @@
 # EcoMais <a href='https://github.com/marcio1002/CrudEcoMais'><img src='https://simpleicons.org/icons/github.svg?color=#181717&style=flat-square' width=4% align='right'/></a>
 
-Um crud para manipulação de dados  do EcoMais
+Um Website que divulga promoções de atacarejos para as pessoas no dia dia.
 <div align="right">
-    <a href='#'>
+    <a href='./src/assets/logos-icons/ecomais-logo.png'>
         <img width="25%" src="./src/assets/logos-icons/ecomais-logo.png"/>
     </a>
 </div>
