@@ -1,18 +1,17 @@
 <?php
 namespace Ecomais\ControllersServices\Company;
 
-use Ecomais\Models\DataException;
+use Ecomais\Models\{Safety,DataException, PersonLegal};
 use Ecomais\Services\Data;
 use PDO;
 
 class CompanyHandling {
-    //--- Api Pagamento ---
-
     private Data $sql;
+    private Safety $safety;
 
-    public function __construct()
-    {
-        $this->sql = new Data;
+    public function __construct() {
+        $this->sql = new Data();
+        $this->safety = new Safety();
     }
 
     public function listenCompanyPro(): ?array
@@ -44,5 +43,28 @@ class CompanyHandling {
         }finally{
             $this->sql->close();
         }
+    }
+
+    public function createAccountPersonLegal(PersonLegal $personLegal): bool
+    {
+        try {
+            $personLegal->passwd =  $this->safety->criptPasswd($personLegal->passwd);
+            $columns = "cnpj,fantasia,razao,contato,pacote,email,senha,uf,cidade,endereco,cep,statusconta,data_criacao";
+            $data = $personLegal->getAll();
+
+            $this->sql->open();
+
+            return $this->sql
+                ->add("empresa",$columns,count($data))
+                ->prepareParam($data)
+                ->execNotRowSql();
+
+        } catch(DataException $ex)  {   
+            throw new DataException( $ex->getMessage(),$ex->getCode() );
+            
+        } finally {
+            $this->sql->close();
+        }
+            
     }
 }

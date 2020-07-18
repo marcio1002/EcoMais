@@ -10,13 +10,11 @@ class PersonLegal extends person
     protected int $cnpj;
     protected string $fantasy; 
     protected string $reason;
-    protected string $contact;
+    protected int $contact;
     protected int $typePackage;
-    protected int $fk_empresa;
 
     public function __set($name, $value)
     {
-        if (empty($name) || empty($value)) throw new DataException('Null values', DataException::REQ_INVALID);
         $this->$name = $value;
     }
 

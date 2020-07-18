@@ -44,27 +44,27 @@ $this->stop();
 
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Fantasia</b></label>
-                        <input type="text" <?= $name ?> class="form-control nextItem" placeholder="Nome da empresa" data-required="">
+                        <label for="fantasia"><span class='required'>*</span> <b>Fantasia</b></label>
+                        <input type="text" <?= $name ?> id="fantasia" class="form-control next-item" placeholder="Nome da empresa" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Razão social</b></label>
-                        <input type="text" class="form-control nextItem" data-required="">
+                        <label for="razao"><span class='required'>*</span> <b>Razão social</b></label>
+                        <input type="text" class="form-control next-item" id="razao" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>CNPJ</b></label>
-                        <input type="text" class="form-control nextItem" data-required="">
+                        <label for="cnpj"><span class='required'>*</span> <b>CNPJ</b></label>
+                        <input type="text" class="form-control next-item" id="cnpj" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>E-mail</b></label>
-                        <input type="text" id="email" <?= $email ?> <?= $email ? "readonly" : "" ?> placeholder="seumail@teste.dominio" class="form-control nextItem" data-required="">
+                        <label for="email"><span class='required'>*</span> <b>E-mail</b></label>
+                        <input type="text" <?= $email ?> <?= $email ? "readonly" : "" ?> id="email" class="form-control next-item" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="inputPassword4"><span class='required'>*</span> <b>Crie uma senha:</b></label>
+                        <label for="password"><span class='required'>*</span> <b>Crie uma senha:</b></label>
                         <div class="input-group">
                             <input type="password" class="form-control nextItem" autocomplete="current-password" id="passwd" maxlength="20" data-required="" />
                             <div class="input-group-prepend">
@@ -79,14 +79,14 @@ $this->stop();
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Telefone de contato</b></label>
-                        <input type="text" class="form-control nextItem" placeholder="Fixo ou celular">
+                        <label for="contato"><span class='required'>*</span> <b>Telefone de contato</b></label>
+                        <input type="text" id="contato"  class="form-control nextItem" placeholder="Fixo ou celular" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
                         <label for="inputCep"><b>Cep</b></label>
                         <div class="input-group">
-                            <input type="text" class="form-control " id="inputCep"/>
+                            <input type="text" class="form-control" id="inputCep" />
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
                             </div>
@@ -94,14 +94,9 @@ $this->stop();
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Cidade</b></label>
-                        <input type="text" class="form-control nextItem" id="locality" data-required="">
-                    </div>
-                    <div class="form-group col-12">
-                        <?= $svgCeta ?>
-                        <label for="nome"><b>Estado</b></label>
+                        <label for="nome"><span class='required'>*</span><b>Estado</b></label>
                         <select id='uf' name='uf' class="form-control custom-select nextItem" data-required="">
-                            <option value=""  selected disabled>Escolha...</option>
+                            <option value="" selected disabled>Escolha...</option>
                             <option value='AC'>Acre</option>
                             <option value='AL'>Alagoas</option>
                             <option value='AP'>Amapá</option>
@@ -132,60 +127,37 @@ $this->stop();
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
+                        <label for="nome"><span class='required'>*</span> <b>Cidade</b></label>
+                        <input type="text" class="form-control nextItem" id="locality" data-required="">
+                    </div>
+                    <div class="form-group col-12">
+                        <?= $svgCeta ?>
                         <label for="nome"><b>Endereço</b></label>
-                        <input type="text" class="form-control nextItem" id="addres" placeholder="Rua, bairro e número" data-required="">
+                        <input type="text" class="form-control nextItem" id="address" placeholder="Rua, bairro e número" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
                         <label for="nome"><span class='required'>*</span> <b>Plano</b></label>
-                        <select class="form-control custom-select nextItem" data-required="">
+                        <select class="form-control custom-select nextItem" id="plano" data-required="">
                             <option value="" selected disabled>Escolha...</option>
                             <option value="10">Sacolinha</option>
                             <option value="20">Cestinha</option>
                             <option value="30">Carrinho</option>
                         </select>
                     </div>
-                    <div class="form-group col-12">
-                        <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Tipo de Pagamento</b></label>
-                        <select id="tipo_pag" class="form-control custom-select nextItem" data-required="">
-                            <option value="" selected disabled>Escolha...</option>
-                            <option value="1">Boleto</option>
-                            <option value="2">Cartão de Crédito</option>
-                            <option value="3">Débito Automatico</option>
-                        </select>
-                    </div>
-
-                    <input type="hidden" name="bandeiraCartao" id="bandeiraCartao">
-                    <input type="hidden" name="valorParcelas" id="valorParcelas">
-                    <input type="hidden" name="tokenCartao" id="tokenCartao">
-                    <input type="hidden" name="hashCartao" id="hashCartao">
-
-                    <div class="form-group col-12">
-                        <?= $svgCeta ?>
-                        <label for="nome"><span class='required'>*</span> <b>Número do Cartão</b></label>
-                        <input type="text" name="numCartao" class="form-control nextItem" id="numCartao" data-required=""/>
-                    </div>
-                    <div class="form-group col-12">
-                        <div class="creditCard">
-                            <?= $svgCeta ?>
-                            <label class="creditCard"><span class='required'>*</span> <b>Mês/Ano de Validade</b></label>
-                            <input type="text" name="mesAnoValidade" id="mesAnoValidade" class="form-control col-xl-3 col-lg-3 col-md-3 col-sm-4 creditCard nextItem" data-required=""/>
-                        </div>
-                    </div>
-                    <div class="form-group col-12">
+                    <div class="form-group col-md-12">
                         <?= $svgCeta ?>
                         <label class="creditCard"><span class='required'>*</span> <b>CVV do cartão</b></label>
-                        <input type="text" name="numCartao" class="form-control col-xl-3 col-lg-3 col-md-4  col-sm-4 creditCard nextItem" id="cvvCartao" data-required=""/>
-                        <small  class="form-text text-muted creditCard">
-                            Código de 3 digitos impresso no verso do cartão
+                        <input type="text" name="numCartao" class="form-control col-xl-3 col-lg-3 col-md-4  col-sm-4 creditCard nextItem" id="cvvCartao" data-required="" />
+                        <small class="form-text text-muted creditCard">
+                            Código de 3 dígitos impresso no verso do cartão
                         </small>
                     </div>
                     <p>
                         <div class="form-check">
                             <?= $svgCeta ?>
-                            <input class="form-check-input nextItem" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
+                            <input class="form-check-input nextItem" type="checkbox" id="termos">
+                            <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
                         </div>
                     </p>
                     <div class="form-row">
@@ -202,7 +174,9 @@ $this->stop();
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto">
-                            <button type="button" class="btn btn-block btn-primary font-size-1-2em text-weight-700 nextItem" id="btnRegisterCompany">Cadastrar</button>
+                            <button type="button" class="btn btn-block btn-primary font-size-1-2em text-weight-700 nextItem" id="btnRegisterCompany">
+                                Cadastrar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -212,7 +186,7 @@ $this->stop();
             <div class="dropdown">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h2 class="text-center h3">Aumete as vendas com o ECOMAIS</h2>
+                        <h2 class="text-center h3">Aumente suas vendas com o EcoMais</h2>
                     </div>
                     <div class="card-body ">
                         <fieldset>

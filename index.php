@@ -87,7 +87,7 @@ $router->namespace("Ecomais\Controllers\User");
 $router->namespace("Ecomais\Controllers\Company");
     
     $router->group("manager");
-    //--- Api Pagamento ---
+    $router->post("/addaccountpersonlegal","AccountManagerCompany:createAccount");
     $router->get("/listencompany","AccountManagerCompany:listenCompany");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
 

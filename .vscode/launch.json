@@ -17,32 +17,10 @@
       "url": "https://127.0.0.1/www/ecomais/",
       "webRoot": "${workspaceFolder}/src/",
       "clearConsoleOnReload": true,
-      "pathMappings": [
-        {
-          "url": "https://127.0.0.1/www/ecomais/src/assets/js/register.js",
-          "path": "${workspaceFolder}/src/assets/js/register.js"
-        },
-        {
-          "url": "https://127.0.0.1/www/ecomais/src/assets/js/login.js",
-          "path": "${workspaceFolder}/src/assets/js/login.js"
-        },
-        {
-          "url": "https://127.0.0.1/www/ecomais/",
-          "path": "${workspaceFolder}/src/assets/js/*.js"
-        },
-        {
-          "url": "https://127.0.0.1/www/ecomais/src/assets/js/product",
-          "path": "${workspaceFolder}/src/assets/js/product/*.js"
-        },
-        {
-          "url": "https://127.0.0.1/www/ecomais/src/assets/js/login.js",
-          "path": "${workspaceFolder}/src/assets/js/login.js"
-        },
-        {
-          "url": "https://127.0.0.1/www/ecomais/src/assets/js/manipulation.js",
-          "path": "${workspaceFolder}/src/assets/js/manipulation.js"
-        }
-      ],
+      "pathMappings": [{
+        "url": "https://127.0.0.1/www/ecomais/src/assets/js/",
+        "path": "${workspaceFolder}/src/assets/js/"
+      }],
       "skipFiles": [
         "**${workspaceFolder}/vendor/**",
         "**${workspaceFolder}/src/assets/js/bootstrap/**",

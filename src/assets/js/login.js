@@ -2,6 +2,14 @@ alertify.set('notifier','position','top-center');
 
 $("#inputPwd").keypress(function(evt) { if (evt.keyCode == 13) $('#btnLogar').click(); });
 
+$("#inputEmail").keypress(function() {
+    if(!isNaN(parseInt($("#inputEmail").val()))) {
+        $("#inputEmail").mask("00.000.000/0000-00",{ placeholder: "00.000.000/0000-00", clearIfNotMatch: true, });
+    }else {
+        $("#inputEmail").unmask();
+    }
+})
+
 $('#btnLogar').click( function()  {
     $(this).attr("disabled",true);
     const person = {
