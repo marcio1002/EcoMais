@@ -6,7 +6,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -17,17 +17,15 @@ use Ecomais\Controllers\ComponenteElement as componente;
   <meta name="description" content="Conheça a melhor plataforma de descontos de atacarejos. O ecomais vai te mostrar os melhores descontos perto da sua casa.">
   <meta name="keywords" content="descontos,atacarejos,supermercado,compras">
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-  <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]); ?>
-  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
-  <!-- <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"> -->
+  <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]);?>
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/themeUser.css"); ?> >
   <?= $this->section("css"); ?>
   
   <title><?= $title ?></title>
 </head>
 
 <body>
-
   <!-- Navigation -->
   <nav class="navbar navbar-light bg-light static-top">
     <div class="container">

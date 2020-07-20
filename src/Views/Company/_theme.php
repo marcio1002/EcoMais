@@ -2,6 +2,9 @@
 require_once __DIR__ . "/../../../vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
+//$safety = new Ecomais\Models\Safety();
+
+if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -11,7 +14,8 @@ use Ecomais\Web\Bundles;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome","css/eco/style"]); ?>
+    <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
+    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome","css/eco/style","css/manipulation"]); ?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/themeCompany.css"); ?>>
     <?= $this->section("css"); ?>
     <title><?= $title; ?></title>
@@ -81,11 +85,13 @@ use Ecomais\Web\Bundles;
     </div>
 
 <?php
-    Bundles::renderJs([
+   echo Bundles::renderJs([
         "js/jquery",
         "js/jqueryMask",
         "js/bootstrap",
         "js/alertify",
+        "js/apis",
+        "js/manipulation"
     ]);
     echo $this->section("scripts");
 

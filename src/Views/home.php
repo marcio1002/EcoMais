@@ -126,16 +126,6 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
 
   <?php
   $this->start("footer");
-  echo ComponenteElement::footerHome();
+    echo ComponenteElement::footerHome();
   $this->stop()
-  ?>
-
-  <?php
-  $this->start("scripts");
-  Bundles::renderJs([
-    "js/jquery",
-    "js/apis",
-  ]);
-  $this->stop();
-
   ?>

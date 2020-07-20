@@ -2,18 +2,18 @@ alertify.set('notifier','position','top-center');
 
 $("#inputPwd").keypress(function(evt) { if (evt.keyCode == 13) $('#btnLogar').click(); });
 
-$("#inputEmail").keypress(function() {
-    if(!isNaN(parseInt($("#inputEmail").val()))) {
-        $("#inputEmail").mask("00.000.000/0000-00",{ placeholder: "00.000.000/0000-00", clearIfNotMatch: true, });
+$("#value").keypress(function() {
+    if(!isNaN(parseInt($("#value").val()))) {
+        $("#value").mask("00.000.000/0000-00",{ placeholder: "00.000.000/0000-00", clearIfNotMatch: true, });
     }else {
-        $("#inputEmail").unmask();
+        $("#value").unmask();
     }
 })
 
 $('#btnLogar').click( function()  {
     $(this).attr("disabled",true);
-    const person = {
-        email: $("#inputEmail").val(),
+    const data = {
+        value: $("#value").val(),
         passwd: $('#inputPwd').val(),
         conectedLogin: $('#manterConectado').is(":checked") ? 18 : 0
     };
@@ -22,7 +22,7 @@ $('#btnLogar').click( function()  {
         mycustomtype: "application/json",
         url: `${BASE_URL}/manager/login`,
         dataType: "json",
-        data: person,
+        data,
         success: (res) => {
             if (typeof res == undefined || !res) throw new TypeError("Object null");
             if (res.error) {
@@ -44,7 +44,7 @@ $('#btnLogar').click( function()  {
         }
     }
     
-    if($("#inputEmail").val().length > 0 && $("#inputPwd").val().length > 0) 
+    if($("#value").val().length > 0 && $("#inputPwd").val().length > 0) 
         reqAjax(option);
     else  {
         $(this).attr("disabled",false);

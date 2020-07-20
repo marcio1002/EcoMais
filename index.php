@@ -62,7 +62,7 @@ $router->namespace("Ecomais\Web");
 /**
  * @namespace Controller
  * 
- * rotas para os metodos controllers 
+ * rotas para os métodos controllers 
  * */
 $router->namespace("Ecomais\Controllers");
 
@@ -90,6 +90,7 @@ $router->namespace("Ecomais\Controllers\Company");
     $router->post("/addaccountpersonlegal","AccountManagerCompany:createAccount");
     $router->get("/listencompany","AccountManagerCompany:listenCompany");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
+    $router->put("/updatecompany","AccountManagerCompany:updateCompany");
 
 $router->namespace("Ecomais\Controllers\Product");
 
@@ -101,6 +102,7 @@ $router->namespace("Ecomais\Controllers\Product");
 $router->dispatch();
 
 if ($router->error()) $router->redirect("/error/{$router->error()}");
+
 
 $content =  ob_get_contents();
 ob_end_clean();

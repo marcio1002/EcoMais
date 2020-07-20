@@ -74,14 +74,15 @@ class AccountHandling {
         }
     }
 
-    public function setLogin(Person $person): ?array
+    public function setLogin(Person $person,int $typeUser): ?array
     {
         try {
+             $table = ($typeUser == 10) ? "empresa" : "usuario";
 
             $this->sql->open();
 
             return $this->sql
-                ->show('usuario',"","email = ?",3)
+                ->show($table,"","email = ?",3)
                 ->prepareParam([$person->email])
                 ->executeSql();
         }
@@ -93,15 +94,17 @@ class AccountHandling {
         }
     }
 
-    public function getLoginAuthGoogle(Person $person): ?array
+    public function getLoginAuthGoogle(Person $person, string $table): ?array
     {
         try {
             $where = [$person->name, $person->email];
 
+            $columnName = ($table == "empresa") ? "fantasia" : "nome";
+
             $this->sql->open();
 
             return $this->sql
-                ->show('usuario',"","nome = ? AND email = ?",3)
+                ->show($table,"","${columnName} = ? AND email = ?",3)
                 ->prepareParam($where)
                 ->executeSql();
 

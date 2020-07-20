@@ -17,10 +17,12 @@
       "url": "https://127.0.0.1/www/ecomais/",
       "webRoot": "${workspaceFolder}/src/",
       "clearConsoleOnReload": true,
-      "pathMappings": [{
-        "url": "https://127.0.0.1/www/ecomais/src/assets/js/",
-        "path": "${workspaceFolder}/src/assets/js/"
-      }],
+      "pathMappings": [
+        {
+          "url": "https://127.0.0.1/www/ecomais/src/assets/js/",
+          "path": "${workspaceFolder}/src/assets/js/",
+        }
+      ],
       "skipFiles": [
         "**${workspaceFolder}/vendor/**",
         "**${workspaceFolder}/src/assets/js/bootstrap/**",

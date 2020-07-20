@@ -45,7 +45,7 @@ $this->stop();
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
                         <label for="fantasia"><span class='required'>*</span> <b>Fantasia</b></label>
-                        <input type="text" <?= $name ?> id="fantasia" class="form-control next-item" placeholder="Nome da empresa" data-required="">
+                        <input type="text" <?= $name ?> <?= $name ? "readonly" : "" ?> id="fantasia" class="form-control next-item" placeholder="Nome da empresa" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>

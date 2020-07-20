@@ -23,12 +23,12 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
     <div id="container-login" class='col-xl-4 col-lg-4 col-md-6 col-sm-8 shadow-lg py-4 bg-white m-auto' style="top: 5px;">
         <div class='modal-body p-3'>
             <div class='form-group col-12'>
-                <label for='inputEmail' class='label-login'>Email ou CNPJ :</label>
-                <input type='text' class='form-control border-bottom-solid-2px' id='inputEmail'>
+                <label for='value' class='label-login'>Email ou CNPJ :</label>
+                <input type='text' id='value' class='form-control border-bottom-solid-2px'>
             </div>
             <div class='form-group col-12'>
                 <label for='inputPwd' class='label-login'>Senha :</label>
-                <input type='password' class='form-control border-bottom-solid-2px' id='inputPwd'>
+                <input type='password' id='inputPwd' class='form-control border-bottom-solid-2px'>
             </div>
             <div class=' col-12'>
                 <div class="form-check m-auto">
@@ -56,7 +56,7 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
                         <button class=" btn-color-red text-white btn btn-focus-shadow-none">
                             <i class='icon-google fab fa-google'></i>
                         </button>
-                        <a title='Entrar com o Google' href=<?=$authGoogleUrl?> class='btn btn-large btn-block btn-color-red  btn-google btn-focus-shadow-none text-weight-800 font-size-1-2em text-center text-white p-2'>
+                        <a title='Entrar com o Google' href=<?=$authGoogleUrl?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
                             <div class='item-account-login google '>
                                 Entrar com o Google
                             </div>
@@ -66,8 +66,8 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
             </div>
         </div>
     </div>
-    <?=
-        Bundles::renderJs([
+    <?php
+    echo  Bundles::renderJs([
             "js/jquery",
             "js/jqueryMask",
             "js/bootstrap",
@@ -75,12 +75,10 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
             "js/alertify",
             "js/login"
         ]);
-    ?>
-    <?php
-    echo $this->section("scripts");
+
     echo "<script>
-            const BASE_URL = '" . BASE_URL . "';
-        </script>";
+        const BASE_URL = '" . BASE_URL . "';
+    </script>";
     ?>
 </body>
 

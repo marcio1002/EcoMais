@@ -107,8 +107,6 @@ $('#btnRegister').click(function() {
             $(this).prop("disabled",false);
         },
         success: (res) => {
-            if (typeof res == undefined || !res) throw new TypeError("Object null");
-
             if (!res.error) {
                 alertify.success('Cadastro realizado com sucesso');
             } else {

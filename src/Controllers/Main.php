@@ -13,6 +13,7 @@ class Main
     private $usr;
     private $safety;
     private $email;
+    private $connected;
 
     function __construct()
     {
@@ -28,31 +29,35 @@ class Main
     public function login(array $param): void
     {
         try {
-            $this->usr->email = $param['email'];
+            $param['value'] = preg_replace("/\D/","",$param['value']);
+            $this->usr->email = $param['value'];
             $this->usr->passwd = $param['passwd'];
+            $company = 10;
+            $user = 11;
 
-            $row = $this->sql->setLogin($this->usr);
+            $row = $this->sql->setLogin($this->usr, (is_numeric($param['value'])) ? $company : $user);
 
             if (count($row) > 0 && password_verify($this->usr->passwd,$row['senha'])) {
+
+                $expire = ($param['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+
+                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
 
                 $this->usr->id = $row['id_usuario'];
 
                 $this->sql->verifyUpdateHash($row['senha'],$this->usr);
 
-                $expire = ($param['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
-
-                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 session_name($token);
-                session_id(md5(uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
+                session_id(hash("whirlpool",uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start(true);
 
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
-                echo json_encode(["error" => false, "status" => 200, "msg" => "Ok"]);
+                echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($param['value'])) ? $company : $user]);
             } else {
-                echo json_encode(["error" => true, "status" => 404, "msg" => "Not results"]);
+                echo json_encode(["error" => true, "status" => 404, "data" => "Not results"]);
             }
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
@@ -70,10 +75,6 @@ class Main
         $code = filter_input(INPUT_GET,"code",FILTER_SANITIZE_STRIPPED);
         $err  = filter_input(INPUT_GET,"error",FILTER_SANITIZE_STRIPPED);
 
-        if(filter_input(INPUT_GET,"conectedLogin",FILTER_VALIDATE_INT)) {
-            $connected = filter_input(INPUT_GET,"conectedLogin",FILTER_VALIDATE_INT);
-        }
-
         if(empty($code) && empty($err)) header("location: $authGoogleUrl");
 
         if(!empty($code)) {
@@ -81,22 +82,22 @@ class Main
             $data = $google->getData($code);
             $this->usr->name = $data->getName(); // O metodo não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
-            $row =  $this->sql->getLoginAuthGoogle($this->usr);
+            $row =  $this->sql->getLoginAuthGoogle($this->usr,"usuario");
+            $row2 = $this->sql->getLoginAuthGoogle($this->usr,"empresa");
 
-            if(count($row) > 0) {
+            if(count($row) > 0 || count($row2) > 0) {
                 $this->usr->id = $row['id_usuario'];
 
-                $expire = ($connected == 18) ?  time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
-                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                $expire = time() + (12 * 30 * 24 * 3600);
+                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 
                 session_name($token);
-                session_id(md5(uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
+                session_id(hash("whirlpool",uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start(true);
 
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
-
             } 
         }else {
             echo "<script> window.close(); </script>";

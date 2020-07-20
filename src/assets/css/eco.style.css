@@ -1,3 +1,4 @@
+/* @author Marcio Alemão */
 .text-weight-800 { font-weight: 800; }
 
 .font-size-1em {font-size: 1em;}
@@ -16,15 +17,14 @@
 .text-weight-700 { font-weight: 700; }
 .text-weight-800 { font-weight: 800; }
 
-.btn-focus-shadow-none:focus {  box-shadow: none; }
-
 
 /* --- Background Color --- */
 
 .bg-green-dark-1 { background-color: #204839; }
+.bg-green-dark-1:hover { background-color: #346b57; }
 .bg-red-wine { background-color: rgb(128, 18, 18);}
 
-.bg-red-wine:hover {background-color: rgb(122, 10, 10);}
+.bg-red-wine:hover {background-color: rgb(139, 18, 18);}
 
 
 /* --- Borders ---*/
@@ -41,3 +41,49 @@
 /* --- Remove o focus do bootstrap ---*/
 
 .remove-focus:focus { box-shadow: none !important;}
+
+/* ---  Posicionamento --- */
+
+.bottom-25 { bottom: 25%; }
+
+.top-25 { bottom: 25%; }
+
+.left-25 { left: 25%; }
+
+.right-25 { right: 25% }
+
+
+
+
+/* --- Atribuir classes para viewport --- */
+
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) { 
+  .bottom-sm-0 { bottom: 0; }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) { 
+  .bottom-md-0 { bottom: 0; }
+  .bottom-sm-25 { bottom: 25%; }
+  .bottom-sm-50 { bottom: 50%; }
+  .position-sm-relative { position: relative; }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) { 
+  .bottom-lg-0 { bottom: 0; }
+  .bottom-lg-25 {bottom: 25%;}
+  .bottom-lg-50 {bottom: 50%;}
+  .position-lg-relative { position: relative; }
+
+}
+
+/* Dispositivos extra large (desktops grandes com 1200px ou mais) */
+@media (min-width: 1200px) { 
+  .bottom-xl-0 { bottom: 0; }
+  .bottom-xl-25 { bottom: 25%; }
+  .bottom-xl-50 { bottom: 50%; }
+  .position-xl-relative { position: relative; }
+
+}

@@ -79,7 +79,7 @@ class Safety
     public function isLogged():bool
     {
             if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-                $token =  md5("ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 $this->sql->open();
                 $row = $this->sql
                         ->show("usuarios","","id_usuario = ?",3)

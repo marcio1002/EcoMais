@@ -104,11 +104,11 @@ class  Router
     //--- Api Pagamento ---
 
 
-    // public function configCompany(?array $param = array()):void
-    // {
-    //     $this->directory("Company");
-    //     echo $this->view->render("configuration",$param);
-    // }
+    public function configCompany():void
+    {
+        $this->directory("Company");
+        echo $this->view->render("config");
+    }
 
 
     /**

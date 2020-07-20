@@ -97,7 +97,7 @@ $('#btnRegisterCompany').click(function() {
     if (validaForm()) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
  
-    let personLegal = {
+    let data = {
         fantasy: $("#fantasia").val(),
         reason: $('#razao').val(),
         cnpj: $('#cnpj').val(),
@@ -115,7 +115,7 @@ $('#btnRegisterCompany').click(function() {
         mycustomtype: "application/json charset=utf-8",
         url: `${BASE_URL}/manager/addaccountpersonlegal`,
         dataType: "json",
-        data: personLegal,
+        data,
         beforeSend: () => {
             $(this).prop("disabled",true);
         },
