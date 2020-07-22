@@ -1,7 +1,12 @@
-function validaForm() {
+/**
+ * 
+ * @param {String} elem 
+ * Elementos pai
+ */
+function validaForm(elem = "") {
    var forError = false;
 
-   $("[data-required]").each(function () {
+   $(`${elem} [data-required]`).each(function () {
        if ($(this).is("input"))
            if ($(this).val().length == 0) {
                forError = true;

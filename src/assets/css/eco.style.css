@@ -23,6 +23,7 @@
 
 /* --- Background Color --- */
 
+.bg-dark-transparent { background-color: rgba(22, 22, 21, 0.63);}
 .bg-green-dark-1 { background-color: #204839; }
 .bg-green-dark-1:hover { background-color: #346b57; }
 .bg-red-wine { background-color: rgb(128, 18, 18);}

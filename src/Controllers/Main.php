@@ -98,6 +98,8 @@ class Main
 
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
+
+                if($row2) header("location: " . BASE_URL . "/");
             } 
         }else {
             echo "<script> window.close(); </script>";

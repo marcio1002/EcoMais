@@ -93,6 +93,12 @@ $router->namespace("Ecomais\Controllers\Company");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
     $router->put("/updatecompany","AccountManagerCompany:updateCompany");
 
+$router->namespace("Ecomais\Pagseguro");
+    
+    $router->group("manager");
+    $router->get("/paymentinfo","Pagamento:paymentInfo");
+    $router->post("/addpayment","Proc_pag:addPayment");
+
 $router->namespace("Ecomais\Controllers\Product");
 
     $router->group("manager");

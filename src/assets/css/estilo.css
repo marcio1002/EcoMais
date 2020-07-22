@@ -28,7 +28,7 @@ body{
     height: 3px;
     left: 5%;
     bottom: 0;
-    background-color: #fde24f;
+    background-color: rgb(175, 39, 39);;
     transform: scaleX(0);
     -webkit-transform: scaleX(0);
     -moz-transform: scaleX(0);

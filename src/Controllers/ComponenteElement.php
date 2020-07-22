@@ -11,7 +11,7 @@ class ComponenteElement
         $index = renderUrl();
         $login = renderUrl("/login");
         $urlRegisterCompany = renderUrl("/cadastro/empresa");
-        return <<<navBar
+return <<<navBar
       <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-md fixed-top navbar-dark text-weight-500  bg-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
@@ -24,7 +24,6 @@ class ComponenteElement
             <div class='navbar-nav'>
               <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='about-menu' href='$urlRegister' >Cadastre-se</a>
-              <a class='nav-item nav-link item-hover position-relative text-white' id='portfolio-menu' href='#'>Projetos</a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
             </div>
             <div>
@@ -41,7 +40,7 @@ navBar;
     public static function footer(): string
     {
         $termsPolicy = renderUrl("/politica-privacidade-termos");
-        return <<<footer
+return <<<footer
     <section class="call-to-action bg-secondary text-white text-center">
         <div class="overlay"></div>
         <div class="container">
@@ -113,7 +112,7 @@ footer;
         $font2 = "font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
         $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
         $background = "https://ci4.googleusercontent.com/proxy/zi2B0d_rqBrjZUnbvWBsWVB8fe8l8zm2FoPZ47PHEU2ogMXdxR09xVIKWM8QHcCmFCTyyzH0kRR1HLgukAU2J3cKuZGRln3KRpGokTAh0qER=s0-d-e1-ft#https://img.fortawesome.com/349cfdf6/tile-info-icons-misc1.png";
-        return <<<mail
+return <<<mail
       <div id=':19t' class='ii gt'>
         <div id=':19s' class='a3s aXjCH undefined' dir='ltr'><u></u>
             <div bgcolor='#f8f9fa'>

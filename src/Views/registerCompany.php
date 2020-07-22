@@ -1,9 +1,11 @@
 <?php
+    require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Ecomais\Controllers\ComponenteElement;
 use Ecomais\Web\Bundles;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
+$pag = new \Ecomais\Models\Pagamento();
 
 $authGoogleUrl = $google->getAuthURL();
 
@@ -35,7 +37,7 @@ $this->stop();
 <div class="container">
     <div class="row">
         <div class=" col-xl-6 col-lg-6  col-md-10 m-xl-0 m-lg-0 m-md-auto col-sm-12">
-            <div class="card mb-3">
+            <div class="card mb-3" id="formCompany">
                 <div class="card-header">
                     <h2 class="text-center h3">Cadastre sua empresa</h2>
                 </div>
@@ -156,10 +158,10 @@ $this->stop();
                     <div class="form-row">
                         <div class='col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto'>
                             <div class="btn-group btn-large btn-block nextItem">
-                                <button class="btn-color-red text-white btn btn-focus-shadow-none">
+                                <button class="btn-color-red text-white btn remove-focus">
                                     <i class='icon-google fab fa-google'></i>
                                 </button>
-                                <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red btn-focus-shadow-none text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
+                                <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red remove-focus text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
                                     Registrar com o Google
                                 </a>
                             </div>
@@ -167,7 +169,7 @@ $this->stop();
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto">
-                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-primary font-size-1-2em text-weight-700 nextItem" id="btnRegisterCompany">
+                            <button type="button" id="btnRegisterCompany" class="btn btn-block btn-primary font-size-1-2em remove-focus text-weight-700 nextItem">
                                 Cadastrar
                             </button>
                         </div>
@@ -227,23 +229,19 @@ $this->stop();
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bg-dark-transparent" id="modalPagamento" tabindex="-1" role="Pagamento" aria-labelledby="Pagamento" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Pagamento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header" title="Precione ESC para voltar" style="cursor: help;">
+                    <h5 class="modal-title m-auto">Dados do Cartão</h5>
                 </div>
                 <div class="modal-body">
-                <span class="endereco" data-endereco="<?php echo BASE_URL; ?>"></span>
                     <form name="formPagamento" action="" id="formPagamento">
                         <input type="hidden" name="paymentMethod" id="paymentMethod" value="creditCard">
 
-                        <input type="hidden" name="receiverEmail" id="receiverEmail" value="<?php echo EMAIL_LOJA; ?>">
+                        <input type="hidden" name="receiverEmail" id="receiverEmail" value=<?= $pag->pagInfo["EMAIL_LOJA"]?> >
 
-                        <input type="hidden" name="currency" id="currency" value="<?php echo MOEDA_PAGAMENTO; ?>">
+                        <input type="hidden" name="currency" id="currency" value=<?=  $pag->pagInfo["MOEDA_PAGAMENTO"]; ?> >
 
                         <input type="hidden" name="extraAmount" id="extraAmount" value="0.00">
 
@@ -255,25 +253,24 @@ $this->stop();
 
                         <input type="hidden" name="itemQuantity1" id="itemQuantity1" value="1">
 
-                        <input type="hidden" name="notificationURL" id="notificationURL" value="<?php echo URL_NOTIFICACAO; ?>">
+                        <input type="hidden" name="notificationURL" id="notificationURL" value=<?= $pag->pagInfo["URL_NOTIFICACAO"] ?> >
 
                         <input type="hidden" name="reference" id="reference" value="1001">
                         
-                        <h2>Dados do Cartão</h2>
                         <label>Número do cartão</label><br>
-                        <input type="text" name="numCartao" id="numCartao" required><br>
+                        <input type="text" name="numCartao" id="numCartao" data-required=""><br>
                         
 
                         <label>CVV do cartão</label><br>
-                        <input type="text" name="cvvCartao" id="cvvCartao" maxlength="3" required><br>
+                        <input type="text" name="cvvCartao" id="cvvCartao" maxlength="3" data-required=""><br>
 
                         <input type="hidden" name="bandeiraCartao" id="bandeiraCartao">
 
                         <label>Mês de Validade</label><br>
-                        <input type="text" name="mesValidade" id="mesValidade" maxlength="2" required><br>
+                        <input type="text" name="mesValidade" id="mesValidade" maxlength="2" data-required=""><br>
 
                         <label>Ano de Validade</label><br>
-                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" required><br> 
+                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" data-required=""><br> 
 
                         <input type="hidden" name="qntParcelas" id="qntParcelas" class="select-qnt-parcelas"> 
                             
@@ -281,29 +278,29 @@ $this->stop();
                         <input type="hidden" name="valorParcelas" id="valorParcelas">
 
                         <label>CPF do dono do Cartão</label><br>
-                        <input type="text" name="creditCardHolderCPF" id="creditCardHolderCPF" placeholder="CPF sem traço" required> <br>
+                        <input type="text" name="creditCardHolderCPF" id="creditCardHolderCPF" placeholder="CPF sem traço" data-required=""> <br>
 
                         <label>Nome no Cartão</label><br>
-                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" required> 
+                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" data-required=""> 
 
                         <input type="hidden" name="tokenCartao" id="tokenCartao">
                         <input type="hidden" name="hashCartao" id="hashCartao">
 
-                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" required> 
-                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" required> 
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" data-required=""> 
+                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" data-required=""> 
                         <input type="hidden" value="1 andar" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento"> 
                         <input type="hidden" value="Jardim Paulistano" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro"> 
-                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" required> 
-                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" required> 
-                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" required> 
+                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" data-required=""> 
+                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" data-required=""> 
+                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" data-required=""> 
                         <input type="hidden" value="BRA" name="billingAddressCountry" id="billingAddressCountry" value="BRL">
 
-                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" required> 
-                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" required> 
-                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" required> 
-                        <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD" required>
-                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" required> 
-                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" required> 
+                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" data-required=""> 
+                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" data-required=""> 
+                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" data-required=""> 
+                        <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD" data-required="">
+                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" data-required=""> 
+                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" data-required=""> 
                         <input type="hidden" name="shippingAddressRequired" id="shippingAddressRequired" value="true">
                         <input type="hidden" value="Av. Brig. Faria Lima" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua"> 
                         <input type="hidden" value="1384" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número"> 
@@ -321,8 +318,8 @@ $this->stop();
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" name="btnComprar" id="btnComprar" value="Comprar">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" name="btnComprar" id="btnComprar" value="Comprar">Finalizar cadastro</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -332,7 +329,7 @@ $this->stop();
 
 <?php
 $this->start("footer");
-echo ComponenteElement::footer();
+    echo ComponenteElement::footer();
 $this->stop();
 
 $this->start("scripts");

@@ -19,7 +19,9 @@ $("#contato").on("keypress",function(evt){
 $("#contato").mask(maskContact,optionsMask);
 $("#cnpj").mask("00.000.000/0000-30",{placeholder: "__.____.___/____-__", clearIfNotMatch: true });
 $("#inputCep").mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true });
-$("#mesAnoValidade").mask("00/0000",{placeholder:"__/____", clearIfNotMatch: true});
+$("#mesValidade").mask("00",{placeholder:"__", clearIfNotMatch: true});
+$("#anoValidade").mask("0000",{placeholder:"____", clearIfNotMatch: true});
+$("#creditCardHolderCPF").mask("000.000.000-00",{placeholder:"___.___.___-__", clearIfNotMatch: true});
 $("#cvvCartao").mask("000",{placeholder:"___", clearIfNotMatch: true});
 $("#numCartao").mask("0000 0000 0000 0000",{placeholder:"___ ___ ___ ___", clearIfNotMatch: true});
 
@@ -91,16 +93,22 @@ $("#btnViewPasswd").on("click", function () {
     }
 });
 
-
-$('#btnComprar').click(function() {
+$("#btnRegisterCompany").click(function() {
     $("[data-required]").removeClass("formError");
 
-    if (validaForm()) return alertify.error("Preencha os campos em vermelho!");
-    if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
- 
-    pagamento();
+    if (validaForm("#formCompany")) return alertify.error("Preencha os campos em vermelho!");
+    if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro");
+    $("#modalPagamento").modal({
+        backdrop: false,
+        keyboard: true,
+        focus: true
+    })
+});
 
-    $('#exampleModal').dialog('close');
+
+$('#btnComprar').click(function(e) {
+    if (validaForm("#modalPagamento")) return alertify.error("Preencha os campos em vermelho!");
+    if(!pagamento()) return e.preventDefault();
 
     let data = {
         fantasy: $("#fantasia").val(),
@@ -115,7 +123,7 @@ $('#btnComprar').click(function() {
         address: $("#address").val(),
         plano: $('#plano').val()
     };
-    option = {
+    let option = {
         method: 'POST',
         mycustomtype: "application/json charset=utf-8",
         url: `${BASE_URL}/manager/addaccountpersonlegal`,
@@ -129,6 +137,8 @@ $('#btnComprar').click(function() {
         },
         success: (res) => { 
             if (!res.error) {
+                $("#modalPagamento").modal('hide');
+                $("#modalPagamento input,select").val("");
                 alertify.success('Cadastro realizado com sucesso');
             } else {
                 if (res.status == 0) alertify.error("Preencha todos os campos!");
@@ -136,6 +146,7 @@ $('#btnComprar').click(function() {
             }
         },
         error: (e) =>  {
+            $('#modalPagamento').modal('hide');
             alertify.error("Ocorreu um erro no servidor!");
         }
     };
@@ -145,21 +156,22 @@ $('#btnComprar').click(function() {
 
 
 function pagamento() {
-
-    var endereco = jQuery('.endereco').attr("data-endereco");
-    $.ajax({
-
-        url: endereco + "pagamento.php",
-        type: 'POST',
+    let res = true; 
+        
+    reqAjax({
+        type: 'GET',
+        url: `${BASE_URL}/manager/paymentinfo`,
         dataType: 'json',
         success: function (retorno) {
-
             PagSeguroDirectPayment.setSessionId(retorno.id);
             recupHashCartao();
         },
-        complete: function (retorno) {
+        error: () => {
+            res = false;
+            alertify.error("Erro ao efetuar o pagamento!");
         }
     });
+    return res;
 }
 
 $('#numCartao').on('keyup', function () {
@@ -199,9 +211,9 @@ function recupHashCartao() {
 
             var endereco = jQuery('.endereco').attr("data-endereco");
 
-            $.ajax({
+            reqAjax({
                 method: "POST",
-                url: endereco + "/src/pagseguro/proc_pag.php",
+                url: `${BASE_URL}/manager/addpayment`,
                 data: dados,
                 dataType: 'json',
                 success: function (retorna) {

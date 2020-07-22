@@ -148,7 +148,6 @@ $this->stop();
 
             res.forEach(val => {
               item += 1;
-
                 $("[data-index='1']").appendTo(`   
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3">
                   <div class="card shadow" style="width: 100%;">

@@ -1,5 +1,5 @@
 <?php
-$env = getenv("BASE_URL") ? getenv("BASE_URL") : "https://localhost/ecomais";
+$env = getenv("BASE_URL") ? getenv("BASE_URL") : "https://127.0.0.1/www/ecomais";
 
 define("BASE_URL", $env);
 

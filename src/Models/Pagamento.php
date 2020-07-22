@@ -3,24 +3,38 @@ namespace Ecomais\Models;
 
 use Ecomais\Models\DataException;
 
-use TypeError;
-
-/**
- * pode deixar o PersonLegal como herança porque ele já tem os atributos certos 
- * e tem a classe Person estendida
- * 
- * depois tira esse comentário
-*/
 class Pagamento extends PersonLegal 
 {
-    private int $id;
-    private int $tipo; 
-    private string $code_trans;
-    private int $status;
-    private string $link_boleto;
-    private string $link_bd_online;
-    private string $data_criacao;
-    private string $data_update;
+    protected int $id;
+    protected int $type; 
+    protected string $code_trans;
+    protected int $status;
+    protected ?string $link_boleto;
+    protected ?string $link_bd_online;
+    protected int $carrinho_id;
+    protected string $data_criacao;
+    protected string $data_update;
+    //dados padrão
+    protected $pagInfo = array(
+        "URL_PAGSEGURO" => "https://ws.sandbox.pagseguro.uol.com.br/v2/",
+        "SCRIPT_PAGSEGURO" => "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js",
+        "MOEDA_PAGAMENTO" => "BRL",
+        "URL_NOTIFICACAO" => "https://sualoja.com.br/notifica.html"
+    );
+
+    public function __construct(bool $sandbox = true,array $dataPagArray = null)
+    {
+        if ($sandbox) {
+            $this->pagInfo["EMAIL_PAGSEGURO"] =  "emanuelcafe.santos@gmail.com";
+            $this->pagInfo["TOKEN_PAGSEGURO"] =  "D146D1FA2079439EB485AEF5B23EA68C";
+            $this->pagInfo["EMAIL_LOJA"] = "emanuelcafe175@gmail.com";
+        } else {
+            $this->pagInfo["EMAIL_PAGSEGURO"] =  $dataPagArray[0];
+            $this->pagInfo["TOKEN_PAGSEGURO"] =  $dataPagArray[1];
+            $this->pagInfo["EMAIL_LOJA"] = $dataPagArray[3];
+        }
+
+    }
 
     public function __set($name, $value)
     {
@@ -44,5 +58,13 @@ class Pagamento extends PersonLegal
             $array += array($key => $val);
         }
         return $array;
+    }
+
+    public function createAt(): string
+    {
+        date_default_timezone_set("America/Sao_paulo");
+
+        $this->data_criacao = date('Y-m-d H:i:s');
+        return $this->data_criacao;
     }
 }
