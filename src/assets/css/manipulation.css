@@ -12,3 +12,7 @@
 
 
 .required { color:#ee3211; font-weight: bolder; }
+
+#formPagamento{
+    text-align: center;
+}

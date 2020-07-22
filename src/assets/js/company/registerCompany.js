@@ -91,12 +91,17 @@ $("#btnViewPasswd").on("click", function () {
     }
 });
 
-$('#btnRegisterCompany').click(function() {
+
+$('#btnComprar').click(function() {
     $("[data-required]").removeClass("formError");
 
     if (validaForm()) return alertify.error("Preencha os campos em vermelho!");
     if (!$("#termos").is(":checked")) return alertify.alert("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!", "Você precisa aceitar os termos para concluir o cadastro")
  
+    pagamento();
+
+    $('#exampleModal').dialog('close');
+
     let data = {
         fantasy: $("#fantasia").val(),
         reason: $('#razao').val(),
@@ -137,3 +142,77 @@ $('#btnRegisterCompany').click(function() {
     reqAjax(option);
  
  });
+
+
+function pagamento() {
+
+    var endereco = jQuery('.endereco').attr("data-endereco");
+    $.ajax({
+
+        url: endereco + "pagamento.php",
+        type: 'POST',
+        dataType: 'json',
+        success: function (retorno) {
+
+            PagSeguroDirectPayment.setSessionId(retorno.id);
+            recupHashCartao();
+        },
+        complete: function (retorno) {
+        }
+    });
+}
+
+$('#numCartao').on('keyup', function () {
+
+    var numCartao = $(this).val();
+
+    var qntNumero = numCartao.length;
+
+    if (qntNumero == 6) {
+
+        PagSeguroDirectPayment.getBrand({
+            cardBin: numCartao,
+            success: function (retorno) {
+                $('#msg').empty();
+
+                var imgBand = retorno.brand.name;
+                $('#bandeiraCartao').val(imgBand);
+            },
+            error: function (retorno) {
+
+                $('.bandeira-cartao').empty();
+                $('#msg').html("Cartão inválido");
+            }
+        });
+    }
+});
+
+function recupHashCartao() {
+    PagSeguroDirectPayment.onSenderHashReady(function (retorno) {
+        if (retorno.status == 'error') {
+            console.log(retorno.message);
+            return false;
+        } else {
+            $("#hashCartao").val(retorno.senderHash);
+            var dados = $("#formPagamento").serialize();
+            console.log(dados);
+
+            var endereco = jQuery('.endereco').attr("data-endereco");
+
+            $.ajax({
+                method: "POST",
+                url: endereco + "/src/pagseguro/proc_pag.php",
+                data: dados,
+                dataType: 'json',
+                success: function (retorna) {
+                    console.log("Sucesso " + JSON.stringify(retorna));
+                    
+                },
+                error: function (retorna) {
+                    console.log("Erro" + JSON.stringify(retorna));
+                    
+                }
+            });
+        }
+    });
+}

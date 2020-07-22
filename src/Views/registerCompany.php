@@ -145,14 +145,7 @@ $this->stop();
                             <option value="30">Carrinho</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-12">
-                        <?= $svgCeta ?>
-                        <label class="creditCard"><span class='required'>*</span> <b>CVV do cartão</b></label>
-                        <input type="text" name="numCartao" class="form-control col-xl-3 col-lg-3 col-md-4  col-sm-4 creditCard nextItem" id="cvvCartao" data-required="" />
-                        <small class="form-text text-muted creditCard">
-                            Código de 3 dígitos impresso no verso do cartão
-                        </small>
-                    </div>
+                    
                     <p>
                         <div class="form-check">
                             <?= $svgCeta ?>
@@ -174,7 +167,7 @@ $this->stop();
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto">
-                            <button type="button" class="btn btn-block btn-primary font-size-1-2em text-weight-700 nextItem" id="btnRegisterCompany">
+                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-primary font-size-1-2em text-weight-700 nextItem" id="btnRegisterCompany">
                                 Cadastrar
                             </button>
                         </div>
@@ -230,6 +223,106 @@ $this->stop();
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pagamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <span class="endereco" data-endereco="<?php echo BASE_URL; ?>"></span>
+                    <form name="formPagamento" action="" id="formPagamento">
+                        <input type="hidden" name="paymentMethod" id="paymentMethod" value="creditCard">
+
+                        <input type="hidden" name="receiverEmail" id="receiverEmail" value="<?php echo EMAIL_LOJA; ?>">
+
+                        <input type="hidden" name="currency" id="currency" value="<?php echo MOEDA_PAGAMENTO; ?>">
+
+                        <input type="hidden" name="extraAmount" id="extraAmount" value="0.00">
+
+                        <input type="hidden" name="itemId1" id="itemId1" value="0001">
+
+                        <input type="hidden" name="itemDescription1" id="itemDescription1" value="plano carrinho">
+
+                        <input type="hidden" name="itemAmount1" id="itemAmount1" value="39.99">
+
+                        <input type="hidden" name="itemQuantity1" id="itemQuantity1" value="1">
+
+                        <input type="hidden" name="notificationURL" id="notificationURL" value="<?php echo URL_NOTIFICACAO; ?>">
+
+                        <input type="hidden" name="reference" id="reference" value="1001">
+                        
+                        <h2>Dados do Cartão</h2>
+                        <label>Número do cartão</label><br>
+                        <input type="text" name="numCartao" id="numCartao" required><br>
+                        
+
+                        <label>CVV do cartão</label><br>
+                        <input type="text" name="cvvCartao" id="cvvCartao" maxlength="3" required><br>
+
+                        <input type="hidden" name="bandeiraCartao" id="bandeiraCartao">
+
+                        <label>Mês de Validade</label><br>
+                        <input type="text" name="mesValidade" id="mesValidade" maxlength="2" required><br>
+
+                        <label>Ano de Validade</label><br>
+                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" required><br> 
+
+                        <input type="hidden" name="qntParcelas" id="qntParcelas" class="select-qnt-parcelas"> 
+                            
+                        
+                        <input type="hidden" name="valorParcelas" id="valorParcelas">
+
+                        <label>CPF do dono do Cartão</label><br>
+                        <input type="text" name="creditCardHolderCPF" id="creditCardHolderCPF" placeholder="CPF sem traço" required> <br>
+
+                        <label>Nome no Cartão</label><br>
+                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" required> 
+
+                        <input type="hidden" name="tokenCartao" id="tokenCartao">
+                        <input type="hidden" name="hashCartao" id="hashCartao">
+
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" required> 
+                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" required> 
+                        <input type="hidden" value="1 andar" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento"> 
+                        <input type="hidden" value="Jardim Paulistano" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro"> 
+                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" required> 
+                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" required> 
+                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" required> 
+                        <input type="hidden" value="BRA" name="billingAddressCountry" id="billingAddressCountry" value="BRL">
+
+                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" required> 
+                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" required> 
+                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" required> 
+                        <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD" required>
+                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" required> 
+                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" required> 
+                        <input type="hidden" name="shippingAddressRequired" id="shippingAddressRequired" value="true">
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua"> 
+                        <input type="hidden" value="1384" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número"> 
+                        <input type="hidden" value="5o anda" name="shippingAddressComplement" id="shippingAddressComplement" placeholder="Complemento"> 
+                        <input type="hidden" value="Jardim Paulistano" name="shippingAddressDistrict" id="shippingAddressDistrict" placeholder="Bairro"> 
+                        <input type="hidden" value="01452002" name="shippingAddressPostalCode" id="shippingAddressPostalCode" placeholder="CEP sem traço"> 
+                        <input type="hidden" value="Sao Paulo" name="shippingAddressCity" id="shippingAddressCity" placeholder="Cidade"> 
+                        <input type="hidden" value="SP" name="shippingAddressState" id="shippingAddressState" placeholder="Sigla do Estado"> 
+                        <input type="hidden" value="BRA" name="shippingAddressCountry" id="shippingAddressCountry" value="BRL">
+                        
+                        <input type="hidden" name="shippingType" value="3">
+                        <input type="hidden" value="1.00" name="shippingCost" id="shippingCost" placeholder="Preço do frete. Ex: 2.10">      
+                        
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" name="btnComprar" id="btnComprar" value="Comprar">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
