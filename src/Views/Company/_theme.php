@@ -4,7 +4,7 @@ require_once __DIR__ . "/../../../vendor/autoload.php";
 use Ecomais\Web\Bundles;
 //$safety = new Ecomais\Models\Safety();
 
-if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
+// if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -40,7 +40,7 @@ if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
                             </a>
                         </li>
                         <li class="nav-item pb-2">
-                            <a class="nav-link position-relative p-0 py-xl-3" data-toggle="tab" href="#tab-content-friends" title="Friends" role="tab">
+                            <a href=<?= renderUrl("/empresa/perfil"); ?> class="nav-link position-relative p-0 py-xl-3" data-toggle="tab" title="Friends" role="tab">
                                 <i class="far fa-address-card"></i>
                             </a>
                         </li>
@@ -49,8 +49,6 @@ if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
                                 <i class="fas fa-shopping-basket"></i>
                             </a>
                         </li>
-
-                        <!-- Settings -->
                     </ul>
 
                 </div>

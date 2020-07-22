@@ -50,7 +50,11 @@ class CompanyHandling {
         try{
             $this->sql->open();
             return $this->sql
-            ->show("empresa","","statusconta = true AND id_empresa = ?",3)
+            ->show(
+                "empresa AS e LEFT JOIN pagamento AS p ON p.fk_empresa = e.id_empresa",
+                "e.*, p.*",
+                "statusconta = true AND id_empresa = ?",
+                6)
             ->prepareParam($emp->getAll())
             ->executeSql();
 

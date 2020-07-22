@@ -16,6 +16,9 @@
 .text-weight-600 { font-weight: 600; }
 .text-weight-700 { font-weight: 700; }
 .text-weight-800 { font-weight: 800; }
+.text-red-wine { color: rgb(128, 18, 18); }
+.text-red-wine-light-1 { color: rgb(161, 52, 52); }
+.text-red-wine-light-2 { color: rgb(141, 36, 36); }
 
 
 /* --- Background Color --- */
@@ -37,6 +40,29 @@
 
 /* --- Buttons Colors ---*/
 .btn-color-red { background: #ea4335; }
+.main-btn {
+  background-color: rgb(128, 18, 18);
+  color: #ffffff;
+  text-transform: uppercase;
+  border-radius: 30px;
+  border: 2px solid#28a745;
+  transition: .5s;
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.main-btn:hover { text-decoration: none;}
 
 /* --- Remove o focus do bootstrap ---*/
 

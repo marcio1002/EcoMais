@@ -19,6 +19,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]); ?>
     <link rel='stylesheet' type='text/css' href=<?= renderUrl("/src/assets/css/estilo.css") ?> />
+    <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/styleComponente.css"); ?> >
     <?= $this->section("css"); ?>
     <title><?= $title ?></title>
 </head>
@@ -40,14 +41,11 @@ use Ecomais\Controllers\ComponenteElement as componente;
         endif;
         ?>
     </main>
-    <footer>
         <?php
         if ($this->section('footer')) :
             echo $this->section('footer');
         endif;
-        ?>
-    </footer>
-<?php
+
     echo Bundles::renderJs([
             "js/jquery",
             "js/jqueryMask",
@@ -76,6 +74,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
                 success: (response) => {
 
                     if (response.res) {
+                        $("#emailNewsLetter").val("");
                         alertify.success("Obrigado! <br/>Agora você receberar nossa newsletter").delay(5);
                     }
                 },

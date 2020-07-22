@@ -101,15 +101,17 @@ class  Router
         echo $this->view->render("index", $param);
     }
 
-    //--- Api Pagamento ---
-
-
     public function configCompany():void
     {
         $this->directory("Company");
         echo $this->view->render("config");
     }
 
+    public function perfilCompany(): void
+    {
+        $this->directory("Company");
+        echo $this->view->render("perfil");
+    }
 
     /**
      * @group User

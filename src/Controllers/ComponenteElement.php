@@ -1,16 +1,17 @@
 <?php
+
 namespace Ecomais\Controllers;
 
 class ComponenteElement
 {
-  public static function navBarHome():string
-  {
-    $urlRegister = renderUrl('/cadastro');
-    $logo = renderUrl('/src/assets/logos-icons/ecomais-icon-small.png');
-    $index = renderUrl();
-    $login = renderUrl("/login");
-    $urlRegisterCompany = renderUrl("/cadastro/empresa");
-return <<<navBar
+    public static function navBarHome(): string
+    {
+        $urlRegister = renderUrl('/cadastro');
+        $logo = renderUrl('/src/assets/logos-icons/ecomais-icon-small.png');
+        $index = renderUrl();
+        $login = renderUrl("/login");
+        $urlRegisterCompany = renderUrl("/cadastro/empresa");
+        return <<<navBar
       <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-md fixed-top navbar-dark text-weight-500  bg-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
@@ -35,61 +36,84 @@ return <<<navBar
     <div class='subNavBar' style='background: transparent'>
     </div>
 navBar;
-  }
+    }
 
-  public static function footerHome():string
-  {
-return <<<footer
-    <div id="contact-area" class='text-center bg-dark text-white'>
-    <div class="container p-2">
-        <div class="col-xl-12 col-md-12">
-        <div class="col-md-12 p-2" id="contact-form">
-            <p>Receba nossa Newsletter </p>
-            <div class="col-md-5 m-auto">
-            <input type="text" class="form-control" placeholder="email@exemplo.com" id="emailNewsLetter">
-            <div class="row pt-3">
-                <button type="button" class="main-btn text-black m-auto" id='btnEnv' >enviar</button>
+    public static function footer(): string
+    {
+        $termsPolicy = renderUrl("/politica-privacidade-termos");
+        return <<<footer
+    <section class="call-to-action bg-secondary text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 mx-auto">
+                    <div class="col-md-12 p-2" id="contact-form">
+                    <p class="h4">Receba nossa Newsletter </p>
+                    <div class="">
+                    <input type="text" class="form-control" placeholder="email@exemplo.com" id="emailNewsLetter">
+                    <div class="row pt-3">
+                    <div class="col-xl-6 col-md-8 col-sm-12 m-auto">
+                        <button type="button" class="btn bg-red-wine remove-focus text-white font-weight-bold btn-block text-black m-auto" id='btnEnv'>enviar</button>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
         </div>
-        <div class="col-xl-12 col-md-12 p-xl-4">
-        <div class="col-md-12">
-            <h3 class="main-title">Entre em contato conosco</h3>
-        </div>
+    </div>
+    </section>
+    <footer class="footer bg-dark">
+    <div class="container">
         <div class="row">
-        <div class="col-md-4 contact-box">
-            <i class="fas fa-phone"></i>
-            <p><span class="contact-tile">Telefone:</span> (48)99999-9999</p>
-            <p><span class="contact-tile">Horários de atendimento:</span><br /> 8:00 - 19:00</p>
+        <div class="col-lg-7 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+                <p class="text-white"><i class="fas fa-phone text-red-wine-light-1"></i>&ThinSpace; (48) 4749-0812</p>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+                <p class="text-white"><i class="fas fa-envelope text-red-wine-light-1"></i>&ThinSpace; ecomais5354@gmail.com</p>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+                <a href='${termsPolicy}' class="text-white">Termos</a>
+            </li>
+            <li class="list-inline-item large">&sdot;</li>
+            <li class="list-inline-item">
+                <a href='${termsPolicy}' class="text-white">Política de privacidade</a>
+            </li>
+            </ul>
+            <p class="text-white-50 small mb-4 mb-lg-0">Desenvolvido por <a href="#">EcoMais</a> &copy; 2020</p>
         </div>
-        <div class="col-md-4 contact-box">
-            <i class="fas fa-envelope"></i>
-            <p><span class="contact-tile">Envie um email:</span> ecomais5354@gmail.com</p>
+        <div class="col-lg-5 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-3">
+                <a href="https://www.facebook.com/ecomais.ecomais.1">
+                <i class="fab fa-facebook fa-2x fa-fw"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                <i class="fab fa-instagram fa-2x fa-fw"></i>
+                </a>
+            </li>
+            </ul>
         </div>
-        <div class="col-md-4 contact-box">
-            <i class="fas fa-map-marker-alt"></i>
-            <p><span class="contact-tile">Endereço:</span><br /> Itaquá Garden Shopping Itaquaquecetuba - SP - 1314</p>
-        </div>
-        </div>
-        </div>
-        <div class="col-xl-12 col-md-12">
-        <p>Desenvolvido por <a href="#">EcoMais</a> &copy; 2020</p>
         </div>
     </div>
-    </div>
+    </footer>
 footer;
-  }
+    }
 
 
-  public static function mail($name,$token):string
-  {
-    $url = renderUrl("/recuperarsenha/novasenha/$token");
-    $font1 = "padding:0;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
-    $font2 ="font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
-    $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
-    $background = "https://ci4.googleusercontent.com/proxy/zi2B0d_rqBrjZUnbvWBsWVB8fe8l8zm2FoPZ47PHEU2ogMXdxR09xVIKWM8QHcCmFCTyyzH0kRR1HLgukAU2J3cKuZGRln3KRpGokTAh0qER=s0-d-e1-ft#https://img.fortawesome.com/349cfdf6/tile-info-icons-misc1.png";
-return<<<mail
+    public static function mail($name, $token): string
+    {
+        $url = renderUrl("/recuperarsenha/novasenha/$token");
+        $font1 = "padding:0;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
+        $font2 = "font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
+        $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
+        $background = "https://ci4.googleusercontent.com/proxy/zi2B0d_rqBrjZUnbvWBsWVB8fe8l8zm2FoPZ47PHEU2ogMXdxR09xVIKWM8QHcCmFCTyyzH0kRR1HLgukAU2J3cKuZGRln3KRpGokTAh0qER=s0-d-e1-ft#https://img.fortawesome.com/349cfdf6/tile-info-icons-misc1.png";
+        return <<<mail
       <div id=':19t' class='ii gt'>
         <div id=':19s' class='a3s aXjCH undefined' dir='ltr'><u></u>
             <div bgcolor='#f8f9fa'>
@@ -224,6 +248,5 @@ return<<<mail
         </div>
       </div>
 mail;
-  }
-
+    }
 }

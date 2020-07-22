@@ -76,7 +76,7 @@ $("#save-config-company").on("click",function(){
         `Antes de qualquer mudança analisamos seus dados, para que você possa mudar seu plano. Se houver alguma conta 
         pedente ou algo que não esteja dentro da nossas diretrizes essa ação não será procedida. 
         <br/> você deseja realmente mudar o plano?`,
-         async () =>{movable
+         async () =>{
             data.typePackage = await $("#passwd").val();
             reqAjax(option);
          },

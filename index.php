@@ -52,6 +52,7 @@ $router->namespace("Ecomais\Web");
     $router->group("empresa");
     $router->get("/","Router:indexCompany");
     $router->get("/configuracoes","Router:configCompany");
+    $router->get("/perfil","Router:perfilCompany");
 
 /**
  * @group User

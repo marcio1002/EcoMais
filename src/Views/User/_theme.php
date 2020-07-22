@@ -19,7 +19,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
   <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]);?>
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-  <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/themeUser.css"); ?> >
+  <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/styleComponente.css"); ?> >
   <?= $this->section("css"); ?>
   
   <title><?= $title ?></title>
@@ -33,6 +33,9 @@ use Ecomais\Controllers\ComponenteElement as componente;
       <a class="btn btn-primary" href="#">Sign In</a>
     </div>
   </nav>
+  <div class="progress d-none" style="height: 5px;">
+  <div id="#progress" class="progress-bar bg-success" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
   <section>
     <?php
@@ -46,51 +49,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
 
 
   <!-- Footer -->
-  <footer class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="#">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <?= componente::footer()?>
 
 <?php
     echo Bundles::renderJs([
@@ -101,11 +60,40 @@ use Ecomais\Controllers\ComponenteElement as componente;
           "js/apis",
       ]);
       
-  echo $this->section("scripts");
   echo "<script>
           const BASE_URL = '" . BASE_URL . "';
       </script>";
+      echo $this->section("scripts");
   ?>
+
+<script>
+        $("#btnEnv").click(function() {
+          alertify.set('notifier','position', 'top-right');
+          
+            let val = $("#emailNewsLetter").val().trim();
+            option = {
+                method: 'POST',
+                mycustomtype: "application/json",
+                url: `${BASE_URL}/manager/newsletter`,
+                dataType: "json",
+                data: {
+                    newsletter: val
+                },
+                success: (response) => {
+
+                    if (response.res) {
+                        $("#emailNewsLetter").val("");
+                        alertify.success("Obrigado! <br/>Agora você recebera nossa newsletter").delay(5);
+                    }
+                },
+                error: () => {}
+            };
+
+            if (val.length > 0) {
+                reqAjax(option);
+            }
+        })
+    </script>
 
 </body>
 

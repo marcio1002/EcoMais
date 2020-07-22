@@ -153,7 +153,7 @@ $this->stop();
 </div>
 <?php
 $this->start("footer");
-echo ComponenteElement::footerHome();
+echo ComponenteElement::footer();
 $this->stop()
 ?>
 <?php

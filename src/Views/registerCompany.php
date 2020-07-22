@@ -239,7 +239,7 @@ $this->stop();
 
 <?php
 $this->start("footer");
-echo ComponenteElement::footerHome();
+echo ComponenteElement::footer();
 $this->stop();
 
 $this->start("scripts");

@@ -17,71 +17,76 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
   <h1 class="h1">EcoMais</h1>
 </div>
 <div id="about-area">
-  <div class="container p-3">
-    <div class="row col-12">
-      <div class="col-12">
-        <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
-      </div>
-      <div class="col-md-6 ">
-        <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
-      </div>
-      <div class="col-md-6">
-        <h3 class="about-title">Uma Organização que pensa no futuro e saúde do planeta</h3>
-        <p>O EcoMais tem como grande desafio propor economia e sustentabilidade aos seus clientes, trazendo um retorno
-          lucrativo, rendível e sustentável a sua empresa, divulgando os produtos em plataformas digitais.</p>
-        <p> Você micro-empreendedor poderá cadastrar a sua empresa do ramo alimentício em nossa plataforma, poderá
-          criar panfletos e anunciar promoções, tudo digital! a plataforma e os arquitetos de software estarão
-          disponibilizando todo suporte para você aproveitar as melhores tecnologias para seus anúncios.</p>
-        <p>E nossos designers trabalharão na sua interface/layout para impulsionar os seus anúncios.</p>
-        <p>Veja outros diferenciais da equipe:</p>
-        <ul id="about-list">
-          <li><i class="fas fa-check"></i> Suporte 24h</li>
-          <li><i class="fas fa-check"></i> Layout responsivo para todos os dispositivos</li>
-          <li><i class="fas fa-check"></i> Integração com diversos sistemas do mercado</li>
-          <li><i class="fas fa-check"></i> Desenvolvimento com metodologia ágil</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-12 py-4">
-    <div class="row">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        <div class="card" style="height: 305px">
-          <div class="card-header text-center">
-            <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text">A plataforma Ecomais é pra você também que é consumidor!
-              Você poderá realizar um Cadastro no site, entrar para ver produtos, ser notificados de promoções perto de
-              você e muito mais!
-              Crie o seu cadastro agora mesmo!
-            </p>
-            <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-large btn-primary  center">Acesse-já</a>
-          </div>
+  <section>
+    <div class="container p-3">
+      <div class="row col-12">
+        <div class="col-12">
+          <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
         </div>
-      </div>
-      <div class="w-sm-100"></div>
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        <div class="card" style="height: 305px ">
-          <div class="card-header text-center">
-            <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
-          </div>
-          <div class="card-body pb-3" style="overflow: auto;">
-            <p class="card-text">
-              Panfletos, folhetos e encartes são alguns mecanismos de divulgação bastante usados quando
-              se quer atrair a atenção do público em cidades da região. De fácil manuseio, essas mídias têm custo de
-              produção geralmente baixo, mas pelo mau uso de quem os distribui e recebe pelas ruas, para muitos, eles têm
-              se tornado um sinônimo de transtorno e sujeira. Pensando nisso a equipe do EcoMais busca uma solução mais
-              sustentável quanto a isso, que é a utilização das plataformas digitais para os anúncios. Toda a empresa
-              comprometida deve buscar soluções mais sustentáveis. Por isso não perca tempo, Cadastre a sua empresa e
-              venha participar desta missão!
-            </p>
-            <a href="#" class="btn btn-primary">Acesse-já</a>
-          </div>
+        <div class="col-md-6 ">
+          <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
+        </div>
+        <div class="col-md-6">
+          <h3 class="about-title">Uma Organização que pensa no futuro e saúde do planeta</h3>
+          <p>O EcoMais tem como grande desafio propor economia e sustentabilidade aos seus clientes, trazendo um retorno
+            lucrativo, rendível e sustentável a sua empresa, divulgando os produtos em plataformas digitais.</p>
+          <p> Você micro-empreendedor poderá cadastrar a sua empresa do ramo alimentício em nossa plataforma, poderá
+            criar panfletos e anunciar promoções, tudo digital! a plataforma e os arquitetos de software estarão
+            disponibilizando todo suporte para você aproveitar as melhores tecnologias para seus anúncios.</p>
+          <p>E nossos designers trabalharão na sua interface/layout para impulsionar os seus anúncios.</p>
+          <p>Veja outros diferenciais da equipe:</p>
+          <ul id="about-list">
+            <li><i class="fas fa-check"></i> Suporte 24h</li>
+            <li><i class="fas fa-check"></i> Layout responsivo para todos os dispositivos</li>
+            <li><i class="fas fa-check"></i> Integração com diversos sistemas do mercado</li>
+            <li><i class="fas fa-check"></i> Desenvolvimento com metodologia ágil</li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section>
+    <div class="col-12 py-4">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+          <div class="card" style="height: 305px">
+            <div class="card-header text-center">
+              <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">A plataforma Ecomais é pra você também que é consumidor!
+                Você poderá realizar um Cadastro no site, entrar para ver produtos, ser notificados de promoções perto de
+                você e muito mais!
+                Crie o seu cadastro agora mesmo!
+              </p>
+              <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-large btn-primary  center">Acesse-já</a>
+            </div>
+          </div>
+        </div>
+        <div class="w-sm-100"></div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+          <div class="card" style="height: 305px ">
+            <div class="card-header text-center">
+              <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
+            </div>
+            <div class="card-body pb-3" style="overflow: auto;">
+              <p class="card-text">
+                Panfletos, folhetos e encartes são alguns mecanismos de divulgação bastante usados quando
+                se quer atrair a atenção do público em cidades da região. De fácil manuseio, essas mídias têm custo de
+                produção geralmente baixo, mas pelo mau uso de quem os distribui e recebe pelas ruas, para muitos, eles têm
+                se tornado um sinônimo de transtorno e sujeira. Pensando nisso a equipe do EcoMais busca uma solução mais
+                sustentável quanto a isso, que é a utilização das plataformas digitais para os anúncios. Toda a empresa
+                comprometida deve buscar soluções mais sustentáveis. Por isso não perca tempo, Cadastre a sua empresa e
+                venha participar desta missão!
+              </p>
+              <a href="#" class="btn btn-primary">Acesse-já</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section >
     <div id="mainSlider" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#mainSlider" data-slide-to="0" class="activate"></li>
@@ -123,9 +128,10 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
         <span class="sr-only">Next</span>
       </a>
     </div>
-
-  <?php
-  $this->start("footer");
-    echo ComponenteElement::footerHome();
-  $this->stop()
-  ?>
+  </section>
+</div>
+<?php
+$this->start("footer");
+echo ComponenteElement::footer();
+$this->stop()
+?>
