@@ -116,9 +116,15 @@ class  Router
     /**
      * @group User
      */
-    public function indexUser()
+    public function indexUser(): void
     {
         $this->directory("User");
         echo $this->view->render("index");
+    }
+
+    public function listProduct(): void
+    {
+        $this->directory("User");
+        echo $this->view->render("listProduct");
     }
 }

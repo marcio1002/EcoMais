@@ -59,6 +59,7 @@ $router->namespace("Ecomais\Web");
  */
     $router->group("user");
     $router->get("/","Router:indexUser");
+    $router->get("/listaprodutos","Router:listProduct");
 
 /**
  * @namespace Controller

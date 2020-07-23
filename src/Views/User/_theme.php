@@ -58,6 +58,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
           "js/bootstrap",
           "js/alertify",
           "js/apis",
+          "js/manipulation"
       ]);
       
   echo "<script>

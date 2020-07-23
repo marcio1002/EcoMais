@@ -71,7 +71,7 @@ class ProductHandling {
            return $this->sql
             ->show(
                 "produto AS p INNER JOIN empresa AS e ON p.id_empresa = e.id_empresa",
-                "p.*, e.id_empresa,e.fantasia, e.cnpj,e.email,e.contato,e.cidade, e.endereco,e.uf",
+                "p.*, e.id_empresa,e.fantasia, e.cnpj,e.email,e.contato,e.cidade, e.endereco,e.uf,e.imagem",
                 "e.id_empresa = ?",
                 6
             )

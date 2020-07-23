@@ -19,7 +19,7 @@ $clearRequest = "";
 $svgCeta = "<svg class='bi bi-caret-right-fill' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/></svg>";
 
 if (!empty($code)) {
-
+    //ignore o problema o vscode não encontro o objeto mas ele existe
     if ($data = $google->getData($code)) {
         $name = "value='{$data->getName()}'";
         $email = "value='{$data->getEmail()}'";
@@ -35,7 +35,7 @@ $this->stop();
 ?>
 
 <div class="container">
-    <div class="row">
+    <div class="row py-5">
         <div class=" col-xl-6 col-lg-6  col-md-10 m-xl-0 m-lg-0 m-md-auto col-sm-12">
             <div class="card mb-3" id="formCompany">
                 <div class="card-header">

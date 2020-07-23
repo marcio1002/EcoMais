@@ -45,25 +45,20 @@ class CompanyHandling {
             switch($type) {
                 case 1:
                     $columns = "tipo_pg, cod_trans, status, carrinho_id, created";
-                    $quant = 5;
                     break;
                 case 2:
                     $columns = "tipo_pg, cod_trans, status, link_boleto,carrinho_id, created";
-                    $quant = 6;
                     break;
                 case 3:
                     $columns = "tipo_pg, cod_trans, status, link_db_online,carrinho_id, created";
-                    $quant = 6;
                     break;
             }
 
             $this->sql->open();
             return $this->sql
-            ->add("pagamento",$columns,$quant)
+            ->add("pagamento",$columns,count($emp->getAll()))
             ->prepareParam($emp->getAll())
             ->execNotRowSql();
-
-            
 
         }catch(DataException $ex){
             throw $ex;
