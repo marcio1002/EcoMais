@@ -113,6 +113,12 @@ class  Router
         echo $this->view->render("perfil");
     }
 
+    public function registerProduct(): void
+    {
+        $this->directory("Company");
+        echo $this->view->render("registerProduct");
+    }
+
     /**
      * @group User
      */

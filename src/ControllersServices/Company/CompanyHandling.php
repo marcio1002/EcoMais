@@ -128,4 +128,20 @@ class CompanyHandling {
             $this->sql->close();
         }
     }
+
+    public function userInfo(PersonLegal $emp): ?array
+    {
+        try{
+            $this->sql->open();
+            return $this->sql
+            ->show("empresa","","statusconta = true AND id_empresa = ?",3)
+            ->prepareParam([$emp->id],[PDO::PARAM_INT])
+            ->executeSql();
+
+        }catch(DataException $ex){
+            throw $ex;
+        }finally{
+            $this->sql->close();
+        }
+    }
 }

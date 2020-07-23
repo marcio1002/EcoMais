@@ -55,7 +55,7 @@ class Main
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
-                echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($param['value'])) ? $company : $user]);
+                echo json_encode(["error" => false, "status" => 200, "data" => "{'typeUser': ". (is_numeric($param['value'])) ? $company : $user. "}"]);
             } else {
                 echo json_encode(["error" => true, "status" => 404, "data" => "Not results"]);
             }
@@ -78,7 +78,6 @@ class Main
         if(empty($code) && empty($err)) header("location: $authGoogleUrl");
 
         if(!empty($code)) {
-            echo "<script> window.close(); </script>";
             $data = $google->getData($code);
             $this->usr->name = $data->getName(); // O metodo não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
@@ -99,7 +98,8 @@ class Main
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
-                if($row2) header("location: " . BASE_URL . "/");
+                if($row) header("location: " . BASE_URL . "/user");
+                if($row2) header("location: " . BASE_URL . "/empresa");
             } 
         }else {
             echo "<script> window.close(); </script>";

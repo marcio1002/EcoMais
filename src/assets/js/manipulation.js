@@ -36,6 +36,24 @@ function formatDate(string) {
    return "";
 }
 
+/**
+ * 
+ * @param {String} url 
+ */
+function getPropsUrl(url) {
+   let obj = new Object;
+   let infoUrl = new URL(url);
+   let params = infoUrl.search.replace("?","").split("&");
+
+   params.forEach(val => {
+       let array = val.split("=");
+       let prop =  array[0];
+       let value = array[1];
+       obj[prop] = value; 
+   });
+   return obj;
+}
+
 function clearInput() {
    $('input[type=text]').val("");
    $('input[type=email]').val("");

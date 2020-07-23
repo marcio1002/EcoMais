@@ -44,7 +44,7 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
             </div>
             <div class='col-12'>
                 <div class='text-center col-12'>
-                    <button type='button' class='btn btn-large btn-block btn-focus-shadow-none text-center btn-color-login text-weight-800 font-size-1-2em text-uppercase' id='btnLogar'>Entrar</button>
+                    <button type='button' class='btn btn-large btn-block remove-focus text-center btn-color-login text-weight-800 font-size-1-2em text-uppercase' id='btnLogar'>Entrar</button>
                 </div>
             </div>
             <div class='col-12 text-center pt-3'>
@@ -53,7 +53,7 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
             <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
                 <div class='text-center col-12'>
                     <div class="btn-group btn-large btn-block">
-                        <button class=" btn-color-red text-white btn btn-focus-shadow-none">
+                        <button class=" btn-color-red text-white btn remove-focus">
                             <i class='icon-google fab fa-google'></i>
                         </button>
                         <a title='Entrar com o Google' href=<?=$authGoogleUrl?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>

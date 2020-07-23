@@ -35,7 +35,8 @@ $('#btnLogar').click( function()  {
                 }
                 $(this).attr("disabled",false);
             } else {
-                // location.href = `${BASE_URL}/product/`;
+                if(res.data.userType == 11)  location.href = `${BASE_URL}/user`;
+                if(res.data.userType == 10 ) location.href = `${BASE_URL}/user`
             }
         },
         error: (er) => {
@@ -55,5 +56,5 @@ $('#btnLogar').click( function()  {
 $('#container-account-login a').click(function(e) {
     e.preventDefault();
     let conectedLogin = $('#manterConectado').is(":checked") ? 18 : 0;
-    window.open(`${$(this).attr("href")}?conectedLogin=${conectedLogin}` ,'janela','width=600, height=600, top=100, left=400, scrollbars=no, status=no, toolbar=no, location=no, menubar=no, resizable=no, fullscreen=no');
+    location.href = `${$(this).attr("href")}?conectedLogin=${conectedLogin}`;
 });

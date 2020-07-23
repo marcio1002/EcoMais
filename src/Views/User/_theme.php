@@ -4,6 +4,19 @@ require_once __DIR__ . "/../../../vendor/autoload.php";
 use Ecomais\Web\Bundles;
 use Ecomais\Controllers\ComponenteElement as componente;
 
+$sql = new Ecomais\ControllersServices\User\UserHandling();
+$user = new Ecomais\Models\Person();
+$safety = new Ecomais\Models\Safety();
+
+  // if($safety->isLogged()) {
+
+  //   $user->id = $_COOKIE['_id'];
+  //   $row = $sql->userInfo($user->id);
+
+  // } else {
+  //   header("location: " . BASE_URL . "/login");
+  // }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,7 +35,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
   <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/styleComponente.css"); ?> >
   <?= $this->section("css"); ?>
   
-  <title><?= $title ?></title>
+  <title>Ecomais | <?= $row ?? "My Webpage" ?></title>
 </head>
 
 <body>
@@ -33,9 +46,6 @@ use Ecomais\Controllers\ComponenteElement as componente;
       <a class="btn btn-primary" href="#">Sign In</a>
     </div>
   </nav>
-  <div class="progress d-none" style="height: 5px;">
-  <div id="#progress" class="progress-bar bg-success" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
 
   <section>
     <?php
@@ -65,9 +75,9 @@ use Ecomais\Controllers\ComponenteElement as componente;
           const BASE_URL = '" . BASE_URL . "';
       </script>";
       echo $this->section("scripts");
-  ?>
+?>
 
-<script>
+  <script>
         $("#btnEnv").click(function() {
           alertify.set('notifier','position', 'top-right');
           
@@ -94,7 +104,7 @@ use Ecomais\Controllers\ComponenteElement as componente;
                 reqAjax(option);
             }
         })
-    </script>
+  </script>
 
 </body>
 

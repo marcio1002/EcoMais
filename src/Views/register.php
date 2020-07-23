@@ -38,10 +38,10 @@ $this->stop();
     <div class="col-12">
       <div class='col-xl-4 col-lg-4 col-md-7 col-sm-12 m-auto'>
         <div class="btn-group btn-large btn-block">
-          <button class="btn-color-red text-white btn btn-focus-shadow-none">
+          <button class="btn-color-red text-white btn remove-focus">
             <i class='icon-google fab fa-google'></i>
           </button>
-          <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red btn-focus-shadow-none text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
+          <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red remove-focus text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
             Registrar com o Google
           </a>
         </div>

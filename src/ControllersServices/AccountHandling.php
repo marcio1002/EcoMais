@@ -26,7 +26,7 @@ class AccountHandling {
                 $person->cep,
                 $person->uf,
                 $person->locality,
-                $person->addres,
+                $person->address,
                 $person->statusAccount,
                 $person->createAt()
             );

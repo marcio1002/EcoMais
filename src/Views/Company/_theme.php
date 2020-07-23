@@ -2,9 +2,19 @@
 require_once __DIR__ . "/../../../vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
-//$safety = new Ecomais\Models\Safety();
 
-// if(!$safety->isLogged()) header("location: " . BASE_URL . "/login");
+$sql = new Ecomais\ControllersServices\Company\CompanyHandling();
+$user = new Ecomais\Models\PersonLegal();
+$safety = new Ecomais\Models\Safety();
+
+//   if($safety->isLogged()) {
+
+//     $user->id = $_COOKIE['_id'];
+//     $row = $sql->userInfo($user->id);
+
+//   } else {
+//     header("location: " . BASE_URL . "/login");
+//   }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -35,11 +45,11 @@ use Ecomais\Web\Bundles;
                     <ul class="d-flex flex-column justify-content-center align-items-center" role="tablist">
 
                         <li class="nav-item pb-2">
-                            <a class="nav-link position-relative p-0 py-xl-3" data-toggle="tab" href="#tab-content-create-chat" title="Create chat" role="tab">
+                            <a class="nav-link  nav-link position-relative p-0 py-xl-3" data-toggle="tab" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Create chat" role="tab">
                                 <i class="far fa-chart-bar"></i>
                             </a>
                         </li>
-                        <li class="nav-item pb-2">
+                        <li class="nav-item  nav-link pb-2">
                             <a href=<?= renderUrl("/empresa/perfil"); ?> class="nav-link position-relative p-0 py-xl-3" data-toggle="tab" title="Friends" role="tab">
                                 <i class="far fa-address-card"></i>
                             </a>

@@ -47,8 +47,19 @@ body{
 
 #login:active { background-color: #239c55 !important;  color: rgb(236, 236, 236) !important; }
 /* ------- */
-
-#title-container { background: rgba(68, 68, 68, 0.644) url("../imgs/casal-no-mercado.png") no-repeat; background-size: cover; background-attachment: fixed; height: 70vh; }
+#title-container {height: 100vh;}
+.content-img { 
+  position: absolute; 
+  background: rgba(68, 68, 68, 0.651) url("../imgs/casal-no-mercado.png") no-repeat; 
+  background-size: auto;
+  background-size: cover;
+  /* background-attachment: fixed; */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
 
 .h1{ font-family: 'Jost', sans-serif; margin: 0; padding-top: 20px; padding-left: 0; padding-bottom: 50px; letter-spacing: 8px;text-align: center; font-size: 75px; color: #F9F9F9; background-size: 300%;}
 
@@ -94,7 +105,7 @@ body{
   bottom:0;
   left:0;
   right:0;
-  background-color:rgba(0, 0, 0, 0.301);
+  background-color:rgba(12, 12, 12, 0.301);
 }
 
 @media (max-width:720px) { 

@@ -13,21 +13,23 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
   $this->stop();
 ?>
 
-<div class="col-12 img-fluid" id="title-container">
-  <h1 class="h1">EcoMais</h1>
+<div class="col-12 position-relative" id="title-container">
+  <div class="overlay content-img after-color"></div>
+  <div class="col-12 ">
+    <div class="col-12 py-xl-5 py-lg-5 text-right">
+      <h3 class="main-title text-white">Bem Vindo Ao EcoMais</h3>
+      <h4 class="h5 text-warning">Uma Organização que pensa no futuro do seu dinheiro</h4>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-sm-12 py-xl-5 py-lg-3">
+      <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
+    </div>
+  </div>
 </div>
 <div id="about-area">
   <section>
-    <div class="container p-3">
+    <div class="container py-5">
       <div class="row col-12">
-        <div class="col-12">
-          <h3 class="main-title">Bem Vindo Ao EcoMais</h3>
-        </div>
-        <div class="col-md-6 ">
-          <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
-        </div>
-        <div class="col-md-6">
-          <h3 class="about-title">Uma Organização que pensa no futuro e saúde do planeta</h3>
+        <div class="col-xl-6 col-lg-6 col-sm-12">
           <p>O EcoMais tem como grande desafio propor economia e sustentabilidade aos seus clientes, trazendo um retorno
             lucrativo, rendível e sustentável a sua empresa, divulgando os produtos em plataformas digitais.</p>
           <p> Você micro-empreendedor poderá cadastrar a sua empresa do ramo alimentício em nossa plataforma, poderá
@@ -35,6 +37,8 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
             disponibilizando todo suporte para você aproveitar as melhores tecnologias para seus anúncios.</p>
           <p>E nossos designers trabalharão na sua interface/layout para impulsionar os seus anúncios.</p>
           <p>Veja outros diferenciais da equipe:</p>
+        </div>
+         <div class="col-xl-6 col-lg-6 col-sm-12 py-sm-2">
           <ul id="about-list">
             <li><i class="fas fa-check"></i> Suporte 24h</li>
             <li><i class="fas fa-check"></i> Layout responsivo para todos os dispositivos</li>
@@ -46,7 +50,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
     </div>
   </section>
   <section>
-    <div class="col-12 py-4">
+    <div class="col-12 py-5">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
           <div class="card" style="height: 305px">
@@ -86,7 +90,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
       </div>
     </div>
   </section>
-  <section >
+  <section>
     <div id="mainSlider" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#mainSlider" data-slide-to="0" class="activate"></li>
