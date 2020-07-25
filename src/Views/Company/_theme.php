@@ -62,18 +62,18 @@ $safety = new Ecomais\Models\Safety();
         </header>
         <header class="d-block d-xl-none d-lg-none">
             <nav class="nav nav-pills nav-fill fixed-bottom bg-white">
-                <a class="nav-item  nav-link py-4" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
+                <a class="nav-item  nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
                     <i class="far fa-chart-bar"></i>
                 </a>
 
-                <a class="nav-item nav-link py-4" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
+                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
                     <i class="far fa-edit"></i>
                 </a>
 
-                <a class="nav-item nav-link py-4" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
+                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
                     <i class="far fa-address-card"></i>
                 </a>
-                <a class="nav-item nav-link py-4" href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
+                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
                     <i class="fas fa-cog"></i>
                 </a>
             </nav>

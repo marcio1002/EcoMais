@@ -5,7 +5,7 @@ $comp = new Ecomais\Controllers\Company\AccountManagerCompany();
 
 $this->layout("_theme", ["title" => "Empresa"]);
 
-if ($row = $comp->listenInfoCompany(1)) {
+if ($row = $comp->listenInfoCompany(0)) {
   switch($row['pacote']) {      
     case "10":
       $package = "<option value='10' selected>Sacolinha</option>";

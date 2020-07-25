@@ -58,7 +58,7 @@ $this->layout("_theme", ["title" => "Empresa"]);
               <option value="3">Produtos de limpeza</option>
             </select>
           </div>
-          <div class="form-group py-4">
+          <div class="form-group py-5">
             <button type="button" id="registerProduct" class="btn btn-success my-2 my-sm-3 float-right">Cadastrar</button>
           </div>
         </form>
