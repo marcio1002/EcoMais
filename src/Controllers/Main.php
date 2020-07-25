@@ -29,7 +29,9 @@ class Main
     public function login(array $param): void
     {
         try {
-            $param['value'] = preg_replace("/\D/","",$param['value']);
+            if(preg_match("/\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}/",$param['value'])) {
+                $param['value'] = preg_replace("/\D/","",$param['value']);
+            }
             $this->usr->email = $param['value'];
             $this->usr->passwd = $param['passwd'];
             $company = 10;
@@ -55,7 +57,7 @@ class Main
                 setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
                 setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
 
-                echo json_encode(["error" => false, "status" => 200, "data" => "{'typeUser': ". (is_numeric($param['value'])) ? $company : $user. "}"]);
+                echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($param['value'])) ? $company : $user ]);
             } else {
                 echo json_encode(["error" => true, "status" => 404, "data" => "Not results"]);
             }

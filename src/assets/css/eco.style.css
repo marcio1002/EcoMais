@@ -79,13 +79,15 @@
 .top-25 { bottom: 25%; }
 
 .left-25 { left: 25%; }
-
+.w-10 { max-width: 100px; width: 100%; }
 .right-25 { right: 25% }
 
 
 /* --- outros --- */
 
 .pointer {cursor: pointer;}
+
+.z-index-1000 {z-index: 5000;}
 
 
 

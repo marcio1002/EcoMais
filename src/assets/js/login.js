@@ -35,8 +35,9 @@ $('#btnLogar').click( function()  {
                 }
                 $(this).attr("disabled",false);
             } else {
-                if(res.data.userType == 11)  location.href = `${BASE_URL}/user`;
-                if(res.data.userType == 10 ) location.href = `${BASE_URL}/user`
+                console.info(res.data)
+                if(res.data == 11)  location.href = `${BASE_URL}/user`;
+                if(res.data == 10 ) location.href = `${BASE_URL}/empresa`
             }
         },
         error: (er) => {

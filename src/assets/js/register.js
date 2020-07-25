@@ -61,7 +61,7 @@ $("#searchCep").on("click", async function () {
         const res = await searchCep($("#inputCep").val())
         if (res !== null) {
             $("#uf").val(res.uf);
-            $("#inputAddres").val(`${res.bairro}, ${res.logradouro}`);
+            $("#address").val(`${res.bairro}, ${res.logradouro}`);
             $("#locality").val(res.localidade);
         } else {
            return alertify.error("Não foi possível buscar o cep informado!")
@@ -109,6 +109,7 @@ $('#btnRegister').click(function() {
         success: (res) => {
             if (!res.error) {
                 alertify.success('Cadastro realizado com sucesso');
+                clearForm();
             } else {
                 if (res.status == 0) alertify.error("Preencha todos os campos!");
                 if (res, status != 0) alertify.error("Não foi possível fazer o cadastro");

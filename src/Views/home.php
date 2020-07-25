@@ -16,12 +16,12 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
 <div class="col-12 position-relative" id="title-container">
   <div class="overlay content-img after-color"></div>
   <div class="col-12 ">
-    <div class="col-12 py-xl-5 py-lg-5 text-right">
+    <div class="col-12 py-xl-5 py-lg-5 text-xl-right text-lg-right text-center">
       <h3 class="main-title text-white">Bem Vindo Ao EcoMais</h3>
       <h4 class="h5 text-warning">Uma Organização que pensa no futuro do seu dinheiro</h4>
     </div>
     <div class="col-xl-6 col-lg-6 col-sm-12 py-xl-5 py-lg-3">
-      <img class="img-fluid mb-md-3" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
+      <img class="img-fluid" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
     </div>
   </div>
 </div>

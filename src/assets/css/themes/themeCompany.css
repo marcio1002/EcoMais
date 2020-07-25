@@ -2,20 +2,12 @@ body,html {
     padding: 0;
     margin: 0;
 }
-/* --- Tags ---*/
-
-.w-10 { max-width: 100px; width: 100%; }
 
 /* --- Menu navegação ---*/s
 .layote-navbar,.navigation  { width: 81px; height: 100vh; }
 
 .layote-navbar { border-right: 1px solid #ffe65b; }
 .navbar-nav { height: 80%; }
-
-.layote-navbar i:hover {
-    color: #ffe65b;
-}
-
 
 /* --- Conteúdo da página ---*/
 main,.container-header { max-width: 100%; width: 100%; }
@@ -25,3 +17,9 @@ main,.container-header { max-width: 100%; width: 100%; }
 
 
 /* --- Medias para diversos tamanho de devices --- */
+
+
+@media (max-width:720px) { 
+    
+    
+}

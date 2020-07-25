@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "/../../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Ecomais\Controllers\ComponenteElement;
 use Ecomais\Web\Bundles;
@@ -36,6 +36,54 @@ $this->stop();
 
 <div class="container">
     <div class="row py-5">
+        <div class=" col-xl-6 col-lg-6 col-md-10 m-xl-0 m-lg-0 m-md-auto col-sm-12">
+            <div class="dropdown">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2 class="text-center h3">Aumente suas vendas com o EcoMais</h2>
+                    </div>
+                    <div class="card-body ">
+                        <div id="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-4">Planos!</h1>
+                                <p class="lead"> Escolha o pacote que mais se adequá ao seus objetivos.</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
+                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
+                                        <img src=<?= renderUrl("/src/assets/imgs/sacolinha.png") ?> alt="sacolinha de compras com um desenho de carrinho" class="float-left border rounded img-fluid img-thumbnail" />
+                                    </div>
+                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano sacolinha! </h3>
+                                    <p class="text-green-dark text-weight-600">R$10:99 mês</p>
+                                    <p class="small">2 promoções por semana com 10 itens cadastrados em cada.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
+                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
+                                        <img src=<?= renderUrl("/src/assets/imgs/cestinha.png ") ?> class="float-left border rounded img-fluid img-thumbnail" alt="Cestinha de compras" />
+                                    </div>
+                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano cestinha!</h3>
+                                    <p class="text-green-dark text-weight-600">R$29:99 mês</p>
+                                    <p class="small">3 promoções por semana com 20 itens cadastrados em cada.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
+                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
+                                        <img src=<?= renderUrl("/src/assets/imgs/carrinho.png") ?> alt="Carrinho de compras" class="float-left border rounded img-fluid img-thumbnail" />
+                                    </div>
+                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano carrinho!</h3>
+                                    <p class="text-green-dark text-weight-600">R$39:99 mês</p>
+                                    <p class="small">5 promoçoes por semana com 30 itens cadastrados em cada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class=" col-xl-6 col-lg-6  col-md-10 m-xl-0 m-lg-0 m-md-auto col-sm-12">
             <div class="card mb-3" id="formCompany">
                 <div class="card-header">
@@ -82,7 +130,7 @@ $this->stop();
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
                         <label for="contato"><span class='required'>*</span> <b>Telefone de contato</b></label>
-                        <input type="text" id="contato"  class="form-control nextItem" placeholder="Fixo ou celular" data-required="">
+                        <input type="text" id="contato" class="form-control nextItem" placeholder="Fixo ou celular" data-required="">
                     </div>
                     <div class="form-group col-12">
                         <?= $svgCeta ?>
@@ -147,7 +195,7 @@ $this->stop();
                             <option value="30">Carrinho</option>
                         </select>
                     </div>
-                    
+
                     <p>
                         <div class="form-check">
                             <?= $svgCeta ?>
@@ -177,57 +225,7 @@ $this->stop();
                 </div>
             </div>
         </div>
-        <div class=" col-xl-6 col-lg-6 col-md-10 m-xl-0 m-lg-0 m-md-auto col-sm-12">
-            <div class="dropdown">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h2 class="text-center h3">Aumente suas vendas com o EcoMais</h2>
-                    </div>
-                    <div class="card-body ">
-                        <fieldset>
-                            <img src=<?= renderUrl("/src/assets/imgs/aumente_vendas.png") ?> alt="aumente_vendas" class="img-thumbnail mb-3">
-                        </fieldset>
-                        <div id="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h1 class="display-4">Planos!</h1>
-                                <p class="lead"> Escolha o pacote que mais se adequá ao seus objetivos.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
-                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
-                                        <img src=<?= renderUrl("/src/assets/imgs/sacolinha.png") ?> alt="sacolinha de compras com um desenho de carrinho" class="float-left border rounded img-fluid img-thumbnail" />
-                                    </div>
-                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano sacolinha! </h3>
-                                    <p class="text-green-dark text-weight-600">R$10:99 mês</p>
-                                    <p class="small">2 promoções por semana com 10 itens cadastrados em cada.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
-                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
-                                        <img src=<?= renderUrl("/src/assets/imgs/cestinha.png ") ?> class="float-left border rounded img-fluid img-thumbnail" alt="Cestinha de compras" />
-                                    </div>
-                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano cestinha!</h3>
-                                    <p class="text-green-dark text-weight-600">R$29:99 mês</p>
-                                    <p class="small">3 promoções por semana com 20 itens cadastrados em cada.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 mt-xl-2 mt-lg-2 m-md-0">
-                                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12 float-left">
-                                        <img src=<?= renderUrl("/src/assets/imgs/carrinho.png") ?> alt="Carrinho de compras" class="float-left border rounded img-fluid img-thumbnail" />
-                                    </div>
-                                    <h3 class="font-weight-bold text-xl-left text-lg-left  text-md-center text-sm-center text-uppercase h6">Plano carrinho!</h3>
-                                    <p class="text-green-dark text-weight-600">R$39:99 mês</p>
-                                    <p class="small">5 promoçoes por semana com 30 itens cadastrados em cada.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
     </div>
     <div class="modal fade bg-dark-transparent" id="modalPagamento" tabindex="-1" role="Pagamento" aria-labelledby="Pagamento" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -239,9 +237,9 @@ $this->stop();
                     <form name="formPagamento" action="" id="formPagamento">
                         <input type="hidden" name="paymentMethod" id="paymentMethod" value="creditCard">
 
-                        <input type="hidden" name="receiverEmail" id="receiverEmail" value=<?= $pag->pagInfo["EMAIL_LOJA"]?> >
+                        <input type="hidden" name="receiverEmail" id="receiverEmail" value=<?= $pag->pagInfo["EMAIL_LOJA"] ?>>
 
-                        <input type="hidden" name="currency" id="currency" value=<?=  $pag->pagInfo["MOEDA_PAGAMENTO"]; ?> >
+                        <input type="hidden" name="currency" id="currency" value=<?= $pag->pagInfo["MOEDA_PAGAMENTO"]; ?>>
 
                         <input type="hidden" name="extraAmount" id="extraAmount" value="0.00">
 
@@ -253,13 +251,13 @@ $this->stop();
 
                         <input type="hidden" name="itemQuantity1" id="itemQuantity1" value="1">
 
-                        <input type="hidden" name="notificationURL" id="notificationURL" value=<?= $pag->pagInfo["URL_NOTIFICACAO"] ?> >
+                        <input type="hidden" name="notificationURL" id="notificationURL" value=<?= $pag->pagInfo["URL_NOTIFICACAO"] ?>>
 
                         <input type="hidden" name="reference" id="reference" value="1001">
-                        
+
                         <label>Número do cartão</label><br>
                         <input type="text" name="numCartao" id="numCartao" data-required=""><br>
-                        
+
 
                         <label>CVV do cartão</label><br>
                         <input type="text" name="cvvCartao" id="cvvCartao" maxlength="3" data-required=""><br>
@@ -270,50 +268,50 @@ $this->stop();
                         <input type="text" name="mesValidade" id="mesValidade" maxlength="2" data-required=""><br>
 
                         <label>Ano de Validade</label><br>
-                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" data-required=""><br> 
+                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" data-required=""><br>
 
-                        <input type="hidden" name="qntParcelas" id="qntParcelas" class="select-qnt-parcelas"> 
-                            
-                        
+                        <input type="hidden" name="qntParcelas" id="qntParcelas" class="select-qnt-parcelas">
+
+
                         <input type="hidden" name="valorParcelas" id="valorParcelas">
 
                         <label>CPF do dono do Cartão</label><br>
                         <input type="text" name="creditCardHolderCPF" id="creditCardHolderCPF" placeholder="CPF sem traço" data-required=""> <br>
 
                         <label>Nome no Cartão</label><br>
-                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" data-required=""> 
+                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" data-required="">
 
                         <input type="hidden" name="tokenCartao" id="tokenCartao">
                         <input type="hidden" name="hashCartao" id="hashCartao">
 
-                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" data-required=""> 
-                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" data-required=""> 
-                        <input type="hidden" value="1 andar" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento"> 
-                        <input type="hidden" value="Jardim Paulistano" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro"> 
-                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" data-required=""> 
-                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" data-required=""> 
-                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" data-required=""> 
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" data-required="">
+                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" data-required="">
+                        <input type="hidden" value="1 andar" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento">
+                        <input type="hidden" value="Jardim Paulistano" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro">
+                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" data-required="">
+                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" data-required="">
+                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" data-required="">
                         <input type="hidden" value="BRA" name="billingAddressCountry" id="billingAddressCountry" value="BRL">
 
-                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" data-required=""> 
-                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" data-required=""> 
-                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" data-required=""> 
+                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" data-required="">
+                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" data-required="">
+                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" data-required="">
                         <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD" data-required="">
-                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" data-required=""> 
-                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" data-required=""> 
+                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" data-required="">
+                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" data-required="">
                         <input type="hidden" name="shippingAddressRequired" id="shippingAddressRequired" value="true">
-                        <input type="hidden" value="Av. Brig. Faria Lima" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua"> 
-                        <input type="hidden" value="1384" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número"> 
-                        <input type="hidden" value="5o anda" name="shippingAddressComplement" id="shippingAddressComplement" placeholder="Complemento"> 
-                        <input type="hidden" value="Jardim Paulistano" name="shippingAddressDistrict" id="shippingAddressDistrict" placeholder="Bairro"> 
-                        <input type="hidden" value="01452002" name="shippingAddressPostalCode" id="shippingAddressPostalCode" placeholder="CEP sem traço"> 
-                        <input type="hidden" value="Sao Paulo" name="shippingAddressCity" id="shippingAddressCity" placeholder="Cidade"> 
-                        <input type="hidden" value="SP" name="shippingAddressState" id="shippingAddressState" placeholder="Sigla do Estado"> 
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua">
+                        <input type="hidden" value="1384" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número">
+                        <input type="hidden" value="5o anda" name="shippingAddressComplement" id="shippingAddressComplement" placeholder="Complemento">
+                        <input type="hidden" value="Jardim Paulistano" name="shippingAddressDistrict" id="shippingAddressDistrict" placeholder="Bairro">
+                        <input type="hidden" value="01452002" name="shippingAddressPostalCode" id="shippingAddressPostalCode" placeholder="CEP sem traço">
+                        <input type="hidden" value="Sao Paulo" name="shippingAddressCity" id="shippingAddressCity" placeholder="Cidade">
+                        <input type="hidden" value="SP" name="shippingAddressState" id="shippingAddressState" placeholder="Sigla do Estado">
                         <input type="hidden" value="BRA" name="shippingAddressCountry" id="shippingAddressCountry" value="BRL">
-                        
+
                         <input type="hidden" name="shippingType" value="3">
-                        <input type="hidden" value="1.00" name="shippingCost" id="shippingCost" placeholder="Preço do frete. Ex: 2.10">      
-                        
+                        <input type="hidden" value="1.00" name="shippingCost" id="shippingCost" placeholder="Preço do frete. Ex: 2.10">
+
                     </form>
 
                 </div>
@@ -329,7 +327,7 @@ $this->stop();
 
 <?php
 $this->start("footer");
-    echo ComponenteElement::footer();
+echo ComponenteElement::footer();
 $this->stop();
 
 $this->start("scripts");

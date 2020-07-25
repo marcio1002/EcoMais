@@ -22,6 +22,14 @@ function validaForm(elem = "") {
    return forError;
 }
 
+function clearForm() {
+   $('input[type=text]').val("");
+   $('input[type=email]').val("");
+   $('input[type=password]').val("");
+   $('input[type=tel]').val("");
+
+}
+
 function formatDateTime(string) {
    let datetime = string.split(" ");
    let format = datetime[0].split("-");
@@ -54,13 +62,7 @@ function getPropsUrl(url) {
    return obj;
 }
 
-function clearInput() {
-   $('input[type=text]').val("");
-   $('input[type=email]').val("");
-   $('input[type=password]').val("");
-   $('input[type=tel]').val("");
 
-}
 
 function isValidEmail(email) {
 
