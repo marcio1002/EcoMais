@@ -1,3 +1,3 @@
 <?php
-    $this->layout("_theme", ["title" => "Empresa"]);
+    $this->layout("_theme",  ["subtitle" => "Principal"]);
 ?>

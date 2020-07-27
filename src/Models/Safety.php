@@ -2,6 +2,7 @@
 namespace Ecomais\Models;
 
 use Ecomais\Models\DataException;
+use Ecomais\Services\Data;
 
 class Safety
 {
@@ -9,6 +10,12 @@ class Safety
     private string $passwd;
     private string $imageName;
     private string $key;
+    private Data $sql;
+
+    public function __construct() 
+    {
+        $this->sql = new Data();
+    }
 
     /**
      * Criptografia Bcrypt
@@ -76,24 +83,25 @@ class Safety
     /**
      * Verifica se o usuário está logado
      */
-    public function isLogged():bool
+    public function isLogged($table):bool
     {
-            if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-                $this->sql->open();
-                $row = $this->sql
-                        ->show("usuarios","","id_usuario = ?",3)
-                        ->prepareParam([$_COOKIE['_id']])
-                        ->executeSql();
-                $this->sql->close();
+        if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
+            $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+            $id = (strcasecmp($table,"empresa") === 0) ? "id_empresa" : "id_usuario";
+            $this->sql->open();
+            $row = $this->sql
+                    ->show($table,"","$id = ?",3)
+                    ->prepareParam([$_COOKIE['_id']])
+                    ->executeSql();
+            $this->sql->close();
 
-                if (!empty($row)) {
-                    $id = $row["id_usuario"];
-                    if(strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;
-                }
+            if (!empty($row)) {
+                $id = $row[$id];
+                if(strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;
+            }
 
-            } 
-            return false;
+        } 
+        return false;
     }
 
 }

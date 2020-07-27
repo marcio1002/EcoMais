@@ -7,14 +7,12 @@ $sql = new Ecomais\ControllersServices\Company\CompanyHandling();
 $user = new Ecomais\Models\PersonLegal();
 $safety = new Ecomais\Models\Safety();
 
-//   if($safety->isLogged()) {
-
-//     $user->id = $_COOKIE['_id'];
-//     $row = $sql->userInfo($user->id);
-
-//   } else {
-//     header("location: " . BASE_URL . "/login");
-//   }
+if ($safety->isLogged("empresa")) {
+    $user->id = $_COOKIE['_id'];
+    $row = $sql->userInfo($user);
+} else {
+    header("location: " . BASE_URL . "/login");
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,33 +26,33 @@ $safety = new Ecomais\Models\Safety();
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style", "css/manipulation"]); ?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/themeCompany.css"); ?>>
     <?= $this->section("css"); ?>
-    <title><?= $title; ?></title>
+    <title><?= $row['fantasia'] ?></title>
 </head>
 
 <body>
-    <div class="d-xl-flex d-lg-flex w-12">
+    <div class="d-xl-flex d-lg-flex w-12 bg-secondary">
         <!-- Menu -->
         <header class="h-auto navigation d-none d-lg-block d-xl-block">
-            <nav class="nav flex-column layote-navbar navigation navbar bg-light position-fixed z-index-1000">
+            <nav class="nav flex-column layote-navbar align-content-center navigation navbar bg-light position-fixed z-index-1000">
                 <div class="">
                     <!-- Logo -->
                     <img src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo-medium.png") ?> alt="logo Ecomais" class="img-fluid">
                 </div>
                 <div class="py-5">
-                    <a class="nav-link  nav-link py-4" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
+                    <a class="nav-link text-red-wine text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
                         <i class="far fa-chart-bar"></i>
                     </a>
 
-                    <a class="nav-link py-4" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
+                    <a class="nav-link text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
                         <i class="far fa-edit"></i>
                     </a>
 
-                    <a class="nav-link py-4" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
+                    <a class="nav-link text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
                         <i class="far fa-address-card"></i>
                     </a>
                 </div>
                 <div>
-                    <a class="nav-link" href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
+                    <a class="nav-link text-red-wine py-2 px-2 font-size-1-4em " href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
                         <i class="fas fa-cog"></i>
                     </a>
                 </div>
@@ -85,18 +83,18 @@ $safety = new Ecomais\Models\Safety();
             ?>
                 <? else: ?>
                 <div class="h-auto d-flex flex-column container-header">
-                    <div class="layote-header h-auto py-2 py-xl-4 py-lg-4 py-md-3  text-white sticky-top d-flex flex-row justify-content-between">
+                    <div class="layote-header h-auto py-2 py-xl-3 py-lg-3 py-md-3  text-white sticky-top d-flex flex-row justify-content-between">
                         <div class="col-3"></div>
                         <div class="header-title text-center col-6">
-                            <h5>col 2 Title</h5>
+                            <h5 class="font-weight-bold"><?= $subtitle; ?></h5>
                         </div>
                         <div class="col-3">
-                            <i class="fas fa-sign-out-alt align-item-end"></i>
+                            <button id="logoff" class="btn bg-transparent float-right py-2 remove-focus" title="Sair"><i class="fas fa-sign-out-alt text-white"></i></button>
                         </div>
                     </div>
-                    <div class="content">
+                    <div class="content h-auto">
                         <?= $this->section("content"); ?>
-                        <div class="bg-transparent" style="height: 7vh;"></div>
+                        <div class="" style="height: 7vh;"></div>
                     </div>
                 </div>
             <?php endif; ?>
@@ -120,5 +118,24 @@ $safety = new Ecomais\Models\Safety();
     </script>";
     ?>
 </body>
+<script>
+    $("#logoff").click(function() {
+        let option = {
+            method: 'GET',
+            mycustomtype: "application/json charset=utf-8",
+            url: `${BASE_URL}/manager/logoff`,
+            dataType: "json",
+            success: (res) => {
+                if (!res.error) {
+                    location.href = `${BASE_URL}/login`
+                }
+            },
+            error: (e) => {
+                alertify.error("Ocorreu um erro no servidor!");
+            }
+        };
+        reqAjax(option);
+    });
+</script>
 
 </html>

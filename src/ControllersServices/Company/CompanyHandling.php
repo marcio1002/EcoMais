@@ -134,9 +134,9 @@ class CompanyHandling {
         try{
             $this->sql->open();
             return $this->sql
-            ->show("empresa","","statusconta = true AND id_empresa = ?",3)
-            ->prepareParam([$emp->id],[PDO::PARAM_INT])
-            ->executeSql();
+                ->show("empresa","","statusconta = true AND id_empresa = ?",3)
+                ->prepareParam([$emp->id],[PDO::PARAM_INT])
+                ->executeSql();
 
         }catch(DataException $ex){
             throw $ex;

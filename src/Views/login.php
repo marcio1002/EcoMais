@@ -3,9 +3,21 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
 
+$sql = new Ecomais\ControllersServices\Company\CompanyHandling();
+$user = new Ecomais\Models\PersonLegal();
+$safety = new Ecomais\Models\Safety();
+
+$row = $safety->isLogged("usuario");
+$row2 = $safety->isLogged("empresa");
+
+if($row) header("location: " . BASE_URL . "/usuario");
+if($row2) header("location: " . BASE_URL . "/empresa");
+
+
 $register = renderUrl("/cadastro");
 $urlRecoverPasswd = renderUrl("/recuperarsenha");
 $authGoogleUrl = renderUrl("/manager/logingoogle");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

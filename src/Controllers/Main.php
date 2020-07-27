@@ -24,7 +24,7 @@ class Main
     }
 
     /**
-     * login server para os dois tipos de usuario empresa/usuario
+     * login server para os dois tipos de usuário empresa/usuário
      */
     public function login(array $param): void
     {
@@ -45,17 +45,16 @@ class Main
 
                 $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
 
-                $this->usr->id = $row['id_usuario'];
+                $this->usr->id = $row[is_numeric($param['value']) ? "id_empresa" : "id_usuario"];
 
                 $this->sql->verifyUpdateHash($row['senha'],$this->usr);
 
-                session_name($token);
                 session_id(hash("whirlpool",uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start(true);
 
-                setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
-                setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
+                setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
+                setcookie('_token', $token, $expire, '/', "", false, true);
 
                 echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($param['value'])) ? $company : $user ]);
             } else {
@@ -97,8 +96,8 @@ class Main
 
                 if (session_status() == PHP_SESSION_DISABLED) session_start(true);
 
-                setcookie('_id', $this->usr->id, $expire, '/', BASE_URL, false, true);
-                setcookie('_token', $token, $expire, '/', BASE_URL, false, true);
+                setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
+                setcookie('_token', $token, $expire, '/', "", false, true);
 
                 if($row) header("location: " . BASE_URL . "/user");
                 if($row2) header("location: " . BASE_URL . "/empresa");
@@ -117,10 +116,9 @@ class Main
             setcookie('_id', "", 0, "/");
             setcookie('_token', "", 0, "/");
 
-            header("location:" . BASE_URL);
+            echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
         } else {
-
-            header("location: " . BASE_URL);
+            echo json_encode(["error" => true, "status" => 404, "msg" => "Not results"]);
         }
         if (session_status() == PHP_SESSION_ACTIVE) session_destroy();
     }

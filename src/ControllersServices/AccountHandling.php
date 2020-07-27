@@ -78,11 +78,12 @@ class AccountHandling {
     {
         try {
              $table = ($typeUser == 10) ? "empresa" : "usuario";
+             $where = ($typeUser == 10) ? "cnpj = ?" : "email = ?";
 
             $this->sql->open();
 
             return $this->sql
-                ->show($table,"","email = ?",3)
+                ->show($table,"",$where,3)
                 ->prepareParam([$person->email])
                 ->executeSql();
         }
@@ -104,7 +105,7 @@ class AccountHandling {
             $this->sql->open();
 
             return $this->sql
-                ->show($table,"","${columnName} = ? AND email = ?",3)
+                ->show($table,"","$columnName = ? AND email = ?",3)
                 ->prepareParam($where)
                 ->executeSql();
 

@@ -17,7 +17,7 @@ $("#contato").on("keypress",function(evt){
 });
 
 $("#contato").mask(maskContact,optionsMask);
-$("#cnpj").mask("00.000.000/0000-30",{placeholder: "__.____.___/____-__", clearIfNotMatch: true });
+$("#cnpj").mask("00.000.000/0000-00",{placeholder: "__.____.___/____-__", clearIfNotMatch: true });
 $("#inputCep").mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true });
 $("#mesValidade").mask("00",{placeholder:"__", clearIfNotMatch: true});
 $("#anoValidade").mask("0000",{placeholder:"____", clearIfNotMatch: true});
@@ -107,6 +107,7 @@ $("#btnRegisterCompany").click(function() {
 
 
 $('#btnComprar').click(function(e) {
+    $("input,select").removeClass("formError");
     if (validaForm("#modalPagamento")) return alertify.error("Preencha os campos em vermelho!");
     if(!pagamento()) return e.preventDefault();
 
@@ -140,6 +141,7 @@ $('#btnComprar').click(function(e) {
                 $("#modalPagamento").modal('hide');
                 $("#modalPagamento input,select").val("");
                 alertify.success('Cadastro realizado com sucesso');
+                clearForm();
             } else {
                 if (res.status == 0) alertify.error("Preencha todos os campos!");
                 if (res, status != 0) alertify.error("Não foi possível fazer o cadastro");

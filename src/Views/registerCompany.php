@@ -284,21 +284,21 @@ $this->stop();
                         <input type="hidden" name="tokenCartao" id="tokenCartao">
                         <input type="hidden" name="hashCartao" id="hashCartao">
 
-                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" data-required="">
-                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" data-required="">
+                        <input type="hidden" value="Av. Brig. Faria Lima" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua">
+                        <input type="hidden" value="1384" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número">
                         <input type="hidden" value="1 andar" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento">
                         <input type="hidden" value="Jardim Paulistano" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro">
-                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" data-required="">
-                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" data-required="">
-                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" data-required="">
+                        <input type="hidden" value="01452002" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço">
+                        <input type="hidden" value="Sao Paulo" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade">
+                        <input type="hidden" value="SP" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado">
                         <input type="hidden" value="BRA" name="billingAddressCountry" id="billingAddressCountry" value="BRL">
 
-                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo" data-required="">
-                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912" data-required="">
-                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço" data-required="">
-                        <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD" data-required="">
-                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número" data-required="">
-                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" data-required="">
+                        <input type="hidden" value="Jose Comprador" name="senderName" id="senderName" placeholder="Nome completo">
+                        <input type="hidden" value="27/10/1987" name="creditCardHolderBirthDate" id="creditCardHolderBirthDate" placeholder="Data de Nascimento. Ex: 12/12/1912">
+                        <input type="hidden" value="22111944785" name="senderCPF" id="senderCPF" placeholder="CPF sem traço">
+                        <input type="hidden" value="11" name="senderAreaCode" id="senderAreaCode" placeholder="DDD">
+                        <input type="hidden" value="56273440" name="senderPhone" id="senderPhone" placeholder="Somente número">
+                        <input type="hidden" value="comprador@sandbox.pagseguro.com.br" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador">
                         <input type="hidden" name="shippingAddressRequired" id="shippingAddressRequired" value="true">
                         <input type="hidden" value="Av. Brig. Faria Lima" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua">
                         <input type="hidden" value="1384" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número">
