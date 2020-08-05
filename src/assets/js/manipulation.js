@@ -3,7 +3,7 @@
  * @param {String} elem 
  * Elementos pai
  */
-function validaForm(elem = "") {
+let validaForm = (elem = "") => {
    var forError = false;
 
    $(`${elem} [data-required]`).each(function () {
@@ -22,6 +22,16 @@ function validaForm(elem = "") {
    return forError;
 }
 
+/**
+ * 
+ * @param {Event} event 
+ * Um parâmetro de eventos do teclado
+ */
+let isNumber = (event) => {
+   if(typeof  event != "object" || !event) throw new ErrorEvent("Variable is not a type of keyboard event or is undefined");
+   return (!isNaN(Number(event.key))) ?  true : false;
+};
+
 function clearForm() {
    $('input[type=text]').val("");
    $('input[type=email]').val("");
@@ -29,8 +39,6 @@ function clearForm() {
    $('input[type=tel]').val("");
 
 }
-
-
 
 const datetime = {
    formatDateTime(string) {

@@ -5,8 +5,10 @@ $(function () {
 
   $("#price").keypress(function (e) {
     if ($(this).val().length > 10) return false;
-    if (isNaN(Number(e.key)) && e.key != ",") return false;
+    if (!isNumber(e) && e.key != ",") return false;
   });
+
+  $("#quantity").keypress(e => ((!isNumber(e)) ?  false : ''));
 
 
   $("#formProduct").on("submit", function (e) {

@@ -2,13 +2,39 @@
 
 namespace Ecomais\Controllers\Company;
 
+use CoffeeCode\Uploader\Send;
 use Ecomais\Models\{DataException, Safety, PersonLegal};
 use Ecomais\ControllersServices\Company\CompanyHandling;
 
 class AccountManagerCompany
 {
+    private static $type = array(
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "image/wbmp",
+        "image/gif",
+        "image/tiff",
+        "image/psd",
+        "image/jpc",
+        "image/jp2",
+        "image/jpx",
+    );
+    private static $extension = array (
+        "jpg",
+        "jpeg",
+        "png",
+        "wbmp",
+        "gif",
+        "tiff",
+        "psd",
+        "jpc",
+        "jp2",
+        "jpx",
+    );
     private CompanyHandling $handling;
     private PersonLegal $emp;
+    private Safety $safety;
 
     public function __construct()
     {
@@ -48,7 +74,7 @@ class AccountManagerCompany
     {
         try {
             if ($row = $this->handling->listenCompanyPro())
-                echo json_encode(["error" => false, "status" => 200, "data" => $row]);
+                echo json_encode(["error" => false, "status" => 200, "data" => empty($row[0]) ? [$row] : $row]);
             else
                 echo json_encode(["error" => true, "status" => 404, "msg" => "Not results"]);
         } catch (DataException $ex) {
@@ -80,14 +106,12 @@ class AccountManagerCompany
         }
     }
 
-    public function updateCompany($param): void
+    public function updateInfoCompany($param): void
     {
         try{
+            foreach($param as $k => $v) $this->emp->$k = $v;
 
-            $this->emp->id = filter_var($param['id'],FILTER_FLAG_EMPTY_STRING_NULL);
-            $this->emp->typePackage = filter_var($param['id'],FILTER_FLAG_EMPTY_STRING_NULL);
-
-            if ($this->handling->updateCompany($this->emp)) {
+            if ($this->handling->updateInfoCompany($this->emp)) {
                 echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "msg" => "Ok"]);
             } else {
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Not Imprements"]);
@@ -97,4 +121,43 @@ class AccountManagerCompany
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
         }
     }
+
+    public function updateImageCompany($param): void
+    {
+        try{
+            $upload = new Send("src/uploads","imageCompany",self::$type,self::$extension,false);
+            
+            if(isset($_FILES["image"]) && $upload::isAllowed()) {
+
+                $bitType = array("bytes","KB","MB","GB");
+                $bytes = filesize($_FILES["image"]['tmp_name']);
+                $factor = floor(log($bytes) / log(1024));
+                $maxFileSize = 17000000;
+
+                if($bytes >= $maxFileSize && $bitType[$factor] == $bitType[2]) die(json_encode(["error" => true, "status" => DataException::NOT_IMPLEMENTED, "msg" => "Not Implements"]));
+
+                $newFileName =  explode(".",$this->safety->criptImage($_FILES["image"]))[0];
+                $this->emp->id = $param['id'];
+
+                $row = $this->handling->userCompanyInfo($this->emp);
+                
+                //imagem é apagada porque o nome sempre é diferente
+                if(file_exists($row["imagem"])) unlink($row["imagem"]);
+                    
+                $this->emp->image =  $upload->upload($_FILES['image'],$newFileName);
+
+                if ($this->handling->updateImageCompany($this->emp)) 
+                    echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "msg" => "Ok"]);
+                 else 
+                    echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Not Implements"]);
+            }else {
+                echo json_encode(["error" => true, "status" => DataException::NOT_IMPLEMENTED, "msg" => "Not Implements"]);
+
+            }
+            
+        }catch(DataException $ex) {
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
+        }
+    }
+
 }
