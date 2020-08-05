@@ -31,6 +31,11 @@ class Person
         return $this->$name;
     }
 
+    public function __isset($name)
+    {
+        return isset($this->$name);
+    }
+
     /**
      * Pega todos os valores nos atributos da classe
      * @return array

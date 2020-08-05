@@ -41,12 +41,13 @@ class Safety
      * @return string
      * Retorna uma nova criptografia
      */
-    public function criptImage(string $exReg, string $imageName): string
+    public function criptImage(array $file): string
     {
-        if (empty($exReg) || empty($imageName)) throw new DataException("Null value",DataException::NOT_ACCEPTABLE);
+        if (empty($file)) throw new DataException("Null file",DataException::NOT_ACCEPTABLE);
 
-        preg_match("/\.($exReg)$/", $imageName, $ext);
-        $this->imageName = strtoupper(md5(uniqid(time($imageName)))) . "." . $ext[1];
+        $ext = pathinfo($file["name"],PATHINFO_EXTENSION);
+        $fileName = pathinfo($file["name"],PATHINFO_FILENAME);
+        $this->imageName = strtoupper(uniqid(md5(time() . $fileName))) . "." . $ext;
 
         return $this->imageName;
     }
@@ -102,6 +103,20 @@ class Safety
 
         } 
         return false;
+    }
+
+    /**
+     * @param string $bytes 
+     * O tamanho da image em bytes
+     * @param int $fixed
+     * O tamanho fixo
+     */
+    public function getBytesFormat($bytes, $fixed = 2): string
+    {
+        $extByte = array("bytes","KB","MB","GB","TB","PB", "EB","ZB","YB");
+        $espo =  floor(log($bytes) / log(1024));
+        $size = round($bytes / pow(1024, $espo));
+        return sprintf("%.{$fixed}f$extByte[$espo]", $size);
     }
 
 }

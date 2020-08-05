@@ -25,9 +25,9 @@ class Pagamento extends PersonLegal
     public function __construct(bool $sandbox = true,array $dataPagArray = null)
     {
         if ($sandbox) {
-            $this->pagInfo["EMAIL_PAGSEGURO"] =  "emanuelcafe.santos@gmail.com";
-            $this->pagInfo["TOKEN_PAGSEGURO"] =  "D146D1FA2079439EB485AEF5B23EA68C";
-            $this->pagInfo["EMAIL_LOJA"] = "emanuelcafe175@gmail.com";
+            $this->pagInfo["EMAIL_PAGSEGURO"] =  "";
+            $this->pagInfo["TOKEN_PAGSEGURO"] =  "";
+            $this->pagInfo["EMAIL_LOJA"] = "";
         } else {
             $this->pagInfo["EMAIL_PAGSEGURO"] =  $dataPagArray[0];
             $this->pagInfo["TOKEN_PAGSEGURO"] =  $dataPagArray[1];
@@ -38,13 +38,17 @@ class Pagamento extends PersonLegal
 
     public function __set($name, $value)
     {
-        if (empty($name) || empty($value)) throw new DataException('Null values', DataException::REQ_INVALID);
         $this->$name = $value;
     }
 
     public function __get($name)
     {
         return $this->$name;
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->$name);
     }
 
     /**

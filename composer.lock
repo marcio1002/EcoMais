@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b052c29db91a690fd9bac5393146455",
+    "content-hash": "58b0f852008cd4fdcf54bce30b57a6a9",
     "packages": [
         {
             "name": "coffeecode/router",
@@ -50,6 +50,60 @@
                 "upinside"
             ],
             "time": "2019-09-30T16:29:47+00:00"
+        },
+        {
+            "name": "coffeecode/uploader",
+            "version": "1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robsonvleite/uploader.git",
+                "reference": "1fd58f13d41de26be36bef9fcebe54b865f3380e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robsonvleite/uploader/zipball/1fd58f13d41de26be36bef9fcebe54b865f3380e",
+                "reference": "1fd58f13d41de26be36bef9fcebe54b865f3380e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-exif": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoffeeCode\\Uploader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robson V. Leite",
+                    "email": "cursos@upinside.com.br",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tiago Chini",
+                    "email": "tiago.chini@hotmail.com",
+                    "role": "collaborator"
+                }
+            ],
+            "description": "It is a easy PHP upload manager for images, files and media in your application",
+            "homepage": "http://www.upinside.com.br",
+            "keywords": [
+                "Coffeecode",
+                "Image upload",
+                "file upload",
+                "media upload",
+                "upinside",
+                "upload"
+            ],
+            "time": "2020-06-23T13:22:03+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -323,16 +377,16 @@
         },
         {
             "name": "league/oauth2-google",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-google.git",
-                "reference": "cfe9b0ae69eb5dbac64a282f04410b731f6b9c04"
+                "reference": "18d1889897a8b18d85ecadacf74c9274d678d943"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-google/zipball/cfe9b0ae69eb5dbac64a282f04410b731f6b9c04",
-                "reference": "cfe9b0ae69eb5dbac64a282f04410b731f6b9c04",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-google/zipball/18d1889897a8b18d85ecadacf74c9274d678d943",
+                "reference": "18d1889897a8b18d85ecadacf74c9274d678d943",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +424,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2019-11-16T14:11:06+00:00"
+            "time": "2020-07-24T15:16:12+00:00"
         },
         {
             "name": "league/plates",

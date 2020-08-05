@@ -1,16 +1,18 @@
-let isDisabled = true;
+$(function(){
+  let isDisabled = true;
+var typePackage = $("#typePackage").val();
 $("#edit-info").click(function(){
+  let value = $("#typePackage").val();
   $("#passwd").val("");
   $("#confirmPasswd").val("");
-  $("#plano > option*").remove();
+  $("#typePackage > option*").remove();
   $("input").removeClass("formError");
+  $("#typePackage").append(`
+      <option value="10">Sacolinha</option>
+      <option value="20">Cestinha</option>
+      <option value="30">Carrinho</option>
+  `).val(value);
 
-  $("#plano").append(`
-    <option value="" selected disabled>Escolha...</option>
-    <option value="10">Sacolinha</option>
-    <option value="20">Cestinha</option>
-    <option value="30">Carrinho</option>
-  `);
 
   (isDisabled) ?  $(".confirmPasswd").show(400) :  $(".confirmPasswd").hide(400);
   let disabled = (isDisabled) ?  false : true;
@@ -19,7 +21,7 @@ $("#edit-info").click(function(){
 
   $("#passwd").prop("disabled",disabled);
   $("#confirmPasswd").prop("disabled",disabled);
-  $("#plano").prop("disabled",disabled);
+  $("#typePackage").prop("disabled",disabled);
   $("#save-config-company").prop("disabled",disabled);
   $("#btnViewPasswd").prop("disabled",disabled);
 });
@@ -41,7 +43,7 @@ $("#btnViewPasswd").on("click", function () {
 
 $("#save-config-company").on("click",function(){
   let data = new Object;
-    if($("#passwd").val().length == 0 && $("#plano").val() == null) return alertify.warning("Nenhuma alteração foi realizada!");
+    if($("#passwd").val().length == 0 && $("#typePackage").val() == typePackage) return alertify.warning("Nenhuma alteração foi realizada!");
     if($("#passwd").val().length ) 
         if($("#passwd").val() != $("#confirmPasswd").val()){
           $("#passwd").addClass("formError");
@@ -52,12 +54,12 @@ $("#save-config-company").on("click",function(){
         data.id = $("#id_company").val();
         
         if($("#passwd").val().length) data.passwd = $("#passwd").val();
-        
+        if($("#typePackage").val().length) data.typePackage = $("#typePackage").val();
 
        let option = {
           method: 'PUT',
           mycustomtype: "application/json",
-          url: `${BASE_URL}/manager/updatecompany`,
+          url: `${BASE_URL}/manager/updateinfocompany`,
           dataType: "json",
           data,
           beforeSend: () => $(this).attr("disabled",true),
@@ -71,13 +73,12 @@ $("#save-config-company").on("click",function(){
           }
       }
 
-      if($("#plano").val() != null)
+      if($("#typePackage").val() != typePackage)
          alertify.confirm("<i class='fas fa-exclamation-triangle text-warning'></i> Aviso!",
         `Antes de qualquer mudança analisamos seus dados, para que você possa mudar seu plano. Se houver alguma conta 
         pedente ou algo que não esteja dentro da nossas diretrizes essa ação não será procedida. 
         <br/> você deseja realmente mudar o plano?`,
-         async () =>{
-            data.typePackage = await $("#passwd").val();
+        () =>{
             reqAjax(option);
          },
           () => {}
@@ -86,5 +87,6 @@ $("#save-config-company").on("click",function(){
           'closable': false
         });
       
-    if(data.passwd) reqAjax(option);
+    if(data.passwd && data.typePackage == typePackage) reqAjax(option);
 });
+})

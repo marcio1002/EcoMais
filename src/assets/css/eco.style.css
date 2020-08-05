@@ -83,7 +83,9 @@
 .top-25 { bottom: 25%; }
 
 .left-25 { left: 25%; }
+
 .w-10 { max-width: 100px; width: 100%; }
+
 .right-25 { right: 25% }
 
 
@@ -93,6 +95,7 @@
 
 .z-index-1000 {z-index: 5000;}
 
+.overflow-h { overflow: hidden !important;}
 
 
 /* --- Atribuir classes para viewport --- */

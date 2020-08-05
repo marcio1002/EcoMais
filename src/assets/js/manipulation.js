@@ -30,18 +30,33 @@ function clearForm() {
 
 }
 
-function formatDateTime(string) {
-   let datetime = string.split(" ");
-   let format = datetime[0].split("-");
-   return `${format[2]}/${format[1]}/${format[0]} ${datetime[1]}`;
-}
 
-function formatDate(string) {
-   let date = /^\d{4}\-\d{2}\-\d{2}/g.exec(string)[0].split("-");
-   if(date){
-      return `${date[2]}/${date[1]}/${date[0]}`;
+
+const datetime = {
+   formatDateTime(string) {
+      const datetime = string.split(" ");
+      if(datetime) {
+         let format = datetime[0].split("-");
+         return `${format[2]}/${format[1]}/${format[0]} ${datetime[1]}`;
+      }
+      return "";
+   },
+   
+   formatDate(string) {
+      const date = /^\d{4}\-\d{2}\-\d{2}/g.exec(string)[0].split("-").reverse().join("/");
+      if(date) return date;
+      return "";
+   },
+
+   dateNow() {
+      const date = new Date;
+      return date.toLocaleDateString();
+   },
+
+   timeNow() {
+      const time = new Date;
+      return time.toLocaleTimeString();
    }
-   return "";
 }
 
 /**
@@ -51,18 +66,10 @@ function formatDate(string) {
 function getPropsUrl(url) {
    let obj = new Object;
    let infoUrl = new URL(url);
-   let params = infoUrl.search.replace("?","").split("&");
-
-   params.forEach(val => {
-       let array = val.split("=");
-       let prop =  array[0];
-       let value = array[1];
-       obj[prop] = value; 
-   });
-   return obj;
+   let urlParams = new URLSearchParams(infoUrl.search)
+   for([key,val] of urlParams.entries())  obj[key] = val;
+   return obj || {}
 }
-
-
 
 function isValidEmail(email) {
 

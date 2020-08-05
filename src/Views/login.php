@@ -7,17 +7,8 @@ $sql = new Ecomais\ControllersServices\Company\CompanyHandling();
 $user = new Ecomais\Models\PersonLegal();
 $safety = new Ecomais\Models\Safety();
 
-$row = $safety->isLogged("usuario");
-$row2 = $safety->isLogged("empresa");
-
-if($row) header("location: " . BASE_URL . "/usuario");
-if($row2) header("location: " . BASE_URL . "/empresa");
-
-
-$register = renderUrl("/cadastro");
-$urlRecoverPasswd = renderUrl("/recuperarsenha");
-$authGoogleUrl = renderUrl("/manager/logingoogle");
-
+if($safety->isLogged("usuario")) header("location: " . BASE_URL . "/usuario");
+if($safety->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +42,8 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
                 </div>
             </div>
             <div class='p-3 col text-center'>
-                <a href=<?=$register?> class='btn btn-link yellow'>Cadastra-se</a>
-                <a href=<?=$urlRecoverPasswd?> class='btn btn-link text-dark'>Esqueceu a Senha?</a>
+                <a href=<?=renderUrl("/cadastro");?> class='btn btn-link yellow'>Cadastra-se</a>
+                <a href=<?=renderUrl("/recuperarsenha")?> class='btn btn-link text-dark'>Esqueceu a Senha?</a>
             </div>
             <div class='col-12'>
                 <div class='text-center col-12'>
@@ -68,7 +59,7 @@ $authGoogleUrl = renderUrl("/manager/logingoogle");
                         <button class=" btn-color-red text-white btn remove-focus">
                             <i class='icon-google fab fa-google'></i>
                         </button>
-                        <a title='Entrar com o Google' href=<?=$authGoogleUrl?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
+                        <a title='Entrar com o Google' href=<?=renderUrl("/manager/logingoogle");?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
                             <div class='item-account-login google '>
                                 Entrar com o Google
                             </div>

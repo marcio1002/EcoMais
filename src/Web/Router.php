@@ -2,14 +2,17 @@
 
 namespace Ecomais\Web;
 
+use Ecomais\Controllers\Company\AccountManagerCompany;
 use League\Plates\Engine;
 
 class  Router
 {
-    protected Engine $view;
+    private Engine $view;
+    private AccountManagerCompany $comp;
 
     public function __construct()
     {
+        $this->comp = new AccountManagerCompany();
     }
 
 
@@ -95,28 +98,34 @@ class  Router
     /**
      * @group Company
      */
-    public function indexCompany(?array $param = array()): void
+    public function indexCompany(): void
     {
         $this->directory("Company");
-        echo $this->view->render("index", $param);
+        echo $this->view->render("index");
     }
 
     public function configCompany():void
     {
         $this->directory("Company");
-        echo $this->view->render("config");
+        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
+
+        echo $this->view->render("config", $row ?? []);
     }
 
     public function perfilCompany(): void
     {
         $this->directory("Company");
-        echo $this->view->render("perfil");
+        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
+
+        echo $this->view->render("perfil", $row ?? []);
     }
 
     public function registerProduct(): void
     {
         $this->directory("Company");
-        echo $this->view->render("registerProduct");
+        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
+
+        echo $this->view->render("registerProduct", $row ?? []);
     }
 
     /**

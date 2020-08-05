@@ -12,15 +12,5 @@ class PersonLegal extends person
     protected string $reason;
     protected int $contact;
     protected int $typePackage;
-
-    public function __set($name, $value)
-    {
-        $this->$name = $value;
-    }
-
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-    
+    protected string $image;
 }

@@ -27,8 +27,8 @@ class ProductManager
             $this->prod->classification = filter_var($param['classification'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->prod->description = filter_var($param['description'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->prod->quantity = filter_var($param['quantity'], FILTER_VALIDATE_INT, FILTER_FLAG_EMPTY_STRING_NULL);
-            $this->prod->period_start = date("Y-m-d H:i:s", strtotime($param['date_start']));
-            $this->prod->period_end = date("Y-m-d H:i:s", strtotime($param['date_end']));
+            $this->prod->period_start = date("Y-m-d H:i:s", strtotime($param['date_start'].$param['time_start']));
+            $this->prod->period_end = date("Y-m-d H:i:s", strtotime($param['date_end'].$param['time_end']));
             $this->prod->fkCompany = filter_var($param['fkCompany'], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
             $this->prod->status = Product::ACTIVATED;
             $this->prod->createAt();

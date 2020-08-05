@@ -93,7 +93,8 @@ $router->namespace("Ecomais\Controllers\Company");
     $router->post("/addaccountpersonlegal","AccountManagerCompany:createAccount");
     $router->get("/listencompany","AccountManagerCompany:listenCompany");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
-    $router->put("/updatecompany","AccountManagerCompany:updateCompany");
+    $router->put("/updateinfocompany","AccountManagerCompany:updateInfoCompany");
+    $router->post("/updateimagecompany","AccountManagerCompany:updateImageCompany");
 
 $router->namespace("Ecomais\Pagseguro");
     

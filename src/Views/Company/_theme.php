@@ -9,7 +9,7 @@ $safety = new Ecomais\Models\Safety();
 
 if ($safety->isLogged("empresa")) {
     $user->id = $_COOKIE['_id'];
-    $row = $sql->userInfo($user);
+    $row = $sql->userCompanyInfo($user);
 } else {
     header("location: " . BASE_URL . "/login");
 }
@@ -24,7 +24,7 @@ if ($safety->isLogged("empresa")) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style", "css/manipulation"]); ?>
-    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/themeCompany.css"); ?>>
+    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/company/themeCompany.css"); ?> >
     <?= $this->section("css"); ?>
     <title><?= $row['fantasia'] ?></title>
 </head>
@@ -110,12 +110,11 @@ if ($safety->isLogged("empresa")) {
         "js/apis",
         "js/manipulation"
     ]);
-    echo $this->section("scripts");
-
     echo "
     <script>
         const BASE_URL = '" . BASE_URL . "';
     </script>";
+    echo $this->section("scripts");
     ?>
 </body>
 <script>

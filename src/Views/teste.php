@@ -14,16 +14,16 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?= Bundles::renderCss(["css/bootstrap", "css/alertify","css/dataTable","css/eco/style"])?>
-    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/tableproduct.css")?> >
+    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "css/dataTable", "css/eco/style"]) ?>
+    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/tableproduct.css") ?>>
     <title>Teste</title>
 </head>
 
 <body>
-
-
+    
     <?php
-   echo Bundles::renderJs([
+    echo dirname(__DIR__ . "/../uploads/imageCompany/",1);
+    echo Bundles::renderJs([
         "js/jquery",
         "js/jqueryMask",
         "js/bootstrap",
@@ -32,7 +32,7 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
         "js/manipulation",
         "js/apis",
     ]);
-    
+
     echo
         "
         <script>
@@ -40,23 +40,6 @@ $prod  = new Ecomais\Controllers\Product\ProductManager();
         </script>
         "
     ?>
-<script>
-    const options = {
-        method: 'GET',
-        mycustomtype: "application/json",
-        url: `${BASE_URL}/manager/listencompany`,
-        dataType: "json",
-        success: (res) => {
-            console.debug(res);
-        },
-        error: (res) => {
-            console.warn(res.responseText);
-            alertify.alert("Alerta","Não foi possível buscar os atacados");
-        }
-    }
-
-    reqAjax(options);
-</script>
 </body>
 
 </html>

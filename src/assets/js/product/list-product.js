@@ -20,9 +20,9 @@ $(function () {
             success: (res) => {
                 $("#load").addClass("d-none");
                 if (res && !res.error) {
-                    $("#table #thead").append(`<tr><th>Nome</th><th>Marca</th><th>Descrição</th><th>Preço</th><th>Quantidade</th><th>Inicio promoção</th><th>Fim promoção</th></tr>`);
+                    $("#table #thead").append(`<tr><th>Nome</th><th>Marca</th><th>Descrição</th><th>Preço</th><th>Quantidade</th><th>Inicio promoção</th><th>Horário</th><th>Fim promoção</th><th>Horário</th></tr>`);
                     if (res.data.length) {
-                        $("#logoCompany").append(`<img class="img-fluid w-100" src="${res.data[0].imagem}" alt="logo do(a) tenda-atacado">`);
+                        $("#logoCompany").append(`<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 m-auto img-thumbnail bg-transparent border-0"><img class="img-fluid w-100" src="${BASE_URL}/${res.data[0].imagem || res.data.image}" alt="logo do(a) tenda-atacado"><div>`);
                         res.data.forEach((val, index) => {
                             $("#table #tbody").append(`
                                 <tr data-id="${val.id_produto}" >
@@ -31,8 +31,10 @@ $(function () {
                                     <td>${val.descricao}</td>
                                     <td> <span class="badge badge-success p-2 font-size-1em">${val.preco}</span></td>
                                     <td>${val.quantidade}</td>
-                                    <td><span class="badge badge-info font-size-1em">${formatDate(val.periodo_inicio)}</span></td>
-                                    <td><span class="badge badge-info font-size-1em">${formatDate(val.periodo_fim)}</span></td>
+                                    <td><span class="badge badge-info font-size-1em">${datetime.formatDate(val.periodo_inicio)}</span></td>
+                                    <td><span class="badge badge-info font-size-1em">${datetime.formatDateTime(val.periodo_inicio).split(" ")[1].substr(0,5)}</span></td>
+                                    <td><span class="badge badge-info font-size-1em">${datetime.formatDate(val.periodo_inicio)}</span></td>
+                                    <td><span class="badge badge-info font-size-1em">${datetime.formatDateTime(val.periodo_fim).split(" ")[1].substr(0,5)}</span></td>
                                 </tr>`);
                         });
                     }

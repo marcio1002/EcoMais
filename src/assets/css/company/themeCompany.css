@@ -1,0 +1,25 @@
+body,html {
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Menu navegação ---*/s
+.layote-navbar,.navigation  { width: 81px; height: 100vh; }
+
+.layote-navbar { border-right: 1px solid #ffe65b; }
+.navbar-nav { height: 80%; }
+
+/* --- Conteúdo da página ---*/
+main,.container-header { max-width: 100%; width: 100%; }
+.layote-header { z-index: 1000; background: #2b3b5a; }
+
+.content { width: 100%; height: 88vh; }
+
+
+/* --- Medias para diversos tamanho de devices --- */
+
+
+@media (max-width:720px) { 
+    
+    
+}

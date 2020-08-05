@@ -123,7 +123,7 @@ final class Data
     {
         try {
 
-            if (empty($table) || empty($columns) || empty($quantity)) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
+            if (empty($table) || empty($columns) || empty($quantity)) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
 
             $preVal = implode(",", array_fill(0, $quantity, "?"));
 
@@ -163,7 +163,7 @@ final class Data
     public function show(string $table, string $columns = "", string $prewhere = "", int $option = 1): Data
     {
         try {
-            if (empty($table)) throw new DataException("Error null values", DataException::NOT_IMPLEMENTED);
+            if (empty($table)) throw new DataException("null values", DataException::NOT_IMPLEMENTED);
             if ($option <= 0 || $option > 6) throw new DataException("Value <mark>$option</mark> is not accepted", DataException::SERVER_ERROR);
             if (!is_numeric($option)) throw new DataException("Non-numeric value", DataException::NOT_ACCEPTABLE);
 
@@ -213,7 +213,7 @@ final class Data
     public function update(string $table, string $colums, string $where): Data
     {
         try {
-            if (empty($table) || empty($colums) || empty($where) ) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
+            if (empty($table) || empty($colums) || empty($where) ) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();
             $this->query = $this->pdo->prepare("UPDATE $table SET $colums WHERE $where");
@@ -235,7 +235,7 @@ final class Data
     public function delete(string $table, string $where): Data
     {
         try {
-            if (empty($table) || empty($where) || empty($val)) throw new DataException("Error null values", DataException::NOT_ACCEPTABLE);
+            if (empty($table) || empty($where) || empty($val)) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();
             $this->query = $this->pdo->prepare("DELETE FROM $table WHERE $where");

@@ -54,10 +54,10 @@ use Ecomais\Controllers\ComponenteElement as componente;
             "js/apis",
         ]);
 
-    echo $this->section("scripts");
     echo "<script>
             const BASE_URL = '" . BASE_URL . "';
         </script>";
+    echo $this->section("scripts");
     ?>
 
     <script>

@@ -118,18 +118,7 @@ class CompanyHandling {
         }
     }
 
-    public function updateCompany(PersonLegal $emp) :bool
-    {
-        try{
-            $this->sql->open();
-        }catch(DataException $ex) {
-            throw $ex;
-        }finally {
-            $this->sql->close();
-        }
-    }
-
-    public function userInfo(PersonLegal $emp): ?array
+    public function userCompanyInfo(PersonLegal $emp): ?array
     {
         try{
             $this->sql->open();
@@ -141,6 +130,47 @@ class CompanyHandling {
         }catch(DataException $ex){
             throw $ex;
         }finally{
+            $this->sql->close();
+        }
+    }
+
+    public function updateInfoCompany(PersonLegal $emp) :bool
+    {
+        try{
+            $columns = "pacote = ?";
+            $data = [$emp->typePackage];
+            if(!empty($emp->passwd)) {
+                $columns .= ", senha = ?";
+                array_push($data,$this->safety->criptPasswd($emp->passwd));
+            }
+            array_push($data,$emp->id);
+            
+            $this->sql->open();
+            return $this->sql
+                ->update("empresa",$columns,"id_empresa = ?")
+                ->prepareParam($data)
+                ->execNotRowSql();
+
+        }catch(DataException $ex) {
+            throw $ex;
+        }finally {
+            $this->sql->close();
+        }
+    }
+
+    public function updateImageCompany(PersonLegal $emp): bool
+    {
+        try{
+           
+            $this->sql->open();
+            return $this->sql
+                ->update("empresa","imagem = ?","id_empresa = ?")
+                ->prepareParam([$emp->image, $emp->id])
+                ->execNotRowSql();
+
+        }catch(DataException $ex) {
+            throw $ex;
+        }finally {
             $this->sql->close();
         }
     }
