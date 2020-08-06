@@ -4,7 +4,7 @@ namespace Ecomais\Models;
 use Ecomais\Models\DataException;
 use Ecomais\Services\Data;
 
-class Safety
+class Implementation
 {
 
     private string $passwd;
@@ -117,6 +117,33 @@ class Safety
         $espo =  floor(log($bytes) / log(1024));
         $size = round($bytes / pow(1024, $espo));
         return sprintf("%.{$fixed}f$extByte[$espo]", $size);
+    }
+
+    /**
+     * @param array $arr
+     * Um array associativo com chave/valor ou array único com chave/valor
+     */
+    public function toObject(array $arr): object
+    {
+        $object = new class{};
+        foreach($arr as $in => &$v) {
+            if(is_array($v))
+                foreach($v as $key => &$val) $object->$key = $val;
+            else
+            $object->$in = $v;
+        }  
+        return $object;
+    }
+
+    /**
+     * @param object $object
+     * Um objeto 
+     */
+    public function toArray(object $object): array
+    {
+        $array = array();
+        foreach($object as $key => $val) $array[$key] = $val;
+        return $array;
     }
 
 }

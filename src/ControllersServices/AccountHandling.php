@@ -1,41 +1,31 @@
 <?php 
 namespace Ecomais\ControllersServices;
 
-use Ecomais\Models\{Safety,DataException, Person};
+use Ecomais\Models\{Implementation,DataException, Person};
 use Ecomais\Services\Data;
 
 class AccountHandling {
 
     private Data $sql;
-    private Safety $safety;
+    private Implementation $implement;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->sql = new Data();
-        $this->safety = new Safety();
+        $this->implement = new Implementation();
     }
 
     public function createAccountPersonPhysical(Person $person): bool
     {
         try {
-            $passwd =  $this->safety->criptPasswd($person->passwd);
-            $columns = "nome,email,senha,cep,uf,cidade,endereco,statusconta,data_criacao";
-            $data = array(
-                $person->name,
-                $person->email,
-                $passwd,
-                $person->cep,
-                $person->uf,
-                $person->locality,
-                $person->address,
-                $person->statusAccount,
-                $person->createAt()
-            );
+            $person->passwd =  $this->implement->criptPasswd($person->passwd);
+            $columns = "nome,email,senha,uf,cidade,endereco,cep,statusconta,data_criacao";
 
             $this->sql->open();
 
             return $this->sql
-                ->add("usuario",$columns,count($data))
-                ->prepareParam($data)
+                ->add("usuario",$columns,count($person->toArray()))
+                ->prepareParam($person->toArray())
                 ->execNotRowSql();
 
         } catch(DataException $ex)  {   
@@ -59,8 +49,7 @@ class AccountHandling {
     {
         try{
             if(password_needs_rehash($passwd, PASSWORD_DEFAULT)) {
-                $parans = array($this->safety->criptPasswd($person->passwd), $person->id);
-                $vals  = [];
+                $parans = array($this->implement->criptPasswd($person->passwd), $person->id);
                 $this->sql->open();
                 $this->sql
                     ->update("usuario","senha = ?","id_usuario = ?")

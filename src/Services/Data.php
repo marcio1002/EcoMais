@@ -22,11 +22,10 @@ final class Data
     const  TYPE_SBGD = 'mysql';
     const PARAM_PORT = "3305";
     const OPTIONS =
-    [
+    array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ];
-    private  $row = null;
+    );
     private  $pdo = null;
     private $query = null;
 
@@ -125,7 +124,7 @@ final class Data
 
             if (empty($table) || empty($columns) || empty($quantity)) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
 
-            $preVal = implode(",", array_fill(0, $quantity, "?"));
+            $preVal = join(",", array_fill(0, $quantity, "?"));
 
             $this->pdo->beginTransaction();
 

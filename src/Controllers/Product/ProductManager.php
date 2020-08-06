@@ -2,7 +2,7 @@
 
 namespace Ecomais\Controllers\Product;
 
-use Ecomais\Models\{DataException, Product, Safety};
+use Ecomais\Models\{DataException, Product, Implementation};
 use Ecomais\ControllersServices\Product\ProductHandling;
 
 class ProductManager
@@ -14,7 +14,6 @@ class ProductManager
     public function __construct()
     {
         $this->prod = new Product();
-        $this->safety = new Safety();
         $this->sql = new ProductHandling();
     }
 
@@ -51,7 +50,6 @@ class ProductManager
     public function setStatus(array $param): void
     {
         try{
-
             foreach($param as $k => $v) $this->prod->$k = $v;
 
             if($this->sql->updateStatusProduc($this->prod))

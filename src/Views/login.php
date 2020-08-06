@@ -5,10 +5,10 @@ use Ecomais\Web\Bundles;
 
 $sql = new Ecomais\ControllersServices\Company\CompanyHandling();
 $user = new Ecomais\Models\PersonLegal();
-$safety = new Ecomais\Models\Safety();
+$implement = new Ecomais\Models\Implementation();
 
-if($safety->isLogged("usuario")) header("location: " . BASE_URL . "/usuario");
-if($safety->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
+if($implement->isLogged("usuario")) header("location: " . BASE_URL . "/usuario");
+if($implement->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,11 +53,11 @@ if($safety->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
             <div class='col-12 text-center pt-3'>
                 OU
             </div>
-            <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' id='container-account-login'>
+            <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center' >
                 <div class='text-center col-12'>
-                    <div class="btn-group btn-large btn-block">
+                    <div id="container-account-login" class="btn-group btn-large btn-block">
                         <button class=" btn-color-red text-white btn remove-focus">
-                            <i class='icon-google fab fa-google'></i>
+                            <i class="icon-google fab fa-google"></i>
                         </button>
                         <a title='Entrar com o Google' href=<?=renderUrl("/manager/logingoogle");?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
                             <div class='item-account-login google '>
@@ -76,6 +76,7 @@ if($safety->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
             "js/bootstrap",
             "js/apis",
             "js/alertify",
+            "js/manipulation",
             "js/login"
         ]);
 

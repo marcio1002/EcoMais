@@ -3,7 +3,7 @@
 namespace Ecomais\Controllers\Company;
 
 use CoffeeCode\Uploader\Send;
-use Ecomais\Models\{DataException, Safety, PersonLegal};
+use Ecomais\Models\{DataException, Implementation, PersonLegal};
 use Ecomais\ControllersServices\Company\CompanyHandling;
 
 class AccountManagerCompany
@@ -34,13 +34,13 @@ class AccountManagerCompany
     );
     private CompanyHandling $handling;
     private PersonLegal $emp;
-    private Safety $safety;
+    private Implementation $implement;
 
     public function __construct()
     {
         $this->emp = new PersonLegal();
         $this->handling = new CompanyHandling();
-        $this->safety = new Safety();
+        $this->implement = new Implementation();
     }
 
     public function  createAccount($param): void
@@ -125,7 +125,7 @@ class AccountManagerCompany
     public function updateImageCompany($param): void
     {
         try{
-            $upload = new Send("src/uploads","imageCompany",self::$type,self::$extension,false);
+            $upload = new Send("src/uploads","imageCompany",static::$type,static::$extension,false);
             
             if(isset($_FILES["image"]) && $upload::isAllowed()) {
 
@@ -134,9 +134,9 @@ class AccountManagerCompany
                 $factor = floor(log($bytes) / log(1024));
                 $maxFileSize = 17000000;
 
-                if($bytes >= $maxFileSize && $bitType[$factor] == $bitType[2]) die(json_encode(["error" => true, "status" => DataException::NOT_IMPLEMENTED, "msg" => "Not Implements"]));
+                if($bytes >= $maxFileSize && $bitType[$factor] == $bitType[2]) exit(json_encode(["error" => true, "status" => DataException::NOT_IMPLEMENTED, "msg" => "Not Implements"]));
 
-                $newFileName =  explode(".",$this->safety->criptImage($_FILES["image"]))[0];
+                $newFileName =  explode(".",$this->implement->criptImage($_FILES["image"]))[0];
                 $this->emp->id = $param['id'];
 
                 $row = $this->handling->userCompanyInfo($this->emp);

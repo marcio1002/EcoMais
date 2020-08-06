@@ -36,12 +36,10 @@ class Product
      * Pega todos os valores nos atributos da classe
      * @return array
      */
-    public function getAll(): array
+    public function toArray(): array
     {
         $array = array();
-        foreach($this as $key => $val) {
-            $array += array($key => $val);
-        }
+        foreach($this as $key => $val) $array[$key] = $val;
         return $array;
     }
 

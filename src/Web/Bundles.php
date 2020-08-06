@@ -17,37 +17,31 @@ class Bundles
         
         foreach ($urlName as $url) {
 
-            if (empty(self::$import[$url])) continue;
+            if (empty(static::$import[$url])) continue;
 
-            if (is_array(self::$import[$url])) {
+            if (is_array(static::$import[$url])) {
 
-                foreach (self::$import[$url] as $r) {
-
-                    self::$renderFile .= $r . PHP_EOL;
-                }
+                foreach (static::$import[$url] as $r) static::$renderFile .= $r . PHP_EOL;
             } else {
-                self::$renderFile .= self::$import[$url] . PHP_EOL;
+                static::$renderFile .= static::$import[$url] . PHP_EOL;
             }
 
         }
-        return self::$renderFile;
+        return static::$renderFile;
     }
 
     public static  function  renderJs(array $urlName): string
     {
-        self::$renderFile = "";
+        static::$renderFile = "";
         foreach ($urlName as $url) {
 
-            if (empty(self::$import[$url])) continue;
+            if (empty(static::$import[$url])) continue;
 
-            if (is_array(self::$import[$url])) {
+            if (is_array(static::$import[$url])) {
 
-                foreach (self::$import[$url] as $r) {
-
-                    self::$renderFile .= $r . PHP_EOL;
-                }
+                foreach (static::$import[$url] as $r) static::$renderFile .= $r . PHP_EOL;
             } else {
-                self::$renderFile .= self::$import[$url] . PHP_EOL;
+                static::$renderFile .= static::$import[$url] . PHP_EOL;
             }
 
         }
@@ -63,10 +57,7 @@ class Bundles
 
             if (is_array(self::$import[$url])) {
 
-                foreach (self::$import[$url] as $r) {
-
-                    self::$renderFile .= $r . PHP_EOL;
-                }
+                foreach (static::$import[$url] as $r) static::$renderFile .= $r . PHP_EOL;
             } else {
                 self::$renderFile .= self::$import[$url] . PHP_EOL;
             }

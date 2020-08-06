@@ -13,7 +13,7 @@ define(
         "css/alertify" =>
         [
             "<link rel='stylesheet' type='text/css' href= '" . renderUrl('/src/assets/css/themes/default.min.css') ."'/>",
-            "<link rel='stylesheet' type='text/css' href='" . renderUrl('/src/assets/css/alertify.min.css') . "' />",
+            "<link rel='stylesheet' type='text/css' href='" . renderUrl('/src/assets/css/themes/alertify.min.css') . "' />",
         ],
         "css/bootstrap" => 
         [

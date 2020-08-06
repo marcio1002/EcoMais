@@ -6,9 +6,9 @@ use Ecomais\Controllers\ComponenteElement as componente;
 
 $sql = new Ecomais\ControllersServices\User\UserHandling();
 $user = new Ecomais\Models\Person();
-$safety = new Ecomais\Models\Safety();
+$implement = new Ecomais\Models\Implementation();
 
-  // if($safety->isLogged()) {
+  // if($Implementation->isLogged()) {
 
   //   $user->id = $_COOKIE['_id'];
   //   $row = $sql->userInfo($user->id);

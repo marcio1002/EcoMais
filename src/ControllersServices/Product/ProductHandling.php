@@ -3,17 +3,18 @@
 namespace Ecomais\ControllersServices\Product;
 
 use PDO;
-use Ecomais\Models\{Safety,DataException, Product};
+use Ecomais\Models\{Implementation,DataException, Product};
 use Ecomais\Services\Data;
 
 class ProductHandling {
 
     private Data $sql;
-    private Safety $safety;
+    private Implementation $implement;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->sql = new Data();
-        $this->safety = new Safety();
+        $this->implement = new Implementation();
     }
 
 
@@ -24,8 +25,8 @@ class ProductHandling {
             $this->sql->open();
             $columns = "nome,preco,marca,classificacao,descricao,quantidade,periodo_inicio,periodo_fim,id_empresa,statusdoproduto,data_criacao";
             return $this->sql
-                ->add("produto", $columns,count($prod->getAll()))
-                ->prepareParam($prod->getAll())
+                ->add("produto", $columns,count($prod->toArray()))
+                ->prepareParam($prod->toArray())
                 ->execNotRowSql();
 
         }catch(DataException $ex){

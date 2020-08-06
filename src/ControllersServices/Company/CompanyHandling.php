@@ -1,31 +1,31 @@
 <?php
 namespace Ecomais\ControllersServices\Company;
 
-use Ecomais\Models\{Safety,DataException, Pagamento, PersonLegal};
+use Ecomais\Models\{Implementation,DataException, Pagamento, PersonLegal};
 use Ecomais\Services\Data;
 use PDO;
 
 class CompanyHandling {
     private Data $sql;
-    private Safety $safety;
+    private Implementation $implement;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->sql = new Data();
-        $this->safety = new Safety();
+        $this->implement = new Implementation();
     }
 
     public function createAccountPersonLegal(PersonLegal $emp): bool
     {
         try {
-            $emp->passwd =  $this->safety->criptPasswd($emp->passwd);
+            $emp->passwd =  $this->implement->criptPasswd($emp->passwd);
             $columns = "cnpj,fantasia,razao,contato,pacote,email,senha,uf,cidade,endereco,cep,statusconta,data_criacao";
-            $data = $emp->getAll();
 
             $this->sql->open();
 
             return $this->sql
-                ->add("empresa",$columns,count($data))
-                ->prepareParam($data)
+                ->add("empresa",$columns,count($emp->toArray()))
+                ->prepareParam($emp->toArray())
                 ->execNotRowSql();
 
         } catch(DataException $ex)  {   
@@ -35,36 +35,6 @@ class CompanyHandling {
             $this->sql->close();
         }
             
-    }
-
-    public function createPayment(Pagamento $emp,int $type): bool
-    {
-        try{
-            $columns = "";
-            $quant = 5;
-            switch($type) {
-                case 1:
-                    $columns = "tipo_pg, cod_trans, status, carrinho_id, created";
-                    break;
-                case 2:
-                    $columns = "tipo_pg, cod_trans, status, link_boleto,carrinho_id, created";
-                    break;
-                case 3:
-                    $columns = "tipo_pg, cod_trans, status, link_db_online,carrinho_id, created";
-                    break;
-            }
-
-            $this->sql->open();
-            return $this->sql
-            ->add("pagamento",$columns,count($emp->getAll()))
-            ->prepareParam($emp->getAll())
-            ->execNotRowSql();
-
-        }catch(DataException $ex){
-            throw $ex;
-        }finally {
-            $this->sql->close();
-        }
     }
 
     public function listenCompanyPro(): ?array
@@ -108,7 +78,7 @@ class CompanyHandling {
                 "e.*, p.*",
                 "statusconta = true AND id_empresa = ?",
                 6)
-            ->prepareParam($emp->getAll())
+            ->prepareParam($emp->toArray())
             ->executeSql();
 
         }catch(DataException $ex){
@@ -141,7 +111,7 @@ class CompanyHandling {
             $data = [$emp->typePackage];
             if(!empty($emp->passwd)) {
                 $columns .= ", senha = ?";
-                array_push($data,$this->safety->criptPasswd($emp->passwd));
+                array_push($data,$this->implement->criptPasswd($emp->passwd));
             }
             array_push($data,$emp->id);
             

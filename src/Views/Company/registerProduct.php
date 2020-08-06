@@ -50,7 +50,7 @@ $this->layout("_theme",  ["subtitle" => "Cadastro de Produtos"]);
           <div class="form-group">
             <label for="classification"><span class='required'>*</span><b>Classificação</b></label>
             <select id="classification" name="classification" class="custom-select remove-focus" data-required="">
-              <option selected disabled>Escolher...</option>
+              <option selected disabled value="">Escolher...</option>
               <option value="1">Frutas</option>
               <option value="2">Legumes</option>
               <option value="3">Carnes</option>

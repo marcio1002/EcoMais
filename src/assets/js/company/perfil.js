@@ -1,6 +1,7 @@
 $(function () {
+  alertify.set('notifier','position', 'top-right');
+
   let fileInfo = null;
-  let isHover = true;
 
   let formatBytes = (bytes, decimals = 2) => {
     const k = 1024;

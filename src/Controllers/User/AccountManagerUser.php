@@ -1,21 +1,18 @@
 <?php
 namespace Ecomais\Controllers\User;
 
-use Ecomais\Controllers\AccountManager;
-use Ecomais\Models\{DataException,Person,Safety};
+use Ecomais\Models\{DataException,Person};
 use Ecomais\ControllersServices\AccountHandling;
 
 class AccountManagerUser {
 
     private AccountHandling $account;
     private Person $usr;
-    private Safety $safety;
 
     function __Construct() 
     {
         $this->usr = new Person();
         $this->account = new AccountHandling();
-        $this->safety = new Safety();
     }
 
     public function  createAccount($param): void
@@ -37,25 +34,7 @@ class AccountManagerUser {
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Not Imprements"]);
             }
         } catch (DataException $ex) {
-            die(header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error"));
-        }
-    }
-
-    public function updateAccount(): void
-    {
-        try {
-
-        } catch (DataException $ex) {
-            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
-        }
-    }
-
-    public function  deleteAccount($param): void
-    {
-        try {
-
-        } catch (DataException $ex) {
-            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
         }
     }
 }

@@ -49,25 +49,24 @@ $this->stop();
     </div>
   </div>
   <div class="col-12">
-    <form onsubmit="return false">
-      <div>
+    <form id="formUser" enctype="multipart/form-data">
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Nome:</label>
-            <input type="text" <?=$name?>  <?= $name? "readonly": "" ?> class="form-control nextItem" id="name"  data-required="" />
+            <input type="text" id="name" name="name" <?=$name?>  <?= $name? "readonly": "" ?> class="form-control nextItem" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Email:</label>
-            <input type="text" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" id="cadEmail" placeholder="seumail@teste.dominio" data-required="" />
+            <input type="text" id="email" name="email" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" placeholder="seumail@teste.dominio" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputCep">Cep</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="inputCep" maxlength="8" />
+              <input type="text" id="inputCep" name="cep" class="form-control" maxlength="8" />
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
               </div>
@@ -78,7 +77,7 @@ $this->stop();
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputPassword4">Crie uma senha:</label>
             <div class="input-group">
-              <input type="password" class="form-control nextItem" autocomplete="current-password" id="passwd" maxlength="20" data-required="" />
+              <input type="password" id="passwd" name="passwd" class="form-control nextItem" autocomplete="current-password" maxlength="20" data-required="" />
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
               </div>
@@ -93,7 +92,7 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="cpf">Cidade: </label>
-            <input type="text" class="form-control nextItem" id="locality" data-required="" />
+            <input type="text" id="locality"  name="locality" class="form-control nextItem" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
@@ -133,21 +132,20 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="address">Endereço:</label>
-            <input type="address" class="form-control nextItem" id="address" />
+            <input type="address" id="address" name="address" class="form-control nextItem"/>
           </div>
         </div>
         <div class="custom-control custom-switch pb-5 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group form-check">
-            <input type="checkbox" aria-label="Chebox para permitir input text" id="termos">
+            <input type="checkbox" id="termos" aria-label="Aceitar termos do sistema" >
             <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?> >Termos de uso</a></label>
           </div>
         </div>
         <div class="col-12">
           <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto">
-            <button type="button" class="btn btn-block bg-red-wine remove-focus text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
+            <button class="btn btn-block bg-red-wine remove-focus text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
           </div>
         </div>
-      </div>
     </form>
   </div>
 </div>

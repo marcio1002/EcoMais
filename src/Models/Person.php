@@ -16,7 +16,6 @@ class Person
     protected string $uf;
     protected string $locality;
     protected ?string $address;
-    protected int $number;
     protected ?int $cep;
     protected bool $statusAccount;
     protected string $date;
@@ -40,12 +39,10 @@ class Person
      * Pega todos os valores nos atributos da classe
      * @return array
      */
-    public function getAll(): array
+    public function toArray(): array
     {
         $array = array();
-        foreach($this as $key => $val) {
-            $array += array($key => $val);
-        }
+        foreach($this as $key => $val) $array[$key] = $val;
         return $array;
     }
 

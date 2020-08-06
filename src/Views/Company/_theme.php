@@ -5,9 +5,9 @@ use Ecomais\Web\Bundles;
 
 $sql = new Ecomais\ControllersServices\Company\CompanyHandling();
 $user = new Ecomais\Models\PersonLegal();
-$safety = new Ecomais\Models\Safety();
+$implement = new Ecomais\Models\Implementation();
 
-if ($safety->isLogged("empresa")) {
+if ($implement->isLogged("empresa")) {
     $user->id = $_COOKIE['_id'];
     $row = $sql->userCompanyInfo($user);
 } else {
@@ -26,7 +26,7 @@ if ($safety->isLogged("empresa")) {
     <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style", "css/manipulation"]); ?>
     <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/company/themeCompany.css"); ?> >
     <?= $this->section("css"); ?>
-    <title><?= $row['fantasia'] ?></title>
+    <title><?= "$row[fantasia] | {$subtitle}" ?></title>
 </head>
 
 <body>

@@ -43,15 +43,12 @@ function clearForm() {
 const datetime = {
    formatDateTime(string) {
       const datetime = string.split(" ");
-      if(datetime) {
-         let format = datetime[0].split("-");
-         return `${format[2]}/${format[1]}/${format[0]} ${datetime[1]}`;
-      }
+      if(datetime) return `${datetime[0].split("-").reverse().join("/")} ${datetime[1]}`;
       return "";
    },
    
    formatDate(string) {
-      const date = /^\d{4}\-\d{2}\-\d{2}/g.exec(string)[0].split("-").reverse().join("/");
+      const date = string.split("-").reverse().join("/");
       if(date) return date;
       return "";
    },
