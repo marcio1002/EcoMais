@@ -51,7 +51,8 @@ class Main
 
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
-                if (session_status() == PHP_SESSION_DISABLED) session_start(true);
+                if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) 
+                    session_start();
 
                 setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
                 setcookie('_token', $token, $expire, '/', "", false, true);
@@ -96,7 +97,9 @@ class Main
                 session_name($token);
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
-                if (session_status() == PHP_SESSION_DISABLED) session_start(true);
+                if (session_status() == PHP_SESSION_DISABLED || 
+                    session_status() == PHP_SESSION_NONE) 
+                    session_start();
 
                 setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
                 setcookie('_token', $token, $expire, '/', "", false, true);
@@ -117,6 +120,7 @@ class Main
         if (!empty($_COOKIE['_id']) && !empty($_COOKIE['_token'])) {
             setcookie('_id', "", 0, "/");
             setcookie('_token', "", 0, "/");
+            session_destroy();
 
             echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
         } else {
@@ -129,19 +133,22 @@ class Main
     {
         try {
             $token = $this->implement->createToken($param["value"]);
-            if ($res  = $this->sql->recoverByKey(trim($param["value"]))) {
+            if ($this->sql->recoverByKey(trim($param["value"]))) {
                 session_cache_expire(time() + (2 * 3600));
                 session_id(md5($param['name'] . "ECOID"));
 
-                session_start();
+                if(session_status() == PHP_SESSION_DISABLED || 
+                    session_status() == PHP_SESSION_NONE)
+                    session_start();
 
-                $_SESSION["ssioninfo"] = ["ssion_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
+                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
+                
                 echo json_encode(["error" => false, "status" => 200, "token" => $token]);
             } else echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "chave inválida"]);
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
-            session_commit();
+            session_write_close();
             sleep(1);
         }
     }
@@ -152,7 +159,7 @@ class Main
             ob_start();
             $token = $this->implement->createToken($param["value"]);
             $env = $this->email->add(
-                "Seu pedido de recuperação de senha do EcoMais",
+                "Seu pedido de recuperação de senha",
                 Componente::mail($param['name'], $token),
                 $param["name"],
                 $param["value"],
@@ -162,17 +169,18 @@ class Main
                 session_cache_expire(time() + (2 * 3600));
                 session_id(md5($param['name'] . "ECOID"));
 
-                session_start();
+               if(session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE)
+                    session_start();
 
-                $_SESSION["ssioninfo"] = ["ssion_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
+                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
 
                 echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
             } else  echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "ok"]);
-            ob_end_flush();
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
-            session_commit();
+            ob_end_flush();
+            session_write_close();
             sleep(1);
         }
     }

@@ -42,16 +42,12 @@ $("#newPasswdVerify").keypress(function(e) {
 $("#btnRecoverPwd").click(function() {
 
     $(".alert").removeClass("alert-success").removeClass("alert-danger");
-    if($("#newPasswd").val().length == 0) {
-        return $("#newPasswd").addClass("formError");
-    }
-    if($("#newPasswdVerify").val().length == 0) {
-        return $("#newPasswdVerify").addClass("formError");
-    }
 
-    if($("#newPasswd").val() !== $("#newPasswdVerify").val()) {
-        return alertify.error("As senhas não coincidem");
-    }
+    if($("#newPasswd").val().length == 0) return $("#newPasswd").addClass("formError");
+
+    if($("#newPasswdVerify").val().length == 0) return $("#newPasswdVerify").addClass("formError");
+
+    if($("#newPasswd").val() !== $("#newPasswdVerify").val()) return alertify.error("As senhas não coincidem");
 
     if(forca <= 27) return alertify.error("Digite uma senha forte");
 

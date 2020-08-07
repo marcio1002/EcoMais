@@ -87,6 +87,10 @@ class Implementation
     public function isLogged($table):bool
     {
         if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
+            if (session_status() == PHP_SESSION_DISABLED || 
+                session_status() == PHP_SESSION_NONE) 
+                session_start(['read_and_close'  => true]);
+                
             $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
             $id = (strcasecmp($table,"empresa") === 0) ? "id_empresa" : "id_usuario";
             $this->sql->open();
@@ -97,8 +101,7 @@ class Implementation
             $this->sql->close();
 
             if (!empty($row)) {
-                $id = $row[$id];
-                if(strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$id) === 0 ) return true;
+                if(strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$row[$id]) === 0 ) return true;
             }
 
         } 
@@ -126,11 +129,11 @@ class Implementation
     public function toObject(array $arr): object
     {
         $object = new class{};
-        foreach($arr as $in => &$v) {
+        foreach($arr as $k => &$v) {
             if(is_array($v))
                 foreach($v as $key => &$val) $object->$key = $val;
             else
-            $object->$in = $v;
+            $object->$k = $v;
         }  
         return $object;
     }

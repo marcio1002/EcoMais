@@ -129,11 +129,17 @@ class AccountHandling {
     public function recoverPasswd(Person $usr,string $value, int $option): bool
     {
         try{
-            $this->sql->open();
             $where = ($option == 1) ? "email = ?" : "senha = ?";
 
+            $this->sql->open();
+            $tableEmp = $this->sql->show("empresa","",$where,3)
+                ->prepareParam([$usr->passwd])
+                ->executeSql();
+            
+            $table = (count($tableEmp) > 0) ? "empresa" : "usuario";
+
             return $this->sql
-                ->update("usuario","senha = ?",$where)
+                ->update($table,"senha = ?",$where)
                 ->prepareParam(array($usr->passwd,$value))
                 ->execNotRowSql();
         }catch(DataException $ex) {

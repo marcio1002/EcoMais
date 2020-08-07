@@ -84,7 +84,7 @@ class  Router
     {
         $this->directory();
         echo $this->view->render("newPasswd", [
-            "v" => $token
+            "token" => $token["token"]
         ]);
     }
 

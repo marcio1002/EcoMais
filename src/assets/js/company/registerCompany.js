@@ -9,7 +9,9 @@ $(function () {
     alertify.set('notifier', 'position', 'top-right');
 
 
-    $("#contato").on("keypress", function (evt) {
+    $("#contato")
+    .mask(maskContact, optionsMask)
+    .on("keypress", function (evt) {
         let value = $("#contato").val().replace(/\D/g, "");
         value += evt.key;
         maskContact = value.length > 10 ? "(00) 00000-0000" : "(00) 0000-0000";
@@ -17,9 +19,7 @@ $(function () {
         console.clear();
     });
 
-    $("#contato").mask(maskContact, optionsMask);
     $("#cnpj").mask("00.000.000/0000-00", { placeholder: "__.____.___/____-__", clearIfNotMatch: true });
-    $("#inputCep").mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true });
     $("#mesValidade").mask("00", { placeholder: "__", clearIfNotMatch: true });
     $("#anoValidade").mask("0000", { placeholder: "____", clearIfNotMatch: true });
     $("#creditCardHolderCPF").mask("000.000.000-00", { placeholder: "___.___.___-__", clearIfNotMatch: true });
@@ -43,7 +43,9 @@ $(function () {
         }
     });
 
-    $("#inputCep").keyup(function (evt) { evt.preventDefault(); if (evt.keyCode == 13) $("#searchCep").trigger("click") });
+    $("#inputCep")
+        .mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true })
+        .keypress(evt => { if (evt.keyCode == 13) (evt.preventDefault(),$("#searchCep").trigger("click")) });
 
     $("#email").focusout(function () {
         if (!isValidEmail($(this).val())) {

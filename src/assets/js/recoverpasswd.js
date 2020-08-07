@@ -20,14 +20,17 @@ $("#recoverpwd").keypress(function(e) {
 $("#btnEnviPwd").click(() => {
 
     $("input").removeClass("formError");
-    $(".alert").remove();
+
+    if($("#username").val().length == 0) return $("#username").addClass("formError");
+    if($("#recoverpwd").val().length == 0 ) return $("#recoverpwd").addClass("formError");
+
+    if($("#checkChave").val() == 0) 
+        if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("formError");
+    
 
     let func = ($("#checkChave").val() == 0) ? "recoverByMail" : "recoverByKey";
 
-    let data = {
-        value: $("#recoverpwd").val(),
-        name: $("#username").val()
-    };
+    let data = { value: $("#recoverpwd").val(), name: $("#username").val() };
 
     option = {
         method: 'POST',
@@ -35,33 +38,18 @@ $("#btnEnviPwd").click(() => {
         url: `${BASE_URL}/manager/${func}`,
         dataType: "json",
         data,
-        success: (res) => {
-            if (res) 
-                if(!res.error) {
-                    if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
-                    $(".alert")
-                        .addClass("alert-success")
-                        .text("Enviado com sucesso! verifique seu e-mail")
-                        .append(`<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>`);
-                } else {
-                    $(".alert")
-                        .addClass("alert-danger")
-                        .text("Verifique os dados!")
-                        .append(`<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>`);;
-                } 
+        beforeSend: () => $(this).prop("disabled",true),
+        complete: () => $(this).prop("disabled",false),
+        success: res => {
+            if(res.error) $("#alert").addClass("alert-danger").text("Verifique os dados!");
+
+            if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
+                
+            $("#alert").addClass("alert-success").text("Enviado com sucesso! verifique seu e-mail");
         },
-        error: (err) => {
-            
-            alertify.error("Ocorreu um erro no servidor!");
-        }
+        error: err => alertify.error("Ocorreu um erro no servidor!")
     }
 
-    if($("#checkChave").val() == 0) if(!isValidEmail( $("#recoverpwd").val() )) return $("#recoverpwd").addClass("formError");
-    
-    if($("#username").val().length == 0) return $("#username").addClass("formError");
-    if($("#recoverpwd").val().length == 0 ) return $("#recoverpwd").addClass("formError");
-    
-    $("#recoverpwd").removeClass("formError");
     reqAjax(option);
 
 })

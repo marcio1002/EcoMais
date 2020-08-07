@@ -4,21 +4,17 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 use Ecomais\Web\Bundles;
 
 
-if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) session_start();
+if (session_status() == PHP_SESSION_DISABLED || 
+    session_status() == PHP_SESSION_NONE) 
+    session_start(['read_and_close'  => true]);
+
 $expire = time();
-if($expire > $_SESSION['ssioninfo']["timestamp"]) {
-  session_unset();
-  session_destroy();
-}
 
-$session_id = session_id();
+if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $expire) {
 
-if (isset($_SESSION['ssioninfo'])) {
-  $ssion_id = $_SESSION['ssioninfo']["ssion_id"];
-  $tnk = $_SESSION['ssioninfo']["tnk"];
-  if ((strcasecmp($ssion_id, $session_id) != 0) || (strcasecmp($tnk, $v["token"]) != 0)) {
-    header("location: " . renderUrl("/recuperarsenha"));
-  }
+  if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (strcasecmp($_SESSION['ssioninfo']["tnk"], $token) != 0))
+      header("location: " . renderUrl("/recuperarsenha"));
+      
 } else {
   header("location: " . renderUrl("/recuperarsenha"));
 }
@@ -66,7 +62,7 @@ if (isset($_SESSION['ssioninfo'])) {
               </div>
             </div>
             <div class="d-none">
-              <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?>>
+              <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?? "\"\"" ?>>
             </div>
             <div class="form-row">
               <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">

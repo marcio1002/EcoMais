@@ -52,7 +52,7 @@ $(function () {
 
     $("#inputCep")
         .mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true })
-        .keyup(function (evt) {evt.preventDefault(); if (evt.keyCode == 13) $("#searchCep").trigger("click") });
+        .keypress(evt => { if (evt.keyCode == 13) (evt.preventDefault(),$("#searchCep").trigger("click"));});
 
     $("#searchCep").on("click", async function () {
         try {

@@ -147,19 +147,19 @@ final class Data
      * 3 - Pesquisa trazendo todos os dados com validação também pode usar manipuladores;
      * 4 - Pesquisa simples com colunas específicas;
      * 5 - Pesquisa com colunas específicas e com manipuladores;
-     * 6 - esquisa com colunas específicas e com validação também pode usar manipuladores;
+     * 6 - Pesquisa com colunas específicas e com validação também pode usar manipuladores;
      * 
      * @param string $table
      * Nome da tabela
      * @param string $columns
      * Nome das colunas separada com vírgulas
-     * @param string $where
+     * @param string $preWhere
      * A validação
      * @param int $option
      * Opção de pesquisa
      * @return Data
      */
-    public function show(string $table, string $columns = "", string $prewhere = "", int $option = 1): Data
+    public function show(string $table, string $columns = "", string $preWhere = "", int $option = 1): Data
     {
         try {
             if (empty($table)) throw new DataException("null values", DataException::NOT_IMPLEMENTED);
@@ -173,19 +173,19 @@ final class Data
                     $this->query = $this->pdo->prepare("SELECT * FROM $table");
                     break;
                 case 2:
-                    $this->query = $this->pdo->prepare("SELECT * FROM $table $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT * FROM $table $preWhere");
                     break;
                 case 3:
-                    $this->query = $this->pdo->prepare("SELECT * FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT * FROM $table WHERE $preWhere");
                     break;
                 case 4:
                     $this->query = $this->pdo->prepare("SELECT $columns FROM $table");
                     break;
                 case 5:
-                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table  $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table  $preWhere");
                     break;
                 case 6:
-                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table WHERE $prewhere");
+                    $this->query = $this->pdo->prepare("SELECT $columns FROM $table WHERE $preWhere");
                     break;
             }
 

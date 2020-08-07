@@ -11,7 +11,7 @@ class ComponenteElement
         $index = renderUrl();
         $login = renderUrl("/login");
         $urlRegisterCompany = renderUrl("/cadastro/empresa");
-return <<<navBar
+        return <<<navBar
       <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-md fixed-top navbar-dark text-weight-500  bg-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
@@ -40,7 +40,7 @@ navBar;
     public static function footer(): string
     {
         $termsPolicy = renderUrl("/politica-privacidade-termos");
-return <<<footer
+        return <<<footer
     <section class="call-to-action bg-secondary text-white text-center">
         <div class="overlay"></div>
         <div class="container">
@@ -171,7 +171,9 @@ return <<<mail
                                                                     <tbody>
                                                                         <tr>
                                                                             <td style='text-decoration: none;font-weight: 700;font-size: 25px; background-color:#FEF56F;border-radius:4px;border: 1px solid #F1E53D; border-bottom: 3px solid #F1E53D; border-right: 3px solid #F1E53D; padding:20px;' align='center'>
-                                                                                <a style='text-decoration:none' href='$url' style='$font2' target='_blank'>Redefinir minha senha</a> 
+                                                                                <a style='text-decoration:none' href='$url' style='$font2' target='_blank'>
+                                                                                    Redefinir minha senha
+                                                                                </a>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -251,7 +253,7 @@ mail;
 
     public static function load(): string
     {
-return <<<load
+        return <<<load
 <div class="sk-folding-cube">
     <div class="sk-cube1 sk-cube"></div>
     <div class="sk-cube2 sk-cube"></div>
@@ -259,27 +261,27 @@ return <<<load
     <div class="sk-cube3 sk-cube"></div>
 </div>   
 load;
-    // <div class="spinner">
-    //     <div class="rect1"></div>
-    //     <div class="rect2"></div>
-    //     <div class="rect3"></div>
-    //     <div class="rect4"></div>
-    //     <div class="rect5"></div>
-    // </div>
-    // Load cube
-    //<div class="sk-cube-grid">
-    //   <div class="sk-cube sk-cube1"></div>
-    //   <div class="sk-cube sk-cube2"></div>
-    //   <div class="sk-cube sk-cube3"></div>
-    //   <div class="sk-cube sk-cube4"></div>
-    //   <div class="sk-cube sk-cube5"></div>
-    //   <div class="sk-cube sk-cube6"></div>
-    //   <div class="sk-cube sk-cube7"></div>
-    //   <div class="sk-cube sk-cube8"></div>
-    //   <div class="sk-cube sk-cube9"></div>
-    // </div>
+        // <div class="spinner">
+        //     <div class="rect1"></div>
+        //     <div class="rect2"></div>
+        //     <div class="rect3"></div>
+        //     <div class="rect4"></div>
+        //     <div class="rect5"></div>
+        // </div>
+        // Load cube
+        //<div class="sk-cube-grid">
+        //   <div class="sk-cube sk-cube1"></div>
+        //   <div class="sk-cube sk-cube2"></div>
+        //   <div class="sk-cube sk-cube3"></div>
+        //   <div class="sk-cube sk-cube4"></div>
+        //   <div class="sk-cube sk-cube5"></div>
+        //   <div class="sk-cube sk-cube6"></div>
+        //   <div class="sk-cube sk-cube7"></div>
+        //   <div class="sk-cube sk-cube8"></div>
+        //   <div class="sk-cube sk-cube9"></div>
+        // </div>
 
-    //Load Folding em uso
-    
+        //Load Folding em uso
+
     }
 }

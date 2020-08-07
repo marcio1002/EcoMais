@@ -94,22 +94,22 @@ $this->stop();
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="fantasia"><span class='required'>*</span> <b>Fantasia</b></label>
-                            <input type="text" id="fantasia" name="fantasy" <?= $name ?> <?= $name ? "readonly" : "" ?> class="form-control next-item" placeholder="Nome da empresa" data-required="">
+                            <input type="text" id="fantasia" name="fantasy" <?= $name ?> <?= $name ? "readonly" : "" ?> class="form-control nextItem" placeholder="Nome da empresa" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="razao"><span class='required'>*</span> <b>Razão social</b></label>
-                            <input type="text" id="razao" name="reason"  class="form-control next-item" data-required="">
+                            <input type="text" id="razao" name="reason"  class="form-control nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="cnpj"><span class='required'>*</span> <b>CNPJ</b></label>
-                            <input type="text" id="cnpj" name="cnpj" class="form-control next-item" data-required="">
+                            <input type="text" id="cnpj" name="cnpj" class="form-control nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="email"><span class='required'>*</span> <b>E-mail</b></label>
-                            <input type="text" id="email" name="email" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control next-item" data-required="">
+                            <input type="text" id="email" name="email" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
