@@ -1,12 +1,10 @@
 <?php
-namespace Ecomais\Models;
 
-use Ecomais\Models\DataException;
-use TypeError;
+namespace Ecomais\Models;
 
 class Person
 {
-    const ENABLED = true; 
+    const ENABLED = true;
     const DISABLED = false;
 
     protected int $id;
@@ -21,7 +19,7 @@ class Person
     protected string $date;
 
     public function __set($name, $value)
-    {  
+    {
         $this->$name = $value;
     }
 
@@ -42,7 +40,7 @@ class Person
     public function toArray(): array
     {
         $array = array();
-        foreach($this as $key => $val) $array[$key] = $val;
+        foreach ($this as $key => $val) $array[$key] = $val;
         return $array;
     }
 

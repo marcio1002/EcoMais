@@ -11,8 +11,6 @@ class EmailECM  extends EmailProps
      * */
     private $email;
 
-    private $err;
-
     public function __construct()
     {
         $this->email = new PHPMailer(true);

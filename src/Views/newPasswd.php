@@ -26,11 +26,13 @@ if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $
   <meta charset="UTF-8">
   <title>Recuperação de Senha</title>
   <?=
-    Bundles::renderBundle([
-      "css/manipulation",
-      "css/bootstrap",
-      "css/alertify",
-      "css/rsenha"
+    Bundles::renderFileCss([
+      "bootstrap.min",
+      "bootstrap-reboot.min",
+      "bootstrap-grid.min",
+      "alertify.min",
+      "default.min",
+      "rsenha"
     ])
   ?>
 </head>
@@ -79,19 +81,17 @@ if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $
   </div>
 
   <?php
-  echo Bundles::renderJs([
-    "js/jquery",
-    "js/apis",
-    "js/alertify",
-    "js/manipulation",
-  ]);
-  ?>
-  <script src=<?= renderUrl("/src/assets/js/newpasswd.js") ?>></script>
-  <?php
-  echo
-    "<script>
-      const BASE_URL = '" . BASE_URL . "'
-    </script>";
+  echo "<script> const BASE_URL = \"" . BASE_URL . "\"</script>";
+
+  echo Bundles::renderFileJs([  
+    "jquery-3.5.1.min",
+    "jquery.mask",
+    "bootstrap.min",
+    "bootstrap.bundle",
+    "alertify.min",
+    "apis",
+    "manipulation",
+    "newpasswd"]);
   ?>
 </body>
 

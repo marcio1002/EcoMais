@@ -8,14 +8,14 @@ $sql = new Ecomais\ControllersServices\User\UserHandling();
 $user = new Ecomais\Models\Person();
 $implement = new Ecomais\Models\Implementation();
 
-  // if($Implementation->isLogged()) {
+// if($Implementation->isLogged()) {
 
-  //   $user->id = $_COOKIE['_id'];
-  //   $row = $sql->userInfo($user->id);
+//   $user->id = $_COOKIE['_id'];
+//   $row = $sql->userInfo($user->id);
 
-  // } else {
-  //   header("location: " . BASE_URL . "/login");
-  // }
+// } else {
+//   header("location: " . BASE_URL . "/login");
+// }
 
 ?>
 <!DOCTYPE html>
@@ -30,11 +30,17 @@ $implement = new Ecomais\Models\Implementation();
   <meta name="description" content="Conheça a melhor plataforma de descontos de atacarejos. O ecomais vai te mostrar os melhores descontos perto da sua casa.">
   <meta name="keywords" content="descontos,atacarejos,supermercado,compras">
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-  <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style"]);?>
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-  <link rel='stylesheet' href=<?= renderUrl("/src/assets/css/themes/styleComponente.css"); ?> >
+  <?= Bundles::renderFileCss([
+    "bootstrap.min",
+    "bootstrap-reboot.min",
+    "bootstrap-grid.min",
+    "alertify.min",
+    "default.min",
+    "eco.style",
+    "styleComponente"
+  ]) ?>
   <?= $this->section("css"); ?>
-  
   <title>Ecomais | <?= $row ?? "My Webpage" ?></title>
 </head>
 
@@ -49,61 +55,63 @@ $implement = new Ecomais\Models\Implementation();
 
   <section>
     <?php
-      if ($this->section("error")) :
-        echo $this->section("error");
-      else :
-        echo $this->section("content");
-      endif;
+    if ($this->section("error")) :
+      echo $this->section("error");
+    else :
+      echo $this->section("content");
+    endif;
     ?>
   </section>
 
 
   <!-- Footer -->
-  <?= componente::footer()?>
+  <?= componente::footer() ?>
 
-<?php
-    echo Bundles::renderJs([
-          "js/jquery",
-          "js/jqueryMask",
-          "js/bootstrap",
-          "js/alertify",
-          "js/apis",
-          "js/manipulation"
-      ]);
-      
-  echo "<script>
-          const BASE_URL = '" . BASE_URL . "';
-      </script>";
-      echo $this->section("scripts");
-?>
+  <?php
+  echo Bundles::renderFileJs([
+    "jquery-3.5.1.min",
+    "jquery.mask",
+    "bootstrap.min",
+    "bootstrap.bundle",
+    "alertify.min",
+    "apis",
+    "manipulation"
+  ]);
+
+  echo "
+      <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+      <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
+      <script> const BASE_URL = '" . BASE_URL . "'; </script>";
+  echo $this->section("scripts");
+  ?>
 
   <script>
-        $("#btnEnv").click(function() {
-          alertify.set('notifier','position', 'top-right');
-          
-            let val = $("#emailNewsLetter").val().trim();
-            option = {
-                method: 'POST',
-                mycustomtype: "application/json",
-                url: `${BASE_URL}/manager/newsletter`,
-                dataType: "json",
-                data: {
-                    newsletter: val
-                },
-                success: (response) => {
+    $("#btnEnv").click(function() {
+      alertify.set('notifier', 'position', 'top-right');
 
-                    if (response.res) {
-                        $("#emailNewsLetter").val("");
-                        alertify.success("Obrigado! <br/>Agora você recebera nossa newsletter").delay(5);
-                    }
-                },
-                error: () => {}
-            };
+      let val = $("#emailNewsLetter").val().trim();
+      option = {
+        method: 'POST',
+        mycustomtype: "application/json",
+        url: `${BASE_URL}/manager/newsletter`,
+        dataType: "json",
+        data: {
+          newsletter: val
+        },
+        success: (response) => {
 
-            if (val.length > 0) {
-                reqAjax(option);
-            }
-        })
+          if (response.res) {
+            $("#emailNewsLetter").val("");
+            alertify.success("Obrigado! <br/>Agora você recebera nossa newsletter").delay(5);
+          }
+        },
+        error: () => {}
+      };
+
+      if (val.length > 0) {
+        reqAjax(option);
+      }
+    })
   </script>
 
 </body>

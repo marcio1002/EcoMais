@@ -23,8 +23,16 @@ if ($implement->isLogged("empresa")) {
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "fontawesome", "css/eco/style", "css/manipulation"]); ?>
-    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/company/themeCompany.css"); ?> >
+    <?= Bundles::renderFileCss([ 
+        "bootstrap.min", 
+        "bootstrap-reboot.min", 
+        "bootstrap-grid.min", 
+        "alertify.min", 
+        "default.min", 
+        "eco.style",
+        "manipulation",
+        "themeCompany"])
+    ?>    
     <?= $this->section("css"); ?>
     <title><?= "$row[fantasia] | {$subtitle}" ?></title>
 </head>
@@ -36,10 +44,10 @@ if ($implement->isLogged("empresa")) {
             <nav class="nav flex-column layote-navbar align-content-center navigation navbar bg-light position-fixed z-index-1000">
                 <div class="">
                     <!-- Logo -->
-                    <img src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo-medium.png") ?> alt="logo Ecomais" class="img-fluid">
+                    <img src=<?= Bundles::renderFile("ecomais-logo-medium","png","/assets/logos-icons") ?> alt="logo Ecomais" class="img-fluid">
                 </div>
                 <div class="py-5">
-                    <a class="nav-link text-red-wine text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
+                    <a class="nav-link text-red-wine text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa"); ?> title="Create chat" role="tab">
                         <i class="far fa-chart-bar"></i>
                     </a>
 
@@ -102,18 +110,19 @@ if ($implement->isLogged("empresa")) {
     </div>
 
     <?php
-    echo Bundles::renderJs([
-        "js/jquery",
-        "js/jqueryMask",
-        "js/bootstrap",
-        "js/alertify",
-        "js/apis",
-        "js/manipulation"
+    echo Bundles::renderFileJs([
+        "jquery-3.5.1.min",
+        "jquery.mask",
+        "bootstrap.min",
+        "bootstrap.bundle",
+        "alertify.min",
+        "apis",
+        "manipulation"
     ]);
     echo "
-    <script>
-        const BASE_URL = '" . BASE_URL . "';
-    </script>";
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+    <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
+    <script> const BASE_URL = '" . BASE_URL . "'; </script>";
     echo $this->section("scripts");
     ?>
 </body>

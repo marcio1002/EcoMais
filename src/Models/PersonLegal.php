@@ -1,9 +1,7 @@
 <?php
 namespace Ecomais\Models;
 
-use Ecomais\Models\{Person, DataException};
-
-use TypeError;
+use Ecomais\Models\Person;
 
 class PersonLegal extends person 
 {

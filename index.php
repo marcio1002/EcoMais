@@ -17,7 +17,7 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
-require_once __DIR__ . "/src/config.php";
+require_once __DIR__ . "/src/config/config.php";
 
 
 use CoffeeCode\Router\Router;
@@ -95,12 +95,7 @@ $router->namespace("Ecomais\Controllers\Company");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
     $router->put("/updateinfocompany","AccountManagerCompany:updateInfoCompany");
     $router->post("/updateimagecompany","AccountManagerCompany:updateImageCompany");
-
-$router->namespace("Ecomais\Pagseguro");
-    
-    $router->group("manager");
-    $router->get("/paymentinfo","Pagamento:paymentInfo");
-    $router->post("/addpayment","Proc_pag:addPayment");
+    $router->post("/searchcompany","AccountManagerCompany:searchCompany");
 
 $router->namespace("Ecomais\Controllers\Product");
 

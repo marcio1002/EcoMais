@@ -44,10 +44,7 @@ class Implementation
     public function criptImage(array $file): string
     {
         if (empty($file)) throw new DataException("Null file",DataException::NOT_ACCEPTABLE);
-
-        $ext = pathinfo($file["name"],PATHINFO_EXTENSION);
-        $fileName = pathinfo($file["name"],PATHINFO_FILENAME);
-        $this->imageName = strtoupper(uniqid(md5(time() . $fileName))) . "." . $ext;
+        $this->imageName = strtoupper(uniqid(md5(time() . pathinfo($file["name"])["filename"]))) . "." . pathinfo($file["name"])["extension"];
 
         return $this->imageName;
     }
@@ -129,9 +126,9 @@ class Implementation
     public function toObject(array $arr): object
     {
         $object = new class{};
-        foreach($arr as $k => &$v) {
+        foreach($arr as $k => $v) {
             if(is_array($v))
-                foreach($v as $key => &$val) $object->$key = $val;
+                foreach($v as $key => $val) $object->$key = $val;
             else
             $object->$k = $v;
         }  

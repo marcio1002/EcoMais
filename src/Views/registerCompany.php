@@ -28,7 +28,7 @@ if (!empty($code)) {
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 $this->start("css");
-echo  Bundles::renderCss(["css/manipulation"]);
+echo  Bundles::renderFileCss(["manipulation"]);
 $this->stop();
 ?>
 
@@ -274,15 +274,11 @@ $this->stop();
 
 <?php
 $this->start("footer");
-echo ComponenteElement::footer();
+    echo ComponenteElement::footer();
 $this->stop();
 
 $this->start("scripts");
-echo  Bundles::renderJs([
-    "js/mainMethods",
-    "js/manipulation",
-    "js/registerCompany",
-]);
-echo $clearRequest;
+    echo  Bundles::renderFileJs([ "mainMethods", "registerCompany"]);
+    echo $clearRequest;
 $this->stop();
 ?>

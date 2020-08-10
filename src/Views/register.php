@@ -28,7 +28,7 @@ $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 ?>
 <?php
 $this->start("css");
-echo  Bundles::renderCss(["css/manipulation"]);
+  echo  Bundles::renderFileCss(["manipulation"]);
 $this->stop();
 ?>
 
@@ -151,16 +151,12 @@ $this->stop();
 </div>
 <?php
 $this->start("footer");
-echo ComponenteElement::footer();
+  echo ComponenteElement::footer();
 $this->stop()
 ?>
 <?php
 $this->start("scripts");
-echo  Bundles::renderJs([
-  "js/mainMethods",
-  "js/manipulation",
-  "js/register",
-]);
-echo $clearResquest;
+  echo  Bundles::renderFileJs(["register"]);
+  echo $clearResquest;
 $this->stop();
 ?>

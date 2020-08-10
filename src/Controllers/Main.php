@@ -144,7 +144,8 @@ class Main
                 $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
                 
                 echo json_encode(["error" => false, "status" => 200, "token" => $token]);
-            } else echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "chave inválida"]);
+            } else 
+                echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "chave inválida"]);
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
@@ -175,7 +176,8 @@ class Main
                 $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
 
                 echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
-            } else  echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "ok"]);
+            } else  
+                echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Verifique os dados"]);
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {

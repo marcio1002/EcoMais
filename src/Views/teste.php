@@ -17,33 +17,41 @@ $products->fkCompany = 11;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?= Bundles::renderCss(["css/bootstrap", "css/alertify", "css/dataTable", "css/eco/style"]) ?>
-    <link rel="stylesheet" href=<?= renderUrl("/src/assets/css/themes/tableproduct.css") ?>>
+    <?= Bundles::renderFileCss([
+        "bootstrap.min",
+        "bootstrap-reboot.min",
+        "bootstrap-grid.min",
+        "alertify.min",
+        "dataTable.min",
+        "default.min",
+        "eco.style",
+        "tableproduct"])?>
     <title>Teste</title>
 </head>
 
 <body>
 
-<?php
+    <?php
+
+    echo substr(__DIR__,22,strlen(__DIR__));
 
     $row = $prod->searchProd($products);
 
-    if (count($row) > 0) {
-        foreach ($row as $val) $data = $implement->toObject($val);
-        $url = BASE_URL;
-        echo "<img src=\"$url\\{$data->imagem}\"/>";
-    }
-
-    echo Bundles::renderJs([
-        "js/jquery",
-        "js/jqueryMask",
-        "js/bootstrap",
-        "js/alertify",
-        "js/dataTable",
-        "js/manipulation",
-        "js/apis",
-    ]);
-
+    // if (count($row) > 0) {
+    //     foreach ($row as $val) $data = $implement->toObject($val);
+    //     $url = BASE_URL;
+    //     echo "<img src=\"$url\\{$data->imagem}\"/>";
+    // }
+    echo Bundles::renderFileJs([
+        "popper.min",   
+        "jquery-3.5.1.min",
+        "jqueryMask.mask",
+        "bootstrap.min",
+        "bootstrap.bundle",
+        "alertify.min",
+        "dataTable.min",
+        "manipulation",
+        "apis"]);
     echo
         "
         <script>

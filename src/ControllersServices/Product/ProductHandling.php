@@ -67,18 +67,38 @@ class ProductHandling {
     public function searchProd(Product $prod): ?array
     {
         try{
+            $data = [];
+            $data_type = [];
+            $where = "null";
+
+            if(!empty($prod->fkCompany)) {
+                $where = str_replace("null","",$where);
+                $where .= "e.id_empresa = ?";
+                array_push($data,$prod->fkCompany);
+                array_push($data_type,PDO::PARAM_INT);
+            }
+            if(!empty($prod->name)) {
+                $where = str_replace("null","",$where);
+                $where .= "p.nome = ?";
+                array_push($data,$prod->name);
+                array_push($data_type,PDO::PARAM_STR);
+            }
+            if(!empty($prod->classification)) {
+                $where = str_replace("null","",$where);
+                $where .= "p.classificacao = ?";
+                array_push($data,$prod->classification);
+                array_push($data_type,PDO::PARAM_STR);
+            }
 
             $this->sql->open();
            return $this->sql
             ->show(
                 "produto AS p INNER JOIN empresa AS e ON p.id_empresa = e.id_empresa",
                 "p.*, e.id_empresa,e.fantasia, e.cnpj,e.email,e.contato,e.cidade, e.endereco,e.uf,e.imagem",
-                "e.id_empresa = ?",
+                $where,
                 6
             )
-            ->prepareParam(
-                [$prod->fkCompany],
-                [PDO::PARAM_INT])
+            ->prepareParam($data, $data_type)
             ->executeSql();
         }catch(DataException $ex){
             throw $ex;

@@ -15,7 +15,7 @@ $(function () {
     $("#typePackage").append(`
       <option value="10">Sacolinha</option>
       <option value="20">Cestinha</option>
-      <option value="30">Carrinho</option>
+      <option value="30">⭐Carrinho</option>
   `).val(typePackage);
 
 

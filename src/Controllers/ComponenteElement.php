@@ -39,8 +39,8 @@ navBar;
 
     public static function footer(): string
     {
-        $termsPolicy = renderUrl("/politica-privacidade-termos");
-        return <<<footer
+        $termsPolicy = renderUrl("/politica-privacidade-e-termos");
+return <<<footer
     <section class="call-to-action bg-secondary text-white text-center">
         <div class="overlay"></div>
         <div class="container">
@@ -253,13 +253,13 @@ mail;
 
     public static function load(): string
     {
-        return <<<load
-<div class="sk-folding-cube">
-    <div class="sk-cube1 sk-cube"></div>
-    <div class="sk-cube2 sk-cube"></div>
-    <div class="sk-cube4 sk-cube"></div>
-    <div class="sk-cube3 sk-cube"></div>
-</div>   
+return <<<load
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>   
 load;
         // <div class="spinner">
         //     <div class="rect1"></div>

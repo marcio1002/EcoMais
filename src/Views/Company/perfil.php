@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../../vendor/autoload.php";
 
 $comp = new Ecomais\Controllers\Company\AccountManagerCompany();
 
-$this->layout("_theme", ["subtitle" => "Seu Perfil"]);
+$this->layout("_theme", ["subtitle" => "Meu Perfil"]);
 
 $this->start("css");
 ?>

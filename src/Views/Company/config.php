@@ -14,7 +14,7 @@ if (isset($this->data)) {
       $package = "<option value='20' selected>Cestinha</option>";
       break;
     case "30":
-      $package = "<option value='30' selected>Carrinho</option>";
+      $package = "<option value='30' selected>⭐Carrinho</option>";
       break;
   }
 }

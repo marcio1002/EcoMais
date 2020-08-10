@@ -48,7 +48,7 @@ const datetime = {
    },
    
    formatDate(string) {
-      const date = string.split("-").reverse().join("/");
+      const date = string.split(" ")[0].split("-").reverse().join("/");
       if(date) return date;
       return "";
    },
@@ -64,6 +64,10 @@ const datetime = {
    }
 }
 
+
+function isMobile() {
+   return ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )  ?  true : false;
+}
 /**
  * 
  * @param {String} url 

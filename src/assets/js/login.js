@@ -17,7 +17,7 @@ $('#btnLogar').click( function()  {
         passwd: $('#inputPwd').val(),
         conectedLogin: $('#manterConectado').is(":checked") ? 18 : 0
     };
-    option = {
+    const option = {
         method: 'POST',
         mycustomtype: "application/json",
         url: `${BASE_URL}/manager/login`,
@@ -25,7 +25,6 @@ $('#btnLogar').click( function()  {
         data,
         complete: e => $(this).attr("disabled",false),
         success: (res) => {
-            if (typeof res == undefined || !res) throw new TypeError("Object null");
             if (res.error) {
                 if (res.status == 400) {
                     $("#inputEmail").addClass("formError");

@@ -9,7 +9,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
 
 <?
   $this->start("css");
-    Bundles::renderCss(["css/alertify"]);
+    Bundles::renderFileCss(["alertify"]);
   $this->stop();
 ?>
 
@@ -99,7 +99,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
       </ol>
       <div class="carousel-inner ">
         <div class="carousel-item active after-color">
-          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missao">
+          <img src=<?= Bundles::renderFile("frutas-e-legumes","png","/assets/imgs"); ?> class="d-block w-100" alt="missao">
           <div class="carousel-caption d-none d-md-block">
             <h2>Impacto Positivo</h2>
             <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -107,7 +107,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
           </div>
         </div>
         <div class="carousel-item after-color ">
-          <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="iamgem de negocios">
+          <img src=<?= Bundles::renderFile("supermarket","png","/assets/imgs"); ?> class="d-block w-100" alt="iamgem de negocios">
           <div class="carousel-caption d-none d-md-block">
             <h2>Benefícios para os consumidores</h2>
             <p class=""> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
@@ -116,7 +116,7 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
           </div>
         </div>
         <div class="carousel-item after-color">
-          <img src=<?= renderUrl("/src/assets/imgs/carrinho-com-compras.png"); ?> class="d-block w-100" alt="Mercado">
+          <img src=<?= Bundles::renderFile("carrinho-com-compras","png","/assets/imgs"); ?> class="d-block w-100" alt="Mercado">
           <div class="carousel-caption d-none d-md-block">
             <h2>Mais que um simples negócio, uma missão</h2>
             <p> A equipe EcoMais zela pelo meio ambiente e pelo cuidado com planeta</p>
@@ -136,6 +136,6 @@ $this->layout("_theme", ["title" => "EcoMais - Home"]);
 </div>
 <?php
 $this->start("footer");
-echo ComponenteElement::footer();
+  echo ComponenteElement::footer();
 $this->stop()
 ?>

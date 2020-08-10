@@ -1,7 +1,7 @@
 <?php
 namespace Ecomais\ControllersServices\Company;
 
-use Ecomais\Models\{Implementation,DataException, Pagamento, PersonLegal};
+use Ecomais\Models\{Implementation,DataException, PersonLegal};
 use Ecomais\Services\Data;
 use PDO;
 
@@ -43,7 +43,7 @@ class CompanyHandling {
             $this->sql->open();
             return $this->sql
             ->show("empresa","id_empresa,fantasia,imagem","statusconta = ? AND pacote = ?",6)
-            ->prepareParam([true,"30"],[PDO::PARAM_BOOL,PDO::PARAM_STR])
+            ->prepareParam([PersonLegal::ENABLED,"30"],[PDO::PARAM_BOOL,PDO::PARAM_STR])
             ->executeSql();
 
         }catch(DataException $ex){
@@ -58,7 +58,8 @@ class CompanyHandling {
         try{
             $this->sql->open();
             return $this->sql
-            ->show("empresa","","statusconta = true",3)
+            ->show("empresa","","statusconta = ?",3)
+            ->prepareParam([PersonLegal::ENABLED])
             ->executeSql();
 
         }catch(DataException $ex){
@@ -93,8 +94,8 @@ class CompanyHandling {
         try{
             $this->sql->open();
             return $this->sql
-                ->show("empresa","","statusconta = true AND id_empresa = ?",3)
-                ->prepareParam([$emp->id],[PDO::PARAM_INT])
+                ->show("empresa","","statusconta = ? AND id_empresa = ?",3)
+                ->prepareParam([PersonLegal::ENABLED,$emp->id],[PDO::PARAM_INT])
                 ->executeSql();
 
         }catch(DataException $ex){
@@ -137,6 +138,34 @@ class CompanyHandling {
                 ->update("empresa","imagem = ?","id_empresa = ?")
                 ->prepareParam([$emp->image, $emp->id])
                 ->execNotRowSql();
+
+        }catch(DataException $ex) {
+            throw $ex;
+        }finally {
+            $this->sql->close();
+        }
+    }
+
+    public function searchCompany(PersonLegal $emp): ?array
+    {
+        try{
+            $where = "null";
+            $data = [];
+           if(!empty($emp->uf) && !empty($emp->locality)) {
+               $where = str_replace("null","",$where);
+                $where =  "(uf = ? OR  cidade = ?) AND statusconta = ?";
+                array_push($data,$emp->uf, $emp->locality, PersonLegal::ENABLED);
+            }
+            if(!empty($emp->fantasy)) {
+                $where = str_replace("null","",$where);
+                $where = "fantasia = ? AND statusconta = ?";
+                array_push($data,$emp->fantasy, PersonLegal::ENABLED );
+            } 
+            $this->sql->open();
+            return $this->sql
+            ->show("empresa","id_empresa,fantasia,imagem",$where,6)
+            ->prepareParam($data)
+            ->executeSql();
 
         }catch(DataException $ex) {
             throw $ex;

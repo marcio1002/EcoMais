@@ -2,7 +2,7 @@
 
 namespace Ecomais\Controllers\Product;
 
-use Ecomais\Models\{DataException, Product, Implementation};
+use Ecomais\Models\{DataException, Product};
 use Ecomais\ControllersServices\Product\ProductHandling;
 
 class ProductManager
@@ -53,9 +53,9 @@ class ProductManager
             foreach($param as $k => $v) $this->prod->$k = $v;
 
             if($this->sql->updateStatusProduc($this->prod))
-                echo json_encode(["error" => false, "status" => 204, "msg" => "ok"]); 
+                echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "msg" => "ok"]); 
             else
-                echo json_encode(["error" => true, "status" => 404, "msg" => "0 rows affected"]);
+                echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "0 rows affected"]);
         }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         }
@@ -67,9 +67,9 @@ class ProductManager
             foreach($param as $k => $v) $this->prod->$k = $v;
 
             if($row =  $this->sql->searchProd($this->prod))
-                echo json_encode(["error" => false, "status" => 204, "data" => $row]); 
+                echo json_encode(["error" => false, DataException::NOT_CONTENT, "data" => is_array($row)? $row : [$row]]); 
             else
-                echo json_encode(["error" => false, "status" => 404, "data" => []]);
+                echo json_encode(["error" => true, DataException::NOT_FOUND, "data" => []]);
         }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         }

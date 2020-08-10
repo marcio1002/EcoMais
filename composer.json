@@ -27,8 +27,8 @@
             "Ecomais\\": "src/"
         },
         "files": [
-            "src/config.php",
-            "src/filesBundles.php"
+            "src/config/config.php",
+            "src/config/paramsConfig.php"
         ]
     },
     "repositories": [

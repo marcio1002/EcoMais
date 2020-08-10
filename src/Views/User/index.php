@@ -15,20 +15,20 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
           <div class="form-row">
             <div class="col-12 col-md-9 mb-2 mb-md-0">
               <div class="input-group">
-                <input type="text" class="form-control form-control-lg">
+                <input type="text" id="search" class="form-control form-control-lg">
                 <div class="input-group-append">
-                  <select name="category" id="category" class="custom-select border-0 remove-focus h-auto">
+                  <select name="" id="option" autocomplete="on" autofocus="true" autocorrect="on" class="custom-select border-0 remove-focus h-auto">
                     <option value="" disabled selected>opção</option>
                     <option value="4">Região</option>
-                    <option value="6">Produto</option>
+                    <option value="5">Produto</option>
                     <option value="6">Atacados</option>
-                    <option value="6">Categoria</option>
+                    <option value="7">Categoria</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-12 col-md-3">
-              <button type="button" class="btn btn-block remove-focus btn-lg bg-red-wine text-white font-weight-bold">Pesquisar!</button>
+              <button type="button" id="btnSearch" class="btn btn-block remove-focus btn-lg bg-red-wine text-white font-weight-bold">Pesquisar!</button>
             </div>
           </div>
         </form>
@@ -52,12 +52,12 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
   </div>
 </section>
 
-<!-- Icons Grid -->
+<!-- Icons Conteúdo -->
 <section class="features-icons bg-white text-center">
   <div class="col-12">
-    <div class="row m-auto">
-      <div class="col-xl-3 px-3 col-md-6 col-sm-12">
-        <div class="card  text-white shadow-lg border-radius-30 pointer hover-animate" style="width: 18rem;">
+    <div class="row">
+      <div class="col-xl-3 col-md-6 col-sm-12 py-3">
+        <div class="card text-white shadow-lg border-radius-30 pointer hover-animate m-auto" style="width: 18rem;">
           <div class="card-after-color"></div>
           <a href="http://" class="position-absolute w-100 h-100" style="z-index:1"></a>
           <img class="card-img-top img-fluid" src=<?= renderUrl("/src/assets/imgs/fruta.jpg"); ?> alt="Imagem de fruta">
@@ -66,8 +66,8 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 col-sm-12">
-        <div class="card text-white shadow-lg border-radius-30 pointer hover-animate" style="width: 18rem;">
+      <div class="col-xl-3 col-md-6 col-sm-12 py-3">
+        <div class="card text-white shadow-lg border-radius-30 pointer hover-animate m-auto" style="width: 18rem;">
           <div class="card-after-color"></div>
           <a href="http://" class="position-absolute w-100 h-100" style="z-index:1"></a>
           <img class="card-img-top img-fluid" src=<?= renderUrl("/src/assets/imgs/verduras.jpg"); ?> alt="Imagem de fruta">
@@ -76,9 +76,9 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
           </div>
         </div>
       </div>
-      <div class=" col-xl-3 col-md-6 col-sm-12">
-        <div class="card text-white  position-relative shadow-lg border-radius-30 pointer hover-animate" style="width: 18rem;">
-          <div class="card-after-color"></div>
+      <div class="col-xl-3 col-md-6 col-sm-12 py-3">
+        <div class="card text-white  position-relative shadow-lg border-radius-30 pointer hover-animate m-auto" style="width: 18rem;">
+          <div class="card-after-color "></div>
             <a href="http://" class="position-absolute w-100 h-100" style="z-index:1"></a>
             <img class="card-img-top img-fluid" src=<?= renderUrl("/src/assets/imgs/carnes-congeladas.jpg"); ?> alt="Imagem de fruta">
           <div class="card-img-overlay overlay-content">
@@ -86,8 +86,8 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
           </div>
         </div>
       </div>
-      <div class=" col-xl-3 col-md-6 col-sm-12">
-        <div class="card text-white  shadow-lg border-radius-30 pointer hover-animate" style="width: 18rem;">
+      <div class="col-xl-3 col-md-6 col-sm-12 py-3">
+        <div class="card text-white  shadow-lg border-radius-30 pointer hover-animate m-auto" style="width: 18rem;">
           <div class="card-after-color"></div>
           <a href="http://" class="position-absolute w-100 h-100" style="z-index:1"></a>
           <img class="card-img-top img-fluid" src=<?= renderUrl("/src/assets/imgs/produtos-limpeza.jpg"); ?> alt="Imagem de fruta">
@@ -101,4 +101,5 @@ $this->layout("_theme", ["title" => "EcoMais - My Home"]);
 </section>
 <?php $this->start("scripts"); ?>
 <script src=<?= renderUrl("/src/assets/js/user/index.js");?> ></script>
+<script src=<?= renderUrl("/src/assets/js/user/search.js");?> ></script>
 <?php $this->stop(); ?>

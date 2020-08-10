@@ -4,7 +4,7 @@ $(function () {
 
 
     function createTable() {
-        $("#list-product").append(`<table id="table" class="table table-striped table-bordered bg-dark text-white w-100"></table>`);
+        $("#list-product").append(`<table id="table" class="table table-striped table-bordered table-dark text-white w-100"></table>`);
         $("#list-product #table").append(`<thead id="thead" class="thead bg-light text-red-wine font-weight-bold"></thead>`);
         $("#list-product #table").append(`<tbody id="tbody" class='text-center'></tbody>`);
 

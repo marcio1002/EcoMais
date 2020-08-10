@@ -15,11 +15,15 @@ $("#recoverpwd").keypress(function(e) {
         e.preventDefault();
         $("#btnEnviPwd").click();
     }
+}).focusout(function() {
+    $(this).removeClass("formError");
+    if($("#checkChave").val() == 0)
+        if(!isValidEmail( $(this).val() )) return $(this).addClass("formError");
 })
 
-$("#btnEnviPwd").click(() => {
+$("#btnEnviPwd").click(function() {
 
-    $("input").removeClass("formError");
+    $("input").removeClass("formError, alert-success, alert-danger");
 
     if($("#username").val().length == 0) return $("#username").addClass("formError");
     if($("#recoverpwd").val().length == 0 ) return $("#recoverpwd").addClass("formError");
@@ -41,7 +45,7 @@ $("#btnEnviPwd").click(() => {
         beforeSend: () => $(this).prop("disabled",true),
         complete: () => $(this).prop("disabled",false),
         success: res => {
-            if(res.error) $("#alert").addClass("alert-danger").text("Verifique os dados!");
+            if(res.error) return $("#alert").addClass("alert-danger").text(res.msg);
 
             if(res.token) return location.href = `${BASE_URL}/recuperarsenha/novasenha/${res.token}`;
                 

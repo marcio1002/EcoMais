@@ -15,12 +15,6 @@ use PDOException;
 
 final class Data
 {
-    const  PARAM_HOST = 'localhost';
-    const  PARAM_USER = 'root';
-    const  PARAM_PASSWD = '';
-    const  PARAM_DATA = 'bdecomais';
-    const  TYPE_SBGD = 'mysql';
-    const PARAM_PORT = "3305";
     const OPTIONS =
     array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -43,9 +37,9 @@ final class Data
     {
         if (!isset($this->pdo) || $this->pdo === null) {
             $this->pdo = new PDO(
-                DATA::TYPE_SBGD . ":host=" . Data::PARAM_HOST . ";port=" . Data::PARAM_PORT . ";dbname=" . Data::PARAM_DATA,
-                Data::PARAM_USER,
-                DATA::PARAM_PASSWD,
+                BD_CONFIG["TYPE"] . ":host=" . BD_CONFIG["HOST"] . ";port=" . BD_CONFIG["PORT"] . ";dbname=" . BD_CONFIG["NAME"],
+                BD_CONFIG["USER"],
+                BD_CONFIG["PASSWD"],
                 DATA::OPTIONS
             )
                 or
@@ -202,20 +196,20 @@ final class Data
      * Atualiza os dados
      * @param  string $table
      * Nome da tabela
-     * @param string $colums
+     * @param string $columns
      * Os nomes das colunas que serão atualizados exem:
-     * name = ?, addres = ?
+     * name = ?, address = ?
      * @param string $where
      * A validação
      * @return Data
      */
-    public function update(string $table, string $colums, string $where): Data
+    public function update(string $table, string $columns, string $where): Data
     {
         try {
-            if (empty($table) || empty($colums) || empty($where) ) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
+            if (empty($table) || empty($columns) || empty($where) ) throw new DataException("null values", DataException::NOT_ACCEPTABLE);
 
             $this->pdo->beginTransaction();
-            $this->query = $this->pdo->prepare("UPDATE $table SET $colums WHERE $where");
+            $this->query = $this->pdo->prepare("UPDATE $table SET $columns WHERE $where");
 
         } catch (Exception $ex) {
             throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);

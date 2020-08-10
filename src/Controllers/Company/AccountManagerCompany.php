@@ -32,6 +32,34 @@ class AccountManagerCompany
         "jp2",
         "jpx",
     );
+    private static $locality = array(
+        "AC" => "acre",
+        "AL" => "alagoas",
+        "AP" => "amapá",
+        "AM" => "amazonas",
+        "BA" => "bahia",
+        "CE" => "ceara",
+        "DF" => "distrito federal",
+        "ES" => "espírito santo",
+        "GO" => "goias",
+        "MA" => "maranhão",
+        "MS" => "mato grosso do sul",
+        "MG" =>"mina gerais",
+        "PA" => "para",
+        "PB" => "paraiba",
+        "PR" => "parana",
+        "PE" => "pernambuco",
+        "PI" => "piauí",
+        "RJ" => "rio de janeiro",
+        "RN" => "rio grande do norte",
+        "RS" => "rio grande do sul",
+        "RO" => "rondônia",
+        "rr" => "roraima",
+        "SC" => "santa catarina",
+        "SP" => "são paulo",
+        "SE" => "sergipe",
+        "TO" => "tocantins"
+    );
     private CompanyHandling $handling;
     private PersonLegal $emp;
     private Implementation $implement;
@@ -155,6 +183,30 @@ class AccountManagerCompany
 
             }
             
+        }catch(DataException $ex) {
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
+        }
+    }
+
+    public function searchCompany($param): void
+    {
+        try {
+
+            foreach ($param as $k => $v) {
+                if($k == "uf") {
+                    foreach(static::$locality as $prefix => $locality) {
+                        if($locality == $v) $this->emp->$k = $prefix;
+                    }
+                }else {
+                    $this->emp->$k = $v;
+                }
+            }
+
+            if ($row = $this->handling->searchCompany($this->emp)) 
+                    echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "data" => is_array($row)? $row : [$row] ]);
+                 else 
+                    echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "data" => []]);
+
         }catch(DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
         }
