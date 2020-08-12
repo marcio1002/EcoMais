@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../vendor/autoload.php";
+$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 use Ecomais\Controllers\ComponenteElement;
 use Ecomais\Web\Bundles;
@@ -25,7 +25,6 @@ if (!empty($code)) {
         $clearRequest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
     }
 }
-$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 $this->start("css");
 echo  Bundles::renderFileCss(["manipulation"]);

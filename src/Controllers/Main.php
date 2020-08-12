@@ -120,7 +120,7 @@ class Main
         if (!empty($_COOKIE['_id']) && !empty($_COOKIE['_token'])) {
             setcookie('_id', "", 0, "/");
             setcookie('_token', "", 0, "/");
-            session_destroy();
+            session_unset();
 
             echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
         } else {

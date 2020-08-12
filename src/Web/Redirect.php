@@ -5,7 +5,7 @@ namespace Ecomais\Web;
 use Ecomais\Controllers\Company\AccountManagerCompany;
 use League\Plates\Engine;
 
-class  Router
+class  Redirect
 {
     private Engine $view;
     private AccountManagerCompany $comp;

@@ -1,2 +1,4 @@
 vendor/
 .vscode/settings.json
+
+src/uploads/imageCompany/*

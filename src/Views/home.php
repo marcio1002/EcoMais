@@ -1,13 +1,9 @@
 <?php
-require_once __DIR__ . "/../../vendor/autoload.php";
+$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 use Ecomais\Web\Bundles;
 use Ecomais\Controllers\ComponenteElement;
 
-$this->layout("_theme", ["title" => "EcoMais - Home"]);
-?>
-
-<?
   $this->start("css");
     Bundles::renderFileCss(["alertify"]);
   $this->stop();

@@ -44,8 +44,8 @@ class AccountManagerCompany
         "GO" => "goias",
         "MA" => "maranhão",
         "MS" => "mato grosso do sul",
-        "MG" =>"mina gerais",
-        "PA" => "para",
+        "MG" => "minas gerais",
+        "PA" => "pará",
         "PB" => "paraiba",
         "PR" => "parana",
         "PE" => "pernambuco",
@@ -194,9 +194,7 @@ class AccountManagerCompany
 
             foreach ($param as $k => $v) {
                 if($k == "uf") {
-                    foreach(static::$locality as $prefix => $locality) {
-                        if($locality == $v) $this->emp->$k = $prefix;
-                    }
+                  if(in_array(strtolower($v),static::$locality))  $this->emp->$k =  array_search(strtolower($v),static::$locality);
                 }else {
                     $this->emp->$k = $v;
                 }

@@ -1,6 +1,4 @@
 <?php 
-require_once __DIR__ . "/../../vendor/autoload.php";
-
 $this->layout("_theme", ["title" => "Ecomais - $errCode"]);
 
 $this->start("error");

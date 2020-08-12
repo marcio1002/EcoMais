@@ -1,6 +1,4 @@
-<?php
-$this->layout("_theme", ["title" => "EcoMais - My Home"]);
-?>
+<?php $this->layout("_theme", ["title" => "EcoMais - My Home"]); ?>
 
 <!-- Masthead -->
 <header class="masthead text-white text-center">

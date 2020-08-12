@@ -1,15 +1,14 @@
 <?php
-  require_once __DIR__ . "/../../../vendor/autoload.php";
+$this->layout("_theme", ["title" => "EcoMais - My Home"]);
 
 use Ecomais\Controllers\ComponenteElement;
 use Ecomais\Web\Bundles;
 
-  $this->layout("_theme", ["title" => "EcoMais - My Home"]);
 
-  $this->start("css");
-    echo Bundles::renderFileCss(["load","datatables.min"]);
-    echo Bundles::renderFileCss(["dataTables.bootstrap4.min"],"/assets/css/dataTable/themes");
-  $this->stop();
+$this->start("css");
+  echo Bundles::renderFileCss(["load","datatables.min"]);
+  echo Bundles::renderFileCss(["dataTables.bootstrap4.min"],"/assets/css/dataTable/themes");
+$this->stop();
 ?>
 
 <div class="col-12 p-4 bg-dark">

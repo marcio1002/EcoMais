@@ -1,4 +1,5 @@
 <?php
+$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 use Ecomais\Web\Bundles;
 use Ecomais\Controllers\ComponenteElement;
@@ -24,7 +25,7 @@ if (!empty($code)) {
     $clearResquest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
   }
 }
-$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
+
 ?>
 <?php
 $this->start("css");

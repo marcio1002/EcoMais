@@ -12,7 +12,7 @@
  */
 
 /*
- * Rotas mostrada para o usuario são mostrada em português (pt-BR)
+ * Rotas vista pelos usuários são mostrada em português (pt-BR)
  */
 
 require __DIR__ . "/vendor/autoload.php";
@@ -20,12 +20,10 @@ require __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/src/config/config.php";
 
 
-use CoffeeCode\Router\Router;
+$router = new CoffeeCode\Router\Router(BASE_URL);
 
 ob_start();
 ob_clean();
-$router = new Router(BASE_URL);
-
 /**
  * @namespace Web
  * @link pagina principal 
@@ -34,33 +32,33 @@ $router = new Router(BASE_URL);
 $router->namespace("Ecomais\Web");
 
     $router->group(null);
-    $router->get("/", "Router:home");
-    $router->get("/login", "Router:login");
-    $router->get("/cadastro", "Router:register");
-    $router->get("/cadastro/empresa","Router:registerCompany");
-    $router->get("/recuperarsenha", "Router:recoverPasswd");
-    $router->get("/recuperarsenha/novasenha/{token}","Router:newPasswd");
-    $router->get("/politica-privacidade-e-termos", "Router:terms");
-    $router->get("/teste/{chv}","Router:test");
+    $router->get("/", "Redirect:home");
+    $router->get("/login", "Redirect:login");
+    $router->get("/cadastro", "Redirect:register");
+    $router->get("/cadastro/empresa","Redirect:registerCompany");
+    $router->get("/recuperarsenha", "Redirect:recoverPasswd");
+    $router->get("/recuperarsenha/novasenha/{token}","Redirect:newPasswd");
+    $router->get("/politica-privacidade-e-termos", "Redirect:terms");
+    $router->get("/teste/{chv}","Redirect:test");
 
     $router->group("error");
-    $router->get("/{errCode}", "Router:typeError");
+    $router->get("/{errCode}", "Redirect:typeError");
 
 /**
  * @group Empresa
  */
     $router->group("empresa");
-    $router->get("/","Router:indexCompany");
-    $router->get("/configuracoes","Router:configCompany");
-    $router->get("/cadastro-de-produtos","Router:registerProduct");
-    $router->get("/perfil","Router:perfilCompany");
+    $router->get("/","Redirect:indexCompany");
+    $router->get("/configuracoes","Redirect:configCompany");
+    $router->get("/cadastro-de-produtos","Redirect:registerProduct");
+    $router->get("/perfil","Redirect:perfilCompany");
 
 /**
  * @group User
  */
     $router->group("usuario");
-    $router->get("/","Router:indexUser");
-    $router->get("/listadeprodutos","Router:listProduct");
+    $router->get("/","Redirect:indexUser");
+    $router->get("/listadeprodutos","Redirect:listProduct");
 
 /**
  * @namespace Controller

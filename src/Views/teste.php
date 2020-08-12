@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../vendor/autoload.php";
+require_once dirname(__DIR__,2) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
 
@@ -32,16 +32,14 @@ $products->fkCompany = 11;
 <body>
 
     <?php
-
-    echo substr(__DIR__,22,strlen(__DIR__));
-
     $row = $prod->searchProd($products);
 
-    // if (count($row) > 0) {
-    //     foreach ($row as $val) $data = $implement->toObject($val);
-    //     $url = BASE_URL;
-    //     echo "<img src=\"$url\\{$data->imagem}\"/>";
-    // }
+    if (count($row) > 0) {
+        print_r(array_filter($row[0],fn ($val) => !!(mb_stripos($val,"ma"))));
+        foreach ($row as $val) $data = $implement->toObject($val);
+        $url = BASE_URL;
+        echo "<img src=\"$url\\{$data->imagem}\"/>";
+    }
     echo Bundles::renderFileJs([
         "popper.min",   
         "jquery-3.5.1.min",
