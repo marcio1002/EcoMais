@@ -48,7 +48,7 @@ class Main
                 $this->usr->id = $row[is_numeric($param['value']) ? "id_empresa" : "id_usuario"];
 
                 $this->sql->verifyUpdateHash($row['senha'], $this->usr);
-
+                session_name(hash("crc32","ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
                 if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) 
@@ -94,7 +94,7 @@ class Main
                 $expire = (${$connected} == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
                 $token =  hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
 
-                session_name($token);
+                session_name(hash("crc32","ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
                 if (session_status() == PHP_SESSION_DISABLED || 
@@ -129,19 +129,21 @@ class Main
         if (session_status() == PHP_SESSION_ACTIVE) session_destroy();
     }
 
-    public function recoverByKey(array $param): void
+    public function recoverByKey(array $params): void
     {
         try {
-            $token = $this->implement->createToken($param["value"]);
-            if ($this->sql->recoverByKey(trim($param["value"]))) {
+            $token = $this->implement->createToken($params["value"]);
+            $row = $this->sql->recoverByKey(trim($params["value"]),15);
+            $row2 = $this->sql->recoverByKey(trim($params["value"]),10);
+            if (count($row) > 0 || count($row2) > 0) {
                 session_cache_expire(time() + (2 * 3600));
-                session_id(md5($param['name'] . "ECOID"));
+                session_id(md5($params['name'] . "ECOID"));
 
                 if(session_status() == PHP_SESSION_DISABLED || 
                     session_status() == PHP_SESSION_NONE)
                     session_start();
 
-                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
+                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $params["value"]];
                 
                 echo json_encode(["error" => false, "status" => 200, "token" => $token]);
             } else 
@@ -198,7 +200,7 @@ class Main
 
 
             if ($this->sql->recoverPasswd($this->usr, $verification, $option))
-                echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
+                echo json_encode(["error" => false, "status" => DataException::NOT_CONTENT, "msg" => "ok"]);
             else
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "ok"]);
         } catch (DataException $ex) {

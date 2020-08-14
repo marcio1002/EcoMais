@@ -30,7 +30,6 @@ $("#newPasswd").keypress(function() {
 })
 
 
-
 $("#newPasswdVerify").keypress(function(e) {
     let key = e.keycode? e.keycode : e.charCode;
     if(key == 13) {
@@ -39,9 +38,28 @@ $("#newPasswdVerify").keypress(function(e) {
     }
 });
 
+$("#btnViewPasswd").on("click", function () {
+    let icon = $(this).find("#iconPasswd:eq(0)");
+
+    if ($("#newPasswd:eq(0)").is("[type='password']")) {
+        $("#newPasswd:eq(0)").prop('type', 'text');
+        icon.removeClass("fa-eye-slash").addClass("fa-eye");
+    } else {
+        $("#newPasswd:eq(0)").prop('type', 'password');
+        icon.removeClass("fa-eye").addClass("fa-eye-slash");
+    }
+});
+
+$("input").focusout(function() {
+    if($(this).val().length > 0) 
+        $(this).removeClass("formError")
+    else
+        $(this).addClass("formError")
+})
+
 $("#btnRecoverPwd").click(function() {
 
-    $(".alert").removeClass("alert-success").removeClass("alert-danger");
+    $(".alert").removeClass("alert-success alert-danger").text("");
 
     if($("#newPasswd").val().length == 0) return $("#newPasswd").addClass("formError");
 

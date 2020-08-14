@@ -37,7 +37,7 @@ if ($implement->isLogged("empresa")) {
     <title><?= "$row[fantasia] | {$subtitle}" ?></title>
 </head>
 
-<body>
+<body class="bg-dark">
     <div class="d-xl-flex d-lg-flex w-12 bg-secondary">
         <!-- Menu -->
         <header class="h-auto navigation d-none d-lg-block d-xl-block">
@@ -67,7 +67,7 @@ if ($implement->isLogged("empresa")) {
             </nav>
         </header>
         <header class="d-block d-xl-none d-lg-none">
-            <nav class="nav nav-pills nav-fill fixed-bottom bg-white">
+            <nav class="nav nav-pills nav-fill fixed-bottom bg-light">
                 <a class="nav-item  nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
                     <i class="far fa-chart-bar"></i>
                 </a>
@@ -88,10 +88,10 @@ if ($implement->isLogged("empresa")) {
             <?php
             if ($this->section("error")) :
                 echo $this->section("error");
+            else: 
             ?>
-                <? else: ?>
                 <div class="h-auto d-flex flex-column container-header">
-                    <div class="layote-header h-auto py-2 py-xl-3 py-lg-3 py-md-3  text-white sticky-top d-flex flex-row justify-content-between">
+                    <div class="layote-header bg-dark-3 text-white h-auto py-2 py-xl-3 py-lg-3 py-md-3  sticky-top d-flex flex-row justify-content-between">
                         <div class="col-3"></div>
                         <div class="header-title text-center col-6">
                             <h5 class="font-weight-bold"><?= $subtitle; ?></h5>
@@ -100,7 +100,7 @@ if ($implement->isLogged("empresa")) {
                             <button id="logoff" class="btn bg-transparent float-right py-2 remove-focus" title="Sair"><i class="fas fa-sign-out-alt text-white"></i></button>
                         </div>
                     </div>
-                    <div class="content h-auto">
+                    <div class="content h-auto bg-dark">
                         <?= $this->section("content"); ?>
                         <div class="" style="height: 7vh;"></div>
                     </div>

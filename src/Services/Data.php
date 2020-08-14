@@ -15,11 +15,6 @@ use PDOException;
 
 final class Data
 {
-    const OPTIONS =
-    array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    );
     private  $pdo = null;
     private $query = null;
 
@@ -40,7 +35,7 @@ final class Data
                 BD_CONFIG["TYPE"] . ":host=" . BD_CONFIG["HOST"] . ";port=" . BD_CONFIG["PORT"] . ";dbname=" . BD_CONFIG["NAME"],
                 BD_CONFIG["USER"],
                 BD_CONFIG["PASSWD"],
-                DATA::OPTIONS
+                BD_CONFIG["OPTIONS"]
             )
                 or
             die(header($_SERVER["SERVER_PROTOCOL"] . DataException::NOT_AUTHORIZED . " Not authorized"));

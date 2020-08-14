@@ -105,15 +105,17 @@ class AccountHandling {
         }
     }
 
-    public function recoverByKey(string $key): ?array 
+    public function recoverByKey(string $key,int $typeUser): ?array 
     {
         try {
             $preWhere = [$key];
 
+            $table = ($typeUser == 10) ? "empresa" : "usuario";
+
             $this->sql->open();
 
             return $this->sql
-                ->show("usuario","senha","senha = ?",6)
+                ->show($table,"senha","senha = ?",6)
                 ->prepareParam($preWhere)
                 ->executeSql();
             
@@ -133,8 +135,13 @@ class AccountHandling {
 
             $this->sql->open();
             $tableEmp = $this->sql->show("empresa","",$where,3)
-                ->prepareParam([$usr->passwd])
+                ->prepareParam([$value])
                 ->executeSql();
+            $tableUser = $this->sql->show("usuario","",$where,3)
+                ->prepareParam([$value])
+                ->executeSql();
+                
+            if(count($tableEmp) == 0 && count($tableUser) == 0 ) return false;
             
             $table = (count($tableEmp) > 0) ? "empresa" : "usuario";
 

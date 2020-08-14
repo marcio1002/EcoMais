@@ -32,26 +32,22 @@ use Ecomais\Controllers\ComponenteElement as componente;
 </head>
 
 <body>
+<?php 
+if ($this->section("error")) :
+    echo $this->section("error");
+else:
+?>
     <header>
-        <?php
-        if (!$this->section("error")) :
-            echo componente::navBarHome();
-        endif;
-        ?>
+        <?= componente::navBarHome();?>
     </header>
     <main>
-        <?php
-        if ($this->section("error")) :
-            echo $this->section("error");
-        else :
-            echo $this->section("content");
-        endif;
-        ?>
+        <?= $this->section("content"); ?>
     </main>
     <?php
     if ($this->section('footer')) :
         echo $this->section('footer');
     endif;
+endif;
 
     echo Bundles::renderFileJs([
         "jquery-3.5.1.min",

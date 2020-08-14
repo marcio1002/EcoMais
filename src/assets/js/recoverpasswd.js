@@ -22,8 +22,8 @@ $("#recoverpwd").keypress(function(e) {
 })
 
 $("#btnEnviPwd").click(function() {
-
-    $("input").removeClass("formError, alert-success, alert-danger");
+    $("input").removeClass("formError");
+    $("#alert").removeClass("alert-success alert-danger");
 
     if($("#username").val().length == 0) return $("#username").addClass("formError");
     if($("#recoverpwd").val().length == 0 ) return $("#recoverpwd").addClass("formError");

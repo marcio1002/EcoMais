@@ -7,7 +7,6 @@ use League\Plates\Engine;
 
 class  Redirect
 {
-    private Engine $view;
     private AccountManagerCompany $comp;
 
     public function __construct()
@@ -16,11 +15,11 @@ class  Redirect
     }
 
 
-    private function directory(?string $dir = null): void
+    private function directory(?string $dir = null): \League\Plates\Engine
     {
         $dir = dirname(__DIR__, 1) . "/Views/" . $dir ?? dirname(__DIR__, 1) . "/Views/";
 
-        $this->view = new Engine($dir, "php");
+        return new Engine($dir, "php");
     }
 
     public function test(array $param): void
@@ -30,8 +29,8 @@ class  Redirect
             exit();
         }
 
-        $this->directory();
-        echo $this->view->render("teste");
+        ;
+        echo $this->directory()->render("teste");
     }
 
     /**
@@ -39,8 +38,7 @@ class  Redirect
      */
     public function typeError(array $http_err): void
     {
-        $this->directory();
-        echo $this->view->render("httperror", [
+        echo $this->directory()->render("httperror", [
             "errCode" => $http_err['errCode']
         ]);
     }
@@ -50,48 +48,41 @@ class  Redirect
      */
     public  function home(): void
     {
-        $this->directory();
-        echo $this->view->render("home");
+        echo $this->directory()->render("home");
     }
 
     public function login(): void
     {
-        $this->directory();
-        echo $this->view->render("login");
+        echo $this->directory()->render("login");
     }
 
     public function register(?array $data): void
     {
-        $this->directory();
-        echo $this->view->render("register", [
+        echo $this->directory()->render("register", [
             "data" => $data
         ]);
     }
 
     public function registerCompany(): void
     {
-        $this->directory();
-        echo $this->view->render("registerCompany");
+        echo $this->directory()->render("registerCompany");
     }
 
     public function recoverPasswd(): void
     {
-        $this->directory();
-        echo $this->view->render("recoverPasswd");
+        echo $this->directory()->render("recoverPasswd");
     }
 
     public function newPasswd($token): void
     {
-        $this->directory();
-        echo $this->view->render("newPasswd", [
+        echo $this->directory()->render("newPasswd", [
             "token" => $token["token"]
         ]);
     }
 
     public function terms(): void
     {
-        $this->directory();
-        echo $this->view->render("politicaPrivacidadeTermos");
+        echo $this->directory()->render("politicaPrivacidadeTermos");
     }
 
 
@@ -100,32 +91,28 @@ class  Redirect
      */
     public function indexCompany(): void
     {
-        $this->directory("Company");
-        echo $this->view->render("index");
+        echo $this->directory("Company")->render("index");
     }
 
     public function configCompany():void
-    {
-        $this->directory("Company");
+    {        
         if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
 
-        echo $this->view->render("config", $row ?? []);
+        echo $this->directory("Company")->render("config", $row ?? []);
     }
 
     public function perfilCompany(): void
     {
-        $this->directory("Company");
         if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
 
-        echo $this->view->render("perfil", $row ?? []);
+        echo $this->directory("Company")->render("perfil", $row ?? []);
     }
 
     public function registerProduct(): void
     {
-        $this->directory("Company");
         if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
 
-        echo $this->view->render("registerProduct", $row ?? []);
+        echo $this->directory("Company")->render("registerProduct", $row ?? []);
     }
 
     /**
@@ -133,13 +120,11 @@ class  Redirect
      */
     public function indexUser(): void
     {
-        $this->directory("User");
-        echo $this->view->render("index");
+        echo $this->directory("User")->render("index");
     }
 
     public function listProduct(): void
     {
-        $this->directory("User");
-        echo $this->view->render("listProduct");
+        echo $this->directory("User")->render("listProduct");
     }
 }

@@ -155,7 +155,7 @@ class AccountManagerCompany
         try{
             $upload = new Send("src/uploads","imageCompany",static::$type,static::$extension,false);
             
-            if(isset($_FILES["image"]) && $upload::isAllowed()) {
+            if(isset($_FILES["image"]) || $upload::isAllowed()) {
 
                 $bitType = array("bytes","KB","MB","GB");
                 $bytes = filesize($_FILES["image"]['tmp_name']);

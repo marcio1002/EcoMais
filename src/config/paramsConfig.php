@@ -7,6 +7,11 @@ define("BD_CONFIG", [
   "TYPE" => 'mysql',
   "NAME" => env("BD_NAME", 'bdecomais'),
   "PORT" => env("BD_PORT", "3305"),
+  "OPTIONS" => [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_CASE => PDO::CASE_NATURAL
+  ]
 ]);
 
 define("EMAIL_PROPS", [

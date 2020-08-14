@@ -14,10 +14,10 @@ $(function () {
         let icon = $(this).find("#iconPasswd:eq(0)");
 
         if ($("#passwd:eq(0)").is("[type='password']")) {
-            $("#passwd:eq(0)").attr('type', 'text');
+            $("#passwd:eq(0)").prop('type', 'text');
             icon.removeClass("fa-eye-slash").addClass("fa-eye");
         } else {
-            $("#passwd:eq(0)").attr('type', 'password');
+            $("#passwd:eq(0)").prop('type', 'password');
             icon.removeClass("fa-eye").addClass("fa-eye-slash");
         }
     });
