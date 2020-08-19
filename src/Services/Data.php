@@ -38,7 +38,7 @@ final class Data
                 BD_CONFIG["OPTIONS"]
             )
                 or
-            die(header($_SERVER["SERVER_PROTOCOL"] . DataException::NOT_AUTHORIZED . " Not authorized"));
+            exit(header($_SERVER["SERVER_PROTOCOL"] . DataException::NOT_AUTHORIZED . " Not authorized"));
         }
     }
 

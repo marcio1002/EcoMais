@@ -104,7 +104,7 @@ class Main
                 setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
                 setcookie('_token', $token, $expire, '/', "", false, true);
 
-                if ($row) header("location: " . BASE_URL . "/user");
+                if ($row) header("location: " . BASE_URL . "/usuario");
                 if ($row2) header("location: " . BASE_URL . "/empresa");
             }
         } else {

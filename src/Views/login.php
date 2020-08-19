@@ -58,7 +58,7 @@ if ($implement->isLogged("empresa")) header("location: " . BASE_URL . "/empresa"
                         <button class=" btn-color-red text-white btn remove-focus">
                             <i class="icon-google fab fa-google"></i>
                         </button>
-                        <a title='Entrar com o Google' href=<?= renderUrl("/manager/logingoogle"); ?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
+                        <a title='Entrar com o Google' id="btnLoginGoogle" href=<?= renderUrl("/manager/logingoogle"); ?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
                             <div class='item-account-login google '>
                                 Entrar com o Google
                             </div>
