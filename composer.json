@@ -2,7 +2,7 @@
     "name": "marcio1002/ecomais",
     "description": "Um website que divulga promoções de atacarejos",
     "license": "proprietary",
-    "version": "v1.1.15",
+    "version": "v2.5.55",
     "keywords": [
         "PHP",
         "Composer",
@@ -24,7 +24,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Ecomais\\": "src/"
+            "Ecomais\\": "src/",
+            "Ecotest\\": "test/"
         },
         "files": [
             "src/config/config.php",
@@ -44,5 +45,8 @@
         "league/plates": "^3.3",
         "league/oauth2-google": "^3.0",
         "coffeecode/uploader": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
     }
 }

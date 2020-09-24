@@ -4,7 +4,6 @@ namespace Ecomais\Models;
 
 use Ecomais\Models\DataException;
 use Exception;
-use League\OAuth2\Client\Provider\Facebook;
 use League\OAuth2\Client\Provider\Google;
 
 class AuthGoogle {

@@ -1,157 +1,71 @@
 <?php
+
 namespace Ecomais\Web;
 
 use Exception;
 
+use function PHPUnit\Framework\callback;
+
 class Bundles
 {
-    private static  string $renderFile;
-
-    /**
-     * Renderiza um arquivo. 
-     * Também busca o nível abaixo do que foi especificado com $pathLevels 
-     * Não busca a mais que um nível abaixo. 
-     * Se quer a mais que um nível abaixo especifique no $pathLevels sempre que possível
-     * @param string $fileName
-     * Nome do arquivo
-     * @param string $ext
-     * A extensão do arquivo
-     * @param string $pathLevels
-     * O nível do arquivo
-     * @return string
-     */
-    public static function renderFile(string $fileName,string $ext = "php",string $pathLevels = "/assets"): string
+    private static function typePath(): string
     {
-        if(!is_dir(dirname(__DIR__, 1) . "$pathLevels")) throw new Exception("It is not recognized as a directory");
+        $typePath = array(
+            "windows" => "\\",
+            "linux" => "/",
+            "macintosh" => "/"
+        );
 
-        static::$renderFile = "";
-        $pathDefault = dirname(__DIR__,1) . "$pathLevels";
-
-        foreach(scandir($pathDefault) as $file) {
-            if($file == "." || $file == "..") continue;
-
-            $search = "$pathDefault/$file";
-
-            if(is_dir($search)) {
-                foreach(scandir($search) as $f) {
-                    if($f == "." || $f == "..") continue;
-
-                    $searchFile = "$search/$f";
-
-                    $ext = !empty($ext) ? $ext : pathinfo($searchFile)["extension"];
-
-                    if(is_file($searchFile) && pathinfo($searchFile)["extension"] == $ext) {
-                        if(pathinfo($searchFile)["filename"] != $fileName) continue;
-                        static::$renderFile = BASE_URL . "/src$pathLevels/$file/$f";
-                        break;
-                    }
-                }
-            }
-
-            $ext = !empty($ext) ? $ext : pathinfo($search)["extension"];
-
-            if(is_file($search) && pathinfo($search)["extension"] == $ext) {
-                if(pathinfo($search)["filename"] != $fileName) continue;
-                static::$renderFile = BASE_URL . "/src$pathLevels/$file";
-                break;
-            }
-        }
-        return static::$renderFile; 
+        preg_match("/(windows|linux|macintosh)/", strtolower($_SERVER["HTTP_USER_AGENT"]), $res);
+        return $typePath[$res[1]] ?? "";
     }
 
     /**
-     * Renderiza um arquivo. 
-     * Também busca o nível abaixo do que foi especificado com $pathLevels 
-     * Não busca a mais que um nível abaixo. 
-     * Se quer a mais que um nível abaixo especifique no $pathLevels sempre que possível
+     * Busca o arquivo e passa para o callback. 
      * @param array $fileNames
-     * Nomes dos arquivos
-     * @param string $pathLevels
-     * O nível do arquivo
-     * @return string
+     * Nomes do arquivo em um array
+     * @param callable $callback
+     * O função
+     * @param string $dir
+     * Diretório ou o caminho relativo
+     * @return void
      */
-    public static function renderFileCss(array $fileNames,string $pathLevels = "/assets/css"): string
+    public static function render(array $fileNames,callable $callback, string $dir = ""): void
     {
-        if(!is_dir(dirname(__DIR__, 1) . "$pathLevels")) throw new Exception("It is not recognized as a directory");
+        $path_absolute = dirname(__DIR__,1) . "/$dir";
+        $typePath = static::typePath();
 
-        static::$renderFile = "";
-        $pathDefault = dirname(__DIR__,1) . "$pathLevels";
+        if (!file_exists($path_absolute)) throw new Exception("Directory not found");
         
-        foreach($fileNames as $name) {
-            
-            foreach(scandir($pathDefault) as $file) {
-                if($file == "." || $file == "..") continue;
-    
-                $search = "$pathDefault/$file";
-    
-                if(is_dir($search)) {
-                    foreach(scandir($search) as $f) {
-                        if($f == "." || $f == "..") continue;
-    
-                        $searchFile = "$search/$f";
-    
-                        if(is_file($searchFile) && pathinfo($searchFile)["extension"] == "css") {
-                            if(pathinfo($searchFile)["filename"] != $name) continue;
-                            static::$renderFile .= "<link rel=\"stylesheet\" href=\"" . BASE_URL . "/src$pathLevels/$file/$f\" >". PHP_EOL;
-                        }
-                    }
-                }
-    
-                if(is_file($search) && pathinfo($search)["extension"] == "css") {
-                    if(pathinfo($search)["filename"] != $name) continue;
-                    static::$renderFile .= "<link rel=\"stylesheet\" href=\"" . BASE_URL . "/src$pathLevels/$file\" >". PHP_EOL;
-                }
-            }
-        }
-        
-        return static::$renderFile; 
+
+        if (!empty($typePath) && strcmp($path_absolute[strlen($path_absolute) - 1], $typePath) != 0) 
+            $path_absolute =  "$path_absolute$typePath";
+
+        foreach ($fileNames as $fileName) :
+            $pathInfo = pathinfo($fileName);
+            static::foreachPath("/$dir",$pathInfo,$callback);
+        endforeach;
     }
 
-     /**
-     * Renderiza um arquivo. 
-     * Também busca o nível abaixo do que foi especificado com $pathLevels 
-     * Não busca a mais que um nível abaixo. 
-     * Se quer a mais que um nível abaixo especifique no $pathLevels sempre que possível
-     * @param array $fileNames
-     * Nomes dos arquivos
-     * @param string $pathLevels
-     * O nível do arquivo
-     * @return string
-     */
-    public static function renderFileJs(array $fileNames,string $pathLevels = "/assets/js"): string
+    private static function foreachPath(string $dir,array $fileName, callable $callback)
     {
-        if(!is_dir(dirname(__DIR__, 1) . "$pathLevels")) throw new Exception("It is not recognized as a directory");
+        $path_absolute = dirname(__DIR__,1) . $dir;
+        $typePath = static::typePath();
 
-        static::$renderFile = "";
-        $pathDefault = dirname(__DIR__,1) . "$pathLevels";
-        
-        foreach($fileNames as $name) {
-            
-            foreach(scandir($pathDefault) as $file) {
-                if($file == "." || $file == "..") continue;
+        if (!empty($typePath) && strcmp($path_absolute[strlen($path_absolute) - 1], $typePath) != 0) 
+            $path_absolute =  "$path_absolute$typePath";
+
+        foreach (scandir($path_absolute, 1) as $item) :
+            if (strcasecmp($item, ".") == 0 || strcasecmp($item, "..") == 0) continue;
+
+            if (is_dir("$path_absolute$item")) static::foreachPath("$dir$item/", $fileName, $callback);
     
-                $search = "$pathDefault/$file";
-    
-                if(is_dir($search)) {
-                    foreach(scandir($search) as $f) {
-                        if($f == "." || $f == "..") continue;
-    
-                        $searchFile = "$search/$f";
-    
-                        if(is_file($searchFile) && pathinfo($searchFile)["extension"] == "js") {
-                            if(pathinfo($searchFile)["filename"] != $name) continue;
-                            static::$renderFile .= " <script src=\"" . BASE_URL . "/src$pathLevels/$file/$f\" ></script>". PHP_EOL;
-                        }
-                    }
-                }
-    
-                if(is_file($search) && pathinfo($search)["extension"] == "js") {
-                    if(pathinfo($search)["filename"]!= $name) continue;
-                    static::$renderFile .= " <script src=\"" . BASE_URL . "/src$pathLevels/$file\" ></script>". PHP_EOL;
-                }
-            }
-        }
-        
-        return static::$renderFile; 
+            $pathInfo = pathinfo("$path_absolute$item");
+            if ( file_exists("$path_absolute$item") && is_file("$path_absolute$item")
+                && strcasecmp($pathInfo["filename"], $fileName["filename"]) == 0 && strcasecmp($pathInfo["extension"], $fileName["extension"]) == 0) {
+                $callback(BASE_URL . "/src$dir$item");
+            };
+
+        endforeach;
     }
 }

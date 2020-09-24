@@ -2,7 +2,7 @@
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
 use Ecomais\Web\Bundles;
-use Ecomais\Controllers\ComponenteElement;
+use Ecomais\Views\Component\ComponenteElement as component;
 
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro");
@@ -29,10 +29,9 @@ if (!empty($code)) {
 ?>
 <?php
 $this->start("css");
-  echo  Bundles::renderFileCss(["manipulation"]);
+  echo  Bundles::render(["manipulation.css"],fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\""));
 $this->stop();
 ?>
-
 
 <div class="container p-3 pb-4">
   <div class="mb-3">
@@ -152,12 +151,12 @@ $this->stop();
 </div>
 <?php
 $this->start("footer");
-  echo ComponenteElement::footer();
+  echo component::footer();
 $this->stop()
 ?>
 <?php
 $this->start("scripts");
-  echo  Bundles::renderFileJs(["register"]);
+  Bundles::render(["register.js"], fn($file) => print_r("<script src=\"$file\"></script>"));
   echo $clearResquest;
 $this->stop();
 ?>

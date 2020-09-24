@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecomais\Controllers;
+namespace Ecomais\Views\Component;
 
 class ComponenteElement
 {
@@ -27,7 +27,7 @@ class ComponenteElement
               <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
             </div>
             <div>
-            <a class='nav-item nav-link text-center rounded bg-red-wine  border border-success text-white' id='login' href='$login'>Entrar</a>
+            <a class='nav-item nav-link text-center text-weight-700 rounded bg-red-wine text-white' id='login' href='$login'>Entrar <i class="fas fa-sign-in-alt"></i></a>
             </div>
           </div> 
         </nav>
@@ -52,7 +52,7 @@ return <<<footer
                     <input type="text" class="form-control" placeholder="email@exemplo.com" id="emailNewsLetter">
                     <div class="row pt-3">
                     <div class="col-xl-6 col-md-8 col-sm-12 m-auto">
-                        <button type="button" class="btn bg-red-wine remove-focus text-white font-weight-bold btn-block text-black m-auto" id='btnEnv'>enviar</button>
+                        <button type="button" class="btn bg-red-wine remove-focus text-white text-uppercase font-weight-bold btn-block text-black m-auto" id='btnEnv'>enviar</button>
                     </div>
                     </div>
                 </div>
@@ -197,8 +197,8 @@ return <<<mail
                                                                                     para você a sua economia. Você pode ler
                                                                                     mais sobre os 
                                                                                 <a href='#' style='color:#329af0' target='_blank'>termos de serviço</a> 
-                                                                                para o bem estar nossa platadorma leia também a  
-                                                                                <a href='https://www.localhost/www/EcoMais/terms' style='color:#329af0' target='_blank'> política de  privacidade</a> , se você gostaria. </p>
+                                                                                para o bem estar nossa plataforma, leia também a nossa 
+                                                                                <a href='https://www.localhost/www/EcoMais/terms' style='color:#329af0' target='_blank'> política de  privacidade</a>. </p>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>

@@ -7,8 +7,8 @@ $sql = new Ecomais\ControllersServices\Company\CompanyHandling();
 $user = new Ecomais\Models\PersonLegal();
 $implement = new Ecomais\Models\Implementation();
 
-if ($implement->isLogged("usuario")) header("location: " . BASE_URL . "/usuario");
-if ($implement->isLogged("empresa")) header("location: " . BASE_URL . "/empresa");
+if ($implement->isLogged("usuario")) header("location: " . renderUrl("/usuario"));
+if ($implement->isLogged("empresa")) header("location: " . renderUrl("/empresa"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +17,10 @@ if ($implement->isLogged("empresa")) header("location: " . BASE_URL . "/empresa"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./src/assets/logos-icons/ecomais.ico" type="image/x-icon">
-    <?= Bundles::renderFileCss(["bootstrap.min", "bootstrap-reboot.min", "bootstrap-grid.min", "alertify.min", "default.min", "eco.style", "rsenha", "login"]) ?>
+    <?= Bundles::render(["bootstrap.min.css", "bootstrap-reboot.min.css.map", "bootstrap-reboot.min.css", "bootstrap-grid.min.css.map", "bootstrap-grid.min.css", "alertify.min.css", "default.min.css", "eco.style.css", "rsenha.css", "login.css"],
+        fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">")) ?>
     <title>Login</title>
 </head>
-
 <body>
     <div id="container-login" class='col-xl-4 col-lg-4 col-md-6 col-sm-8 shadow-lg py-4 bg-white m-auto' style="top: 5px;">
         <div class='modal-body p-3'>
@@ -69,19 +69,12 @@ if ($implement->isLogged("empresa")) header("location: " . BASE_URL . "/empresa"
         </div>
     </div>
     <?php
-    echo "<script> const BASE_URL = \"" . BASE_URL . "\"; </script>";
-    echo  Bundles::renderFileJs([
-        "jquery-3.5.1.min",
-        "jquery.mask",
-        "bootstrap.min",
-        "bootstrap.bundle",
-        "alertify.min",
-        "dataTable.min",
-        "manipulation",
-        "apis",
-        "login"
-    ]);
-    ?>
+    echo "<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>\n
+        <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
+        <script> const BASE_URL = \"" . BASE_URL . "\"; </script>";
+    Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js.map","bootstrap.min.js","bootstrap.bundle.js.map","bootstrap.bundle.js","alertify.min.js","manipulation.js","apis.js","login.js"],
+        fn($file) => print_r("<script src=\"$file\"></script>"));
+?>
 </body>
 
 </html>

@@ -1,4 +1,8 @@
-<?php $this->layout("_theme", ["title" => "EcoMais - My Home"]); ?>
+<?php
+
+use Ecomais\Web\Bundles;
+
+$this->layout("_theme", ["title" => "EcoMais - My Home"]); ?>
 
 <!-- Masthead -->
 <header class="masthead text-white text-center">
@@ -97,7 +101,8 @@
     </div>
   </div>
 </section>
-<?php $this->start("scripts"); ?>
-<script src=<?= renderUrl("/src/assets/js/user/index.js");?> ></script>
-<script src=<?= renderUrl("/src/assets/js/user/search.js");?> ></script>
-<?php $this->stop(); ?>
+<?php 
+$this->start("scripts");
+  Bundles::render(["index.js","search.js"],fn($file) => print_r("<script src=\"$file\"></script>"));
+$this->stop(); 
+?>

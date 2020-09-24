@@ -10,15 +10,12 @@ if (
 )
   session_start(['read_and_close'  => true]);
 
-$expire = time();
 
-if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $expire) {
+if (count($_SESSION) == 0 || $_SESSION['ssioninfo']["timestamp"] < time())
+  exit(header("location: " . renderUrl("/recuperarsenha")));
 
-  if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (strcasecmp($_SESSION['ssioninfo']["tnk"], $token) != 0))
-    header("location: " . renderUrl("/recuperarsenha"));
-} else {
-  header("location: " . renderUrl("/recuperarsenha"));
-}
+if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (strcasecmp($_SESSION['ssioninfo']["tnk"], $token) != 0))
+  exit(header("location: " . renderUrl("/recuperarsenha")));
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,17 +26,9 @@ if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $
   <meta http-equiv="X-UA-Compatible" content="IE=7" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-  <?=
-    Bundles::renderFileCss([
-      "bootstrap.min",
-      "bootstrap-reboot.min",
-      "bootstrap-grid.min",
-      "alertify.min",
-      "default.min",
-      "eco.style",
-      "manipulation",
-      "rsenha"
-    ])
+  <?php
+    Bundles::render(["bootstrap.min.css.map","bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"], 
+    fn ($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"))
   ?>
 </head>
 
@@ -74,11 +63,11 @@ if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $
             </div>
           </div>
           <div class="d-none">
-            <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?? "\"\"" ?>>
+            <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?? "''" ?>>
           </div>
           <div class="form-row">
             <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
-              <div class="col-xl-7 col-lg-7 col-md-7 col-xm-10 m-auto">
+              <div id="container-btnRecoverPwd" class="col-xl-7 col-lg-7 col-md-7 col-xm-10 m-auto">
                 <button type="button" class="btn btn-lg btn-block btn-success" id="btnRecoverPwd">Criar</button>
               </div>
             </div>
@@ -89,18 +78,11 @@ if (isset($_SESSION['ssioninfo']) > 0 && $_SESSION['ssioninfo']["timestamp"] > $
   </div>
 
   <?php
-  echo "<script> const BASE_URL = \"" . BASE_URL . "\"</script>";
-  echo "<script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>";
-  echo Bundles::renderFileJs([
-    "jquery-3.5.1.min",
-    "jquery.mask",
-    "bootstrap.min",
-    "bootstrap.bundle",
-    "alertify.min",
-    "apis",
-    "manipulation",
-    "newpasswd"
-  ]);
+  echo "
+    <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>
+    <script> const BASE_URL = \"" . BASE_URL . "\"</script>";
+  Bundles::render(["jquery-3.5.1.min.js", "jquery.mask.js", "bootstrap.min.js.map", "bootstrap.min.js", "bootstrap.bundle.js.map", "bootstrap.bundle.js", "alertify.min.js", "apis.js", "manipulation.js", "newpasswd.js"],
+    fn ($file) => print_r("  <script src=\"$file\"></script>"));
   ?>
 </body>
 

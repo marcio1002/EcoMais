@@ -1,23 +1,18 @@
 <?php
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
-use Ecomais\Web\Bundles;
-use Ecomais\Controllers\ComponenteElement;
-
-  $this->start("css");
-    Bundles::renderFileCss(["alertify"]);
-  $this->stop();
+use Ecomais\Views\Component\ComponenteElement;
 ?>
 
 <div class="col-12 position-relative" id="title-container">
   <div class="overlay content-img after-color"></div>
-  <div class="col-12 ">
-    <div class="col-12 py-xl-5 py-lg-5 text-xl-right text-lg-right text-center">
+  <div class="col-12">
+    <div class="col-12 py-5 text-xl-right text-lg-right text-center">
       <h3 class="main-title text-white">Bem Vindo Ao EcoMais</h3>
       <h4 class="h5 text-warning">Uma Organização que pensa no futuro do seu dinheiro</h4>
     </div>
-    <div class="col-xl-6 col-lg-6 col-sm-12 py-xl-5 py-lg-3">
-      <img class="img-fluid" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.png"); ?> alt="Ecomais">
+    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 m-auto py-xl-5 py-lg-3">
+      <img class="img-fluid" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.jpg"); ?> alt="Ecomais">
     </div>
   </div>
 </div>
@@ -53,13 +48,12 @@ use Ecomais\Controllers\ComponenteElement;
             <div class="card-header text-center">
               <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
             </div>
-            <div class="card-body">
+            <div class="card-body py-3">
               <p class="card-text">A plataforma Ecomais é pra você também que é consumidor!
                 Você poderá realizar um Cadastro no site, entrar para ver produtos, ser notificados de promoções perto de
                 você e muito mais!
                 Crie o seu cadastro agora mesmo!
               </p>
-              <a href=<?= renderUrl("/cadastro"); ?> class="btn btn-large btn-primary  center">Acesse-já</a>
             </div>
           </div>
         </div>
@@ -70,7 +64,7 @@ use Ecomais\Controllers\ComponenteElement;
               <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
             </div>
             <div class="card-body pb-3" style="overflow: auto;">
-              <p class="card-text">
+              <p class="card-text py-3">
                 Panfletos, folhetos e encartes são alguns mecanismos de divulgação bastante usados quando
                 se quer atrair a atenção do público em cidades da região. De fácil manuseio, essas mídias têm custo de
                 produção geralmente baixo, mas pelo mau uso de quem os distribui e recebe pelas ruas, para muitos, eles têm
@@ -79,7 +73,6 @@ use Ecomais\Controllers\ComponenteElement;
                 comprometida deve buscar soluções mais sustentáveis. Por isso não perca tempo, Cadastre a sua empresa e
                 venha participar desta missão!
               </p>
-              <a href="#" class="btn btn-primary">Acesse-já</a>
             </div>
           </div>
         </div>
@@ -95,7 +88,7 @@ use Ecomais\Controllers\ComponenteElement;
       </ol>
       <div class="carousel-inner ">
         <div class="carousel-item active after-color">
-          <img src=<?= Bundles::renderFile("frutas-e-legumes","png","/assets/imgs"); ?> class="d-block w-100" alt="missao">
+          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missao">
           <div class="carousel-caption d-none d-md-block">
             <h2>Impacto Positivo</h2>
             <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -103,16 +96,16 @@ use Ecomais\Controllers\ComponenteElement;
           </div>
         </div>
         <div class="carousel-item after-color ">
-          <img src=<?= Bundles::renderFile("supermarket","png","/assets/imgs"); ?> class="d-block w-100" alt="iamgem de negocios">
+          <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="iamgem de negocios">
           <div class="carousel-caption d-none d-md-block">
             <h2>Benefícios para os consumidores</h2>
-            <p class=""> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
+            <p> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital
             </p>
             <a href="#" class="main-btn text-white">Saiba mais!</a>
           </div>
         </div>
         <div class="carousel-item after-color">
-          <img src=<?= Bundles::renderFile("carrinho-com-compras","png","/assets/imgs"); ?> class="d-block w-100" alt="Mercado">
+          <img src=<?= renderUrl("/src/assets/imgs/carrinho-com-compras.png"); ?> class="d-block w-100" alt="Mercado">
           <div class="carousel-caption d-none d-md-block">
             <h2>Mais que um simples negócio, uma missão</h2>
             <p> A equipe EcoMais zela pelo meio ambiente e pelo cuidado com planeta</p>

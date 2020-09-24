@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__,2) . "/vendor/autoload.php";
+require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
-use Ecomais\Controllers\ComponenteElement as componente;
+use Ecomais\Views\Component\ComponenteElement as componente;
 
 ?>
 <!DOCTYPE html>
@@ -17,80 +17,40 @@ use Ecomais\Controllers\ComponenteElement as componente;
     <meta name="description" content="Conheça a melhor plataforma de descontos de atacarejos. O ecomais vai te mostrar os melhores descontos perto da sua casa.">
     <meta name="keywords" content="descontos,atacarejos,supermercado,compras">
     <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-    <?= Bundles::renderFileCss([
-        "bootstrap.min",
-        "bootstrap-reboot.min",
-        "bootstrap-grid.min",
-        "alertify.min",
-        "default.min",
-        "eco.style",
-        "estilo",
-        "styleComponente"
-    ]) ?>
+    <?= Bundles::render(["bootstrap.min.css.map","bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","styleComponente.css","eco.style.css","manipulation.css","estilo.css",],
+    fn($file) => print_r("<link rel='stylesheet' href='$file'>")); 
+    ?>
     <?= $this->section("css"); ?>
     <title><?= $title ?></title>
 </head>
 
 <body>
-<?php 
-if ($this->section("error")) :
-    echo $this->section("error");
-else:
-?>
-    <header>
-        <?= componente::navBarHome();?>
-    </header>
-    <main>
-        <?= $this->section("content"); ?>
-    </main>
     <?php
-    if ($this->section('footer')) :
-        echo $this->section('footer');
+    if ($this->section("error")) :
+        echo $this->section("error");
+    else :
+    ?>
+        <header>
+            <?= componente::navBarHome(); ?>
+        </header>
+        <main>
+            <?= $this->section("content"); ?>
+        </main>
+    <?php
+        if ($this->section('footer')) :
+            echo $this->section('footer');
+        endif;
     endif;
-endif;
 
-    echo Bundles::renderFileJs([
-        "jquery-3.5.1.min",
-        "jquery.mask",
-        "bootstrap.min",
-        "bootstrap.bundle",
-        "alertify.min",
-        "apis",
-        "manipulation"
-    ]);
-
-    echo "
-        <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+    echo"<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>\n
         <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
         <script> const BASE_URL = '" . BASE_URL . "'; </script>";
 
+    Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js.map","bootstrap.min.js","bootstrap.bundle.js.map","bootstrap.bundle.js","alertify.min.js","apis.js","manipulation.js","newslleter.js"],
+    fn($file) => print_r("<script src=\"$file\"></script>"));
+
     echo $this->section("scripts");
-    ?>
-
-    <script>
-        $("#btnEnv").click(function() {
-            let val = $("#emailNewsLetter").val().trim();
-            option = {
-                method: 'POST',
-                mycustomtype: "application/json",
-                url: `${BASE_URL}/manager/newsletter`,
-                dataType: "json",
-                data: {
-                    newsletter: val
-                },
-                success: (response) => {
-
-                    if (response.res) {
-                        $("#emailNewsLetter").val("");
-                        alertify.success("Obrigado! <br/>Agora você recebera nossa newsletter").delay(5);
-                    }
-                },
-                error: () => {}
-            };
-
-            if (val.length > 0) reqAjax(option);
-        })
-    </script>
+?>
 </body>
 
 </html>

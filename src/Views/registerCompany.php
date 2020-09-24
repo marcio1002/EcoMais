@@ -1,7 +1,7 @@
 <?php
 $this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
 
-use Ecomais\Controllers\ComponenteElement;
+use Ecomais\Views\Component\ComponenteElement as component;
 use Ecomais\Web\Bundles;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
@@ -25,10 +25,6 @@ if (!empty($code)) {
         $clearRequest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
     }
 }
-
-$this->start("css");
-echo  Bundles::renderFileCss(["manipulation"]);
-$this->stop();
 ?>
 
 <div class="container">
@@ -181,7 +177,7 @@ $this->stop();
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="nome"><b>Endereço</b></label>
-                            <input type="text" name="address" class="form-control nextItem" placeholder="Rua, bairro e número" data-required="">
+                            <input type="text" id="address" name="address" class="form-control nextItem" placeholder="Rua, bairro e número" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
@@ -193,7 +189,6 @@ $this->stop();
                                 <option value="30">Carrinho</option>
                             </select>
                         </div>
-
                         <p>
                             <div class="form-check">
                                 <?= $svgCeta ?>
@@ -201,8 +196,8 @@ $this->stop();
                                 <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
                             </div>
                         </p>
-                        <div class="form-row">
-                            <div class='col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto'>
+                        <div class="form-row mt-3">
+                            <div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 m-auto'>
                                 <div class="btn-group btn-large btn-block nextItem">
                                     <button class="btn-color-red text-white btn remove-focus">
                                         <i class='icon-google fab fa-google'></i>
@@ -214,7 +209,7 @@ $this->stop();
                             </div>
                         </div>
                         <div class="form-row mt-3">
-                            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto">
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 m-auto">
                                 <button type="button" id="btnRegisterCompany" class="btn btn-block btn-primary font-size-1-2em remove-focus text-weight-700 nextItem">
                                     Cadastrar
                                 </button>
@@ -273,11 +268,12 @@ $this->stop();
 
 <?php
 $this->start("footer");
-    echo ComponenteElement::footer();
+    echo component::footer();
 $this->stop();
 
 $this->start("scripts");
-    echo  Bundles::renderFileJs([ "mainMethods", "registerCompany"]);
+    echo  Bundles::render([ "mainMethods.js", "registerCompany.js"], 
+    fn($file) => print_r("<script src=\"$file\"></script>"));
     echo $clearRequest;
 $this->stop();
 ?>

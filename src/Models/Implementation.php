@@ -80,6 +80,7 @@ class Implementation
 
     /**
      * Verifica se o usuário está logado
+     * @return bool
      */
     public function isLogged($table):bool
     {
@@ -110,6 +111,7 @@ class Implementation
      * O tamanho da image em bytes
      * @param int $fixed
      * O tamanho fixo
+     * @return string
      */
     public function getBytesFormat($bytes, $fixed = 2): string
     {
@@ -122,6 +124,7 @@ class Implementation
     /**
      * @param array $arr
      * Um array associativo com chave/valor ou array único com chave/valor
+     * @return object
      */
     public function toObject(array $arr): object
     {
@@ -138,12 +141,28 @@ class Implementation
     /**
      * @param object $object
      * Um objeto 
+     * @return array
      */
     public function toArray(object $object): array
     {
         $array = array();
         foreach($object as $key => $val) $array[$key] = $val;
         return $array;
+    }
+
+    /**
+     * Por questões de usar muito a session verificando se ela está ativa
+     * Foi criada essa função pra diminuir repetição de código
+     * @return bool
+    */
+    public function getSession(): bool
+    {
+        if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
+            session_start();
+            return true;
+        }
+
+        return false;
     }
 
 }

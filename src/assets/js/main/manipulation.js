@@ -1,12 +1,11 @@
 /**
  * 
  * @param {String} elem 
- * Elementos pai
  */
 let validaForm = (elem = "") => {
    var forError = false;
 
-   $(`${elem} [data-required]`).each(function () {
+   $(`${elem} [data-required]:input`).each(function () {
        if ($(this).is("input"))
            if ($(this).val().length == 0) {
                forError = true;
@@ -37,7 +36,6 @@ function clearForm() {
    $('input[type=email]').val("");
    $('input[type=password]').val("");
    $('input[type=tel]').val("");
-
 }
 
 const datetime = {
@@ -70,13 +68,12 @@ function isMobile() {
 }
 /**
  * 
- * @param {String} url 
+ * @param {string} url 
  */
 function getPropsUrl(url) {
    let obj = new Object;
    let infoUrl = new URL(url);
-   let urlParams = new URLSearchParams(infoUrl.search)
-   for([key,val] of urlParams.entries())  obj[key] = val;
+   for([key,val] of (new URLSearchParams(infoUrl.search)).entries())  obj[key] = val;
    return obj || {}
 }
 
@@ -198,15 +195,21 @@ $(".nextItem").keypress(function (e) {
    var tecla = e.keyCode ? e.keyCode : e.which;
    if (tecla == 13) {
       e.preventDefault();
-
       var indexof = $(".nextItem").index(this) + 1;
-
-      if (indexof < $(".nextItem:not(input[readonly])").length) {
-
+      
+      if (indexof < $(".nextItem:not(input[readonly])").length) 
          $(`.nextItem:eq(${indexof})`).focus();
-      }
-      else {
+      else 
          return null
-      }
+      
    }
 });
+
+let connection;
+window.ononline = () => {
+    // if (connection === "OFFLINE") 
+   connection = "ONLINE";
+};
+window.onoffline = () => {
+   connection = "OFFLINE";
+};

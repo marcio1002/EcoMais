@@ -1,18 +1,10 @@
 <?php
-require_once dirname(__DIR__,3) . "/vendor/autoload.php";
+require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
+use Ecomais\Views\Component\ComponentCompany as component;
 
-$sql = new Ecomais\ControllersServices\Company\CompanyHandling();
-$user = new Ecomais\Models\PersonLegal();
-$implement = new Ecomais\Models\Implementation();
-
-if ($implement->isLogged("empresa")) {
-    $user->id = $_COOKIE['_id'];
-    $row = $sql->userCompanyInfo($user);
-} else {
-    header("location: " . BASE_URL . "/login");
-}
+    $comp = $this->func()->verifyLoggedCompany();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,128 +14,78 @@ if ($implement->isLogged("empresa")) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-    <?= Bundles::renderFileCss([ 
-        "bootstrap.min", 
-        "bootstrap-reboot.min", 
-        "bootstrap-grid.min", 
-        "alertify.min", 
-        "default.min", 
-        "eco.style",
-        "manipulation",
-        "themeCompany"])
-    ?>    
+    <link rel="shortcut icon" href=<?= "\"". renderUrl("/src/assets/logos-icons/ecomais.ico")."\"" ?> type="image/x-icon">
+    <?php Bundles::render(["bootstrap.min.css.map","bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","eco.style.css","manipulation.css","themeCompany.css"],
+        fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">")) ?>
     <?= $this->section("css"); ?>
-    <title><?= "$row[fantasia] | {$subtitle}" ?></title>
+    <title><?= "$comp->fantasia | {$subtitle}" ?></title>
 </head>
 
 <body class="bg-dark">
     <div class="d-xl-flex d-lg-flex w-12 bg-secondary">
         <!-- Menu -->
-        <header class="h-auto navigation d-none d-lg-block d-xl-block">
-            <nav class="nav flex-column layote-navbar align-content-center navigation navbar bg-light position-fixed z-index-1000">
-                <div class="">
-                    <!-- Logo -->
-                    <img src=<?= Bundles::renderFile("ecomais-logo-medium","png","/assets/logos-icons") ?> alt="logo Ecomais" class="img-fluid">
-                </div>
-                <div class="py-5">
-                    <a class="nav-link text-red-wine text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa"); ?> title="Create chat" role="tab">
-                        <i class="far fa-chart-bar"></i>
-                    </a>
-
-                    <a class="nav-link text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
-                        <i class="far fa-edit"></i>
-                    </a>
-
-                    <a class="nav-link text-red-wine py-4 font-size-1-4em" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
-                        <i class="far fa-address-card"></i>
-                    </a>
-                </div>
-                <div>
-                    <a class="nav-link text-red-wine py-2 px-2 font-size-1-4em " href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
-                        <i class="fas fa-cog"></i>
-                    </a>
-                </div>
-            </nav>
-        </header>
-        <header class="d-block d-xl-none d-lg-none">
-            <nav class="nav nav-pills nav-fill fixed-bottom bg-light">
-                <a class="nav-item  nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/"); ?> title="Create chat" role="tab">
-                    <i class="far fa-chart-bar"></i>
-                </a>
-
-                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/cadastro-de-produtos"); ?> title="Friends" role="tab">
-                    <i class="far fa-edit"></i>
-                </a>
-
-                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/perfil"); ?> title="Demos" role="tab">
-                    <i class="far fa-address-card"></i>
-                </a>
-                <a class="nav-item nav-link py-4 text-red-wine" href=<?= renderUrl("/empresa/configuracoes"); ?> title="Settings">
-                    <i class="fas fa-cog"></i>
-                </a>
-            </nav>
-        </header>
-        <main>
+        <?= component::navbar();?>
+        <!-- Menu mobile -->
+        <?= component::navBarMobile(); ?>
+        
+            <!-- content httperror -->
             <?php
             if ($this->section("error")) :
                 echo $this->section("error");
-            else: 
+            else :
             ?>
+            <!-- c -->
                 <div class="h-auto d-flex flex-column container-header">
-                    <div class="layote-header bg-dark-3 text-white h-auto py-2 py-xl-3 py-lg-3 py-md-3  sticky-top d-flex flex-row justify-content-between">
-                        <div class="col-3"></div>
-                        <div class="header-title text-center col-6">
+                    <div class="layote-header bg-dark-3 text-white h-auto sticky-top d-flex flex-row justify-content-between">
+                        <div class="col-3 py-2 py-xl-3 py-lg-3 py-md-3"></div>
+                        <div class="header-title text-center col-6 py-2 py-xl-3 py-lg-3 py-md-3">
                             <h5 class="font-weight-bold"><?= $subtitle; ?></h5>
                         </div>
-                        <div class="col-3">
-                            <button id="logoff" class="btn bg-transparent float-right py-2 remove-focus" title="Sair"><i class="fas fa-sign-out-alt text-white"></i></button>
+                        <div class="col-3 py-2 py-xl-3 py-lg-3 py-md-3">
+                            <button  data-logoff="" class="btn bg-red-wine text-white remove-focus d-xl-none d-lg-none d-sm-inline float-right" title="Sair">
+                                Sair
+                                <i class="fas fa-sign-out-alt text-white"></i>
+                            </button>
+                            <ul class="navbar-nav pr-1 float-right d-none d-xl-block d-lg-block">
+                                <li class="nav-item dropdown">
+                                    <span class="d-none d-lg-inline text-gray-600 mr-1 text-white"><?= $comp->fantasia?></span>
+                                    <button class="btn bg-transparent remove-focus" title="Mais opções" id="userOptions" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="d-inline">
+                                            <img id="thumbnailCompany" class="img-fluid rounded-circle" style="height: 2rem; width: 2rem;" src=<?= $comp->imagem ? renderUrl("/{$comp->imagem}") : renderUrl("/src/assets/imgs/logo-atacado-default.jpg") ?> alt="Imagem de Perfil">
+                                        </div>
+                                    </button>
+                                    <!-- Dropdown - User Information -->
+                                    <div class="dropdown-menu shadow" style="position: absolute;width: 10rem; will-change: transform; top: 0px; right: 1px; transform: translate3d(22px, 45px, -120px);" aria-labelledby="userOptions">
+                                        <a class="dropdown-item" href=<?= renderUrl("/empresa/configuracoes"); ?> > 
+                                            <i class="fas fa-cogs mr-2 text-red-wine"></i>
+                                            settings
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <button data-logoff="" class=" dropdown-item remove-focus pointer" title="Sair">
+                                            <i class="fas fa-sign-out-alt mr-2 text-red-wine"></i>
+                                            Sair
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="content h-auto bg-dark">
+                    <div id="content" class="content h-auto bg-dark">
                         <?= $this->section("content"); ?>
-                        <div class="" style="height: 7vh;"></div>
                     </div>
                 </div>
             <?php endif; ?>
-        </main>
     </div>
-
-    <?php
-    echo Bundles::renderFileJs([
-        "jquery-3.5.1.min",
-        "jquery.mask",
-        "bootstrap.min",
-        "bootstrap.bundle",
-        "alertify.min",
-        "apis",
-        "manipulation"
-    ]);
-    echo "
-    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+<?php
+    echo 
+    "<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
     <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
     <script> const BASE_URL = '" . BASE_URL . "'; </script>";
-    echo $this->section("scripts");
-    ?>
+    Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js.map","bootstrap.min.js","bootstrap.bundle.js.map","bootstrap.bundle.js","alertify.min.js","apis.js","manipulation.js", "main.js"],
+    fn($file) => print_r("<script src=\"$file\"></script>")); 
+    
+    echo $this->section("scripts"); 
+?>
 </body>
-<script>
-    $("#logoff").click(function() {
-        let option = {
-            method: 'GET',
-            mycustomtype: "application/json charset=utf-8",
-            url: `${BASE_URL}/manager/logoff`,
-            dataType: "json",
-            success: (res) => {
-                if (!res.error) {
-                    location.href = `${BASE_URL}/login`
-                }
-            },
-            error: (e) => {
-                alertify.error("Ocorreu um erro no servidor!");
-            }
-        };
-        reqAjax(option);
-    });
-</script>
 
 </html>

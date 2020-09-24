@@ -96,6 +96,7 @@ $(function () {
     });
 
     $("#btnRegisterCompany").click(function () {
+        alertify.dismissAll()
         $("[data-required]").removeClass("formError");
 
         if (validaForm("#formCompany")) return alertify.error("Preencha os campos em vermelho!");

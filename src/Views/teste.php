@@ -30,33 +30,7 @@ $products->fkCompany = 11;
 </head>
 
 <body>
-
-    <?php
-    $row = $prod->searchProd($products);
-
-    if (count($row) > 0) {
-        print_r(array_filter($row[0],fn ($val) => !!(mb_stripos($val,"ma"))));
-        foreach ($row as $val) $data = $implement->toObject($val);
-        $url = BASE_URL;
-        echo "<img src=\"$url\\{$data->imagem}\"/>";
-    }
-    echo Bundles::renderFileJs([
-        "popper.min",   
-        "jquery-3.5.1.min",
-        "jqueryMask.mask",
-        "bootstrap.min",
-        "bootstrap.bundle",
-        "alertify.min",
-        "dataTable.min",
-        "manipulation",
-        "apis"]);
-    echo
-        "
-        <script>
-            const BASE_URL = '" . BASE_URL . "';
-        </script>
-        ";
-    ?>
+    <?php?>
 </body>
 
 </html>

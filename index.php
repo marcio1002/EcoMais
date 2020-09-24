@@ -11,11 +11,20 @@
  * @license 
  */
 
+ /**
+  * Dependências do projeto
+  * @package coffeecode/router - Gerenciamento de rotas http
+  * @package phpmailer/phpmailer - Envio de emails
+  * @package league/plates - Criação de templates
+  * @package league/oauth2-google - Autenticação com a conta do Google
+  * @package coffeecode/uploader - Upload de imagens
+  */
+
 /*
  * Rotas vista pelos usuários são mostrada em português (pt-BR)
  */
 
-require __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
 require_once __DIR__ . "/src/config/config.php";
 
@@ -34,7 +43,7 @@ $router->namespace("Ecomais\Web");
     $router->group(null);
     $router->get("/", "Redirect:home");
     $router->get("/login", "Redirect:login");
-    $router->get("/cadastro", "Redirect:register");
+    $router->get("/cadastro", "Redirect:registerUser");
     $router->get("/cadastro/empresa","Redirect:registerCompany");
     $router->get("/recuperarsenha", "Redirect:recoverPasswd");
     $router->get("/recuperarsenha/novasenha/{token}","Redirect:newPasswd");
@@ -89,7 +98,8 @@ $router->namespace("Ecomais\Controllers\Company");
     
     $router->group("manager");
     $router->post("/addaccountpersonlegal","AccountManagerCompany:createAccount");
-    $router->get("/listencompany","AccountManagerCompany:listenCompany");
+    $router->get("/listencompany","AccountManagerCompany:findAll");
+    $router->post("/findcompany", "AccountManagerCompany:findByIdJSON");
     $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
     $router->put("/updateinfocompany","AccountManagerCompany:updateInfoCompany");
     $router->post("/updateimagecompany","AccountManagerCompany:updateImageCompany");

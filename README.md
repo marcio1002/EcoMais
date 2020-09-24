@@ -2,7 +2,7 @@
 
 Um Website que divulga promoções de atacarejos para as pessoas no seu dia dia.
 <div align="right">
-    <a href='./src/assets/logos-icons/ecomais-logo.png'>
-        <img width="25%" src="./src/assets/logos-icons/ecomais-logo.png"/>
+    <a href='./src/assets/logos-icons/ecomais-logo.jpg'>
+        <img width="25%" src="./src/assets/logos-icons/ecomais-logo.jpg"/>
     </a>
 </div>

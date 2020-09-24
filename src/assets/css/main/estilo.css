@@ -1,11 +1,4 @@
-body{
-  margin:0;
-  padding: 0;
-  font-family: 'roboto', 'sans-serif';
-}
-
-.icon-google { font-size: 1.6em;  vertical-align: middle; }
-
+body{ margin:0; padding: 0; font-family: 'roboto', 'sans-serif'; }
 
 /* --- menu --- */
 .navbar { z-index: 1000;}
@@ -47,10 +40,12 @@ body{
 
 #login:active { background-color: #239c55 !important;  color: rgb(236, 236, 236) !important; }
 /* ------- */
+
 #title-container {height: 100vh;}
+
 .content-img { 
   position: absolute; 
-  background: rgba(68, 68, 68, 0.651) url("../imgs/casal-no-mercado.png") no-repeat; 
+  background: rgba(68, 68, 68, 0.651) url("../../imgs/casal-no-mercado.png") no-repeat; 
   background-size: auto;
   background-size: cover;
   /* background-attachment: fixed; */
@@ -96,8 +91,6 @@ body{
 #msg-box p { font-size: 22px; }
 #contact-form .main-btn { width: 120px; }
 
-
-
 .after-color:after{
   content:'';
   position: absolute;
@@ -123,10 +116,6 @@ body{
 
   #navbar-links a {
     text-align: center;
-  }
-
-  #navbar-links a:hover {
-    color: rgb(241, 226, 91);
   }
   
 }

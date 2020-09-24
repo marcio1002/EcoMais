@@ -13,16 +13,8 @@ use Ecomais\Web\Bundles;
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
   <?=
-    Bundles::renderFileCss([
-      "bootstrap.min",
-      "bootstrap-reboot.min",
-      "bootstrap-grid.min",
-      "alertify.min",
-      "default.min",
-      "eco.style",
-      "manipulation",
-      "rsenha"
-    ]);
+    Bundles::render(["bootstrap.min.css","bootstrap.min.css.map","bootstrap-reboot.min.css","bootstrap-reboot.min.css.map","bootstrap-grid.min.css","bootstrap-grid.min.css.map","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"],
+    fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"));
   ?>
   <title>Recuperar senha</title>
 </head>
@@ -41,7 +33,7 @@ use Ecomais\Web\Bundles;
       </div>
       <div class="form-row">
         <div class="form-group col-xl-7 col-lg-7 col-md-9 col-sm-12 mx-auto">
-          <label for="recoverpwd" id="recover-label">Email:</label>
+          <label for="recoverpwd" id="recover-label">Email ou CNPJ:</label>
           <input type="text" class="form-control" id="recoverpwd" aria-describedby="emailHelp">
           <small id="emailHelp" class="form-text text-muted">Informe o email ou chave de acesso clicando na opção "<strong>Eu tenho a chave de acesso</strong>" .</small>
         </div>
@@ -67,15 +59,8 @@ use Ecomais\Web\Bundles;
 
   <?php
   echo "<script>  const BASE_URL = \"" . BASE_URL . "\"</script>";
-  echo Bundles::renderFileJs([  
-    "jquery-3.5.1.min",
-    "jquery.mask",
-    "bootstrap.min",
-    "bootstrap.bundle",
-    "alertify.min",
-    "apis",
-    "manipulation",
-    "recoverpasswd"]);
+  echo Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js","bootstrap.min.js.map","bootstrap.bundle.js","bootstrap.bundle.js.map","alertify.min.js","apis.js","manipulation.js","recoverpasswd.js"],
+  fn($file) => print_r("<script src=\"$file\"></script>"));
   ?>
 </body>
 

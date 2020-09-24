@@ -81,6 +81,7 @@ $(function () {
 
     $('#formUser').on("submit", function (e) {
         e.preventDefault();
+        alertify.dismissAll()
         $("[data-required]").removeClass("formError");
         
         if (validaForm()) return alertify.error("Preencha os campos em vermelho!");

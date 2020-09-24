@@ -15,28 +15,6 @@ class AccountHandling {
         $this->implement = new Implementation();
     }
 
-    public function createAccountPersonPhysical(Person $person): bool
-    {
-        try {
-            $person->passwd =  $this->implement->criptPasswd($person->passwd);
-            $columns = "nome,email,senha,uf,cidade,endereco,cep,statusconta,data_criacao";
-
-            $this->sql->open();
-
-            return $this->sql
-                ->add("usuario",$columns,count($person->toArray()))
-                ->prepareParam($person->toArray())
-                ->execNotRowSql();
-
-        } catch(DataException $ex)  {   
-            throw new DataException( $ex->getMessage(),$ex->getCode() );
-            
-        } finally {
-            $this->sql->close();
-        }
-            
-    }
-
     /**
      * Verifica se o hash precisa ser atualizada, se sim ela é atualizada no banco
      * @param string $passwd
@@ -128,6 +106,45 @@ class AccountHandling {
 
     }
 
+    public function recoverByCNPJ(string $cnpj): ?array
+    {
+        try {
+            $this->sql->open();
+
+            return $this->sql
+                ->show("empresa","*","CNPJ = ?",6)
+                ->prepareParam([$cnpj])
+                ->executeSql();
+            
+        }catch(DataException $ex) {
+           throw $ex;
+
+        }finally {
+            $this->sql->close();
+        }
+
+    }
+
+    public function recoverByEmail(string $email,int $typeUser): ?array
+    {
+        try {
+            $table = ($typeUser == 10) ? "empresa" : "usuario";
+            $this->sql->open();
+
+            return $this->sql
+                ->show($table,"*","email = ?",6)
+                ->prepareParam([$email])
+                ->executeSql();
+            
+        }catch(DataException $ex) {
+           throw $ex;
+
+        }finally {
+            $this->sql->close();
+        }
+
+    }
+
     public function recoverPasswd(Person $usr,string $value, int $option): bool
     {
         try{
@@ -144,6 +161,8 @@ class AccountHandling {
             if(count($tableEmp) == 0 && count($tableUser) == 0 ) return false;
             
             $table = (count($tableEmp) > 0) ? "empresa" : "usuario";
+
+            $where .= (count($tableEmp) > 0) ? " AND id_empresa" : " AND id_usuario";
 
             return $this->sql
                 ->update($table,"senha = ?",$where)

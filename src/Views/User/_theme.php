@@ -2,20 +2,10 @@
 require_once dirname(__DIR__ ,3) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
-use Ecomais\Controllers\ComponenteElement as componente;
+use Ecomais\Views\Component\ComponenteElement as componente;
 
-$sql = new Ecomais\ControllersServices\User\UserHandling();
-$user = new Ecomais\Models\Person();
+
 $implement = new Ecomais\Models\Implementation();
-
-// if($Implementation->isLogged()) {
-
-//   $user->id = $_COOKIE['_id'];
-//   $row = $sql->userInfo($user->id);
-
-// } else {
-//   header("location: " . BASE_URL . "/login");
-// }
 
 ?>
 <!DOCTYPE html>
@@ -31,15 +21,9 @@ $implement = new Ecomais\Models\Implementation();
   <meta name="keywords" content="descontos,atacarejos,supermercado,compras">
   <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-  <?= Bundles::renderFileCss([
-    "bootstrap.min",
-    "bootstrap-reboot.min",
-    "bootstrap-grid.min",
-    "alertify.min",
-    "default.min",
-    "eco.style",
-    "styleComponente"
-  ]) ?>
+  <?php Bundles::render(["bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","eco.style.css","styleComponente.css"],
+    fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">")) ?>
+  
   <?= $this->section("css"); ?>
   <title>Ecomais | <?= $row ?? "My Webpage" ?></title>
 </head>
@@ -66,54 +50,18 @@ $implement = new Ecomais\Models\Implementation();
 
   <!-- Footer -->
   <?= componente::footer() ?>
+  
 
   <?php
-  echo Bundles::renderFileJs([
-    "jquery-3.5.1.min",
-    "jquery.mask",
-    "bootstrap.min",
-    "bootstrap.bundle",
-    "alertify.min",
-    "apis",
-    "manipulation"
-  ]);
-
   echo "
-      <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
-      <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
-      <script> const BASE_URL = '" . BASE_URL . "'; </script>";
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
+    <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>\n
+    <script> const BASE_URL = '" . BASE_URL . "'; </script>";
+    Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js.map","bootstrap.min.js","bootstrap.bundle.js.map","bootstrap.bundle.js","alertify.min.js","apis.js","manipulation.js","newaletter.js"],
+  fn($file) => print_r("<script src=\"$file\"></script>"));
+
   echo $this->section("scripts");
   ?>
-
-  <script>
-    $("#btnEnv").click(function() {
-      alertify.set('notifier', 'position', 'top-right');
-
-      let val = $("#emailNewsLetter").val().trim();
-      option = {
-        method: 'POST',
-        mycustomtype: "application/json",
-        url: `${BASE_URL}/manager/newsletter`,
-        dataType: "json",
-        data: {
-          newsletter: val
-        },
-        success: (response) => {
-
-          if (response.res) {
-            $("#emailNewsLetter").val("");
-            alertify.success("Obrigado! <br/>Agora você recebera nossa newsletter").delay(5);
-          }
-        },
-        error: () => {}
-      };
-
-      if (val.length > 0) {
-        reqAjax(option);
-      }
-    })
-  </script>
-
 </body>
 
 </html>

@@ -3,9 +3,9 @@
 namespace Ecomais\Controllers;
 
 use Ecomais\Models\{DataException, Person, Implementation, AuthGoogle};
-use Ecomais\Controllers\ComponenteElement as Componente;
+use Ecomais\Views\Component\ComponenteElement as componente;
 use Ecomais\ControllersServices\AccountHandling;
-use Ecomais\Services\{EmailECM};
+use Ecomais\Services\EmailECM;
 
 class Main
 {
@@ -26,38 +26,38 @@ class Main
      * O método login trabalha com os dois tipos de conta empresa e usuário
      * assim como o método loginAuthGoogle e o método recoverByKey
      */
-    public function login(array $param): void
+    public function login(array $params): void
     {
         try {
-            if (preg_match("/\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}/", $param['value'])) {
-                $param['value'] = preg_replace("/\D/", "", $param['value']);
+            if (preg_match("/\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}/", $params['value'])) {
+                $params['value'] = preg_replace("/\D/", "", $params['value']);
             }
-            $this->usr->email = $param['value'];
-            $this->usr->passwd = $param['passwd'];
+            $this->usr->email = $params['value'];
+            $this->usr->passwd = $params['passwd'];
             $company = 10;
             $user = 11;
 
-            $row = $this->sql->setLogin($this->usr, (is_numeric($param['value'])) ? $company : $user);
+            $row = $this->sql->setLogin($this->usr, (is_numeric($params['value'])) ? $company : $user);
 
             if (count($row) > 0 && password_verify($this->usr->passwd, $row['senha'])) {
 
-                $expire = ($param['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                $expire = ($params['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
 
                 $token =  hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
 
-                $this->usr->id = $row[is_numeric($param['value']) ? "id_empresa" : "id_usuario"];
+                $this->usr->id = $row[is_numeric($params['value']) ? "id_empresa" : "id_usuario"];
 
                 $this->sql->verifyUpdateHash($row['senha'], $this->usr);
-                session_name(hash("crc32","ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
+                session_name(hash("crc32", "ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
-                if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) 
+                if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE)
                     session_start();
 
                 setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
                 setcookie('_token', $token, $expire, '/', "", false, true);
 
-                echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($param['value'])) ? $company : $user]);
+                echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($params['value'])) ? $company : $user]);
             } else {
                 echo json_encode(["error" => true, "status" => 404, "data" => "Not results"]);
             }
@@ -76,12 +76,16 @@ class Main
 
         $code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED);
         $err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
-        $connected = 0;
-        ${$connected} = filter_input(INPUT_GET, "conectedLogin", FILTER_SANITIZE_NUMBER_INT);
 
-        if (empty($code) && empty($err)) header("location: $authGoogleUrl&conectedLogin=$connected");
+        if ($userConnected =  filter_input(INPUT_GET, "connectedLogin", FILTER_SANITIZE_NUMBER_INT)) {
+            $this->implement->getSession();
+            $_SESSION["userConnected"] = $userConnected;
+        }
 
-        if (!empty($code)) {
+        if (empty($code) && empty($err)) header("location: $authGoogleUrl");
+
+
+        if (!empty($code) && empty($err)) {
             $data = $google->getData($code);
             $this->usr->name = $data->getName(); // O método não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
@@ -91,31 +95,33 @@ class Main
             if (count($row) > 0 || count($row2) > 0) {
                 $this->usr->id = $row['id_usuario'] ?? $row2['id_empresa'] ?? null;
 
-                $expire = (${$connected} == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                $this->implement->getSession();
                 $token =  hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                $expire = ($_SESSION["userConnected"] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                session_destroy();
 
-                session_name(hash("crc32","ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
+                session_name(hash("crc32", "ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
                 session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
 
-                if (session_status() == PHP_SESSION_DISABLED || 
-                    session_status() == PHP_SESSION_NONE) 
-                    session_start();
+                $this->implement->getSession();
 
                 setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
                 setcookie('_token', $token, $expire, '/', "", false, true);
 
                 if ($row) header("location: " . BASE_URL . "/usuario");
                 if ($row2) header("location: " . BASE_URL . "/empresa");
-            }
-        } else {
-            echo "<script> window.close(); </script>";
+            } else
+                header("location: " . BASE_URL . "/login");
         }
-        if (session_status() == PHP_SESSION_ACTIVE) session_destroy();
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_destroy();
+            session_write_close();
+        }
     }
 
     public function logoff(): void
     {
-        if (session_status() == PHP_SESSION_DISABLED) session_start();
+        $this->implement->getSession();
 
         if (!empty($_COOKIE['_id']) && !empty($_COOKIE['_token'])) {
             setcookie('_id', "", 0, "/");
@@ -133,20 +139,20 @@ class Main
     {
         try {
             $token = $this->implement->createToken($params["value"]);
-            $row = $this->sql->recoverByKey(trim($params["value"]),15);
-            $row2 = $this->sql->recoverByKey(trim($params["value"]),10);
+            $row = $this->sql->recoverByKey(trim($params["value"]), 15);
+            $row2 = $this->sql->recoverByKey(trim($params["value"]), 10);
+
+
             if (count($row) > 0 || count($row2) > 0) {
                 session_cache_expire(time() + (2 * 3600));
-                session_id(md5($params['name'] . "ECOID"));
+                session_id(hash("crc32", $params['name'] . "ECOID"));
 
-                if(session_status() == PHP_SESSION_DISABLED || 
-                    session_status() == PHP_SESSION_NONE)
-                    session_start();
+                $this->implement->getSession();
 
                 $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $params["value"]];
-                
+
                 echo json_encode(["error" => false, "status" => 200, "token" => $token]);
-            } else 
+            } else
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "chave inválida"]);
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
@@ -156,30 +162,43 @@ class Main
         }
     }
 
-    public function recoverByMail(array $param): void
+    public function recoverByMail(array $params): void
     {
         try {
-            ob_start();
-            $token = $this->implement->createToken($param["value"]);
-            $env = $this->email->add(
-                "Seu pedido de recuperação de senha",
-                Componente::mail($param['name'], $token),
-                $param["name"],
-                $param["value"],
-            )->send();
-            ob_clean();
-            if ($env) {
+            $row = $this->sql->recoverByCNPJ(trim($params["value"] = preg_replace("/\D/", "", $params["value"])));
+            $row2 = $this->sql->recoverByEmail(trim($params["value"]), 10);
+            $token = $this->implement->createToken($params["value"]);
+            $env =  null;
+
+            if (count($row) > 0 || count($row2) > 0) {
                 session_cache_expire(time() + (2 * 3600));
-                session_id(md5($param['name'] . "ECOID"));
+                session_id(hash("crc32", $params['name'] . "ECOID"));
 
-               if(session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE)
-                    session_start();
+                $this->implement->getSession();
 
-                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $param["value"]];
+                session_unset();
+                $_SESSION["ssioninfo"] = ["session_id" => session_id(), "timestamp" => session_cache_expire(), "tnk" => $token, "chveml" => $params["value"]];
+            }
 
-                echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
-            } else  
+            if (count($row2) > 0) {
+                ob_start();
+                $env = $this->email->add(
+                    "Seu pedido de recuperação de senha",
+                    componente::mail($params['name'], $token),
+                    $params["name"],
+                    $params["value"],
+                )->send();
+                ob_clean();
+
+                if ($env)
+                    echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
+                else
+                    echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Verifique os dados"]);
+            } else if (count($row) > 0) {
+                echo json_encode(["error" => false, "status" => 200, "token" => $token]);
+            } else {
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Verifique os dados"]);
+            }
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
@@ -189,14 +208,14 @@ class Main
         }
     }
 
-    public function recoverPasswd($param): void
+    public function recoverPasswd($params): void
     {
         try {
             $email = 1;
             $chave = 2;
-            $option = ($this->implement->isEmail($param["value"])) ? $email : $chave;
-            $verification = $param["value"];
-            $this->usr->passwd = $this->implement->criptPasswd($param['passwd']);
+            $option = ($this->implement->isEmail($params["value"])) ? $email : $chave;
+            $verification = $params["value"];
+            $this->usr->passwd = $this->implement->criptPasswd($params['passwd']);
 
 
             if ($this->sql->recoverPasswd($this->usr, $verification, $option))
@@ -208,13 +227,12 @@ class Main
         }
     }
 
-    public function newsLetter($param): void
+    public function newsLetter($params): void
     {
         try {
-            if (filter_var($param["newsletter"], FILTER_VALIDATE_EMAIL)) {
-                if ($this->sql->createNewsLetter($param["newsletter"]))
-                    echo json_encode(["res" => true]);
-                return;
+            if (filter_var($params["newsletter"], FILTER_VALIDATE_EMAIL)) {
+                if ($this->sql->createNewsLetter($params["newsletter"]))
+                    exit(json_encode(["res" => true]));
             }
             echo json_encode(["res" => false]);
         } catch (DataException $ex) {

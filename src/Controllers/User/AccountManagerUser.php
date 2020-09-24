@@ -2,17 +2,17 @@
 namespace Ecomais\Controllers\User;
 
 use Ecomais\Models\{DataException,Person};
-use Ecomais\ControllersServices\AccountHandling;
+use Ecomais\ControllersServices\User\UserHandling;
 
 class AccountManagerUser {
 
-    private AccountHandling $account;
+    private UserHandling $account;
     private Person $usr;
 
     function __Construct() 
     {
         $this->usr = new Person();
-        $this->account = new AccountHandling();
+        $this->account = new UserHandling();
     }
 
     public function  createAccount($param): void
@@ -33,6 +33,16 @@ class AccountManagerUser {
             } else {
                 echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "msg" => "Not Imprements"]);
             }
+        } catch (DataException $ex) {
+            header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
+        }
+    }
+
+    public function findById(int $id): ?array
+    {
+        try {
+            $this->usr->id = $id;
+            return $this->account->findById($this->usr) ?? null;
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()} server error");
         }
