@@ -20,7 +20,7 @@ use Ecomais\Web\Bundles;
 </head>
 
 <body>
-  <div class="w-100" style="max-height: 100vh;height: 100vh;">
+  <div class="col-12" style="max-height: 100vh;height: 100vh;">
     <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12 p-2 m-auto mb-7">
       <div class="col-xl-7 col-lg-7 col-md-9 col-sm-12 offset-xl-2 p-2">
         <div id="alert" class="alert" role="alert"></div>
@@ -47,9 +47,9 @@ use Ecomais\Web\Bundles;
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-xl-7 col-lg-7 col-md-9 col-sm-12 mx-auto">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-xm-12 m-auto">
-            <button type="button" class="btn btn-lg btn-block btn-primary" id="btnEnviPwd">Enviar</button>
+        <div class="form-group col-12 mx-auto">
+          <div class="col-xl-4 col-md-8 col-xm-12 m-auto">
+            <button type="button" class="btn btn-lg btn-block btn-primary text-weight-800 text-uppercase font-size-1em" id="btnEnviPwd">Enviar</button>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ use Ecomais\Web\Bundles;
 
   <?php
   echo "<script>  const BASE_URL = \"" . BASE_URL . "\"</script>";
-  echo Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js","bootstrap.min.js.map","bootstrap.bundle.js","bootstrap.bundle.js.map","alertify.min.js","apis.js","manipulation.js","recoverpasswd.js"],
+  Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js","bootstrap.min.js.map","bootstrap.bundle.js","bootstrap.bundle.js.map","alertify.min.js","apis.js","manipulation.js","recoverpasswd.js"],
   fn($file) => print_r("<script src=\"$file\"></script>"));
   ?>
 </body>

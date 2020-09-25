@@ -1,6 +1,8 @@
 <?php
 $this->layout("_theme", ["title" => "EcoMais - My Home"]);
 
+$this->func()->verifyLoggedUser();
+
 use Ecomais\Views\Component\ComponenteElement as component;
 use Ecomais\Web\Bundles;
 

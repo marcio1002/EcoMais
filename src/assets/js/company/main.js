@@ -1,10 +1,4 @@
-$(function() {
-  $("#userOptions").on("click", function() { 
-    $(this).parent().find(".dropdown-menu")
-      .animate({ height: "toggle"},200)
-      .toggleClass("show") 
-  })
-  
+$(function() {  
   $("[data-logoff]").click(function() {
     let option = {
         method: 'GET',

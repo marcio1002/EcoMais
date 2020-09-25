@@ -15,7 +15,6 @@ class Bundles
             "linux" => "/",
             "macintosh" => "/"
         );
-
         preg_match("/(windows|linux|macintosh)/", strtolower($_SERVER["HTTP_USER_AGENT"]), $res);
         return $typePath[$res[1]] ?? "";
     }

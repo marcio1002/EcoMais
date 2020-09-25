@@ -2,7 +2,7 @@
 
 namespace Ecomais\Controllers\Company;
 
-use CoffeeCode\Uploader\Send;
+use CoffeeCode\Uploader\Image;
 use Ecomais\Models\{DataException, Implementation, PersonLegal};
 use Ecomais\ControllersServices\Company\CompanyHandling;
 
@@ -19,18 +19,6 @@ class AccountManagerCompany
         "image/jpc",
         "image/jp2",
         "image/jpx",
-    );
-    private static $extension = array (
-        "jpg",
-        "jpeg",
-        "png",
-        "wbmp",
-        "gif",
-        "tiff",
-        "psd",
-        "jpc",
-        "jp2",
-        "jpx",
     );
     private static $locality = array(
         "AC" => "acre",
@@ -180,10 +168,9 @@ class AccountManagerCompany
     public function updateImageCompany($params): void
     {
         try{
-            $upload = new Send("src/uploads","imageCompany",static::$type,static::$extension,false);
+            $upload = new Image("src/uploads","imageCompany",false);
             
-            if(isset($_FILES["image"]) || $upload::isAllowed()) {
-
+            if(isset($_FILES["image"]) && !!in_array($_FILES["image"]["type"], self::$type)) {
                 $bitType = array("bytes","KB","MB","GB");
                 $bytes = filesize($_FILES["image"]['tmp_name']);
                 $factor = floor(log($bytes) / log(1024));
@@ -193,7 +180,6 @@ class AccountManagerCompany
 
                 $newFileName =  explode(".",$this->implement->criptImage($_FILES["image"]))[0];
                 $this->emp->id = $params['id'];
-
                 $row = $this->account->findById($this->emp);
                 
                 //imagem é apagada porque o nome sempre é diferente
@@ -209,7 +195,6 @@ class AccountManagerCompany
                     echo json_encode(["error" => true, "status" => DataException::NOT_FOUND, "data" => []]);
             }else {
                 echo json_encode(["error" => true, "status" => DataException::NOT_IMPLEMENTED, "msg" => "Not Implements"]);
-
             }
             
         }catch(DataException $ex) {

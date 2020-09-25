@@ -1,8 +1,6 @@
 $(function () {
     alertify.set('notifier', 'position', 'top-center')
 
-    $("#manterConectado").prop("checked",true)
-
     //funções de eventos 
     $("#inputPwd").keypress(function (evt) { if (evt.keyCode == 13) $('#btnLogar').click() })
 
@@ -57,7 +55,7 @@ $(function () {
     $('#container-account-login').click(function (e) {
         e.preventDefault()
         let connectedLogin = $('#manterConectado').is(":checked") ? 18 : 0
-        location.replace(`${$("#btnLoginGoogle").prop("href")}?connectedLogin=${connectedLogin}`)
+        location.replace(`${$(this).find("a").prop("href")}?connectedLogin=${connectedLogin}`)
     })
 
 })

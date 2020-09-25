@@ -2,9 +2,8 @@
 require_once dirname(__DIR__,2) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
+use Ecomais\Views\Component\ComponenteElement as component;
 
-$sql = new Ecomais\ControllersServices\Company\CompanyHandling();
-$user = new Ecomais\Models\PersonLegal();
 $implement = new Ecomais\Models\Implementation();
 
 if ($implement->isLogged("usuario")) header("location: " . renderUrl("/usuario"));
@@ -34,7 +33,7 @@ if ($implement->isLogged("empresa")) header("location: " . renderUrl("/empresa")
             </div>
             <div class=' col-12'>
                 <div class="form-check m-auto">
-                    <input type='checkbox' class='form-check-input' id='manterConectado'>
+                    <input type='checkbox' class='form-check-input' id='manterConectado' checked>
                     <label class='form-check-label ' for='dropdownCheck'>
                         Mantenha-me conectado
                     </label>
@@ -46,25 +45,14 @@ if ($implement->isLogged("empresa")) header("location: " . renderUrl("/empresa")
             </div>
             <div class='col-12'>
                 <div class='text-center col-12'>
-                    <button type='button' class='btn btn-large btn-block remove-focus text-center btn-color-login text-weight-800 font-size-1-2em text-uppercase' id='btnLogar'>Entrar</button>
+                    <button type='button' class='btn btn-block btn-color-login btn-bg-shadow-hover remove-focus text-center text-uppercase text-weight-800 font-size-1-1em' id='btnLogar'>Entrar</button>
                 </div>
             </div>
             <div class='col-12 text-center pt-3'>
-                OU
+               OU 
             </div>
-            <div class='col-12 pt-4 pb-4 d-sm-flex justify-content-center'>
-                <div class='text-center col-12'>
-                    <div id="container-account-login" class="btn-group btn-large btn-block">
-                        <button class=" btn-color-red text-white btn remove-focus">
-                            <i class="icon-google fab fa-google"></i>
-                        </button>
-                        <a title='Entrar com o Google' id="btnLoginGoogle" href=<?= renderUrl("/manager/logingoogle"); ?> class='btn btn-large btn-block btn-color-red  btn-google remove-focus text-weight-800 font-size-1-2em text-center text-white p-2'>
-                            <div class='item-account-login google '>
-                                Entrar com o Google
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <div class='col-11 py-2 d-sm-flex justify-content-center m-auto'>
+            <?= component::buttonGoogle("container-account-login","Entrar com o Google",renderUrl("/manager/logingoogle"))?>
             </div>
         </div>
     </div>

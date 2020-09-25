@@ -1,9 +1,10 @@
 <?php
 require_once dirname(__DIR__ ,3) . "/vendor/autoload.php";
 
+$this->func()->verifyLoggedUser();
+
 use Ecomais\Web\Bundles;
 use Ecomais\Views\Component\ComponenteElement as componente;
-
 
 $implement = new Ecomais\Models\Implementation();
 
@@ -47,10 +48,8 @@ $implement = new Ecomais\Models\Implementation();
     ?>
   </section>
 
-
   <!-- Footer -->
   <?= componente::footer() ?>
-  
 
   <?php
   echo "

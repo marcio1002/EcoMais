@@ -2,13 +2,10 @@
 require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Ecomais\Web\Bundles;
+$implement = new  Ecomais\Models\Implementation();
 
 
-if (
-  session_status() == PHP_SESSION_DISABLED ||
-  session_status() == PHP_SESSION_NONE
-)
-  session_start(['read_and_close'  => true]);
+$implement->getSession(['read_and_close'  => true]);
 
 
 if (count($_SESSION) == 0 || $_SESSION['ssioninfo']["timestamp"] < time())
@@ -36,15 +33,15 @@ if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (st
   <div class='body-em d-flex flex-column justify-content-xl-center justify-content-lg-center justify-content-md-center'>
     <div>
       <div class="col-12">
-        <form>
           <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
             <div class="alert " role="alert"></div>
           </div>
+        <form>
           <div class="form-row">
-            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 m-auto">
               <label for="newPasswd" id="recover-label">Digite a nova senha:</label>
               <div class="input-group">
-                <input type="password" class="form-control" id="newPasswd" autocomplete="new-password" aria-describedby="emailHelp" />
+                <input type="password" class="form-control inset-shadow" id="newPasswd" autocomplete="new-password" aria-describedby="emailHelp" />
                 <div class="input-group-prepend">
                   <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
                 </div>
@@ -56,19 +53,19 @@ if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (st
               </small>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+          <div class="form-row p-2">
+            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 m-auto">
               <label for="newPasswdVerify">Digite novamente a senha:</label>
-              <input type="password" id="newPasswdVerify" class="form-control" />
+              <input type="password" id="newPasswdVerify" class="form-control inset-shadow" />
+            </div>
+            <div class="d-none">
+              <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?? "''" ?>>
             </div>
           </div>
-          <div class="d-none">
-            <input type="hidden" id="value" value=<?= $_SESSION['ssioninfo']["chveml"] ?? "''" ?>>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+          <div class="form-row p-4">
+            <div class="form-group col-xl-5 col-lg-5 col-md-8 col-sm-10 m-auto">
               <div id="container-btnRecoverPwd" class="col-xl-7 col-lg-7 col-md-7 col-xm-10 m-auto">
-                <button type="button" class="btn btn-lg btn-block btn-success" id="btnRecoverPwd">Criar</button>
+                <button type="button" class="btn btn-lg btn-block btn-success btn-bg-shadow-hover" id="btnRecoverPwd">Criar</button>
               </div>
             </div>
           </div>

@@ -55,7 +55,7 @@ $(function () {
 
   }
 
-  $(":input:not(#edit-info,#delete-company)").prop("disabled", true)
+  $("#content:input:not(#edit-info,#delete-company)").prop("disabled", true)
 
   $("#edit-info").click(function () {
     $("#passwd").val("")

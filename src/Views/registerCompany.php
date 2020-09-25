@@ -84,33 +84,32 @@ if (!empty($code)) {
                 </div>
                 <div class="card-body">
                     <p class="text-muted ">Faça postagens públicas de seus produtos em promoção!</p>
-
                     <form id="formCompany" enctype="multipart/form-data">
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="fantasia"><span class='required'>*</span> <b>Fantasia</b></label>
-                            <input type="text" id="fantasia" name="fantasy" <?= $name ?> <?= $name ? "readonly" : "" ?> class="form-control nextItem" placeholder="Nome da empresa" data-required="">
+                            <input type="text" id="fantasia" name="fantasy" <?= $name ?> <?= $name ? "readonly" : "" ?> class="form-control inset-shadow nextItem" placeholder="Nome da empresa" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="razao"><span class='required'>*</span> <b>Razão social</b></label>
-                            <input type="text" id="razao" name="reason"  class="form-control nextItem" data-required="">
+                            <input type="text" id="razao" name="reason"  class="form-control inset-shadow nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="cnpj"><span class='required'>*</span> <b>CNPJ</b></label>
-                            <input type="text" id="cnpj" name="cnpj" class="form-control nextItem" data-required="">
+                            <input type="text" id="cnpj" name="cnpj" class="form-control inset-shadow nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="email"><span class='required'>*</span> <b>E-mail</b></label>
-                            <input type="text" id="email" name="email" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control nextItem" data-required="">
+                            <input type="text" id="email" name="email" <?= $email ?> <?= $email ? "readonly" : "" ?> class="form-control inset-shadow nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="password"><span class='required'>*</span> <b>Crie uma senha:</b></label>
                             <div class="input-group">
-                                <input type="password" id="passwd" name="passwd" class="form-control nextItem" autocomplete="current-password" maxlength="20" data-required="" />
+                                <input type="password" id="passwd" name="passwd" class="form-control inset-shadow nextItem" autocomplete="current-password" maxlength="20" data-required="" />
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
                                 </div>
@@ -124,13 +123,13 @@ if (!empty($code)) {
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="contato"><span class='required'>*</span> <b>Telefone de contato</b></label>
-                            <input type="text" id="contato" name="contact" class="form-control nextItem" placeholder="Fixo ou celular" data-required="">
+                            <input type="text" id="contato" name="contact" class="form-control inset-shadow nextItem" placeholder="Fixo ou celular" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="inputCep"><b>Cep</b></label>
                             <div class="input-group">
-                                <input type="text" id="inputCep" name="cep" class="form-control" />
+                                <input type="text" id="inputCep" name="cep" class="form-control inset-shadow" />
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
                                 </div>
@@ -139,7 +138,7 @@ if (!empty($code)) {
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="nome"><span class='required'>*</span><b>Estado</b></label>
-                            <select id='uf' name='uf' class="form-control custom-select nextItem" data-required="">
+                            <select id='uf' name='uf' class="form-control inset-shadow custom-select nextItem" data-required="">
                                 <option value="" selected disabled>Escolha...</option>
                                 <option value='AC'>Acre</option>
                                 <option value='AL'>Alagoas</option>
@@ -172,17 +171,17 @@ if (!empty($code)) {
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="nome"><span class='required'>*</span> <b>Cidade</b></label>
-                            <input type="text" id="locality" name="locality" class="form-control nextItem" data-required="">
+                            <input type="text" id="locality" name="locality" class="form-control inset-shadow nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="nome"><b>Endereço</b></label>
-                            <input type="text" id="address" name="address" class="form-control nextItem" placeholder="Rua, bairro e número" data-required="">
+                            <input type="text" id="address" name="address" class="form-control inset-shadow nextItem" placeholder="Rua, bairro e número" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="nome"><span class='required'>*</span> <b>Plano</b></label>
-                            <select id="plano" name="plano" class="form-control custom-select nextItem" data-required="">
+                            <select id="plano" name="plano" class="form-control inset-shadow custom-select nextItem" data-required="">
                                 <option value="" selected disabled>Escolha...</option>
                                 <option value="10">Sacolinha</option>
                                 <option value="20">Cestinha</option>
@@ -197,22 +196,13 @@ if (!empty($code)) {
                             </div>
                         </p>
                         <div class="form-row mt-3">
-                            <div class='col-xl-10 col-lg-10 col-md-10 col-sm-12 m-auto'>
-                                <div class="btn-group btn-large btn-block nextItem">
-                                    <button class="btn-color-red text-white btn remove-focus">
-                                        <i class='icon-google fab fa-google'></i>
-                                    </button>
-                                    <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red remove-focus text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
-                                        Registrar com o Google
-                                    </a>
-                                </div>
+                            <div class='col-xl-9 col-md-9 col-sm-12 m-auto'>
+                                <?= component::buttonGoogle("registerGoogle","Registrar com o Google",$authGoogleUrl)?>
                             </div>
                         </div>
                         <div class="form-row mt-3">
-                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 m-auto">
-                                <button type="button" id="btnRegisterCompany" class="btn btn-block btn-primary font-size-1-2em remove-focus text-weight-700 nextItem">
-                                    Cadastrar
-                                </button>
+                            <div class="col-xl-9 col-md-9 col-sm-12 m-auto">
+                                <button type="button" id="btnRegisterCompany" class="btn btn-block btn-primary font-size-1-1em remove-focus text-weight-700 nextItem">Cadastrar</button>
                             </div>
                         </div>
                     </form>
@@ -221,59 +211,16 @@ if (!empty($code)) {
         </div>
 
     </div>
-    <div class="modal fade bg-dark-transparent" id="modalPagamento" tabindex="-1" role="Pagamento" aria-labelledby="Pagamento" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header" title="Precione ESC para voltar" style="cursor: help;">
-                    <h5 class="modal-title m-auto">Dados do Cartão</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="formPagamento" enctype="multipart/form-data">
-                        <label>Número do cartão</label><br>
-                        <input type="text" name="numCartao" id="numCartao" data-required=""><br>
-
-
-                        <label>CVV do cartão</label><br>
-                        <input type="text" name="cvvCartao" id="cvvCartao" maxlength="3" data-required=""><br>
-
-                        <input type="hidden" name="bandeiraCartao" id="bandeiraCartao">
-
-                        <label>Mês de Validade</label><br>
-                        <input type="text" name="mesValidade" id="mesValidade" maxlength="2" data-required=""><br>
-
-                        <label>Ano de Validade</label><br>
-                        <input type="text" name="anoValidade" id="anoValidade" maxlength="4" data-required=""><br>
-
-                        <input type="hidden" name="qntParcelas" id="qntParcelas" class="select-qnt-parcelas">
-
-
-                        <input type="hidden" name="valorParcelas" id="valorParcelas">
-
-                        <label>CPF do dono do Cartão</label><br>
-                        <input type="text" name="creditCardHolderCPF" id="creditCardHolderCPF" placeholder="CPF sem traço" data-required=""> <br>
-
-                        <label>Nome no Cartão</label><br>
-                        <input type="text" name="creditCardHolderName" id="creditCardHolderName" placeholder="Nome igual ao escrito no cartão" data-required="">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" name="btnComprar" id="btnComprar" value="Comprar">Finalizar cadastro</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <?php
-$this->start("footer");
-    echo component::footer();
-$this->stop();
+    $this->start("footer");
+        echo component::footer();
+    $this->stop();
 
-$this->start("scripts");
-    echo  Bundles::render([ "mainMethods.js", "registerCompany.js"], 
-    fn($file) => print_r("<script src=\"$file\"></script>"));
-    echo $clearRequest;
-$this->stop();
+    $this->start("scripts");
+        echo  Bundles::render([ "mainMethods.js", "registerCompany.js"], 
+        fn($file) => print_r("<script src=\"$file\"></script>"));
+        echo $clearRequest;
+    $this->stop();
 ?>

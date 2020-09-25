@@ -1,10 +1,16 @@
 /* @author Marcio Alemão */
+
+/* --- Variáveis --- */
 :root {
-  --wine:  rgb(128, 18, 18);
+  --blue-dark: #12242e;
+  --blue-dark-1: #173140;
+  --blue-night: #0E1E27;
+  --red-wine:  #801212;
+  --green-light: #0CFC43;
+  --green-dark: #28D750;
 }
 
-.text-weight-800 { font-weight: 800; }
-
+/* --- Font-sizes --- */
 .font-size-1em {font-size: 1em;}
 .font-size-1-1em {font-size: 1.1em;}
 .font-size-1-2em {font-size: 1.2em;}
@@ -12,76 +18,70 @@
 .font-size-1-4em{font-size: 1.4em;}
 .font-size-1-5em { font-size: 1.5em; }
 
-
-.btn-rounded {border-radius: 10px;}
-
+/* --- Text --- */
 .text-weight-500 { font-weight: 500; }
 .text-weight-600 { font-weight: 600; }
 .text-weight-700 { font-weight: 700; }
 .text-weight-800 { font-weight: 800; }
-.text-red-wine { color: val(--wine); }
+.text-red-wine { color: var(--red-wine); }
 .text-red-wine-light-1 { color: rgb(161, 52, 52); }
 .text-red-wine-light-2 { color: rgb(153, 42, 42); }
 .text-uppercase{text-transform: uppercase;}
 
 
 /* --- Background Color --- */
+.bg-blue-dark { background-color: var(--blue-dark) !important; }
+.bg-blue-dark-1 {background-color: var(--blue-dark-1) !important; }
+.bg-blue-night {background-color: #0E1E27 !important; }
 .bg-dark-transparent { background-color: rgba(22, 22, 21, 0.63);}
 .bg-dark-2 {background-color: #29242a !important;}
 .bg-dark-3 {background-color: #2d3238 !important;}
 .bg-light-1 { background-color: rgb(243, 243, 243);}
-.bg-green-dark-1 { background-color: #204839; }
-.bg-green-dark-1:hover { background-color: #346b57; }
-.bg-red-wine { background-color: var(--wine);}
-.bg-red-wine:hover {background-color: rgb(139, 18, 18);}
+.bg-green-dark { background-color: var(--green-dark) }
+.bg-green-dark:hover { background-color: #27E753; }
+.bg-red-wine { background-color: var(--red-wine) !important;}
+.bg-red-wine:hover {background-color: rgb(139, 18, 18) !important;}
 .bg-orange { background-color: var(--orange);}
 .bg-purple { background-color: var(--purple)}
 .bg-cyan {background-color: var(--cyan);}
 .bg-teal {background-color: var(--teal);}
-
-
+.bg-red-google { background-color: #db4a39;}
 
 /* --- Borders ---*/
-.border-green-dark-1 {border: 2px solid #28a745}
+.border-green-dark-1 {border: 2px solid var(--green-dark)}
 .border-radius-30 {border-radius: .30rem !important;}
 
-/* --- Text Color --- */
-.text-green-dark { color: #1D5842;}
-.text-green-dark-2 { color: #398468;}
-.text-red-wine { color: var(--wine) !important;}
+/* --- Shadow --- */
+.inset-shadow {box-shadow: inset 0 1px 3px rgb(211, 211, 211);}
+.shadow-dark { box-shadow: 0px -2px 10px rgba(51, 51, 51, 0.815); }
+.shadow-top { box-shadow: 0px 2px 10px rgba(46, 46, 46, 0.678); }
 
-/* --- Buttons Colors ---*/
-.btn-color-red { background: #ea4335; }
+/* --- Buttons --- */
+.btn-bg-shadow-hover:hover{background-image:-moz-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:-webkit-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:-o-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:linear-gradient(transparent,#0000000d 40%,#0000001a);}
+.btn-bg-shadow{background-image:-moz-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:-webkit-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:-o-linear-gradient(transparent,#0000000d 40%,#0000001a);background-image:linear-gradient(transparent,#0000000d 40%,#0000001a)}
+.btn.btn-shadow { box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.315);}
+
+/* --- Text Color --- */
+.text-green-dark { color: var(--green-dark);}
+.text-green-dark-2 { color: var(--green-dark);}
+.text-red-wine { color: var(--red-wine) !important;}
 
 /* --- Remove o focus do bootstrap ---*/
-
 .remove-focus:focus { box-shadow: none !important;}
 
 /* ---  Posicionamento --- */
-
 .bottom-25 { bottom: 25%; }
-
 .top-25 { bottom: 25%; }
-
 .left-25 { left: 25%; }
-
-.w-10 { max-width: 100px; width: 100%; }
-
 .right-25 { right: 25% }
 
 
 /* --- outros --- */
-
 .pointer {cursor: pointer;}
-
 .z-index-1000 {z-index: 5000;}
-
 .overflow-h { overflow: hidden !important;}
-
 .img { width: 100%; height: 100%; object-fit: cover; }
-
 .icon-google { font-size: 1.6em;  vertical-align: middle; }
-
 .main-btn:hover { text-decoration: none;}
 
 /* --- Atribuir classes para viewport --- */

@@ -33,18 +33,15 @@ class Implementation
     }
 
     /**
-     * Criptografia MD5
-     * @param string $exReg
-     * Espressão regular
-     * @param string $imageName
-     * Nome da imagem exem:  png|jpg|mpeg
+     * Criptografia de imagem
+     * @param string $file
+     * um array da variável global
      * @return string
-     * Retorna uma nova criptografia
      */
     public function criptImage(array $file): string
     {
         if (empty($file)) throw new DataException("Null file",DataException::NOT_ACCEPTABLE);
-        $this->imageName = strtoupper(uniqid(md5(time() . pathinfo($file["name"])["filename"]))) . "." . pathinfo($file["name"])["extension"];
+        $this->imageName = strtoupper(uniqid(hash("sha512",time() . pathinfo($file["name"])["filename"]))) . "." . pathinfo($file["name"])["extension"];
 
         return $this->imageName;
     }
@@ -53,7 +50,6 @@ class Implementation
      * Cria um token de 8 bits
      * @param string $param
      * @return string
-     * Retorna uma nova criptografia
      */
     public function createToken(string $param): string
     {
@@ -84,41 +80,28 @@ class Implementation
      */
     public function isLogged($table):bool
     {
-        if (isset($_COOKIE['_id']) || isset($_COOKIE['_token'])) {
-            if (session_status() == PHP_SESSION_DISABLED || 
-                session_status() == PHP_SESSION_NONE) 
-                session_start(['read_and_close'  => true]);
-                
-            $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-            $id = (strcasecmp($table,"empresa") === 0) ? "id_empresa" : "id_usuario";
-            $this->sql->open();
-            $row = $this->sql
-                    ->show($table,"","$id = ?",3)
-                    ->prepareParam([$_COOKIE['_id']])
-                    ->executeSql();
-            $this->sql->close();
+        if (isset($_COOKIE['_id'])) {
+            $this->getSession(['read_and_close'  => true]); 
+                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
+                $id = (strcasecmp($table,"empresa") === 0) ? "id_empresa" : "id_usuario";
 
-            if (!empty($row)) {
-                if(strcasecmp($_COOKIE['_token'],$token) === 0 && strcasecmp($_COOKIE['_id'],$row[$id]) === 0 ) return true;
-            }
+                $this->sql->open();
+                $row = $this->sql
+                        ->show($table,"","$id = ?",3)
+                        ->prepareParam([$_COOKIE['_id']])
+                        ->executeSql();
+                $this->sql->close();
+
+                if (!empty($row)) {
+                    if(
+                        strcasecmp($_COOKIE["ECOSESLOGIN"], $token) === 0 && 
+                        strcasecmp($_COOKIE['_id'],$row[$id]) === 0
+                      ) 
+                        return true;
+                }
 
         } 
         return false;
-    }
-
-    /**
-     * @param string $bytes 
-     * O tamanho da image em bytes
-     * @param int $fixed
-     * O tamanho fixo
-     * @return string
-     */
-    public function getBytesFormat($bytes, $fixed = 2): string
-    {
-        $extByte = array("bytes","KB","MB","GB","TB","PB", "EB","ZB","YB");
-        $espo =  floor(log($bytes) / log(1024));
-        $size = round($bytes / pow(1024, $espo));
-        return sprintf("%.{$fixed}f$extByte[$espo]", $size);
     }
 
     /**
@@ -155,10 +138,10 @@ class Implementation
      * Foi criada essa função pra diminuir repetição de código
      * @return bool
     */
-    public function getSession(): bool
+    public function getSession(array $optionsSession = []): bool
     {
         if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
-            session_start();
+            session_start($optionsSession);
             return true;
         }
 

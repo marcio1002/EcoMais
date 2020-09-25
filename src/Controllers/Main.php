@@ -43,19 +43,14 @@ class Main
 
                 $expire = ($params['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
 
-                $token =  hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-
                 $this->usr->id = $row[is_numeric($params['value']) ? "id_empresa" : "id_usuario"];
 
                 $this->sql->verifyUpdateHash($row['senha'], $this->usr);
-                session_name(hash("crc32", "ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
-                session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
+                session_name("ECOSESLOGIN");
+                session_id(hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
-                if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE)
-                    session_start();
-
-                setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
-                setcookie('_token', $token, $expire, '/', "", false, true);
+                $this->implement->getSession();
+                    setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
 
                 echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($params['value'])) ? $company : $user]);
             } else {
@@ -64,7 +59,10 @@ class Main
         } catch (DataException $ex) {
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
-            if (session_status() == PHP_SESSION_ACTIVE) session_destroy();
+            if (session_status() == PHP_SESSION_ACTIVE) {
+                session_destroy();
+                session_write_close();
+            }
         }
     }
 
@@ -79,16 +77,18 @@ class Main
 
         if ($userConnected =  filter_input(INPUT_GET, "connectedLogin", FILTER_SANITIZE_NUMBER_INT)) {
             $this->implement->getSession();
-            $_SESSION["userConnected"] = $userConnected;
+                $_SESSION["userConnected"] = $userConnected;
+            session_write_close();
         }
 
-        if (empty($code) && empty($err)) header("location: $authGoogleUrl");
+        if (empty($code) && empty($err)) exit(header("location: $authGoogleUrl"));
 
 
         if (!empty($code) && empty($err)) {
             $data = $google->getData($code);
             $this->usr->name = $data->getName(); // O método não foi encontrado, mas ele existe no outro objeto
             $this->usr->email = $data->getEmail();
+
             $row =  $this->sql->getLoginAuthGoogle($this->usr, "usuario");
             $row2 = $this->sql->getLoginAuthGoogle($this->usr, "empresa");
 
@@ -96,20 +96,17 @@ class Main
                 $this->usr->id = $row['id_usuario'] ?? $row2['id_empresa'] ?? null;
 
                 $this->implement->getSession();
-                $token =  hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
-                $expire = ($_SESSION["userConnected"] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                    $expire = ($_SESSION["userConnected"] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
                 session_destroy();
 
-                session_name(hash("crc32", "ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}"));
-                session_id(hash("whirlpool", uniqid("ABLS{$_SERVER['REMOTE_ADDR']}ABLS{$_SERVER['HTTP_USER_AGENT']}")));
+                session_name("ECOSESLOGIN");
+                session_id(hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}"));
 
                 $this->implement->getSession();
+                    setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
 
-                setcookie('_id', $this->usr->id, $expire, '/', "", false, true);
-                setcookie('_token', $token, $expire, '/', "", false, true);
-
-                if ($row) header("location: " . BASE_URL . "/usuario");
-                if ($row2) header("location: " . BASE_URL . "/empresa");
+                if (!empty($row)) header("location: " . BASE_URL . "/usuario");
+                if (!empty($row2)) header("location: " . BASE_URL . "/empresa");
             } else
                 header("location: " . BASE_URL . "/login");
         }

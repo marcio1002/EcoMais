@@ -27,7 +27,7 @@ class  Redirect
         return new Engine($dir, "php");
     }
 
-    /* Funções registrada pelo plates */
+                                /* Funções registrada pelo plates */
 
     /**
      * @return object|void
@@ -55,7 +55,7 @@ class  Redirect
         }
     }
 
-    /* Redirecionamento de páginas */
+                                /* Redirecionamento de páginas */
 
     public function test(array $params): void
     {

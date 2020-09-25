@@ -1,8 +1,10 @@
 <?php
+$this->layout("_theme", ["title" => "EcoMais - My Home"]); 
+
+$this->func()->verifyLoggedUser();
 
 use Ecomais\Web\Bundles;
-
-$this->layout("_theme", ["title" => "EcoMais - My Home"]); ?>
+?>
 
 <!-- Masthead -->
 <header class="masthead text-white text-center">

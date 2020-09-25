@@ -8,11 +8,8 @@ body { width: 100%; height: 100vh; background-color: #b4b4b49d; }
 
 
 /* --- Config Button ---*/
-.btn-login { display: inline-block; border: 1px solid transparent; padding: .375rem .75rem;cursor: pointer; }
-
-.btn-color-login { background: #fff132 }
-
-.btn-color-login:hover { background: #fff23e}
+.btn-color-login { background: #fff132;  }
+/* .btn-color-login:hover { background: #f3e629;} */
 
 /* --- Config label input--- */
 

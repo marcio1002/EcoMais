@@ -1,12 +1,11 @@
 <?php
+$this->layout("_theme", ["subtitle" => "Meu Perfil"]);
+
+$this->func()->verifyLoggedCompany();
 
 use Ecomais\Web\Bundles;
 
 $comp = new Ecomais\Controllers\Company\AccountManagerCompany();
-
-$this->layout("_theme", ["subtitle" => "Meu Perfil"]);
-
-$this->func()->verifyLoggedCompany();
 
 $this->start("css");
 Bundles::render(["perfil.css"], fn ($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"));
@@ -38,10 +37,10 @@ $this->stop();
 
     <div class="col-12 d-flex justify-content-center  py-4">
       <div class="col-xl-3  col-md-4 col-sm-12">
-        <button id="saveImage" class="btn btn-block  bg-success text-white remove-focus font-weight-bold font-size-1-1em">Salvar</button>
+        <button id="saveImage" class="btn btn-block bg-success btn-bg-shadow text-white remove-focus font-weight-bold font-size-1-1em">Salvar</button>
       </div>
       <div class="col-xl-3 col-md-4 col-sm-12">
-        <button id="removeImage" class="btn btn-block bg-danger text-white remove-focus font-weight-bold font-size-1-1em">Excluir</button>
+        <button id="removeImage" class="btn btn-block bg-danger btn-bg-shadow text-white remove-focus font-weight-bold font-size-1-1em">Excluir</button>
       </div>
     </div>
   </form>

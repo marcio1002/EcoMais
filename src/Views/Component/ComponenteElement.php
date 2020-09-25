@@ -13,7 +13,7 @@ class ComponenteElement
         $urlRegisterCompany = renderUrl("/cadastro/empresa");
         return <<<navBar
       <div class='container text-white' id='nav-container'>
-        <nav class='navbar navbar-expand-md fixed-top navbar-dark text-weight-500  bg-dark'>
+        <nav class='navbar navbar-expand-md fixed-top text-weight-500  bg-blue-dark'>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
@@ -41,7 +41,7 @@ navBar;
     {
         $termsPolicy = renderUrl("/politica-privacidade-e-termos");
 return <<<footer
-    <section class="call-to-action bg-secondary text-white text-center">
+    <section class="call-to-action bg-blue-dark-1 text-white text-center">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -49,7 +49,7 @@ return <<<footer
                     <div class="col-md-12 p-2" id="contact-form">
                     <p class="h4">Receba nossa Newsletter </p>
                     <div class="">
-                    <input type="text" class="form-control" placeholder="email@exemplo.com" id="emailNewsLetter">
+                    <input type="text" class="form-control inset-shadow" placeholder="email@exemplo.com" id="emailNewsLetter">
                     <div class="row pt-3">
                     <div class="col-xl-6 col-md-8 col-sm-12 m-auto">
                         <button type="button" class="btn bg-red-wine remove-focus text-white text-uppercase font-weight-bold btn-block text-black m-auto" id='btnEnv'>enviar</button>
@@ -61,7 +61,7 @@ return <<<footer
         </div>
     </div>
     </section>
-    <footer class="footer bg-dark">
+    <footer class="footer bg-blue-dark">
     <div class="container">
         <div class="row">
         <div class="col-lg-7 h-100 text-center text-lg-left my-auto">
@@ -261,27 +261,19 @@ return <<<load
         <div class="sk-cube3 sk-cube"></div>
     </div>   
 load;
-        // <div class="spinner">
-        //     <div class="rect1"></div>
-        //     <div class="rect2"></div>
-        //     <div class="rect3"></div>
-        //     <div class="rect4"></div>
-        //     <div class="rect5"></div>
-        // </div>
-        // Load cube
-        //<div class="sk-cube-grid">
-        //   <div class="sk-cube sk-cube1"></div>
-        //   <div class="sk-cube sk-cube2"></div>
-        //   <div class="sk-cube sk-cube3"></div>
-        //   <div class="sk-cube sk-cube4"></div>
-        //   <div class="sk-cube sk-cube5"></div>
-        //   <div class="sk-cube sk-cube6"></div>
-        //   <div class="sk-cube sk-cube7"></div>
-        //   <div class="sk-cube sk-cube8"></div>
-        //   <div class="sk-cube sk-cube9"></div>
-        // </div>
+    }
 
-        //Load Folding em uso
-
+    public static function buttonGoogle(...$props): string 
+    {
+return <<<btnGoogle
+    <div id="{$props[0]}" class="btn btn-group btn-block bg-red-google btn-bg-shadow-hover p-0">
+        <button class="btn text-white remove-focus bg-red-google btn-bg-shadow-hover">
+            <i class="icon-google fab fa-google"></i>
+        </button>
+        <a title='{$props[1]}' href="{$props[2]}" class='btn btn-block text-center text-white remove-focus text-weight-800 font-size-1-1em'>
+            {$props[1]}
+        </a>
+    </div>
+btnGoogle;
     }
 }

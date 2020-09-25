@@ -18,6 +18,8 @@ echo <<<html
 html;
 $this->stop();
 
-$this->start("scripts"); ?>
-<script> $("#back").click(() =>  window.history.back()) </script>
-<? $this->stop(); ?>
+$this->start("scripts"); 
+ echo "<script> $('#back').click(() =>  window.history.back()) </script>";
+$this->stop(); 
+
+?>

@@ -36,15 +36,8 @@ $this->stop();
 <div class="container p-3 pb-4">
   <div class="mb-3">
     <div class="col-12">
-      <div class='col-xl-4 col-lg-4 col-md-7 col-sm-12 m-auto'>
-        <div class="btn-group btn-large btn-block">
-          <button class="btn-color-red text-white btn remove-focus">
-            <i class='icon-google fab fa-google'></i>
-          </button>
-          <a title='Registrar com o Google' id="registerGoogle" href=<?= $authGoogleUrl ?> class='btn btn-large btn-block btn-color-red remove-focus text-center font-size-1-2em text-weight-700 text-white align-middle p-2'>
-            Registrar com o Google
-          </a>
-        </div>
+      <div class="col-xl-4 col-md-8 col-sm-12 m-auto">
+        <?=component::buttonGoogle("registerGoogle","Registrar com o Google",$authGoogleUrl)?>
       </div>
     </div>
   </div>
@@ -142,8 +135,8 @@ $this->stop();
           </div>
         </div>
         <div class="col-12">
-          <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12 m-auto">
-            <button class="btn btn-block bg-red-wine remove-focus text-white border-green-dark-1 nextItem font-size-1-2em text-weight-700" id="btnRegister">Cadastrar</button>
+          <div class="col-xl-4 col-lg-4 col-md-7 col-sm-12 m-auto">
+            <button class="btn btn-block btn-primary remove-focus nextItem font-size-1-1em text-weight-700 btn-bg-shadow-hover" id="btnRegister">Cadastrar</button>
           </div>
         </div>
     </form>
