@@ -1,5 +1,5 @@
 <?php
-$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
+$this->layout("_layout", ["title" => "EcoMais - cadastro"]);
 
 use Ecomais\Web\Bundles;
 use Ecomais\Views\Component\ComponenteElement as component;
@@ -7,37 +7,27 @@ use Ecomais\Views\Component\ComponenteElement as component;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro");
 
-$authGoogleUrl = $google->getAuthURL();
-
-$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED);
-$err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
+$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED,FILTER_SANITIZE_STRING);
+$err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED,FILTER_SANITIZE_STRING);
+$state  = filter_input(INPUT_GET, "state", FILTER_SANITIZE_STRIPPED,FILTER_SANITIZE_STRING);
 
 $name = "";
 $email = "";
 $clearResquest = "";
 
-if (!empty($code)) {
-
-  if($data = $google->getData($code)) {
+if (!empty($code) && empty($err)) {
+  if($google->tokenExpired($code)) $code = $google->tokenExpired($code);
+  if($data = $google->getData($code,$state)) {
     $name = "value='{$data->getName()}'";
     $email = "value='{$data->getEmail()}'";
-  } else {
-    $clearResquest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
   }
 }
-
 ?>
-<?php
-$this->start("css");
-  echo  Bundles::render(["manipulation.css"],fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\""));
-$this->stop();
-?>
-
 <div class="container p-3 pb-4">
   <div class="mb-3">
     <div class="col-12">
       <div class="col-xl-4 col-md-8 col-sm-12 m-auto">
-        <?=component::buttonGoogle("registerGoogle","Registrar com o Google",$authGoogleUrl)?>
+        <?=component::buttonGoogle("registerGoogle","Registrar com o Google","''")?>
       </div>
     </div>
   </div>
@@ -46,20 +36,20 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Nome:</label>
-            <input type="text" id="name" name="name" <?=$name?>  <?= $name? "readonly": "" ?> class="form-control nextItem" data-required="" />
+            <input type="text" id="name" name="name" <?=$name?>  <?= $name ? "readonly": "" ?> class="form-control inset-shadow nextItem" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="text">Email:</label>
-            <input type="text" id="email" name="email" <?=$email?>   <?=$email? "readonly": "" ?> class="form-control nextItem" placeholder="seumail@teste.dominio" data-required="" />
+            <input type="text" id="email" name="email" <?=$email?>   <?= $email ? "readonly": "" ?> class="form-control inset-shadow nextItem" placeholder="seumail@teste.dominio" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputCep">Cep</label>
             <div class="input-group">
-              <input type="text" id="inputCep" name="cep" class="form-control" maxlength="8" />
+              <input type="text" id="inputCep" name="cep" class="form-control inset-shadow"inset-shadow  maxlength="8" />
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
               </div>
@@ -70,7 +60,7 @@ $this->stop();
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputPassword4">Crie uma senha:</label>
             <div class="input-group">
-              <input type="password" id="passwd" name="passwd" class="form-control nextItem" autocomplete="current-password" maxlength="20" data-required="" />
+              <input type="password" id="passwd" name="passwd" class="form-control inset-shadow nextItem" autocomplete="current-password" maxlength="20" data-required="" />
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
               </div>
@@ -85,13 +75,13 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="cpf">Cidade: </label>
-            <input type="text" id="locality"  name="locality" class="form-control nextItem" data-required="" />
+            <input type="text" id="locality"  name="locality" class="form-control inset-shadow nextItem" data-required="" />
           </div>
         </div>
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="inputState">Unidade Federativa:</label>
-            <select id='uf' name='uf' class="form-control custom-select nextItem" data-required="">
+            <select id='uf' name='uf' class="form-control inset-shadow custom-select nextItem" data-required="">
               <option value="" selected>Escolha...</option>
               <option value='AC'>Acre</option>
               <option value='AL'>Alagoas</option>
@@ -125,7 +115,7 @@ $this->stop();
         <div class="form-row pb-3 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
           <div class="form-group col-xl-8 col-lg-8 col-md-12 col-sm-12">
             <label for="address">Endereço:</label>
-            <input type="address" id="address" name="address" class="form-control nextItem"/>
+            <input type="address" id="address" name="address" class="form-control inset-shadow nextItem"/>
           </div>
         </div>
         <div class="custom-control custom-switch pb-5 offset-xl-3 offset-lg-3 offset-md-0 offset-sm-0">
@@ -150,6 +140,6 @@ $this->stop()
 <?php
 $this->start("scripts");
   Bundles::render(["register.js"], fn($file) => print_r("<script src=\"$file\"></script>"));
-  echo $clearResquest;
+  echo "<script>window.history.replaceState('', '', window.location.pathname)</script>";
 $this->stop();
 ?>

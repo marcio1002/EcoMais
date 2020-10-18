@@ -20,3 +20,16 @@ body { width: 100%; height: 100vh; background-color: #b4b4b49d; }
 .btn-google:hover {text-decoration: none;color: #ffffff;}
 
 .icon-google { font-size: 1.6em;  vertical-align: middle; }
+
+.horizontal-row::before {
+  margin-left: -38%;
+}
+.horizontal-row::after { margin-left: 3%;}
+.horizontal-row::before,.horizontal-row::after {
+  width: 35%;
+  top: 65%;
+  overflow: hidden;
+  height: 1px;
+  background-color: #454c52c0;
+  content: '\a0';
+  position: absolute;}

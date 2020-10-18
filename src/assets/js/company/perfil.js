@@ -1,7 +1,7 @@
 $(function () {
   alertify.set('notifier','position', 'top-right');
 
-  let fileInfo = null;
+  let file = null;
 
   function formatBytes(bytes, decimals = 2) {
     const k = 1024;
@@ -15,29 +15,27 @@ $(function () {
 
   let infoImageRemove = e => $("#fileInfo").remove()
 
-  function infoImage(e) {
-    $("#fileInfo*").remove();
-    if (typeof fileInfo == "object") {
+  function infoImageAdd(e) {
+    if (typeof file == "object") {
+      $("#fileInfo").remove();
       $("#logo-company").append(
         `<div id='fileInfo' class='bg-dark-transparent text-white d-flex flex-column justify-content-around align-items-center position-absolute w-100 h-100'>
-          <p class='badge badge-success p-2 font-size-1em'>${fileInfo.name}</p>
-          <p class='badge badge-info p-2 w-50 font-size-1em'>${formatBytes(fileInfo.size)}</p>
+          <p class='badge badge-success p-2 font-size-1em'>${file.name}</p>
+          <p class='badge badge-info p-2 w-50 font-size-1em'>${formatBytes(file.size)}</p>
       </div>`
       );
     }
   }
 
-  function startUpload(files) {
-    fileInfo = files[0];
-    if (typeof files[0] == "object") {
-      $("#logo").remove();
+  function showInfoFile() {
+    if (typeof file == "object") {
       $("#previous-img").remove();
-      $("#logo-company p ").remove();
-      $("#logo-company").append(`<img style=""  id="previous-img" class="card-img-top img-fluid  border-none" src='${URL.createObjectURL(files[0])}' alt="Uma Imagem de capa do atacado" class="img-thumbnail" style="width: 100%;height: auto;">`)
-      $("#logo-company").hover(infoImage, infoImageRemove)
+      $("#logo-company")
+        .hover(infoImageAdd, infoImageRemove)
+        .find("#logo").prop("src",URL.createObjectURL(file))
     }
   }
-  
+
   function requestUpdateImage(url,msg) {
     alertify.dismissAll()
     if($("#inputFile").val().length == 0) return alertify.warning("Nenhum arquivo foi escolhido")
@@ -55,8 +53,10 @@ $(function () {
       complete: () => { $("#saveImage").prop("disabled", false); data.delete("image"); },
       success: (res) => {
         if (res.error) return alertify.warning("Tipo de imagem não suportada!")
-        alertify.success(msg);
         if(res.data) $("#thumbnailCompany").prop("src",`${BASE_URL}/${res.data.imagem}`)
+        alertify.success(msg);
+        infoImageRemove();
+        $("#logo-company").off("mouseenter mouseleave")
       },
       error: () => alertify.error("Erro no servidor tente novamente!")
     };
@@ -67,17 +67,10 @@ $(function () {
   $("#logo-company")
     .bind("dragover dragenter", function (evt) { $(this).css("background", "#EFCB47"); return false })
     .bind("dragleave", function (evt) { $(this).css("background", "transparent"); return false; })
-    .bind("drop", function (e) {
-      $(this).css("background", "transparent");
-      startUpload(e.originalEvent.dataTransfer.files);
-      $("#inputFile")[0].files = e.originalEvent.dataTransfer.files;
-      return false;
-    })
-    .on("click",() => {
-      document.querySelector("#inputFile").click()
-    } );
+    .bind("drop", function (e) { const { files } = e.originalEvent.dataTransfer; $("#inputFile").files = files; $(this).css("background", "green"); return false; })
+    .on("click",() => { document.querySelector("#inputFile").click() });
 
-  $("#inputFile").on("change", function (e) { startUpload(this.files); });
+  $("#inputFile").on("change", function (e) {file = this.files[0]; showInfoFile(); });
 
   $("#formImage").on("submit", function (e) {
     e.preventDefault();
@@ -87,6 +80,6 @@ $(function () {
     } else if(id == "removeImage") {
       return false
       requestUpdateImage.call(this,"","Imagem removida")
-    }  
+    }
   })
 })

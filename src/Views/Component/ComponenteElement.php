@@ -11,23 +11,21 @@ class ComponenteElement
         $index = renderUrl();
         $login = renderUrl("/login");
         $urlRegisterCompany = renderUrl("/cadastro/empresa");
-        return <<<navBar
+return <<<navBar
       <div class='container text-white' id='nav-container'>
-        <nav class='navbar navbar-expand-md fixed-top text-weight-500  bg-blue-dark'>
-          <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-links'
+        <nav class='navbar navbar-expand-md fixed-top text-weight-500 bg-blue-dark'>
+          <button class='navbar-toggler p-2' type='button' data-toggle='collapse' data-target='#navbar-links'
             aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
-            <span class='navbar-toggler-icon'></span>
+            <span class='navbar-toggle-icon'></span>
           </button>
-          <div class='collapse navbar-collapse  justify-content-between' id='navbar-links'>
-            <div class='box-logo'>
-            </div>
-            <div class='navbar-nav'>
+          <div id='navbar-links' class='collapse navbar-collapse justify-content-center'>
+            <div class='navbar-nav m-auto align-content-center'>
               <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='about-menu' href='$urlRegister' >Cadastre-se</a>
               <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
             </div>
             <div>
-            <a class='nav-item nav-link text-center text-weight-700 rounded bg-red-wine text-white' id='login' href='$login'>Entrar <i class="fas fa-sign-in-alt"></i></a>
+                <a class='nav-item nav-link mr-auto text-center text-weight-700 rounded bg-red-wine text-white' id='login' href='$login'>Entrar <i class="fas fa-sign-in-alt"></i></a>
             </div>
           </div> 
         </nav>
@@ -149,7 +147,7 @@ return <<<mail
                                                                                 <p
                                                                                     style='color:#a3daff;font-size:20px;line-height:30px;margin:0'>
                                                                                     Para redefinir sua senha click no
-                                                                                    botão logo abaixo, você será redirecionado para a tela de recupação de senha.<br/><strong>A url se expira em 2 horas.</strong>
+                                                                                    botão logo abaixo, você será redirecionado para a tela de recupação de senha.<br/><strong>A url se expira em 1 horas.</strong>
                                                                                 </p>
                                                                             </td>
                                                                         </tr>
@@ -263,6 +261,10 @@ return <<<load
 load;
     }
 
+    /**
+     * @param mixed ...$props
+     * id,título e link 
+    */
     public static function buttonGoogle(...$props): string 
     {
 return <<<btnGoogle
@@ -270,7 +272,7 @@ return <<<btnGoogle
         <button class="btn text-white remove-focus bg-red-google btn-bg-shadow-hover">
             <i class="icon-google fab fa-google"></i>
         </button>
-        <a title='{$props[1]}' href="{$props[2]}" class='btn btn-block text-center text-white remove-focus text-weight-800 font-size-1-1em'>
+        <a title='{$props[1]}' href="{$props[2]}" class='btn btn-block text-center text-white remove-focus text-weight-800 font-size-xl-1-1em font-size-sm-9em font-size-xm-9em'>
             {$props[1]}
         </a>
     </div>

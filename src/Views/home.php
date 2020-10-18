@@ -1,5 +1,5 @@
 <?php
-$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
+$this->layout("_layout", ["title" => "EcoMais - Cadastro"]);
 
 use Ecomais\Views\Component\ComponenteElement;
 ?>
@@ -43,7 +43,7 @@ use Ecomais\Views\Component\ComponenteElement;
   <section>
     <div class="col-12 py-5">
       <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 py-xl-0 py-lg-0 py-md-0 py-sm-3">
           <div class="card" style="height: 305px">
             <div class="card-header text-center">
               <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
@@ -57,9 +57,8 @@ use Ecomais\Views\Component\ComponenteElement;
             </div>
           </div>
         </div>
-        <div class="w-sm-100"></div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-          <div class="card" style="height: 305px ">
+          <div class="card " style="height: 305px ">
             <div class="card-header text-center">
               <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
             </div>

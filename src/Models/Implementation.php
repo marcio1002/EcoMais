@@ -33,7 +33,7 @@ class Implementation
     }
 
     /**
-     * Criptografia de imagem
+     * Criptografia de imagem de 128 bits
      * @param string $file
      * um array da variável global
      * @return string
@@ -47,7 +47,7 @@ class Implementation
     }
 
     /**
-     * Cria um token de 8 bits
+     * Cria um token de 128 bits
      * @param string $param
      * @return string
      */
@@ -55,8 +55,7 @@ class Implementation
     {
         if (empty($param)) throw new DataException("Null value",DataException::NOT_ACCEPTABLE);
 
-        $numberRandom = random_int(100,1999);
-        $this->key =  hash("sha512", uniqid(imap_binary($param)) . $numberRandom);
+        $this->key =  hash("sha512", uniqid(imap_binary($param)) . random_int(100,1999));
 
         return $this->key;
     }
@@ -64,14 +63,27 @@ class Implementation
     /**
      * @param string $param
      * O email a ser verificado
-     * @return bool
-     * Retorna true | false 
+     * @return bool 
      */
-    public function isEmail(string $param): bool
+    public function isEmail(string $email): bool
     {
-        if (empty($param)) throw new DataException("Null value",DataException::NOT_ACCEPTABLE);
+        if (empty($email)) throw new DataException("Null value",DataException::NOT_ACCEPTABLE);
 
-       return (preg_match("/^(.)+\@[a-zA-Z]+\.[a-zA-Z]+$/i",$param)) ? true : false;
+       return (preg_match("/^(.)+\@[a-zA-Z]+\.[a-zA-Z]+$/i",trim($email))) ? true : false;
+    }
+
+    /**
+     * Verifica o cnpj e a retorna, Se não retorna falso
+     * @param string $cnpj
+     * O cnpj a ser verificado
+     * @return int|bool
+     */
+    public function isCnpj(string $cnpj)
+    {
+        if (empty($cnpj)) throw new DataException("Null value",DataException::NOT_ACCEPTABLE);
+        $cnpj = preg_replace("/\D/", "", trim($cnpj));
+
+        return  strlen($cnpj) == 14 ? (int) $cnpj :  false;
     }
 
     /**
@@ -80,9 +92,8 @@ class Implementation
      */
     public function isLogged($table):bool
     {
-        if (isset($_COOKIE['_id'])) {
+        if (isset($_COOKIE['_id']) && isset($_COOKIE["_sessidcookie"])) {
             $this->getSession(['read_and_close'  => true]); 
-                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$_SERVER['HTTP_USER_AGENT']}");
                 $id = (strcasecmp($table,"empresa") === 0) ? "id_empresa" : "id_usuario";
 
                 $this->sql->open();
@@ -92,9 +103,11 @@ class Implementation
                         ->executeSql();
                 $this->sql->close();
 
+                $token =  hash("whirlpool","ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$row["email"]}{$_SERVER['HTTP_USER_AGENT']}");
+
                 if (!empty($row)) {
                     if(
-                        strcasecmp($_COOKIE["ECOSESLOGIN"], $token) === 0 && 
+                        strcasecmp($_COOKIE["_sessidcookie"], $token) === 0 && 
                         strcasecmp($_COOKIE['_id'],$row[$id]) === 0
                       ) 
                         return true;
@@ -145,6 +158,21 @@ class Implementation
             return true;
         }
 
+        return false;
+    }
+
+    /**
+     * Por questões de usar muito a session verificando se ela está ativa para a exclusão e o fechamento
+     * Foi criada essa função pra diminuir repetição de código
+     * @return bool
+    */
+    public function destroyCloseSession(): bool
+    {
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_destroy();
+            session_write_close();
+            return true;
+        }
         return false;
     }
 

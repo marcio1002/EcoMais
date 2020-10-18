@@ -74,26 +74,16 @@ $(function () {
 
     isDisabled = !isDisabled
 
-    $("#passwd").prop("disabled", disabled)
-    $("#confirmPasswd").prop("disabled", disabled)
-    $("#typePackage").prop("disabled", disabled)
-    $("#email").prop("disabled",disabled)
-    $("#contact").prop("disabled",disabled)
+    $("#passwd").prop("disabled", disabled).removeClass("bg-blue-night").addClass("bg-blue-dark-1")
+    $("#confirmPasswd").prop("disabled", disabled).removeClass("bg-blue-night").addClass("bg-blue-dark-1")
+    $("#typePackage").prop("disabled", disabled).removeClass("bg-blue-night").addClass("bg-blue-dark-1")
+    $("#email").prop("disabled",disabled).removeClass("bg-blue-night").addClass("bg-blue-dark-1")
+    $("#contact").prop("disabled",disabled).removeClass("bg-blue-night").addClass("bg-blue-dark-1")
     $("#save-config-company").prop("disabled", disabled)
     $("#btnViewPasswd").prop("disabled", disabled)
   });
 
-  $("#btnViewPasswd").on("click", function () {
-    let icon = $(this).find("#iconPasswd:eq(0)");
-
-    if ($("#passwd:eq(0)").is("[type='password']")) {
-      $("#passwd:eq(0)").attr('type', 'text');
-      icon.removeClass("fa-eye-slash").addClass("fa-eye");
-    } else {
-      $("#passwd:eq(0)").attr('type', 'password');
-      icon.removeClass("fa-eye").addClass("fa-eye-slash");
-    }
-  });
+  $("#btnViewPasswd").on("click",() => viewPasswd("#passwd"));
 
   $("#save-config-company").on("click", async function () {
     alertify.dismissAll()

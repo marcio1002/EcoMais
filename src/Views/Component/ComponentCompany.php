@@ -27,27 +27,26 @@ return <<<navbar
             <nav class="company-navigation bg-blue-dark-1 d-flex layout-navbar align-items-center justify-content-around navbar navigation position-fixed z-index-1000">
                 $thumbnailCompanyLogo 
                 <div>
-                    <a class="nav-link text-center text-white p-4 font-size-1-4em" href="$dashboard" title="DashBoard">
+                    <a class="nav-link nav-hover text-center text-white p-2 mb-4 font-size-1-4em" href="$dashboard" title="DashBoard">
                       <i class="far fa-chart-bar text-weight-800"></i>
                     </a>
 
-                    <a class="nav-link text-center text-white p-4 font-size-1-4em" href="$registerProduct" title="Cadastrar Produtos">
+                    <a class="nav-link nav-hover text-center text-white p-2 mb-4 font-size-1-4em" href="$registerProduct" title="Cadastro Produtos">
                       <i class="far fa-edit text-weight-800"></i>
                     </a>
 
-                    <a class="nav-link text-center text-white p-4 font-size-1-4em" href="$perfil" title="Perfil">
+                    <a class="nav-link nav-hover text-center text-white p-2 mb-4 font-size-1-4em" href="$perfil" title="Perfil">
                       <i class="far fa-address-card text-weight-800"></i>
                     </a>
                     
-                    <a class="nav-link text-center text-white p-4 font-size-1-4em" href="$configuration" title="Perfil">
+                    <a class="nav-link nav-hover text-center text-white p-2 mb-4 font-size-1-4em" href="$configuration" title="Configurações">
                       <i class="fas fa-cogs mr-2 text-weight-800"></i>
                     </a>
                 </div>
                 <div>
-                  <button data-logoff="" class="btn bg-transparent text-white remove-focus pointer text-weight-800" title="Sair">
-                    Sair
-                    <i class="fas fa-sign-out-alt mr-2 text-light"></i>
-                  </button>
+                  <a data-logoff="" class="nav-link p-2 d-inline-flex align-items-center text-white remove-focus pointer text-weight-800" title="Sair">
+                    Sair <i class="fas fa-sign-out-alt ml-1 text-light"></i>
+                  </a>
                 </div>
             </nav>
         </header>

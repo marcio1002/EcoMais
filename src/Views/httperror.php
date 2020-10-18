@@ -1,8 +1,8 @@
 <?php 
-$this->layout("_theme", ["title" => "Ecomais - $errCode"]);
+$this->layout("_layout", ["title" => "Ecomais - $errCode"]);
 
 $this->start("error");
-$info = ($errCode == "404") ? "Pagina Não encontrada" : "Ocorreu um erro no servidor volte para a página principal ou relate ao suporte sobre o erro";
+$info = ($errCode == "404") ? "Página Não encontrada" : "Ocorreu um erro no servidor!<br/> Se erro persistir entre contato com o administrador para obter mais informações.";
    
 echo <<<html
 </div>

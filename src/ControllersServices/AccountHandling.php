@@ -1,7 +1,7 @@
 <?php 
 namespace Ecomais\ControllersServices;
 
-use Ecomais\Models\{Implementation,DataException, Person};
+use Ecomais\Models\{Implementation,DataException, Person, PersonLegal};
 use Ecomais\Services\Data;
 
 class AccountHandling {
@@ -23,15 +23,15 @@ class AccountHandling {
      * O password a ser atualizado se necessário
      * @return void
      */
-    public function verifyUpdateHash(string $passwd, Person $person):void
+    public function verifyUpdateHash(Person $person, string $senha,string $table_name):void
     {
         try{
-            if(password_needs_rehash($passwd, PASSWORD_DEFAULT)) {
-                $parans = array($this->implement->criptPasswd($person->passwd), $person->id);
+            if(password_needs_rehash($person->passwd, PASSWORD_DEFAULT)) {
+                $params = [$this->implement->criptPasswd($senha), $person->id];
                 $this->sql->open();
                 $this->sql
-                    ->update("usuario","senha = ?","id_usuario = ?")
-                    ->prepareParam($parans)
+                    ->update($table_name,"senha = ?","id_usuario = ?")
+                    ->prepareParam($params)
                     ->execNotRowSql();
             }
         }catch(DataException $ex) {
@@ -145,10 +145,10 @@ class AccountHandling {
 
     }
 
-    public function recoverPasswd(Person $usr,string $value, int $option): bool
+    public function updatePasswd(Person $usr,string $value): bool
     {
         try{
-            $where = ($option == 1) ? "email = ?" : "senha = ?";
+            $where = ($this->implement->isEmail($value)) ? "email = ?" : "senha = ?";
 
             $this->sql->open();
             $tableEmp = $this->sql->show("empresa","",$where,3)
@@ -162,14 +162,44 @@ class AccountHandling {
             
             $table = (count($tableEmp) > 0) ? "empresa" : "usuario";
 
-            $where .= (count($tableEmp) > 0) ? " AND id_empresa" : " AND id_usuario";
+            $where .= (count($tableEmp) > 0) ? " AND id_empresa = ?" : " AND id_usuario = ?";
+
+            $usr->id = (count($tableEmp) > 0) ? $tableEmp["id_empresa"] : $tableUser["id_usuario"];
 
             return $this->sql
                 ->update($table,"senha = ?",$where)
-                ->prepareParam(array($usr->passwd,$value))
+                ->prepareParam(array($usr->passwd,$value, $usr->id))
                 ->execNotRowSql();
         }catch(DataException $ex) {
            throw $ex;
+        }finally {
+            $this->sql->close();
+        }
+    }
+
+
+    public function recoverByCNPJAndUpdatePasswd(Person $usr, int $cnpj): bool
+    {
+        try {
+
+            $this->sql->open();
+            $tableEmp = $this->sql->show("empresa","","cnpj = ?",3)
+                ->prepareParam([$cnpj])
+                ->executeSql();
+                
+            if(count($tableEmp) == 0) return false;
+
+            $usr->id = $tableEmp["id_empresa"];
+
+            return $this->sql
+                ->update("empresa","senha = ?","cnpj = ? AND id_empresa = ?")
+                ->prepareParam([$usr->passwd, $cnpj, $usr->id])
+                ->execNotRowSql();
+
+        }catch(DataException $ex) {
+
+            throw $ex;
+
         }finally {
             $this->sql->close();
         }

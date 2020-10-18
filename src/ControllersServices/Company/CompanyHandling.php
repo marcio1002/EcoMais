@@ -59,7 +59,7 @@ class CompanyHandling {
             $this->sql->open();
             return $this->sql
                 ->show("empresa","","statusconta = ? AND id_empresa = ?",3)
-                ->prepareParam([PersonLegal::ENABLED,$emp->id],[PDO::PARAM_INT])
+                ->prepareParam([PersonLegal::ENABLED,$emp->id],[PDO::PARAM_BOOL, PDO::PARAM_INT])
                 ->executeSql();
 
         }catch(DataException $ex){
@@ -95,7 +95,7 @@ class CompanyHandling {
                 "e.*, p.*",
                 "statusconta = true AND id_empresa = ?",
                 6)
-            ->prepareParam($emp->toArray())
+            ->prepareParam([PersonLegal::ENABLED,$emp->id],[PDO::PARAM_BOOL, PDO::PARAM_INT])
             ->executeSql();
 
         }catch(DataException $ex){
@@ -114,7 +114,7 @@ class CompanyHandling {
                 $columns .= ", senha = ?";
                 array_push($data,$this->implement->criptPasswd($emp->passwd));
             }
-                        array_push($data,$emp->id);
+                array_push($data,$emp->id);
             
             $this->sql->open();
             return $this->sql

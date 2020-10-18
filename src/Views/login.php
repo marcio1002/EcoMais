@@ -48,7 +48,7 @@ if ($implement->isLogged("empresa")) header("location: " . renderUrl("/empresa")
                     <button type='button' class='btn btn-block btn-color-login btn-bg-shadow-hover remove-focus text-center text-uppercase text-weight-800 font-size-1-1em' id='btnLogar'>Entrar</button>
                 </div>
             </div>
-            <div class='col-12 text-center pt-3'>
+            <div class='col-12 text-center pt-3 horizontal-row position-relative'>
                OU 
             </div>
             <div class='col-11 py-2 d-sm-flex justify-content-center m-auto'>

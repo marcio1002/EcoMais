@@ -1,5 +1,5 @@
 <?php
-$this->layout("_theme", ["title" => "EcoMais - My Home"]); 
+$this->layout("_layout", ["title" => "EcoMais - My Home"]); 
 
 $this->func()->verifyLoggedUser();
 

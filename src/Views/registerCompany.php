@@ -1,15 +1,14 @@
 <?php
-$this->layout("_theme", ["title" => "EcoMais - Cadastro"]);
+$this->layout("_layout", ["title" => "EcoMais - Cadastre e começe a usar nosso serviço"]);
 
 use Ecomais\Views\Component\ComponenteElement as component;
 use Ecomais\Web\Bundles;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
 
-$authGoogleUrl = $google->getAuthURL();
-
-$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED);
-$err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED);
+$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
+$err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
+$state  = filter_input(INPUT_GET, "state", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
 
 $name = "";
 $email = "";
@@ -17,12 +16,11 @@ $clearRequest = "";
 
 $svgCeta = "<svg class='bi bi-caret-right-fill' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/></svg>";
 
-if (!empty($code)) {
-    if ($data = $google->getData($code)) {
+if (!empty($code) && empty($err)) {
+    if ($google->tokenExpired($code)) $code = $google->tokenExpired($code);
+    if ($data = $google->getData($code, $state)) {
         $name = "value='{$data->getName()}'";
         $email = "value='{$data->getEmail()}'";
-    } else {
-        $clearRequest =  "<script>window.history.replaceState('', '', window.location.pathname)</script>";
     }
 }
 ?>
@@ -93,7 +91,7 @@ if (!empty($code)) {
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
                             <label for="razao"><span class='required'>*</span> <b>Razão social</b></label>
-                            <input type="text" id="razao" name="reason"  class="form-control inset-shadow nextItem" data-required="">
+                            <input type="text" id="razao" name="reason" class="form-control inset-shadow nextItem" data-required="">
                         </div>
                         <div class="form-group col-12">
                             <?= $svgCeta ?>
@@ -197,7 +195,7 @@ if (!empty($code)) {
                         </p>
                         <div class="form-row mt-3">
                             <div class='col-xl-9 col-md-9 col-sm-12 m-auto'>
-                                <?= component::buttonGoogle("registerGoogle","Registrar com o Google",$authGoogleUrl)?>
+                                <?= component::buttonGoogle("registerGoogle", "Registrar com o Google", "''") ?>
                             </div>
                         </div>
                         <div class="form-row mt-3">
@@ -214,13 +212,15 @@ if (!empty($code)) {
 </div>
 
 <?php
-    $this->start("footer");
-        echo component::footer();
-    $this->stop();
+$this->start("footer");
+echo component::footer();
+$this->stop();
 
-    $this->start("scripts");
-        echo  Bundles::render([ "mainMethods.js", "registerCompany.js"], 
-        fn($file) => print_r("<script src=\"$file\"></script>"));
-        echo $clearRequest;
-    $this->stop();
+$this->start("scripts");
+echo  Bundles::render(
+    ["mainMethods.js", "registerCompany.js"],
+    fn ($file) => print_r("<script src=\"$file\"></script>")
+);
+echo "<script>window.history.replaceState('', '', window.location.pathname)</script>";
+$this->stop();
 ?>

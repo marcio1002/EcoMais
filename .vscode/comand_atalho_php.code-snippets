@@ -1,0 +1,13 @@
+{
+	"Print to console": {
+		"scope": "php",
+		"prefix": "pclass",
+		"body": [
+			"namespace Ecomais\\;",
+			"",
+			"class NameClass {",
+			"}"
+		],
+		"description": "Log output to console"
+	}
+}

@@ -25,8 +25,9 @@ $(function () {
     $("#creditCardHolderCPF").mask("000.000.000-00", { placeholder: "___.___.___-__", clearIfNotMatch: true });
     $("#cvvCartao").mask("000", { placeholder: "___", clearIfNotMatch: true });
     $("#numCartao").mask("0000 0000 0000 0000", { placeholder: "___ ___ ___ ___", clearIfNotMatch: true });
-
-
+    $("#inputCep")
+        .mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true })
+        .keypress(evt => { if (evt.keyCode == 13) (evt.preventDefault(),$("#searchCep").trigger("click")) });
 
     $("#searchCep").on("click", async function () {
         try {
@@ -43,9 +44,6 @@ $(function () {
         }
     });
 
-    $("#inputCep")
-        .mask("00000000", { placeholder: "_ _ _ _ _ _ _ _", clearIfNotMatch: true })
-        .keypress(evt => { if (evt.keyCode == 13) (evt.preventDefault(),$("#searchCep").trigger("click")) });
 
     $("#email").focusout(function () {
         if (!isValidEmail($(this).val())) {
@@ -83,17 +81,7 @@ $(function () {
             $("#progress-bar").css("width", `${forca}%`).addClass("bg-success");
     });
 
-    $("#btnViewPasswd").on("click", function () {
-        let icon = $(this).find("#iconPasswd:eq(0)");
-
-        if ($("#passwd:eq(0)").is("[type='password']")) {
-            $("#passwd:eq(0)").attr('type', 'text');
-            icon.removeClass("fa-eye-slash").addClass("fa-eye");
-        } else {
-            $("#passwd:eq(0)").attr('type', 'password');
-            icon.removeClass("fa-eye").addClass("fa-eye-slash");
-        }
-    });
+    $("#btnViewPasswd").on("click", () => viewPasswd("#passwd"));
 
     $("#btnRegisterCompany").click(function () {
         alertify.dismissAll()

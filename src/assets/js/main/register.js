@@ -10,17 +10,7 @@ $(function () {
         }
     });
 
-    $("#btnViewPasswd").on("click", function () {
-        let icon = $(this).find("#iconPasswd:eq(0)");
-
-        if ($("#passwd:eq(0)").is("[type='password']")) {
-            $("#passwd:eq(0)").prop('type', 'text');
-            icon.removeClass("fa-eye-slash").addClass("fa-eye");
-        } else {
-            $("#passwd:eq(0)").prop('type', 'password');
-            icon.removeClass("fa-eye").addClass("fa-eye-slash");
-        }
-    });
+    $("#btnViewPasswd").on("click",() => viewPasswd("#passwd"));
 
     $("#passwd").keypress(function () {
         $("#progress-bar").removeClass().addClass("progress-bar");

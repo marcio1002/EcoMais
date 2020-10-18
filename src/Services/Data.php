@@ -15,7 +15,7 @@ use PDOException;
 
 final class Data
 {
-    private  $pdo = null;
+    private PDO $pdo;
     private $query = null;
 
 
@@ -28,18 +28,19 @@ final class Data
      * Abre a conexão
      * @return void
      */
-    public function open(): void
+    public function open(): Data
     {
         if (!isset($this->pdo) || $this->pdo === null) {
             $this->pdo = new PDO(
-                BD_CONFIG["TYPE"] . ":host=" . BD_CONFIG["HOST"] . ";port=" . BD_CONFIG["PORT"] . ";dbname=" . BD_CONFIG["NAME"],
-                BD_CONFIG["USER"],
-                BD_CONFIG["PASSWD"],
-                BD_CONFIG["OPTIONS"]
+                DB_CONFIG["DRIVE"] . ":host=" . DB_CONFIG["DB_HOST"] . ";port=" . DB_CONFIG["DB_PORT"] . ";dbname=" . DB_CONFIG["DB_NAME"],
+                DB_CONFIG["DB_USERNAME"],
+                DB_CONFIG["DB_PASSWD"],
+                DB_CONFIG["OPTIONS"]
             )
                 or
             exit(header($_SERVER["SERVER_PROTOCOL"] . DataException::NOT_AUTHORIZED . " Not authorized"));
         }
+        return $this;
     }
 
     /**

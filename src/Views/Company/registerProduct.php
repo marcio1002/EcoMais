@@ -1,7 +1,7 @@
 <?php
-$this->layout("_theme",  ["subtitle" => "Cadastro de Produtos"]);
+$this->layout("_layout",  ["subtitle" => "Cadastro de Produtos"]);
 
-$this->func()->verifyLoggedCompany();
+$data = $this->func()->verifyLoggedCompany();
 
 use Ecomais\Web\Bundles;
 ?>
@@ -56,7 +56,7 @@ use Ecomais\Web\Bundles;
             <option value="3">Produtos de limpeza</option>
           </select>
         </div>
-        <input type="hidden" name="fkCompany" value=<?= $this->data['id_empresa'] ?>>
+        <input type="hidden" name="fkCompany" value=<?= $data->id_empresa ?> >
         <div class="form-group py-5 col-xl-8 col-md-10 col-sm-12 m-auto">
           <button id="registerProduct" class="btn btn-block btn-success btn-bg-shadow my-2 my-sm-3 float-right">Cadastrar</button>
         </div>

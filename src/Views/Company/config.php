@@ -1,12 +1,12 @@
 <?php
-$this->layout("_theme", ["subtitle" => "Configurações"]);
+$this->layout("_layout", ["subtitle" => "Configurações"]);
 
-$this->func()->verifyLoggedCompany();
+$data = ''; //$this->func()->verifyLoggedCompany();
 
 use Ecomais\Web\Bundles;
 
 
-if (isset($data)) {
+if (isset($data) && !empty($data)) {
   switch ($data->pacote) {
     case "10":
       $package = "<option value='10' selected>Sacolinha</option>";

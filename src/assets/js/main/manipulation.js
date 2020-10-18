@@ -1,8 +1,9 @@
 /**
  * 
  * @param {String} elem 
+ * O elemento form para a validação
  */
-let validaForm = (elem = "") => {
+function validaForm(elem = "") {
    var forError = false;
 
    $(`${elem} [data-required]:input`).each(function () {
@@ -26,7 +27,7 @@ let validaForm = (elem = "") => {
  * @param {Event} event 
  * Um parâmetro de eventos do teclado
  */
-let isNumber = (event) => {
+function isNumber(event) {
    if(typeof  event != "object" || !event) throw new ErrorEvent("Variable is not a type of keyboard event or is undefined");
    return (!isNaN(Number(event.key))) ?  true : false;
 };
@@ -189,6 +190,19 @@ function isValidEmail(email) {
 
     return (regExp.test(email)) ? true : false;
 
+}
+
+/**
+ * @param {string} elem
+ * O elemento input:password para visualizar a senha
+ */
+function viewPasswd(elem) {
+   let icon = $(elem).parent().find("#iconPasswd");
+   let typeInput = ($(elem).is("[type='password']")) ? 'text' : 'password'
+   let [removeIcon, addIcon] = ($(elem).is("[type='password']")) ?  ["fa-eye-slash","fa-eye"] : ["fa-eye", "fa-eye-slash"]
+
+   $(elem).attr('type', typeInput);
+   icon.removeClass(removeIcon).addClass(addIcon);
 }
 
 $(".nextItem").keypress(function (e) {

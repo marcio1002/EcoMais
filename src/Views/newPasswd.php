@@ -4,14 +4,12 @@ require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
 use Ecomais\Web\Bundles;
 $implement = new  Ecomais\Models\Implementation();
 
-
 $implement->getSession(['read_and_close'  => true]);
 
-
-if (count($_SESSION) == 0 || $_SESSION['ssioninfo']["timestamp"] < time())
+if (count($_SESSION) == 0 || $_SESSION['ssioninfo']["session_timestamp"] < time())
   exit(header("location: " . renderUrl("/recuperarsenha")));
 
-if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (strcasecmp($_SESSION['ssioninfo']["tnk"], $token) != 0))
+if (strcasecmp($token, session_id()) != 0) 
   exit(header("location: " . renderUrl("/recuperarsenha")));
 ?>
 <!DOCTYPE html>
@@ -33,7 +31,7 @@ if ((strcasecmp($_SESSION['ssioninfo']["session_id"], session_id()) != 0) || (st
   <div class='body-em d-flex flex-column justify-content-xl-center justify-content-lg-center justify-content-md-center'>
     <div>
       <div class="col-12">
-          <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-1">
+          <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10 m-auto">
             <div class="alert " role="alert"></div>
           </div>
         <form>

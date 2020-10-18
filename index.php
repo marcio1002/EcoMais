@@ -3,11 +3,11 @@
  * Ecomais Webpage
  * @see  Ecomais GitHub project
  * @author Marcio Alemão <marcioalemao190@gmail.com>
- * @author Fernando Jesus <fernandodinho12@gmail.com>
- * @author Emanuel Café <emanuelcafe.santos@gmail.com>
  * @author Carlos Alberto <carlosmtr@hotmail.com.br>
  * @author Renata Genora <Renatagenora@hotmail.com>
- * @copyright 2019 Marcio Alemão
+ * @author Fernando Jesus <fernandodinho12@gmail.com>
+ * @author Emanuel Café <emanuelcafe.santos@gmail.com>
+ * @copyright 2019 Ecomais
  * @license 
  */
 
@@ -41,38 +41,38 @@ ob_clean();
 $router->namespace("Ecomais\Web");
 
     $router->group(null);
-    $router->get("/", "Redirect:home");
-    $router->get("/login", "Redirect:login");
-    $router->get("/cadastro", "Redirect:registerUser");
-    $router->get("/cadastro/empresa","Redirect:registerCompany");
-    $router->get("/recuperarsenha", "Redirect:recoverPasswd");
-    $router->get("/recuperarsenha/novasenha/{token}","Redirect:newPasswd");
-    $router->get("/politica-privacidade-e-termos", "Redirect:terms");
+    $router->get("/", "Redirect:home","home");
+    $router->get("/login", "Redirect:login","home.login");
+    $router->get("/cadastro", "Redirect:registerUser","home.cadastro");
+    $router->get("/cadastro/empresa","Redirect:registerCompany","home.empresa");
+    $router->get("/recuperarsenha", "Redirect:recoverPasswd","home.recuperarsenha");
+    $router->get("/recuperarsenha/novasenha/{token}","Redirect:newPasswd","home.novasenha");
+    $router->get("/politica-privacidade-e-termos", "Redirect:terms","home.politicahp");
     $router->get("/teste/{chv}","Redirect:test");
 
     $router->group("error");
-    $router->get("/{errCode}", "Redirect:typeError");
+    $router->get("/{errCode}", "Redirect:typeError","httperro");
 
 /**
  * @group Empresa
  */
     $router->group("empresa");
-    $router->get("/","Redirect:indexCompany");
-    $router->get("/configuracoes","Redirect:configCompany");
-    $router->get("/cadastro-de-produtos","Redirect:registerProduct");
-    $router->get("/perfil","Redirect:perfilCompany");
+    $router->get("/","Redirect:indexCompany","empresa.index");
+    $router->get("/configuracoes","Redirect:configCompany","empresa.configuracoes");
+    $router->get("/cadastro-de-produtos","Redirect:registerProduct","empresa.cadastroprodutos");
+    $router->get("/perfil","Redirect:perfilCompany","empresa.perfil");
 
 /**
  * @group User
  */
     $router->group("usuario");
-    $router->get("/","Redirect:indexUser");
-    $router->get("/listadeprodutos","Redirect:listProduct");
+    $router->get("/","Redirect:indexUser","usuario.index");
+    $router->get("/listadeprodutos","Redirect:listProduct","usuario.listarprodutos");
 
 /**
  * @namespace Controller
  * 
- * rotas para os métodos controllers 
+ * rotas para os métodos de manipulações e controllers dos dados
  * */
 $router->namespace("Ecomais\Controllers");
 
@@ -81,6 +81,7 @@ $router->namespace("Ecomais\Controllers");
     $router->get("/logoff", "Main:logoff");
     $router->get("/logingoogle","Main:loginAuthGoogle");
     $router->get("/registergoogle","Main:registerAuthGoogle");
+    $router->post("/getoauthurl","Main:getOauthUrl");
     $router->post("/recoverByKey", "Main:recoverByKey");
     $router->post("/recoverByMail", "Main:recoverByMail");
     $router->put("/recoverpasswd", "Main:recoverPasswd");
@@ -117,9 +118,5 @@ $router->dispatch();
 if ($router->error()) $router->redirect("/error/{$router->error()}");
 
 
-$content =  ob_get_contents();
-ob_end_clean();
-
-echo $content;
-
+ob_end_flush();
 mb_http_output('UTF-8');

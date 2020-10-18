@@ -20,7 +20,7 @@ class  Redirect
         $this->user = new AccountManagerUser();
     }
 
-    private function directory(?string $dir = null): \League\Plates\Engine
+    private static function directory(?string $dir = null): \League\Plates\Engine
     {
         $dir = dirname(__DIR__, 1) . "/Views/" . $dir ?? dirname(__DIR__, 1) . "/Views/";
 
@@ -38,7 +38,7 @@ class  Redirect
             $this->comp->id = $_COOKIE['_id'];
             return $this->implement->toObject($this->comp->findById($_COOKIE['_id']));
         } else {
-            exit($this->directory()->render("login"));        
+            exit($this::directory()->render("login"));        
         }
     }
 
@@ -51,7 +51,7 @@ class  Redirect
             $this->comp->id = $_COOKIE['_id'];
             return $this->implement->toObject($this->user->findById($_COOKIE['_id']));
         } else {
-            exit($this->directory()->render("login"));
+            exit($this::directory()->render("login"));
         }
     }
 
@@ -63,7 +63,7 @@ class  Redirect
             header("location: " . BASE_URL . "/error/404");
             exit();
         };
-        echo $this->directory()->render("teste");
+        echo $this::directory()->render("teste");
     }
 
     /**
@@ -71,7 +71,7 @@ class  Redirect
      */
     public function typeError(array $http_err): void
     {
-        echo $this->directory()->render("httperror", [
+        echo $this::directory()->render("httperror", [
             "errCode" => $http_err['errCode']
         ]);
     }
@@ -82,41 +82,39 @@ class  Redirect
      */
     public  function home(): void
     {
-        echo $this->directory()->render("home");
+        echo $this::directory()->render("home");
     }
 
     public function login(): void
     {
-        echo $this->directory()->render("login");
+        echo $this::directory()->render("login");
     }
 
-    public function registerUser(?array $data): void
+    public function registerUser(): void
     {
-        echo $this->directory()->render("register", [
-            "data" => $data
-        ]);
+        echo $this::directory()->render("register");
     }
 
     public function registerCompany(): void
     {
-        echo $this->directory()->render("registerCompany");
+        echo $this::directory()->render("registerCompany");
     }
 
     public function recoverPasswd(): void
     {
-        echo $this->directory()->render("recoverPasswd");
+        echo $this::directory()->render("recoverPasswd");
     }
 
     public function newPasswd($token): void
     {
-        echo $this->directory()->render("newPasswd", [
+        echo $this::directory()->render("newPasswd", [
             "token" => $token["token"]
         ]);
     }
 
     public function terms(): void
     {
-        echo $this->directory()->render("politicaPrivacidadeTermos");
+        echo $this::directory()->render("politicaPrivacidadeTermos");
     }
 
 
@@ -125,36 +123,31 @@ class  Redirect
      */
     public function indexCompany(): void
     {
-        echo $this->directory("Company")
+        echo $this::directory("Company")
             ->registerFunction("func", fn() => $this)
             ->render("index");
     }
 
     public function configCompany(): void
     {
-        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
 
-        echo $this->directory("Company")
+        echo $this::directory("Company")
             ->registerFunction("func", fn() => $this)
-            ->render("config",  ["data" => $this->implement->toObject($row)]);
+            ->render("config");
     }
 
     public function perfilCompany(): void
     {
-        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
-
-        echo $this->directory("Company")
+        echo $this::directory("Company")
             ->registerFunction("func", fn() => $this)
-            ->render("perfil", $row ?? []);
+            ->render("perfil");
     }
 
     public function registerProduct(): void
     {
-        if (isset($_COOKIE['_id'])) $row = $this->comp->listenInfoCompany($_COOKIE['_id']);
-
-        echo $this->directory("Company")
+        echo $this::directory("Company")
             ->registerFunction("func", fn() => $this)
-            ->render("registerProduct", $row ?? []);
+            ->render("registerProduct");
     }
 
     /**
@@ -162,14 +155,14 @@ class  Redirect
      */
     public function indexUser(): void
     {
-        echo $this->directory("User")
+        echo $this::directory("User")
             ->registerFunction("func",fn() => $this)
             ->render("index");
     }
 
     public function listProduct(): void
     {
-        echo $this->directory("User")
+        echo $this::directory("User")
             ->registerFunction("func",fn() => $this)
             ->render("listProduct");
     }

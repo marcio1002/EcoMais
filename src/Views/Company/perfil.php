@@ -1,7 +1,6 @@
 <?php
-$this->layout("_theme", ["subtitle" => "Meu Perfil"]);
-
-$this->func()->verifyLoggedCompany();
+$this->layout("_layout", ["subtitle" => "Meu Perfil"]);
+$data =  $this->func()->verifyLoggedCompany();
 
 use Ecomais\Web\Bundles;
 
@@ -14,22 +13,22 @@ $this->stop();
 <div class="d-flex flex-column justify-content-center align-content-center py-1" style="height: 100vh;">
   <form id="formImage" enctype="multipart/form-data">
     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-3 m-auto my-auto">
-      <div class="card shadow bg-white border-secondary text-light w-100">
+      <div class="card shadow-lg bg-white border-secondary text-light w-100">
         <div class="form-group">
-          <div id="logo-company" class="bg-light position-relative pointer overflow-h d-flex flex-column justify-content-center align-items-center" style="height: 300px;border: 1px dotted #000">
+          <div id="logo-company" class="bg-light position-relative pointer overflow-h d-flex flex-column justify-content-center align-items-center border-secondary" style="height: 300px;">
             <?php
-            if ($this->data['imagem'] && file_exists($this->data['imagem'])) :
-              $logoCompany = renderUrl("/{$this->data["imagem"]}");
+            if ($data->imagem && file_exists($data->imagem)) :
+              $logoCompany = renderUrl("/{$data->imagem}");
               echo "<img id='logo' title='Click ou arraste uma imagem aqui' class='card-img-top img-fluid' style='max-height: 100%; height: 20em' src='$logoCompany' alt='Uma Imagem de capa do atacado'>";
             else :
               echo "<p class='text-center'>Click ou arraste uma imagem aqui.</p>";
             endif;
             ?>
-            <input type="hidden" id='id' name="id" value=<?= $this->data['id_empresa'] ?>>
+            <input type="hidden" id='id' name="id" value=<?= $data->id_empresa ?>>
             <input type="file" id="inputFile" class="d-none" name="image" accept="image/*" capture>
           </div>
           <div class="card-body border-top">
-            <input type="text" class="form-control-plaintext h2 text-center m-auto" value=<?= $this->data['razao'] ?? "''" ?> readonly>
+            <input type="text" class="form-control-plaintext h2 text-center m-auto" value=<?= $data->razao ?? "''" ?> readonly>
           </div>
         </div>
       </div>
