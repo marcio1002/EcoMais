@@ -8,7 +8,7 @@ use Ecomais\Web\Bundles;
 
 
 $this->start("css");
-  Bundles::render(["load.css","datatables.min.css","dataTables.bootstrap4.min.css"],fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"));
+  Bundles::render(["load.css","datatables.min.css","dataTables.bootstrap4.min.css"],fn($file) => print_r("<link rel='stylesheet' href='$file'>"));
 $this->stop();
 ?>
 <div class="col-12 p-4 bg-dark">
@@ -24,6 +24,6 @@ $this->stop();
 </div>
 <?php 
 $this->start("scripts");
-  echo Bundles::render(["list-product.js","datatables.min.js","dataTables.bootstrap4.min.js"],fn($file) => print_r("<script src=\"$file\"></script>"));
+  Bundles::render(["list-product.js","datatables.min.js","dataTables.bootstrap4.min.js"],fn ($file) => print_r("<script src='$file'></script>"));
 $this->stop();
 ?>

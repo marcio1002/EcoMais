@@ -3,16 +3,6 @@ $(function () {
 
   let file = null;
 
-  function formatBytes(bytes, decimals = 2) {
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return Math.round(bytes / Math.pow(k, i)).toFixed(dm).replace(".", ",") + ' ' + sizes[i];
-  }
-
   let infoImageRemove = e => $("#fileInfo").remove()
 
   function infoImageAdd(e) {

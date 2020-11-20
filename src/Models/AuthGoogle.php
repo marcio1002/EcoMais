@@ -35,8 +35,9 @@ class AuthGoogle
      */
     private function verifyState($state): bool
     {
+        session_name("ecomais_googlesession");
         static::$implement->getSession(["read_and_close" => true]);
-        return (isset($_SESSION['oauthgoogle_state']) && ($_SESSION['oauthgoogle_state'] <=> $state) == 0) ?: false;
+        return (isset($_SESSION['oauthgoogle_state']) && ($_SESSION['oauthgoogle_state'] <=> $state) == 0);
     }
 
     /**
@@ -47,7 +48,8 @@ class AuthGoogle
      */
     public function getOauthURL(...$scope): string
     {
-        static::$implement->getSession(["cookie_lifetime" => 3600 +  time()]);
+        session_name("ecomais_googlesession");
+        static::$implement->getSession(["cookie_lifetime" => time() + (60 * 40)]);
 
         $url = $this->google->getAuthorizationUrl([
             "scope" => [implode(",", $scope)]
@@ -78,12 +80,12 @@ class AuthGoogle
     {
         try {
             if ($this->verifyState($state)) {
-                static::$implement->getSession(["cookie_lifetime" => 3600 +  time()]);
-
                 $token = $this->google->getAccessToken('authorization_code', [
                     "code" => $code
                 ]);
 
+                session_name("ecomais_googlesession");
+                static::$implement->getSession(["cookie_lifetime" => time() + (60 * 40)]);
                 $_SESSION['oauthgoogle_token'] = [$token, $token->getRefreshToken()];
                 return $this->google->getResourceOwner($token);
             }
@@ -102,19 +104,38 @@ class AuthGoogle
      */
     public function tokenExpired()
     {
+        session_name("ecomais_googlesession");
         static::$implement->getSession();
-        if (isset($_SESSION['oauthgoogle_token']) && $_SESSION['oauthgoogle_token']["oauthToken"]->hasExpired()) {
-            [$oauthToken,$refreshToken] = $_SESSION['oauthgoogle_token'];
+
+        if (isset($_SESSION['oauthgoogle_token']) && $_SESSION['oauthgoogle_token'][0]->hasExpired()) {
+            [$oauthToken, $refreshToken] = $_SESSION['oauthgoogle_token'];
             $token = $this->google->getAccessToken("refresh_token", [
                 "refresh_token" => $refreshToken
             ]);
-            session_unset();
-            session_destroy();
+            $this->unsetSession();
             return $token;
         }
 
         session_write_close();
 
         return false;
+    }
+
+    public function unsetSession()
+    {
+        if($this->isSession()) {
+            session_name("ecomais_googlesession");
+            static::$implement->getSession();
+            unset($_SESSION['oauthgoogle_token']);
+            unset($_SESSION['oauthgoogle_state']);
+            session_write_close();
+        }
+    }
+
+    public function isSession(): bool
+    {
+        session_name("ecomais_googlesession");
+        static::$implement->getSession(["read_and_close" => true]);
+        return (isset($_SESSION['oauthgoogle_token']) || isset($_SESSION['oauthgoogle_state']));
     }
 }

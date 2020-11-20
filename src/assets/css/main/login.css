@@ -1,35 +1,31 @@
-body { width: 100%; height: 100vh; background-color: #b4b4b49d; }
+body { 
+  width: 100%; 
+  height: 100vh; 
+  
+}
 
 /* --- Input login --- */
-#container-login .form-control:focus { border-bottom: 2px solid rgba(100, 127, 153, 0.808); box-shadow: 0 .1em 0 0 rgba(100, 127, 153, 0.25); }
-#container-login .form-control { border: 1px solid transparent; }
-#container-login .border-bottom-solid-2px { border-radius: 0; border-bottom: 2px solid #5d6a75a2; }
-#container-login .border-bottom-solid-2px:invalid { border-bottom: 2px solid #f7713d;}
 
 
 /* --- Config Button ---*/
-.btn-color-login { background: #fff132;  }
-/* .btn-color-login:hover { background: #f3e629;} */
+.btn-color-login { background-color: var(--green-light); color: #ffffff; border-radius: .3em;}
+.btn.btn-color-login:hover { color: #ffffff;}
+.btn-google:hover {text-decoration: none; color: #ffffff;}
+.icon-google { font-size: 1.6em;  vertical-align: middle; }
 
 /* --- Config label input--- */
 
-.label-login {color: #454c52c0; font-size:  1em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif }
+.label-login {color: #181818c0; font-size:  1em; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif }
 
-/* --- icones do login --- */
-
-.btn-google:hover {text-decoration: none;color: #ffffff;}
-
-.icon-google { font-size: 1.6em;  vertical-align: middle; }
-
-.horizontal-row::before {
-  margin-left: -38%;
-}
+/*-- Linha horizonta --*/
+.horizontal-row::before{margin-left:-38%;}
 .horizontal-row::after { margin-left: 3%;}
-.horizontal-row::before,.horizontal-row::after {
-  width: 35%;
-  top: 65%;
-  overflow: hidden;
-  height: 1px;
-  background-color: #454c52c0;
-  content: '\a0';
-  position: absolute;}
+.horizontal-row::before,.horizontal-row::after{width:35%;top:65%;overflow:hidden;height:1px;background-color:#454c52c0;content:'\a0';position:absolute;}
+
+/* --- Ecomais Icon --- */
+.box-ecomais-icon { left: 25rem; right: 25rem;top: 1%; z-index: 500; }
+.ecomais-icon { border-radius: 100%; }
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .box-ecomais-icon{left: 25rem; right: 25rem;top: 1%; z-index: 500; }
+}

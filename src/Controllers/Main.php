@@ -6,6 +6,7 @@ use Ecomais\Models\{DataException, Person, Implementation, AuthGoogle};
 use Ecomais\Views\Component\ComponenteElement as componente;
 use Ecomais\ControllersServices\AccountHandling;
 use Ecomais\Services\EmailECM;
+use Exception;
 
 class Main
 {
@@ -13,6 +14,14 @@ class Main
     private $usr;
     private $implement;
     private $email;
+    private static $cookie_options = [
+        "expires" =>  24 * 36000,
+        "path" => "/",
+        "domain" => SERVER["DOMAIN"],
+        "secure" => SERVER["HTTP_SECURE"],
+        "httponly" => true,
+        "samesite" => "Lax"
+    ];
 
     function __construct()
     {
@@ -29,19 +38,18 @@ class Main
     public function login(array $params): void
     {
         try {
-            if (preg_match("/\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}/", $params['value'])) {
-                $params['value'] = preg_replace("/\D/", "", $params['value']);
+            if ($cnpj = $this->implement->isCnpj($params['value'])) {
+                $params['value'] = $cnpj;
             }
             $this->usr->email = $params['value'];
-            $this->usr->passwd = $params['passwd'];
+            $this->usr->passwd = filter_var($params['passwd'],FILTER_SANITIZE_STRING,FILTER_FLAG_EMPTY_STRING_NULL);
             $company = 10;
             $user = 11;
 
-            $row = $this->sql->setLogin($this->usr, (is_numeric($params['value'])) ? $company : $user);
+            $row = $this->sql->getLogin($this->usr, (is_numeric($params['value'])) ? $company : $user);
 
             if (count($row) > 0 && password_verify($this->usr->passwd, $row['senha'])) {
-
-                $expire = ($params['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
+                static::$cookie_options["expires"] = ($params['conectedLogin'] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 36000);
                 $token = hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$row["email"]}{$_SERVER['HTTP_USER_AGENT']}");
 
                 $this->usr->id = $row[is_numeric($params['value']) ? "id_empresa" : "id_usuario"];
@@ -50,15 +58,18 @@ class Main
 
                 $this->sql->verifyUpdateHash($this->usr, $passwd, is_numeric($params['value']) ? "id_empresa" : "id_usuario");
 
+                session_name("ecomais_session");
                 $this->implement->getSession();
-                setcookie('_id', $this->usr->id, $expire, '/', SERVER["HOST_NAME"], false, true);
-                setcookie("_sessidcookie", $token, $expire, "/", SERVER["HOST_NAME"], false, true);
+                setcookie('_id', $this->usr->id, static::$cookie_options);
+                setcookie('_sessidcookie', $token, static::$cookie_options);
 
                 echo json_encode(["error" => false, "status" => 200, "data" => (is_numeric($params['value'])) ? $company : $user]);
             } else {
                 echo json_encode(["error" => true, "status" => 404, "data" => "Not results"]);
             }
-        } catch (DataException $ex) {
+        } catch (Exception | DataException $ex) {
+            $this->implement->destroyCookie('_id','_sessidcookie');
+            $this->implement->destroyCloseSession();
             header("{$_SERVER["SERVER_PROTOCOL"]} {$ex->getCode()}  server error");
         } finally {
             if (session_status() == PHP_SESSION_ACTIVE) session_write_close();
@@ -67,61 +78,71 @@ class Main
 
     public function loginAuthGoogle(): void
     {
-        $google  = new AuthGoogle("/manager/logingoogle");
+        try {
+            $google  = new AuthGoogle("/manager/logingoogle");
 
 
-        $code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
-        $err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
-        $state  = filter_input(INPUT_GET, "state", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
+            $code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
+            $err  = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
+            $state  = filter_input(INPUT_GET, "state", FILTER_SANITIZE_STRIPPED, FILTER_SANITIZE_STRING);
 
-        if ($userConnected =  filter_input(INPUT_GET, "connectedLogin", FILTER_SANITIZE_NUMBER_INT)) {
-            $this->implement->getSession();
-            $_SESSION["userConnected"] = $userConnected;
-            session_write_close();
-        }
-
-        if (empty($code) && empty($err)) exit(header("location: " . $google->getOauthURL()));
-
-
-        if (!empty($code) && empty($err)) {
-            if ($google->tokenExpired($code)) $code = $google->tokenExpired($code);
-            $data = $google->getData($code, $state);
-            $this->usr->name = $data->getName(); // O método não foi encontrado, mas ele existe no outro objeto
-            $this->usr->email = $data->getEmail();
-
-            $row =  $this->sql->getLoginAuthGoogle($this->usr, "usuario");
-            $row2 = $this->sql->getLoginAuthGoogle($this->usr, "empresa");
-
-            if (count($row) > 0 || count($row2) > 0) {
-                $this->usr->id = $row['id_usuario'] ?? $row2['id_empresa'] ?? null;
-                $email = $row["email"] ?? $row2["email"] ?? null;
-
+            if ($userConnected =  filter_input(INPUT_GET, "connectedLogin", FILTER_SANITIZE_NUMBER_INT)) {
+                session_name("ecomais_session");
                 $this->implement->getSession();
-                $expire = ($_SESSION["userConnected"] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 3600);
-                session_destroy();
+                $_SESSION["userConnected"] = $userConnected;
+                session_write_close();
+            }
 
-                $token = hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$email}{$_SERVER['HTTP_USER_AGENT']}");
+            if (empty($code) && empty($err)) exit(header("location: " . $google->getOauthURL()));
 
-                $this->implement->getSession();
-                setcookie('_id', $this->usr->id, $expire, '/', SERVER["HOST_NAME"], false, true);
-                setcookie("_sessidcookie", $token, $expire, "/", SERVER["HOST_NAME"], false, true);
+            if (!empty($code) && empty($err)) {
+                $row = [];
+                $row2 = [];
+                if ($google->tokenExpired($code)) $code = $google->tokenExpired($code);
+                if ($data = $google->getData($code, $state)) {
+                    $this->usr->name = $data->getName(); // O método não foi encontrado, mas ele existe no outro objeto
+                    $this->usr->email = $data->getEmail();
+                    $row =  $this->sql->getLoginAuthGoogle($this->usr, "usuario");
+                    $row2 = $this->sql->getLoginAuthGoogle($this->usr, "empresa");
+                }
 
-                if (!empty($row)) header("location: " . renderUrl("/usuario"));
-                if (!empty($row2)) header("location: " . renderUrl("/empresa"));
-            } else
-                header("location: " .  renderUrl("/login"));
+                if (count($row) > 0 || count($row2) > 0) {
+                    $this->usr->id = $row['id_usuario'] ?? $row2['id_empresa'] ?? null;
+                    $email = $row["email"] ?? $row2["email"] ?? null;
+
+                    $google->unsetSession();
+                    session_name("ecomais_session");
+                    $this->implement->getSession();
+                    static::$cookie_options["expires"] = ($_SESSION["userConnected"] == 18) ? time() + (12 * 30 * 24 * 3600) : time() + (24 * 3600);
+                    session_unset();
+
+                    $token = hash("whirlpool", "ARBDL{$_SERVER['REMOTE_ADDR']}ARBDL{$email}{$_SERVER['HTTP_USER_AGENT']}");
+
+                    setcookie('_id', $this->usr->id, static::$cookie_options);
+                    setcookie('_sessidcookie', $token, static::$cookie_options);
+
+                    if (!empty($row)) header("location: " . renderUrl("/user"));
+                    if (!empty($row2)) header("location: " . renderUrl("/company"));
+                } else 
+                    header("location: " .  renderUrl("/login"));
+            }
+        } catch (Exception | DataException $ex) {
+            $this->implement->destroyCookie('_id','_sessidcookie');
+            $this->implement->destroyCloseSession();
+            header("location: " .  renderUrl("/login"));
+        }finally {
+            $google->unsetSession();
+            if (session_status() == PHP_SESSION_ACTIVE) session_write_close();
         }
-        if (session_status() == PHP_SESSION_ACTIVE) session_write_close();
     }
 
     public function logoff(): void
     {
+        session_name("ecomais_session");
         $this->implement->getSession();
 
         if (!empty($_COOKIE['_id']) && !empty($_COOKIE['_sessidcookie'])) {
-            setcookie('_id', "", 0, "/");
-            setcookie('_sessidcookie', "", 0, "/");
-            session_unset();
+            $this->implement->destroyCookie('id','_sessidcookie');
 
             echo json_encode(["error" => false, "status" => 200, "msg" => "ok"]);
         } else {
@@ -132,9 +153,9 @@ class Main
 
     public function getOauthUrl(array $params): void
     {
-        if(empty($params['requestOauthUrl']))  exit(json_encode(["oauthgoogle_url" => null]));
-
-        echo json_encode(["oauthgoogleUrl" => (new \Ecomais\Models\AuthGoogle($params['requestOauthUrl']))->getOauthURL()]);
+        if (empty($params['requestOauthUrl']))  exit(json_encode(["oauthgoogle_url" => null]));
+        $requestUrl = filter_var($params['requestOauthUrl'],FILTER_SANITIZE_STRING,FILTER_FLAG_EMPTY_STRING_NULL);
+        echo json_encode(["oauthgoogleUrl" => (new \Ecomais\Models\AuthGoogle($requestUrl))->getOauthURL()]);
     }
 
     public function recoverByKey(array $params): void

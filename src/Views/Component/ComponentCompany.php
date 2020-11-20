@@ -7,21 +7,19 @@ class ComponentCompany {
 
   private static function thumbnailCompanyLogo(): string 
   {
-    $logo = renderUrl("/src/assets/logos-icons/ecomais-logo.jpg");
+    $logo = renderUrl("/src/assets/logos-icons/ecomais-logo-white-alfa.jpg");
 return <<<thumbnail
-    <div class="flex-grow-1">
-      <img src="$logo" alt="logo Ecomais" class="img-fluid">
-    </div> 
+    <a class='navbar-brand' src='$logo'></a>
 thumbnail;
   }
 
   public static function navbar(): string
   {
     $thumbnailCompanyLogo =  static::thumbnailCompanyLogo();
-    $dashboard = renderUrl("/empresa");
-    $registerProduct =  renderUrl("/empresa/cadastro-de-produtos");
-    $perfil = renderUrl("/empresa/perfil");
-    $configuration = renderUrl("/empresa/configuracoes");
+    $dashboard = renderUrl("company.index");
+    $registerProduct =  renderUrl("company.cadastroprodutos");
+    $perfil = renderUrl("company.perfil");
+    $configuration = renderUrl("company.configuracoes");
 return <<<navbar
     <header class="h-auto navigation d-none d-lg-block d-xl-block">
             <nav class="company-navigation bg-blue-dark-1 d-flex layout-navbar align-items-center justify-content-around navbar navigation position-fixed z-index-1000">
@@ -56,10 +54,10 @@ navbar;
 
   public static  function navBarMobile(): string
   {
-    $dashboard = renderUrl("/empresa");
-    $registerProduct =  renderUrl("/empresa/cadastro-de-produtos");
-    $perfil = renderUrl("/empresa/perfil");
-    $configuration = renderUrl("/empresa/configuracoes");
+    $dashboard = renderUrl("company.index");
+    $registerProduct =  renderUrl("company.cadastroprodutos");
+    $perfil = renderUrl("company.perfil");
+    $configuration = renderUrl("company.configuracoes");
 
 return <<<navbarmobile
   <header class="d-block d-xl-none d-lg-none">

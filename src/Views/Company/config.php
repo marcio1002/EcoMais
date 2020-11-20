@@ -1,7 +1,7 @@
 <?php
 $this->layout("_layout", ["subtitle" => "Configurações"]);
 
-$data = ''; //$this->func()->verifyLoggedCompany();
+$data = $this->func()->verifyLoggedCompany();
 
 use Ecomais\Web\Bundles;
 

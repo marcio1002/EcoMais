@@ -7,7 +7,7 @@ use Ecomais\Web\Bundles;
 $comp = new Ecomais\Controllers\Company\AccountManagerCompany();
 
 $this->start("css");
-Bundles::render(["perfil.css"], fn ($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"));
+  Bundles::render(["perfil.css"], fn ($file) => print_r("<link rel='stylesheet' href='$file'>"));
 $this->stop();
 ?>
 <div class="d-flex flex-column justify-content-center align-content-center py-1" style="height: 100vh;">
@@ -34,8 +34,8 @@ $this->stop();
       </div>
     </div>
 
-    <div class="col-12 d-flex justify-content-center  py-4">
-      <div class="col-xl-3  col-md-4 col-sm-12">
+    <div class="col-12 d-flex justify-content-center py-4">
+      <div class="col-xl-3 col-md-4 col-sm-12 mr-4">
         <button id="saveImage" class="btn btn-block bg-success btn-bg-shadow text-white remove-focus font-weight-bold font-size-1-1em">Salvar</button>
       </div>
       <div class="col-xl-3 col-md-4 col-sm-12">
@@ -46,5 +46,5 @@ $this->stop();
 </div>
 <?php
 $this->start("scripts");
-Bundles::render(["perfil.js"], fn ($file) => print_r("<script src=\"$file\"></script>"));
+  Bundles::render(["perfil.js"], fn ($file) => print_r("<script src='$file'></script>"));
 $this->stop() ?>

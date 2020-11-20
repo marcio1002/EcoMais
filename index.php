@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ecomais Webpage
  * @see  Ecomais GitHub project
@@ -11,14 +12,14 @@
  * @license 
  */
 
- /**
-  * Dependências do projeto
-  * @package coffeecode/router - Gerenciamento de rotas http
-  * @package phpmailer/phpmailer - Envio de emails
-  * @package league/plates - Criação de templates
-  * @package league/oauth2-google - Autenticação com a conta do Google
-  * @package coffeecode/uploader - Upload de imagens
-  */
+/**
+ * Dependências do projeto
+ * @package coffeecode/router - Gerenciamento de rotas http
+ * @package phpmailer/phpmailer - Envio de emails
+ * @package league/plates - Criação de templates
+ * @package league/oauth2-google - Autenticação com a conta do Google
+ * @package coffeecode/uploader - Upload de imagens
+ */
 
 /*
  * Rotas vista pelos usuários são mostrada em português (pt-BR)
@@ -38,84 +39,99 @@ ob_clean();
  * @link pagina principal 
  * Paginas principais como home,login,cadastro etc.
  */
-$router->namespace("Ecomais\Web");
+$router
+    ->namespace("Ecomais\Web")
+    ->group(null);
 
-    $router->group(null);
-    $router->get("/", "Redirect:home","home");
-    $router->get("/login", "Redirect:login","home.login");
-    $router->get("/cadastro", "Redirect:registerUser","home.cadastro");
-    $router->get("/cadastro/empresa","Redirect:registerCompany","home.empresa");
-    $router->get("/recuperarsenha", "Redirect:recoverPasswd","home.recuperarsenha");
-    $router->get("/recuperarsenha/novasenha/{token}","Redirect:newPasswd","home.novasenha");
-    $router->get("/politica-privacidade-e-termos", "Redirect:terms","home.politicahp");
-    $router->get("/teste/{chv}","Redirect:test");
+$router->get("/", "Redirect:home", "home");
+$router->get("/login", "Redirect:login", "home.login");
+$router->get("/cadastro", "Redirect:registerUser", "home.cadastro");
+$router->get("/cadastro/empresa", "Redirect:registerCompany", "home.empresa");
+$router->get("/recuperarsenha", "Redirect:recoverPasswd", "home.recuperarsenha");
+$router->get("/recuperarsenha/novasenha/{token}", "Redirect:newPasswd", "home.novasenha");
+$router->get("/politica-privacidade-e-termos", "Redirect:terms", "home.politicahp");
+$router->get("/teste/{chv}", "Redirect:test");
 
-    $router->group("error");
-    $router->get("/{errCode}", "Redirect:typeError","httperro");
+$router->group("error");
+$router->get("/{errCode}", "Redirect:typeError", "httperro");
 
 /**
  * @group Empresa
  */
-    $router->group("empresa");
-    $router->get("/","Redirect:indexCompany","empresa.index");
-    $router->get("/configuracoes","Redirect:configCompany","empresa.configuracoes");
-    $router->get("/cadastro-de-produtos","Redirect:registerProduct","empresa.cadastroprodutos");
-    $router->get("/perfil","Redirect:perfilCompany","empresa.perfil");
+$router->group("company");
+$router->get("/", "Redirect:indexCompany", "company.index");
+$router->get("/configuracoes", "Redirect:configCompany", "company.configuracoes");
+$router->get("/cadastro-de-produtos", "Redirect:registerProduct", "company.cadastroprodutos");
+$router->get("/perfil", "Redirect:perfilCompany", "company.perfil");
 
 /**
  * @group User
  */
-    $router->group("usuario");
-    $router->get("/","Redirect:indexUser","usuario.index");
-    $router->get("/listadeprodutos","Redirect:listProduct","usuario.listarprodutos");
+$router->group("user");
+$router->get("/", "Redirect:indexUser", "user.index");
+$router->get("/listadeprodutos", "Redirect:listProduct", "user.listarprodutos");
 
 /**
  * @namespace Controller
  * 
  * rotas para os métodos de manipulações e controllers dos dados
  * */
-$router->namespace("Ecomais\Controllers");
+$router
+    ->namespace("Ecomais\Controllers")
+    ->group("manager");
 
-    $router->group("manager");
-    $router->post("/login", "Main:login");
-    $router->get("/logoff", "Main:logoff");
-    $router->get("/logingoogle","Main:loginAuthGoogle");
-    $router->get("/registergoogle","Main:registerAuthGoogle");
-    $router->post("/getoauthurl","Main:getOauthUrl");
-    $router->post("/recoverByKey", "Main:recoverByKey");
-    $router->post("/recoverByMail", "Main:recoverByMail");
-    $router->put("/recoverpasswd", "Main:recoverPasswd");
-    $router->post("/newsletter","Main:newsLetter");
-
+$router->post("/login", "Main:login","manager.login");
+$router->get("/logoff", "Main:logoff","manager.logoff");
+$router->get("/logingoogle", "Main:loginAuthGoogle","manager.loginauthgoogle");
+$router->get("/registergoogle", "Main:registerAuthGoogle","manager.registerauthgoogle");
+$router->post("/getoauthurl", "Main:getOauthUrl","manager.getoauthurl");
+$router->post("/recoverByKey", "Main:recoverByKey","manager.recoverbykey");
+$router->post("/recoverByMail", "Main:recoverByMail","manager.recoverbymail");
+$router->put("/recoverpasswd", "Main:recoverPasswd","manager.recoverpasswd");
+$router->post("/newsletter", "Main:newsLetter","manager.newsletter");
 
 /** rotas para Usuários */
-$router->namespace("Ecomais\Controllers\User");
+$router
+    ->namespace("Ecomais\Controllers\User")
+    ->group("manager");
 
-    $router->group("manager");
-    $router->post("/addaccountpersonphysical", "AccountManagerUser:createAccount");
+$router->post("/addaccountpersonphysical", "AccountManagerUser:createAccount","manager.user.addaccountpersonphysical");
 
 /** rotas para Empresas*/
-$router->namespace("Ecomais\Controllers\Company");
-    
-    $router->group("manager");
-    $router->post("/addaccountpersonlegal","AccountManagerCompany:createAccount");
-    $router->get("/listencompany","AccountManagerCompany:findAll");
-    $router->post("/findcompany", "AccountManagerCompany:findByIdJSON");
-    $router->get("/listencompanypro","AccountManagerCompany:listenCompanyPro");
-    $router->put("/updateinfocompany","AccountManagerCompany:updateInfoCompany");
-    $router->post("/updateimagecompany","AccountManagerCompany:updateImageCompany");
-    $router->post("/searchcompany","AccountManagerCompany:searchCompany");
+$router
+    ->namespace("Ecomais\Controllers\Company")
+    ->group("manager");
 
-$router->namespace("Ecomais\Controllers\Product");
+$router->post("/addaccountpersonlegal", "AccountManagerCompany:createAccount","manager.company.createaccount");
+$router->get("/listencompany", "AccountManagerCompany:findAll","manager.company.findall");
+$router->post("/findcompany", "AccountManagerCompany:findByIdJSON","manager.company.findbyidjson");
+$router->get("/listencompanypro", "AccountManagerCompany:listenCompanyPro","manager.company.listencompanypro");
+$router->put("/updateinfocompany", "AccountManagerCompany:updateInfoCompany","manager.company.updateinfocompany");
+$router->post("/updateimagecompany", "AccountManagerCompany:updateImageCompany","manager.company.updateimagecompany");
+$router->post("/searchcompany", "AccountManagerCompany:searchCompany","manager.company.searchcompany");
 
-    $router->group("manager");
-    $router->post("/addproduct","ProductManager:createProduct");
-    $router->put("/setstatus","ProductManager:setStatus");
-    $router->post("/searchproduct","ProductManager:searchProd");
+$router
+    ->namespace("Ecomais\Controllers\Product")
+    ->group("manager");
+
+$router->post("/addproduct", "ProductManager:createProduct","manager.product.createproduct");
+$router->put("/setstatus", "ProductManager:setStatus","manager.product.setstatus");
+$router->post("/searchproduct", "ProductManager:searchProd","manager.product.searchprod");
 
 $router->dispatch();
 
 if ($router->error()) $router->redirect("/error/{$router->error()}");
+
+function renderUrl(string $url = "home", ?array $params = null): string
+{
+    global $router;
+    
+    $baseUrl = BASE_URL;
+    if (preg_match("/^[\w]+\.[\w+\.+]*[\w]$/", $url) || preg_match("/^(home)$/", $url))
+        return $router->route($url, $params);
+    else
+        return ($url <=> "home") == 0 ? $baseUrl : "$baseUrl$url";
+}
 
 
 ob_end_flush();

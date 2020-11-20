@@ -1,16 +1,17 @@
 <?php
 require_once dirname(__DIR__, 2) . "/vendor/autoload.php";
 
-use Ecomais\Web\Bundles;
+use RenderFile\RenderFile as Bundles;
+
 $implement = new  Ecomais\Models\Implementation();
 
 $implement->getSession(['read_and_close'  => true]);
 
 if (count($_SESSION) == 0 || $_SESSION['ssioninfo']["session_timestamp"] < time())
-  exit(header("location: " . renderUrl("/recuperarsenha")));
+  exit(header("location: " . renderUrl("home.recuperarsenha")));
 
-if (strcasecmp($token, session_id()) != 0) 
-  exit(header("location: " . renderUrl("/recuperarsenha")));
+if (($token <=> session_id()) != 0) 
+  exit(header("location: " . renderUrl("home.recuperarsenha")));
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,10 +21,12 @@ if (strcasecmp($token, session_id()) != 0)
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=7" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
+  <link rel="shortcut icon" href="./src/assets/logos-icons/ecomais.ico" type="image/x-icon">
   <?php
-    Bundles::render(["bootstrap.min.css.map","bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"], 
-    fn ($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"))
+    Bundles::render(
+      ["bootstrap.min.css.map","bootstrap.min.css","bootstrap-reboot.min.css.map","bootstrap-reboot.min.css","bootstrap-grid.min.css.map","bootstrap-grid.min.css","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"], 
+      fn ($file) => printf("<link rel='stylesheet' href='%s'>",renderUrl($file))
+    );
   ?>
 </head>
 
@@ -75,9 +78,11 @@ if (strcasecmp($token, session_id()) != 0)
   <?php
   echo "
     <script src='https://kit.fontawesome.com/c38519eb78.js' crossorigin='anonymous'></script>
-    <script> const BASE_URL = \"" . BASE_URL . "\"</script>";
-  Bundles::render(["jquery-3.5.1.min.js", "jquery.mask.js", "bootstrap.min.js.map", "bootstrap.min.js", "bootstrap.bundle.js.map", "bootstrap.bundle.js", "alertify.min.js", "apis.js", "manipulation.js", "newpasswd.js"],
-    fn ($file) => print_r("  <script src=\"$file\"></script>"));
+    <script> const BASE_URL = '" . BASE_URL . "'</script>";
+  Bundles::render(
+    ["jquery-3.5.1.min.js", "jquery.mask.js", "bootstrap.min.js.map", "bootstrap.min.js", "bootstrap.bundle.js.map", "bootstrap.bundle.js", "alertify.min.js", "apis.js", "manipulation.js", "newpasswd.js"],
+    fn ($file) => printf("<script src='%s'></script>",renderUrl($file))
+  );
   ?>
 </body>
 

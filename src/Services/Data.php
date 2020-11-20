@@ -56,8 +56,10 @@ final class Data
     public function prepareParam($vals, ?array $data_type = array()):Data
     {
         $c = 0;
+        
         foreach ($vals as &$v) {
             $c += 1;
+            
             if(isset($data_type[$c - 1])) {
                 $this->query->bindParam($c, $v,$data_type[$c - 1]);
             } else {
@@ -77,7 +79,7 @@ final class Data
             $this->query->execute();
             $this->pdo->commit();
             return ($this->query->rowCount() == 1) ? $this->query->fetch(PDO::FETCH_ASSOC) : $this->query->fetchAll();
-        }catch(PDOException $e) {
+        }catch(PDOException | Exception $e) {
             throw new DataException($e->getMessage(), $e->getCode());
         }
         return null;
@@ -93,7 +95,7 @@ final class Data
             $this->query->execute();
             $this->pdo->commit();
             return  ($this->query->rowCount() > 0 ) ? true : false;
-        }catch(PDOException $e){
+        }catch(PDOException | Exception $e){
             throw new DataException($e->getMessage(),$e->getCode());
         } 
     }
@@ -120,7 +122,7 @@ final class Data
 
             $this->query = $this->pdo->prepare("INSERT INTO $table ($columns) VALUES($preVal)");
 
-        } catch (Exception $ex) {
+        } catch (PDOException | Exception $ex) {
 
             throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);
         }
@@ -179,7 +181,7 @@ final class Data
                     break;
             }
 
-        } catch (Exception $ex) {
+        } catch (PDOException | DataException | Exception $ex) {
 
             throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);
         }
@@ -207,7 +209,7 @@ final class Data
             $this->pdo->beginTransaction();
             $this->query = $this->pdo->prepare("UPDATE $table SET $columns WHERE $where");
 
-        } catch (Exception $ex) {
+        } catch (PDOException | DataException | Exception $ex) {
             throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);
         }
         return $this;
@@ -229,7 +231,7 @@ final class Data
             $this->pdo->beginTransaction();
             $this->query = $this->pdo->prepare("DELETE FROM $table WHERE $where");
 
-        } catch (Exception $ex) {
+        } catch (PDOException | DataException | Exception $ex) {
             throw new DataException($ex->getMessage(), DataException::SERVER_ERROR);
         }
         return $this;

@@ -24,99 +24,30 @@ body{ margin:0; padding: 0; font-family: 'roboto', 'sans-serif'; }
 
 #title-container {height: 100vh;}
 
-.content-img { 
-  position: absolute; 
-  background: rgba(68, 68, 68, 0.651) url("../../imgs/casal-no-mercado.png") no-repeat; 
-  background-size: auto;
-  background-size: cover;
-  /* background-attachment: fixed; */
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -10;
-}
-
+.content-img{position:absolute;background:rgba(68,68,68,.651) url("../../imgs/casal-no-mercado.png") no-repeat;background-size:auto;background-size:cover;width:100%;height:100%;top:0;left:0;z-index:-10;}
 .h1{ font-family: 'Jost', sans-serif; margin: 0; padding-top: 20px; padding-left: 0; padding-bottom: 50px; letter-spacing: 8px;text-align: center; font-size: 75px; color: #F9F9F9; background-size: 300%;}
 
 
+.call-to-action {padding-top: 7rem; padding-bottom: 7rem;}
 
 #mainSlider .carousel-inner, #mainSlider .carousel-item { max-height: 90vh;}
-
-#mainSlider .carousel-caption { top: 30%;}
-
+#mainSlider .carousel-caption { top: 30%; z-index: 10;}
 #mainSlider .carousel-caption h2 {font-size: 50px;margin-bottom: 30px;}
-
 #mainSlider .carousel-caption p { font-size: 22px; font-weight: 300; margin-bottom: 100px;color: #FFF;}
 
 .carousel-indicators .active { background-color: #BE1F0F; } 
 
-#about-area { background-color: #F9F9F9;}
-
-.about-title { font-size: 17px; color: #444; text-transform: uppercase; font-weight: bold; }
-
+#about-area { background-color: #f5f5f5;}
 #about-list { list-style: none; padding-left: 0;}
-
 #about-list li { line-height: 30px;}
-
-#about-list i { color: #087754; margin-right: 15px; }
-
-.contact-box { padding-bottom: 50px; margin-bottom: 50px; border-bottom: 1px solid #BE1F0F; }
-
-.contact-box i { border: solid 1px #ffffff; border-radius: 50%; width: 55px; height: 55px; line-height: 55px; font-size: 24px; margin-bottom: 20px; }
-
-.contact-box p { font-size: 16px; }
-
-.contact-tile { font-weight: bold; color: #FFFC4F; }
+#about-list i { color: #109b6f; margin-right: 15px; }
 
 #msg-box p { font-size: 22px; }
 #contact-form .main-btn { width: 120px; }
 .after-color:after{content:'';position:absolute;top:0;bottom:0;left:0;right:0;background-color:rgba(12,12,12,.301);}
 
-.navbar-toggle-icon {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  content: "";
-  width: 1.2em;
-  height: 2px;
-  background: rgb(255, 255, 255);
-  background-size: auto;
-  transition: 0.5s ease-in-out;
-}
-
-.navbar-toggle-icon:before,
-.navbar-toggle-icon:after {
-  position: absolute;
-  content: "";
-  display: block;
-  width: 1.2em;
-  height: 2px;
-  background: rgb(255, 255, 255);
-  background-size: auto;
-  transition: 0.5s ease-in-out;
-}
-.navbar-toggle-icon:before {
-  top: 6px;
-}
-
-.navbar-toggle-icon:after {
-  bottom: 6px;
-}
-
-.navbar-toggle-icon.active-toggle {
-  transform: rotate(45deg);
-}
-.navbar-toggle-icon.active-toggle::before {
-  transform: rotate(90deg);
-  top: 0;
-
-}
-.navbar-toggle-icon.active-toggle::after {
-  transform: rotate(90deg);
-  bottom: 0;
-}
-
+.navbar-toggler:focus{outline:0;box-shadow:none;}
+.navbar-toggle-icon{position:relative;display:inline-block;vertical-align:middle;content:"";width:1.2em;height:2px;background:rgb(255,255,255);background-size:auto;transition:.5s ease-in-out;}.navbar-toggle-icon:before,.navbar-toggle-icon:after{position:absolute;content:"";display:block;width:1.2em;height:2px;background:rgb(255,255,255);background-size:auto;transition:.5s ease-in-out;}.navbar-toggle-icon:before{top:6px;}.navbar-toggle-icon:after{bottom:6px;}.navbar-toggle-icon.active-toggle{transform:rotate(45deg);}.navbar-toggle-icon.active-toggle::before{transform:rotate(90deg);top:0;}.navbar-toggle-icon.active-toggle::after{transform:rotate(90deg);bottom:0;}
 
 @media (max-width:720px) { 
   #login {

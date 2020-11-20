@@ -67,5 +67,5 @@ use Ecomais\Web\Bundles;
 
 <?php 
 $this->start("scripts"); 
-  Bundles::render(["registerProduct.js"], fn($files) => print_r("<script src=\"$files\"></script>"));
+  Bundles::render(["registerProduct.js"], fn($files) => print_r("<script src='$files'></script>"));
 $this->stop(); ?>

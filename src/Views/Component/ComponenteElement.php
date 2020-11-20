@@ -6,11 +6,11 @@ class ComponenteElement
 {
     public static function navBarHome(): string
     {
-        $urlRegister = renderUrl('/cadastro');
-        $logo = renderUrl('/src/assets/logos-icons/ecomais-icon-small.png');
+        $logo = '{$this->asset("/logos-icons/ecomais-icon-small.png")}';
         $index = renderUrl();
-        $login = renderUrl("/login");
-        $urlRegisterCompany = renderUrl("/cadastro/empresa");
+        $login = renderUrl("home.login");
+        $registerUser = renderUrl("home.cadastro");
+        $registerCompany = renderUrl("home.empresa");
 return <<<navBar
       <div class='container text-white' id='nav-container'>
         <nav class='navbar navbar-expand-md fixed-top text-weight-500 bg-blue-dark'>
@@ -20,12 +20,12 @@ return <<<navBar
           </button>
           <div id='navbar-links' class='collapse navbar-collapse justify-content-center'>
             <div class='navbar-nav m-auto align-content-center'>
-              <a class='nav-item nav-link item-hover position-relative text-white' id='home-menu' href='$index'>Home</span></a>
-              <a class='nav-item nav-link item-hover position-relative text-white' id='about-menu' href='$urlRegister' >Cadastre-se</a>
-              <a class='nav-item nav-link item-hover position-relative text-white' id='services-menu' href='$urlRegisterCompany'>Serviços</a>
+              <a class='nav-item nav-link text-decoration-none  text-white item-hover position-relative ' id='home-menu' href='$index'>Home</span></a>
+              <a class='nav-item nav-link text-decoration-none  text-white item-hover position-relative' id='about-menu' href="$registerUser" >Cadastre-se</a>
+              <a class='nav-item nav-link text-decoration-none  text-white item-hover position-relative' id='services-menu' href='$registerCompany'>Serviços</a>
             </div>
-            <div>
-                <a class='nav-item nav-link mr-auto text-center text-weight-700 rounded bg-red-wine text-white' id='login' href='$login'>Entrar <i class="fas fa-sign-in-alt"></i></a>
+            <div class="">
+                <a class='nav-item btn w-xm-50 w-sm-50 mr-xl-2 mr-lg-2 text-center text-white text-weight-700 text-white rounded bg-red-wine remove-focus' id='login' href='$login'>Entrar <i class="fas fa-sign-in-alt"></i></a>
             </div>
           </div> 
         </nav>
@@ -37,10 +37,9 @@ navBar;
 
     public static function footer(): string
     {
-        $termsPolicy = renderUrl("/politica-privacidade-e-termos");
+        $termsPolicy = renderUrl("home.politicahp");
 return <<<footer
     <section class="call-to-action bg-blue-dark-1 text-white text-center">
-        <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 mx-auto">
@@ -59,7 +58,7 @@ return <<<footer
         </div>
     </div>
     </section>
-    <footer class="footer bg-blue-dark">
+    <footer class="footer bg-blue-dark py-3">
     <div class="container">
         <div class="row">
         <div class="col-lg-7 h-100 text-center text-lg-left my-auto">
@@ -105,7 +104,7 @@ footer;
 
     public static function mail($name, $token): string
     {
-        $url = renderUrl("/recuperarsenha/novasenha/$token");
+        $url = renderUrl("home.novasenha",["token" => $token]);
         $font1 = "padding:0;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
         $font2 = "font-size:20px;font-weight:600;font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:#272726;display:inline-block;padding:16px 24px;text-decoration:none";
         $font3 = "font-family:'Proxima Nova Soft','Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif";
@@ -272,7 +271,7 @@ return <<<btnGoogle
         <button class="btn text-white remove-focus bg-red-google btn-bg-shadow-hover">
             <i class="icon-google fab fa-google"></i>
         </button>
-        <a title='{$props[1]}' href="{$props[2]}" class='btn btn-block text-center text-white remove-focus text-weight-800 font-size-xl-1-1em font-size-sm-9em font-size-xm-9em'>
+        <a title='{$props[1]}' href="{$props[2]}" class='btn btn-block text-center text-white text-weight-800 text-decoration-none remove-focus font-size-xl-1-1em font-size-sm-9em font-size-xm-9em'>
             {$props[1]}
         </a>
     </div>

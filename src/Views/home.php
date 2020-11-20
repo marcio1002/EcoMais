@@ -11,16 +11,13 @@ use Ecomais\Views\Component\ComponenteElement;
       <h3 class="main-title text-white">Bem Vindo Ao EcoMais</h3>
       <h4 class="h5 text-warning">Uma Organização que pensa no futuro do seu dinheiro</h4>
     </div>
-    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 m-auto py-xl-5 py-lg-3">
-      <img class="img-fluid" src=<?= renderUrl("/src/assets/logos-icons/ecomais-logo.jpg"); ?> alt="Ecomais">
-    </div>
   </div>
 </div>
 <div id="about-area">
   <section>
-    <div class="container py-5">
-      <div class="row col-12">
-        <div class="col-xl-6 col-lg-6 col-sm-12">
+    <!-- <div class="container "></div> -->
+      <div class="row col-12 py-5">
+        <div class="col-xl-6 col-lg-6 col-sm-12 py-xl-4 py-lg-3 py-sm-2">
           <p>O EcoMais tem como grande desafio propor economia e sustentabilidade aos seus clientes, trazendo um retorno
             lucrativo, rendível e sustentável a sua empresa, divulgando os produtos em plataformas digitais.</p>
           <p> Você micro-empreendedor poderá cadastrar a sua empresa do ramo alimentício em nossa plataforma, poderá
@@ -29,7 +26,7 @@ use Ecomais\Views\Component\ComponenteElement;
           <p>E nossos designers trabalharão na sua interface/layout para impulsionar os seus anúncios.</p>
           <p>Veja outros diferenciais da equipe:</p>
         </div>
-         <div class="col-xl-6 col-lg-6 col-sm-12 py-sm-2">
+         <div class="col-xl-6 col-lg-6 col-sm-12 py-xl-4 py-lg-3 py-sm-2">
           <ul id="about-list">
             <li><i class="fas fa-check"></i> Suporte 24h</li>
             <li><i class="fas fa-check"></i> Layout responsivo para todos os dispositivos</li>
@@ -41,9 +38,8 @@ use Ecomais\Views\Component\ComponenteElement;
     </div>
   </section>
   <section>
-    <div class="col-12 py-5">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 py-xl-0 py-lg-0 py-md-0 py-sm-3">
+    <div class="row col-12 py-5 justify-content-center">
+      <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 py-xl-0 py-lg-0 py-md-0 py-sm-3">
           <div class="card" style="height: 305px">
             <div class="card-header text-center">
               <h5 class="card-title"><b>Mais Economia e Conforto ao cliente</b></h5>
@@ -57,7 +53,7 @@ use Ecomais\Views\Component\ComponenteElement;
             </div>
           </div>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
           <div class="card " style="height: 305px ">
             <div class="card-header text-center">
               <h5 class="card-title"><b>Uma missão para as empresas</b></h5>
@@ -75,7 +71,6 @@ use Ecomais\Views\Component\ComponenteElement;
             </div>
           </div>
         </div>
-      </div>
     </div>
   </section>
   <section>
@@ -87,7 +82,7 @@ use Ecomais\Views\Component\ComponenteElement;
       </ol>
       <div class="carousel-inner ">
         <div class="carousel-item active after-color">
-          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missao">
+          <img src=<?= renderUrl("/src/assets/imgs/frutas-e-legumes.png"); ?> class="d-block w-100" alt="missão">
           <div class="carousel-caption d-none d-md-block">
             <h2>Impacto Positivo</h2>
             <p> Entre e conheça sobre os benefícios da propaganda digital para o meio ambiente</p>
@@ -95,7 +90,7 @@ use Ecomais\Views\Component\ComponenteElement;
           </div>
         </div>
         <div class="carousel-item after-color ">
-          <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="iamgem de negocios">
+          <img src=<?= renderUrl("/src/assets/imgs/supermarket.png"); ?> class="d-block w-100" alt="Imagem de negócios">
           <div class="carousel-caption d-none d-md-block">
             <h2>Benefícios para os consumidores</h2>
             <p> Entre e conheça sobre os impactos positivos para o bolso do consumidor através da propagenda digital

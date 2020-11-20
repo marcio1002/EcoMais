@@ -58,8 +58,7 @@ use Ecomais\Web\Bundles;
 
 <!-- Icons Conteúdo -->
 <section class="features-icons bg-white text-center">
-  <div class="col-12">
-    <div class="row">
+  <div class="col-12 row">
       <div class="col-xl-3 col-md-6 col-sm-12 py-3">
         <div class="card text-white shadow-lg border-radius-30 pointer hover-animate m-auto" style="width: 18rem;">
           <div class="card-after-color"></div>
@@ -101,10 +100,9 @@ use Ecomais\Web\Bundles;
         </div>
       </div>
     </div>
-  </div>
 </section>
 <?php 
 $this->start("scripts");
-  Bundles::render(["index.js","search.js"],fn($file) => print_r("<script src=\"$file\"></script>"));
+  Bundles::render( ["index.js","search.js"], fn ($file) => print_r("<script src='$file' ></script>"));
 $this->stop(); 
 ?>

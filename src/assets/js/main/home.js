@@ -1,16 +1,25 @@
-$("[data-target=\'#navbar-links\']").click(() => $("span.navbar-toggle-icon").toggleClass("active-toggle"))
+$("[data-target='#navbar-links']").click(() => $("span.navbar-toggle-icon").toggleClass("active-toggle"))
 
-$("main .container").click(() => {
-  if ($("#navbar-links").hasClass("show")) {
-    $("#navbar-links").removeClass("show")
+$("body").click(function(elem) {
+  if ($(elem.target).is($("[data-target='#navbar-links']")) || 
+      $(elem.target).is(".navbar") || 
+      !$("#navbar-links").hasClass("show")) return 
+
+    $("#navbar-links").animate({ 
+      height: 0
+    },
+    300,
+    "linear",
+    () => $("#navbar-links").removeClass("show")
+  )
+    
     $("span.navbar-toggle-icon").toggleClass("active-toggle")
-  }
 })
 
 $("#registerGoogle").on("click", function (evt) {
   evt.preventDefault()
 
-  let pathName = location.pathname.replace("\/www/ecomais","");
+  let pathName = location.pathname.replace("/www/ecomais","");
   let options = {
     method: 'POST',
     mycustomtype: "application/json",

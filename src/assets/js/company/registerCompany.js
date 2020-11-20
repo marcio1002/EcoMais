@@ -31,6 +31,7 @@ $(function () {
 
     $("#searchCep").on("click", async function () {
         try {
+            alertify.dismissAll()
             const res = await searchCep($("#inputCep").val())
             if (res !== null) {
                 $("#uf").val(res.uf);

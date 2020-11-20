@@ -6,7 +6,7 @@ define("DB_CONFIG", [
   "DB_PORT" => env("DB_PORT", "3306"),
   "DB_USERNAME" => env("DB_USERNAME", 'root'),
   "DB_PASSWD" => env("DB_PASSWD", ''),
-  "DB_NAME" => env("DB_NAME", 'bdecomais'),
+  "DB_NAME" => env("DB_NAME", 'dbecomais'),
   "OPTIONS" => [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -23,5 +23,6 @@ define("EMAIL_PROPS", [
 ]);
 
 define("SERVER",[
-  "HOST_NAME" => env("HOST_NAME","")
+  "DOMAIN" => env("DOMAIN",""),
+  "HTTP_SECURE" => env("HTTP_SECURE",false)
 ]);

@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__DIR__,2) . "/vendor/autoload.php";
 
-use Ecomais\Web\Bundles;
+use RenderFile\RenderFile as Bundles;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,10 +11,12 @@ use Ecomais\Web\Bundles;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=7" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="shortcut icon" href=<?= renderUrl("/src/assets/logos-icons/ecomais.ico") ?> type="image/x-icon">
-  <?=
-    Bundles::render(["bootstrap.min.css","bootstrap.min.css.map","bootstrap-reboot.min.css","bootstrap-reboot.min.css.map","bootstrap-grid.min.css","bootstrap-grid.min.css.map","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"],
-    fn($file) => print_r("<link rel=\"stylesheet\" href=\"$file\">"));
+  <link rel="shortcut icon" href="./src/assets/logos-icons/ecomais.ico" type="image/x-icon">
+  <?php
+    Bundles::render(
+      ["bootstrap.min.css.map", "bootstrap.min.css", "bootstrap-reboot.min.css.map", "bootstrap-reboot.min.css", "bootstrap-grid.min.css.map", "bootstrap-grid.min.css","bootstrap-utilities.min.css.map","bootstrap-utilities.min.css","alertify.min.css","default.min.css","eco.style.css","manipulation.css","rsenha.css"],
+      fn($file) => printf("<link rel='stylesheet' href='%s'>",renderUrl($file))
+    );
   ?>
   <title>Recuperar senha</title>
 </head>
@@ -24,12 +26,6 @@ use Ecomais\Web\Bundles;
     <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12 p-2 m-auto mb-7">
       <div class="col-xl-7 col-lg-7 col-md-9 col-sm-12 m-auto">
         <div id="alert" class="alert" role="alert"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-xl-7 col-lg-7 col-md-9 col-sm-12 m-auto">
-          <label for="username">Nome:</label>
-          <input type="text" class="form-control inset-shadow" id="username" aria-describedby="emailHelp">
-        </div>
       </div>
       <div class="form-row">
         <div class="form-group col-xl-7 col-lg-7 col-md-9 col-sm-12 m-auto">
@@ -59,8 +55,10 @@ use Ecomais\Web\Bundles;
 
   <?php
   echo "<script>  const BASE_URL = \"" . BASE_URL . "\"</script>";
-  Bundles::render(["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js","bootstrap.min.js.map","bootstrap.bundle.js","bootstrap.bundle.js.map","alertify.min.js","apis.js","manipulation.js","recoverpasswd.js"],
-  fn($file) => print_r("<script src=\"$file\"></script>"));
+  Bundles::render(
+    ["jquery-3.5.1.min.js","jquery.mask.js","bootstrap.min.js","bootstrap.min.js.map","bootstrap.bundle.js","bootstrap.bundle.js.map","alertify.min.js","apis.js","manipulation.js","recoverpasswd.js"],
+    fn($file) => printf("<script src='%s'></script>",renderUrl($file))
+  );
   ?>
 </body>
 

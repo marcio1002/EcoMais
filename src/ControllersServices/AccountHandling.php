@@ -3,6 +3,7 @@ namespace Ecomais\ControllersServices;
 
 use Ecomais\Models\{Implementation,DataException, Person, PersonLegal};
 use Ecomais\Services\Data;
+use PDOException;
 
 class AccountHandling {
 
@@ -28,8 +29,8 @@ class AccountHandling {
         try{
             if(password_needs_rehash($person->passwd, PASSWORD_DEFAULT)) {
                 $params = [$this->implement->criptPasswd($senha), $person->id];
-                $this->sql->open();
                 $this->sql
+                    ->open()
                     ->update($table_name,"senha = ?","id_usuario = ?")
                     ->prepareParam($params)
                     ->execNotRowSql();
@@ -41,15 +42,14 @@ class AccountHandling {
         }
     }
 
-    public function setLogin(Person $person,int $typeUser): ?array
+    public function getLogin(Person $person,int $typeUser): ?array
     {
         try {
              $table = ($typeUser == 10) ? "empresa" : "usuario";
              $where = ($typeUser == 10) ? "cnpj = ?" : "email = ?";
 
-            $this->sql->open();
-
             return $this->sql
+                ->open()
                 ->show($table,"",$where,3)
                 ->prepareParam([$person->email])
                 ->executeSql();
@@ -69,9 +69,8 @@ class AccountHandling {
 
             $columnName = ($table == "empresa") ? "fantasia" : "nome";
 
-            $this->sql->open();
-
             return $this->sql
+                ->open()
                 ->show($table,"","$columnName = ? AND email = ?",3)
                 ->prepareParam($where)
                 ->executeSql();
@@ -90,9 +89,8 @@ class AccountHandling {
 
             $table = ($typeUser == 10) ? "empresa" : "usuario";
 
-            $this->sql->open();
-
-            return $this->sql
+            $this->sql
+                ->open()
                 ->show($table,"senha","senha = ?",6)
                 ->prepareParam($preWhere)
                 ->executeSql();
@@ -109,9 +107,8 @@ class AccountHandling {
     public function recoverByCNPJ(string $cnpj): ?array
     {
         try {
-            $this->sql->open();
-
             return $this->sql
+                ->open()
                 ->show("empresa","*","CNPJ = ?",6)
                 ->prepareParam([$cnpj])
                 ->executeSql();
@@ -129,9 +126,8 @@ class AccountHandling {
     {
         try {
             $table = ($typeUser == 10) ? "empresa" : "usuario";
-            $this->sql->open();
-
             return $this->sql
+                ->open()
                 ->show($table,"*","email = ?",6)
                 ->prepareParam([$email])
                 ->executeSql();
@@ -182,8 +178,9 @@ class AccountHandling {
     {
         try {
 
-            $this->sql->open();
-            $tableEmp = $this->sql->show("empresa","","cnpj = ?",3)
+            $tableEmp = $this->sql
+                ->open()
+                ->show("empresa","","cnpj = ?",3)
                 ->prepareParam([$cnpj])
                 ->executeSql();
                 
@@ -208,9 +205,8 @@ class AccountHandling {
     public function createNewsLetter($email): bool
     {
         try{
-            $this->sql->open();
-            
             return $this->sql
+                ->open()
                 ->add("newsletter","email",1)
                 ->prepareParam([$email])
                 ->execNotRowSql();

@@ -2,7 +2,7 @@
 $this->layout("_layout", ["title" => "EcoMais - Cadastre e começe a usar nosso serviço"]);
 
 use Ecomais\Views\Component\ComponenteElement as component;
-use Ecomais\Web\Bundles;
+use RenderFile\RenderFile as Bundles;
 
 $google  = new \Ecomais\Models\AuthGoogle("/cadastro/empresa");
 
@@ -16,13 +16,15 @@ $clearRequest = "";
 
 $svgCeta = "<svg class='bi bi-caret-right-fill' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/></svg>";
 
+if (!empty($code) && $google->tokenExpired($code)) $code = $google->tokenExpired($code);
+
 if (!empty($code) && empty($err)) {
-    if ($google->tokenExpired($code)) $code = $google->tokenExpired($code);
     if ($data = $google->getData($code, $state)) {
         $name = "value='{$data->getName()}'";
         $email = "value='{$data->getEmail()}'";
     }
-}
+}else
+    if($google->isSession()) $google->unsetSession();
 ?>
 
 <div class="container">
@@ -108,12 +110,10 @@ if (!empty($code) && empty($err)) {
                             <label for="password"><span class='required'>*</span> <b>Crie uma senha:</b></label>
                             <div class="input-group">
                                 <input type="password" id="passwd" name="passwd" class="form-control inset-shadow nextItem" autocomplete="current-password" maxlength="20" data-required="" />
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-primary" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
-                                </div>
+                                <button type="button" class="btn btn-primary remove-focus" id="btnViewPasswd"><i id="iconPasswd" class="fas fa-eye-slash"></i></button>
                             </div>
                             <small class="form-text text-muted">
-                                <div class="progress" style="width: 100%; height: 5px;">
+                                <div class="progress mt-1" style="width: 100%; height: 5px;">
                                     <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </small>
@@ -128,9 +128,7 @@ if (!empty($code) && empty($err)) {
                             <label for="inputCep"><b>Cep</b></label>
                             <div class="input-group">
                                 <input type="text" id="inputCep" name="cep" class="form-control inset-shadow" />
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-info input-group-text" id="searchCep">Buscar</button>
-                                </div>
+                                <button type="button" class="btn btn-primary remove-focus input-group-text" id="searchCep">Buscar</button>
                             </div>
                         </div>
                         <div class="form-group col-12">
@@ -190,7 +188,7 @@ if (!empty($code) && empty($err)) {
                             <div class="form-check">
                                 <?= $svgCeta ?>
                                 <input class="form-check-input nextItem" type="checkbox" id="termos">
-                                <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("/politica-privacidade-e-termos") ?>>Termos de uso</a></label>
+                                <label class="form-check-label" for="termos">Li e concordo com os <a href=<?= renderUrl("home.politicahp") ?>>Termos de uso</a></label>
                             </div>
                         </p>
                         <div class="form-row mt-3">
@@ -217,9 +215,9 @@ echo component::footer();
 $this->stop();
 
 $this->start("scripts");
-echo  Bundles::render(
+Bundles::render(
     ["mainMethods.js", "registerCompany.js"],
-    fn ($file) => print_r("<script src=\"$file\"></script>")
+    fn ($file) => printf("<script src='%s'></script>",renderUrl($file))
 );
 echo "<script>window.history.replaceState('', '', window.location.pathname)</script>";
 $this->stop();

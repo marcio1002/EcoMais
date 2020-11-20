@@ -18,3 +18,4 @@ Options All -Indexes
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?route=/$1 [L,QSA]
+RewriteRule ^(.+)\.(\d+)\.(js|css|png|jpg|gif)$ $1.$3 [L]
