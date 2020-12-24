@@ -62,11 +62,9 @@ class EmailECM  extends EmailProps
             $this->email->msgHTML($this->bodyProp);
             $this->email->AltBody = $this->altBodyProp;
 
-            if (!empty($this->attachProp)) {
-                foreach ($this->attachProp as $path => $name) {
+            if (!empty($this->attachProp))
+                foreach ($this->attachProp as $path => $name)
                     $this->email->addAttachment($path, $name);
-                }
-            }
 
             $this->email->send();
             return true;
