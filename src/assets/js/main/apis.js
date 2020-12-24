@@ -3,8 +3,7 @@ async function searchCep(cep) {
 
     const info = await $.get(`https://viacep.com.br/ws/${cep}/json/`);
     
-    if (info.erro) return null;
-    return info;
+    return  (!info.erro) ? info : null;
 }
 
 /**

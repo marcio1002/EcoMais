@@ -8,8 +8,8 @@ abstract class EmailProps
     const PORT_EM = EMAIL_PROPS["PORT"];
     const USER_EM = EMAIL_PROPS["EMAIL"];
     const PASSWD_EM = EMAIL_PROPS["PASSWD"];
-    const FROM_NAME = "EcoMais";
-    const FROM_EMAIL = "ecomais5354@gmail.com";
+    const FROM_NAME = "User";
+    const FROM_EMAIL = "Email User";
 
     protected string $subjecProp;
 

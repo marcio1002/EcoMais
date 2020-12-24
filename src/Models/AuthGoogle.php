@@ -16,8 +16,8 @@ class AuthGoogle
     public function __construct($redirect)
     {
         $this->configAuthUser = [
-            'clientId'          => '580621536071-2n4itptpg20oephtqhmi4bgcdlu2dfg5.apps.googleusercontent.com',
-            'clientSecret'      => 'SozYVrSystXUHxGwqizHwj6j',
+            'clientId'          => 'id',
+            'clientSecret'      => 'Secret',
             'redirectUri'       => renderUrl($redirect),
             'graphApiVersion'   => 'v7.0',
             'accessType'   => 'offline'

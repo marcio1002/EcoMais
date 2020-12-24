@@ -6,7 +6,7 @@ define("DB_CONFIG", [
   "DB_PORT" => env("DB_PORT", "3306"),
   "DB_USERNAME" => env("DB_USERNAME", 'root'),
   "DB_PASSWD" => env("DB_PASSWD", ''),
-  "DB_NAME" => env("DB_NAME", 'dbecomais'),
+  "DB_NAME" => env("DB_NAME", 'dbName'),
   "OPTIONS" => [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -18,8 +18,8 @@ define("DB_CONFIG", [
 define("EMAIL_PROPS", [
   "HOST" => "smtp.gmail.com",
   "PORT" => "587",
-  "EMAIL" => "ecomais5354@gmail.com",
-  "PASSWD" => env("EMAIL_PASSWD","ecoMaisDeveloper"),
+  "EMAIL" => "myDevEmail",
+  "PASSWD" => env("EMAIL_PASSWD","myDevEmailPassword"),
 ]);
 
 define("SERVER",[

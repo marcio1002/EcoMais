@@ -12,7 +12,7 @@ $(function () {
         `<div id='fileInfo' class='bg-dark-transparent text-white d-flex flex-column justify-content-around align-items-center position-absolute w-100 h-100'>
           <p class='badge badge-success p-2 font-size-1em'>${file.name}</p>
           <p class='badge badge-info p-2 w-50 font-size-1em'>${formatBytes(file.size)}</p>
-      </div>`
+        </div>`
       );
     }
   }

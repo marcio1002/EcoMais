@@ -79,6 +79,7 @@ $(function () {
         $("#btnRegister").prop("disabled", true);
 
         const data = new FormData(this);
+
         option = {
             method: 'POST',
             mycustomtype: "application/json charset=utf-8",

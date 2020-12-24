@@ -1,4 +1,5 @@
 vendor/
-.vscode/settings.json
-.vscode/comand_atalho_php.code-snippets
-src/uploads/imageCompany/*
+.vscode/
+src/uploads/imageCompany/**
+Procfile
+.buildpacks

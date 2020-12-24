@@ -19,6 +19,7 @@
  * @package league/plates - Criação de templates
  * @package league/oauth2-google - Autenticação com a conta do Google
  * @package coffeecode/uploader - Upload de imagens
+ * @package marcio1002/render-file - Renderizar arquivos js e css
  */
 
 /*
